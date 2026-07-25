@@ -1,4 +1,14 @@
 import { useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { toast } from "sonner";
+import {
+  contactFormSchema,
+  waitlistFormSchema,
+  submitLead,
+  type ContactFormValues,
+  type WaitlistFormValues,
+} from "@/lib/leads";
 import {
   ArrowRight,
   Globe,
@@ -436,6 +446,25 @@ function Why() {
 }
 
 function ComingSoon() {
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors, isSubmitting },
+  } = useForm<WaitlistFormValues>({
+    resolver: zodResolver(waitlistFormSchema),
+  });
+
+  const onSubmit = async (values: WaitlistFormValues) => {
+    try {
+      await submitLead({ type: "waitlist", email: values.email });
+      toast.success("You're on the list — we'll be in touch.");
+      reset();
+    } catch {
+      toast.error("Something went wrong. Please try again.");
+    }
+  };
+
   return (
     <section id="future" className="relative overflow-hidden py-24 md:py-32">
       <div className="pointer-events-none absolute inset-0 -z-10">
@@ -456,22 +485,25 @@ function ComingSoon() {
                 repetitive business tasks such as document processing, email
                 management and workflow automation.
               </p>
-              <form
-                onSubmit={(e) => e.preventDefault()}
-                className="mt-8 flex flex-col gap-3 sm:flex-row"
-              >
-                <input
-                  type="email"
-                  required
-                  placeholder="you@company.com"
-                  className="flex-1 rounded-xl border border-border bg-background px-4 py-3 text-sm outline-none transition-colors focus:border-primary focus:ring-4 focus:ring-primary/10"
-                />
-                <button
-                  type="submit"
-                  className="btn-primary inline-flex items-center justify-center gap-2 rounded-xl px-5 py-3 text-sm font-medium"
-                >
-                  Join the Waiting List <ArrowRight className="h-4 w-4" />
-                </button>
+              <form onSubmit={handleSubmit(onSubmit)} noValidate>
+                <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+                  <input
+                    type="email"
+                    placeholder="you@company.com"
+                    {...register("email")}
+                    className="flex-1 rounded-xl border border-border bg-background px-4 py-3 text-sm outline-none transition-colors focus:border-primary focus:ring-4 focus:ring-primary/10"
+                  />
+                  <button
+                    type="submit"
+                    disabled={isSubmitting}
+                    className="btn-primary inline-flex items-center justify-center gap-2 rounded-xl px-5 py-3 text-sm font-medium disabled:opacity-60"
+                  >
+                    {isSubmitting ? "Joining..." : "Join the Waiting List"} <ArrowRight className="h-4 w-4" />
+                  </button>
+                </div>
+                {errors.email && (
+                  <span className="mt-2 block text-xs text-destructive">{errors.email.message}</span>
+                )}
               </form>
               <div className="mt-4 text-xs text-muted-foreground">
                 Early access · No spam · Unsubscribe anytime
@@ -523,6 +555,25 @@ function About() {
 }
 
 function Contact() {
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors, isSubmitting },
+  } = useForm<ContactFormValues>({
+    resolver: zodResolver(contactFormSchema),
+  });
+
+  const onSubmit = async (values: ContactFormValues) => {
+    try {
+      await submitLead({ type: "contact", ...values });
+      toast.success("Message sent — we'll reply within 24 hours.");
+      reset();
+    } catch {
+      toast.error("Something went wrong. Please try again.");
+    }
+  };
+
   return (
     <section id="contact" className="bg-surface py-24 md:py-32">
       <div className="mx-auto max-w-5xl px-4">
@@ -551,7 +602,8 @@ function Contact() {
             </ul>
           </div>
           <form
-            onSubmit={(e) => e.preventDefault()}
+            onSubmit={handleSubmit(onSubmit)}
+            noValidate
             className="glass-panel rounded-3xl p-6 md:p-8"
           >
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
@@ -559,14 +611,18 @@ function Contact() {
                 <span className="mb-1.5 block text-xs font-medium text-foreground">Name</span>
                 <input
                   type="text"
-                  required
+                  {...register("name")}
                   className="w-full rounded-xl border border-border bg-background px-3.5 py-2.5 text-sm outline-none transition-colors focus:border-primary focus:ring-4 focus:ring-primary/10"
                 />
+                {errors.name && (
+                  <span className="mt-1 block text-xs text-destructive">{errors.name.message}</span>
+                )}
               </label>
               <label className="block">
                 <span className="mb-1.5 block text-xs font-medium text-foreground">Company</span>
                 <input
                   type="text"
+                  {...register("company")}
                   className="w-full rounded-xl border border-border bg-background px-3.5 py-2.5 text-sm outline-none transition-colors focus:border-primary focus:ring-4 focus:ring-primary/10"
                 />
               </label>
@@ -575,23 +631,30 @@ function Contact() {
               <span className="mb-1.5 block text-xs font-medium text-foreground">Email</span>
               <input
                 type="email"
-                required
+                {...register("email")}
                 className="w-full rounded-xl border border-border bg-background px-3.5 py-2.5 text-sm outline-none transition-colors focus:border-primary focus:ring-4 focus:ring-primary/10"
               />
+              {errors.email && (
+                <span className="mt-1 block text-xs text-destructive">{errors.email.message}</span>
+              )}
             </label>
             <label className="mt-4 block">
               <span className="mb-1.5 block text-xs font-medium text-foreground">Message</span>
               <textarea
                 rows={5}
-                required
+                {...register("message")}
                 className="w-full resize-none rounded-xl border border-border bg-background px-3.5 py-2.5 text-sm outline-none transition-colors focus:border-primary focus:ring-4 focus:ring-primary/10"
               />
+              {errors.message && (
+                <span className="mt-1 block text-xs text-destructive">{errors.message.message}</span>
+              )}
             </label>
             <button
               type="submit"
-              className="btn-primary mt-6 inline-flex w-full items-center justify-center gap-2 rounded-xl px-5 py-3 text-sm font-medium"
+              disabled={isSubmitting}
+              className="btn-primary mt-6 inline-flex w-full items-center justify-center gap-2 rounded-xl px-5 py-3 text-sm font-medium disabled:opacity-60"
             >
-              Send message <ArrowRight className="h-4 w-4" />
+              {isSubmitting ? "Sending..." : "Send message"} <ArrowRight className="h-4 w-4" />
             </button>
           </form>
         </div>
