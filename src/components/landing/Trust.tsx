@@ -1,9 +1,9 @@
 export function Trust() {
   const stats = [
-    { value: "120+", label: "Projects Delivered" },
-    { value: "60+", label: "Happy Clients" },
-    { value: "98/100", label: "Performance Score" },
-    { value: "< 2h", label: "Support Response" },
+    { value: "Direct", label: "Access to the Founders" },
+    { value: "Fixed-Price", label: "No Surprise Costs" },
+    { value: "2–6 Weeks", label: "Typical Delivery Time" },
+    { value: "Modern Stack", label: "React & Next.js" },
   ];
   return (
     <section className="border-y border-border/60 bg-surface">
