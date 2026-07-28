@@ -175,6 +175,7 @@
 }
 
 @utility btn-primary {
+  cursor: pointer;
   background: var(--gradient-primary);
   color: var(--primary-foreground);
   box-shadow: var(--shadow-elevated);
