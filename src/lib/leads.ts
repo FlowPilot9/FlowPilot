@@ -1,22 +1,27 @@
 import { z } from "zod";
 import { supabase } from "@/lib/supabase";
+import type { FormValidationMessages } from "@/i18n";
 
-export const contactFormSchema = z.object({
-  name: z.string().min(2, "Name must be at least 2 characters"),
-  company: z.string().optional(),
-  email: z.string().email("Enter a valid email address"),
-  message: z.string().min(10, "Message must be at least 10 characters"),
-  website: z.string().optional(), // honeypot — trebuie să rămână gol
-});
+export function createContactFormSchema(messages: FormValidationMessages) {
+  return z.object({
+    name: z.string().min(2, messages.nameMin),
+    company: z.string().optional(),
+    email: z.string().email(messages.emailInvalid),
+    message: z.string().min(10, messages.messageMin),
+    website: z.string().optional(), // honeypot — trebuie să rămână gol
+  });
+}
 
-export type ContactFormValues = z.infer<typeof contactFormSchema>;
+export type ContactFormValues = z.infer<ReturnType<typeof createContactFormSchema>>;
 
-export const waitlistFormSchema = z.object({
-  email: z.string().email("Enter a valid email address"),
-  website: z.string().optional(), // honeypot — trebuie să rămână gol
-});
+export function createWaitlistFormSchema(messages: FormValidationMessages) {
+  return z.object({
+    email: z.string().email(messages.emailInvalid),
+    website: z.string().optional(), // honeypot — trebuie să rămână gol
+  });
+}
 
-export type WaitlistFormValues = z.infer<typeof waitlistFormSchema>;
+export type WaitlistFormValues = z.infer<ReturnType<typeof createWaitlistFormSchema>>;
 
 type LeadType = "contact" | "waitlist";
 
