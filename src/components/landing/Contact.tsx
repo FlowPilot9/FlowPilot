@@ -19,8 +19,18 @@ export function Contact() {
   });
 
   const onSubmit = async (values: ContactFormValues) => {
+    const { website, ...lead } = values;
+
+    // Honeypot: un bot completează și câmpurile ascunse. Dacă are valoare,
+    // pretindem succes și nu trimitem nimic către Supabase.
+    if (website) {
+      toast.success("Message sent — we'll reply within 24 hours.");
+      reset();
+      return;
+    }
+
     try {
-      await submitLead({ type: "contact", ...values });
+      await submitLead({ type: "contact", ...lead });
       toast.success("Message sent — we'll reply within 24 hours.");
       reset();
     } catch {
@@ -60,6 +70,14 @@ export function Contact() {
             noValidate
             className="glass-panel rounded-3xl p-6 md:p-8"
           >
+            <input
+              type="text"
+              {...register("website")}
+              tabIndex={-1}
+              autoComplete="off"
+              aria-hidden="true"
+              className="absolute left-[-9999px] top-auto h-px w-px overflow-hidden"
+            />
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
               <label className="block">
                 <span className="mb-1.5 block text-xs font-medium text-foreground">Name</span>

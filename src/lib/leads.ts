@@ -6,12 +6,14 @@ export const contactFormSchema = z.object({
   company: z.string().optional(),
   email: z.string().email("Enter a valid email address"),
   message: z.string().min(10, "Message must be at least 10 characters"),
+  website: z.string().optional(), // honeypot — trebuie să rămână gol
 });
 
 export type ContactFormValues = z.infer<typeof contactFormSchema>;
 
 export const waitlistFormSchema = z.object({
   email: z.string().email("Enter a valid email address"),
+  website: z.string().optional(), // honeypot — trebuie să rămână gol
 });
 
 export type WaitlistFormValues = z.infer<typeof waitlistFormSchema>;

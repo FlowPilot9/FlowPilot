@@ -20,6 +20,12 @@ export function ComingSoon() {
   });
 
   const onSubmit = async (values: WaitlistFormValues) => {
+    if (values.website) {
+      toast.success("You're on the list — we'll be in touch.");
+      reset();
+      return;
+    }
+
     try {
       await submitLead({ type: "waitlist", email: values.email });
       toast.success("You're on the list — we'll be in touch.");
@@ -50,6 +56,14 @@ export function ComingSoon() {
                 management and workflow automation.
               </p>
               <form onSubmit={handleSubmit(onSubmit)} noValidate>
+                <input
+                  type="text"
+                  {...register("website")}
+                  tabIndex={-1}
+                  autoComplete="off"
+                  aria-hidden="true"
+                  className="absolute left-[-9999px] top-auto h-px w-px overflow-hidden"
+                />
                 <div className="mt-8 flex flex-col gap-3 sm:flex-row">
                   <input
                     type="email"
