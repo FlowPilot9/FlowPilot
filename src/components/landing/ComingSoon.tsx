@@ -1,15 +1,23 @@
+import { useMemo } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "sonner";
 import { ArrowRight } from "lucide-react";
 import {
-  waitlistFormSchema,
+  createWaitlistFormSchema,
   submitLead,
   type WaitlistFormValues,
 } from "@/lib/leads";
+import { useTranslation } from "@/i18n/I18nProvider";
 import aiIllustration from "@/assets/ai-illustration.png";
 
 export function ComingSoon() {
+  const { t } = useTranslation();
+  const waitlistFormSchema = useMemo(
+    () => createWaitlistFormSchema(t.forms.validation),
+    [t],
+  );
+
   const {
     register,
     handleSubmit,
@@ -21,17 +29,17 @@ export function ComingSoon() {
 
   const onSubmit = async (values: WaitlistFormValues) => {
     if (values.website) {
-      toast.success("You're on the list — we'll be in touch.");
+      toast.success(t.comingSoon.toastSuccess);
       reset();
       return;
     }
 
     try {
       await submitLead({ type: "waitlist", email: values.email });
-      toast.success("You're on the list — we'll be in touch.");
+      toast.success(t.comingSoon.toastSuccess);
       reset();
     } catch {
-      toast.error("Something went wrong. Please try again.");
+      toast.error(t.comingSoon.toastError);
     }
   };
 
@@ -45,15 +53,13 @@ export function ComingSoon() {
           <div className="grid grid-cols-1 items-center gap-10 md:grid-cols-2">
             <div>
               <span className="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/5 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-primary">
-                In Development
+                {t.comingSoon.badge}
               </span>
               <h2 className="mt-5 text-3xl font-bold tracking-tight text-foreground sm:text-4xl md:text-5xl md:leading-[1.05]">
-                The Future of <span className="text-gradient">FlowPilot.</span>
+                {t.comingSoon.title} <span className="text-gradient">{t.comingSoon.titleHighlight}</span>
               </h2>
               <p className="mt-5 max-w-xl text-base leading-relaxed text-muted-foreground md:text-lg">
-                We're building intelligent AI assistants designed to automate
-                repetitive business tasks such as document processing, email
-                management and workflow automation.
+                {t.comingSoon.description}
               </p>
               <form onSubmit={handleSubmit(onSubmit)} noValidate>
                 <input
@@ -67,7 +73,7 @@ export function ComingSoon() {
                 <div className="mt-8 flex flex-col gap-3 sm:flex-row">
                   <input
                     type="email"
-                    placeholder="you@company.com"
+                    placeholder={t.comingSoon.emailPlaceholder}
                     {...register("email")}
                     className="flex-1 rounded-xl border border-border bg-background px-4 py-3 text-sm outline-none transition-colors focus:border-primary focus:ring-4 focus:ring-primary/10"
                   />
@@ -76,7 +82,7 @@ export function ComingSoon() {
                     disabled={isSubmitting}
                     className="btn-primary inline-flex items-center justify-center gap-2 rounded-xl px-5 py-3 text-sm font-medium disabled:opacity-60"
                   >
-                    {isSubmitting ? "Joining..." : "Join the Waiting List"} <ArrowRight className="h-4 w-4" />
+                    {isSubmitting ? t.comingSoon.submitting : t.comingSoon.submit} <ArrowRight className="h-4 w-4" />
                   </button>
                 </div>
                 {errors.email && (
@@ -84,14 +90,14 @@ export function ComingSoon() {
                 )}
               </form>
               <div className="mt-4 text-xs text-muted-foreground">
-                Early access · No spam · Unsubscribe anytime
+                {t.comingSoon.disclaimer}
               </div>
             </div>
             <div className="relative">
               <div className="absolute -inset-6 -z-10 rounded-[3rem] bg-[radial-gradient(closest-side,oklch(0.7_0.18_260/0.25),transparent)]" />
               <img
                 src={aiIllustration}
-                alt="Illustration of an AI assistant orchestrating business tasks"
+                alt={t.comingSoon.imageAlt}
                 loading="lazy"
                 width={1024}
                 height={1024}

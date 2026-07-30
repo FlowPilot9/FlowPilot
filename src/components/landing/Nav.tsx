@@ -1,10 +1,14 @@
 import { useEffect, useState } from "react";
 import { ArrowRight, Menu, X } from "lucide-react";
 import { Logo } from "@/components/landing/Logo";
+import { LanguageSwitcher } from "@/components/landing/LanguageSwitcher";
+import { useTranslation } from "@/i18n/I18nProvider";
 
 export function Nav() {
+  const { t } = useTranslation();
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
     onScroll();
@@ -13,11 +17,11 @@ export function Nav() {
   }, []);
 
   const links = [
-    { href: "#services", label: "Services" },
-    { href: "#process", label: "Process" },
-    { href: "#work", label: "Work" },
-    { href: "#future", label: "Coming Soon" },
-    { href: "#about", label: "About" },
+    { href: "#services", label: t.nav.services },
+    { href: "#process", label: t.nav.process },
+    { href: "#work", label: t.nav.work },
+    { href: "#future", label: t.nav.comingSoon },
+    { href: "#about", label: t.nav.about },
   ];
 
   return (
@@ -46,21 +50,25 @@ export function Nav() {
               </a>
             ))}
           </nav>
-          <div className="hidden md:block">
+          <div className="hidden items-center gap-3 md:flex">
+            <LanguageSwitcher />
             <a
               href="#contact"
               className="btn-primary inline-flex items-center gap-1.5 rounded-xl px-4 py-2 text-sm font-medium"
             >
-              Get in touch <ArrowRight className="h-3.5 w-3.5" />
+              {t.common.getInTouch} <ArrowRight className="h-3.5 w-3.5" />
             </a>
           </div>
-          <button
-            className="md:hidden rounded-lg border border-border p-2"
-            onClick={() => setOpen((o) => !o)}
-            aria-label="Menu"
-          >
-            {open ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
-          </button>
+          <div className="flex items-center gap-2 md:hidden">
+            <LanguageSwitcher />
+            <button
+              className="rounded-lg border border-border p-2"
+              onClick={() => setOpen((o) => !o)}
+              aria-label={t.common.menu}
+            >
+              {open ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
+            </button>
+          </div>
         </div>
         {open && (
           <div className="glass-panel mt-2 rounded-2xl p-3 md:hidden animate-fade-up">
@@ -79,7 +87,7 @@ export function Nav() {
               onClick={() => setOpen(false)}
               className="btn-primary mt-2 block rounded-xl px-4 py-2 text-center text-sm font-medium"
             >
-              Get in touch
+              {t.common.getInTouch}
             </a>
           </div>
         )}

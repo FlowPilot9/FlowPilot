@@ -1,14 +1,22 @@
+import { useMemo } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "sonner";
 import { ArrowRight, Mail, Check } from "lucide-react";
 import {
-  contactFormSchema,
+  createContactFormSchema,
   submitLead,
   type ContactFormValues,
 } from "@/lib/leads";
+import { useTranslation } from "@/i18n/I18nProvider";
 
 export function Contact() {
+  const { t } = useTranslation();
+  const contactFormSchema = useMemo(
+    () => createContactFormSchema(t.forms.validation),
+    [t],
+  );
+
   const {
     register,
     handleSubmit,
@@ -24,17 +32,17 @@ export function Contact() {
     // Honeypot: un bot completează și câmpurile ascunse. Dacă are valoare,
     // pretindem succes și nu trimitem nimic către Supabase.
     if (website) {
-      toast.success("Message sent — we'll reply within 24 hours.");
+      toast.success(t.contact.toastSuccess);
       reset();
       return;
     }
 
     try {
       await submitLead({ type: "contact", ...lead });
-      toast.success("Message sent — we'll reply within 24 hours.");
+      toast.success(t.contact.toastSuccess);
       reset();
     } catch {
-      toast.error("Something went wrong. Please try again.");
+      toast.error(t.contact.toastError);
     }
   };
 
@@ -44,24 +52,23 @@ export function Contact() {
         <div className="grid grid-cols-1 gap-10 md:grid-cols-2 md:gap-14">
           <div>
             <span className="text-xs font-semibold uppercase tracking-[0.18em] text-primary">
-              Contact
+              {t.contact.eyebrow}
             </span>
             <h2 className="mt-3 text-3xl font-bold tracking-tight text-foreground sm:text-4xl md:text-[42px] md:leading-[1.1]">
-              Let's build something great together.
+              {t.contact.title}
             </h2>
             <p className="mt-4 max-w-md text-base text-muted-foreground md:text-lg">
-              Tell us about your project. We reply within 24 hours with a
-              tailored proposal.
+              {t.contact.description}
             </p>
             <ul className="mt-8 space-y-3 text-sm text-muted-foreground">
               <li className="flex items-center gap-3">
                 <Mail className="h-4 w-4 text-primary" /> hello@flowpilot.studio
               </li>
               <li className="flex items-center gap-3">
-                <Check className="h-4 w-4 text-primary" /> Fixed-price engagements
+                <Check className="h-4 w-4 text-primary" /> {t.contact.fixedPrice}
               </li>
               <li className="flex items-center gap-3">
-                <Check className="h-4 w-4 text-primary" /> Delivery in 2–6 weeks
+                <Check className="h-4 w-4 text-primary" /> {t.contact.delivery}
               </li>
             </ul>
           </div>
@@ -80,7 +87,7 @@ export function Contact() {
             />
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
               <label className="block">
-                <span className="mb-1.5 block text-xs font-medium text-foreground">Name</span>
+                <span className="mb-1.5 block text-xs font-medium text-foreground">{t.contact.name}</span>
                 <input
                   type="text"
                   {...register("name")}
@@ -91,7 +98,7 @@ export function Contact() {
                 )}
               </label>
               <label className="block">
-                <span className="mb-1.5 block text-xs font-medium text-foreground">Company</span>
+                <span className="mb-1.5 block text-xs font-medium text-foreground">{t.contact.company}</span>
                 <input
                   type="text"
                   {...register("company")}
@@ -100,7 +107,7 @@ export function Contact() {
               </label>
             </div>
             <label className="mt-4 block">
-              <span className="mb-1.5 block text-xs font-medium text-foreground">Email</span>
+              <span className="mb-1.5 block text-xs font-medium text-foreground">{t.contact.email}</span>
               <input
                 type="email"
                 {...register("email")}
@@ -111,7 +118,7 @@ export function Contact() {
               )}
             </label>
             <label className="mt-4 block">
-              <span className="mb-1.5 block text-xs font-medium text-foreground">Message</span>
+              <span className="mb-1.5 block text-xs font-medium text-foreground">{t.contact.message}</span>
               <textarea
                 rows={5}
                 {...register("message")}
@@ -126,7 +133,7 @@ export function Contact() {
               disabled={isSubmitting}
               className="btn-primary mt-6 inline-flex w-full items-center justify-center gap-2 rounded-xl px-5 py-3 text-sm font-medium disabled:opacity-60"
             >
-              {isSubmitting ? "Sending..." : "Send message"} <ArrowRight className="h-4 w-4" />
+              {isSubmitting ? t.contact.submitting : t.contact.submit} <ArrowRight className="h-4 w-4" />
             </button>
           </form>
         </div>

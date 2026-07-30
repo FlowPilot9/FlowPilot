@@ -1,43 +1,45 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import {
   Outlet,
-  Link,
   createRootRouteWithContext,
-  useRouter,
   HeadContent,
   Scripts,
+  useRouterState,
 } from "@tanstack/react-router";
 import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { Toaster } from "@/components/ui/sonner";
+import { DEFAULT_LOCALE, getLocaleFromPathname, getMetaTags } from "@/i18n";
 
-function NotFoundComponent() {
+// Locale-agnostic fallback only. In practice every real 404/error is caught
+// inside routes/{-$locale}.tsx, which knows the locale and renders a
+// translated version. This one only fires if something goes wrong before the
+// locale layout even mounts, so it stays deliberately simple and bilingual.
+function RootNotFoundComponent() {
   return (
     <div className="flex min-h-screen items-center justify-center bg-background px-4">
       <div className="max-w-md text-center">
         <h1 className="text-7xl font-bold text-foreground">404</h1>
-        <h2 className="mt-4 text-xl font-semibold text-foreground">Page not found</h2>
-        <p className="mt-2 text-sm text-muted-foreground">
-          The page you're looking for doesn't exist or has been moved.
+        <p className="mt-4 text-sm text-muted-foreground">
+          Pagina nu a fost găsită. / Page not found.
         </p>
         <div className="mt-6">
-          <Link
-            to="/"
+          <a
+            href="/"
             className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
           >
-            Go home
-          </Link>
+            Acasă / Home
+          </a>
         </div>
       </div>
     </div>
   );
 }
 
-function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
+function RootErrorComponent({ error }: { error: Error }) {
   console.error(error);
-  const router = useRouter();
   useEffect(() => {
     reportLovableError(error, { boundary: "tanstack_root_error_component" });
   }, [error]);
@@ -46,26 +48,14 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
     <div className="flex min-h-screen items-center justify-center bg-background px-4">
       <div className="max-w-md text-center">
         <h1 className="text-xl font-semibold tracking-tight text-foreground">
-          This page didn't load
+          A apărut o eroare. / Something went wrong.
         </h1>
-        <p className="mt-2 text-sm text-muted-foreground">
-          Something went wrong on our end. You can try refreshing or head back home.
-        </p>
-        <div className="mt-6 flex flex-wrap justify-center gap-2">
-          <button
-            onClick={() => {
-              router.invalidate();
-              reset();
-            }}
-            className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
-          >
-            Try again
-          </button>
+        <div className="mt-6">
           <a
             href="/"
-            className="inline-flex items-center justify-center rounded-md border border-input bg-background px-4 py-2 text-sm font-medium text-foreground transition-colors hover:bg-accent"
+            className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
           >
-            Go home
+            Acasă / Home
           </a>
         </div>
       </div>
@@ -73,28 +63,17 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
   );
 }
 
+// Ultimate fallback title only — the real per-locale title/description/og
+// tags come from routes/{-$locale}/index.tsx and override these.
+const fallbackMeta = getMetaTags(DEFAULT_LOCALE);
+
 export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()({
   head: () => ({
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "FlowPilot — Premium websites & business automation" },
-      {
-        name: "description",
-        content:
-          "FlowPilot designs premium websites today and builds the intelligent business tools of tomorrow.",
-      },
+      { title: fallbackMeta.title },
       { name: "author", content: "FlowPilot" },
-      { property: "og:title", content: "FlowPilot — Premium websites & business automation" },
-      {
-        property: "og:description",
-        content:
-          "FlowPilot designs premium websites today and builds the intelligent business tools of tomorrow.",
-      },
-      { property: "og:type", content: "website" },
-      { property: "og:image", content: "/og-image.png" },
-      { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:image", content: "/og-image.png" },
     ],
     links: [
       {
@@ -114,13 +93,19 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
   }),
   shellComponent: RootShell,
   component: RootComponent,
-  notFoundComponent: NotFoundComponent,
-  errorComponent: ErrorComponent,
+  notFoundComponent: RootNotFoundComponent,
+  errorComponent: RootErrorComponent,
 });
 
 function RootShell({ children }: { children: ReactNode }) {
+  // The locale lives in the URL, so the shell reads it straight from the
+  // current path rather than from any client-side state — this stays
+  // correct during SSR, on the very first paint, and on every navigation.
+  const pathname = useRouterState({ select: (state) => state.location.pathname });
+  const lang = getLocaleFromPathname(pathname);
+
   return (
-    <html lang="en">
+    <html lang={lang}>
       <head>
         <HeadContent />
       </head>
@@ -137,7 +122,9 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
+      {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes.
+          The active locale, translations, and per-page <head> are provided further down
+          the tree by routes/{-$locale}.tsx and routes/{-$locale}/index.tsx. */}
       <Outlet />
       <Toaster position="bottom-right" />
     </QueryClientProvider>

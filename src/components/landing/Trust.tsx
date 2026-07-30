@@ -1,19 +1,17 @@
+import { useTranslation } from "@/i18n/I18nProvider";
+
 export function Trust() {
-  const stats = [
-    { value: "Direct", label: "Access to the Founders" },
-    { value: "Fixed-Price", label: "No Surprise Costs" },
-    { value: "2–6 Weeks", label: "Typical Delivery Time" },
-    { value: "Modern Stack", label: "React & Next.js" },
-  ];
+  const { t } = useTranslation();
+
   return (
     <section className="border-y border-border/60 bg-surface">
       <div className="mx-auto max-w-6xl px-4 py-20">
         <p className="mx-auto max-w-2xl text-center text-lg text-muted-foreground md:text-xl">
-          We help businesses build their online presence with{" "}
-          <span className="text-foreground">fast, modern and scalable</span> websites.
+          {t.trust.intro}{" "}
+          <span className="text-foreground">{t.trust.introHighlight}</span>.
         </p>
         <div className="mt-12 grid grid-cols-2 gap-px overflow-hidden rounded-3xl border border-border bg-border md:grid-cols-4">
-          {stats.map((s) => (
+          {t.trust.stats.map((s) => (
             <div key={s.label} className="bg-background px-6 py-8 text-center">
               <div className="text-3xl font-bold tracking-tight text-foreground md:text-4xl">
                 {s.value}
