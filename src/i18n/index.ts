@@ -79,10 +79,10 @@ export function stripLocalePrefix(pathname: string): string {
 }
 
 /**
- * hrefLang alternate links for a given locale-neutral path, so search engines
+ * hreflang alternate links for a given locale-neutral path, so search engines
  * know the ro/en pages are translations of each other rather than duplicates.
  */
-export function buildHrefLangLinks(path: string = "/") {
+export function buildHreflangLinks(path: string = "/") {
   return [
     ...LOCALES.map((locale) => ({
       rel: "alternate",

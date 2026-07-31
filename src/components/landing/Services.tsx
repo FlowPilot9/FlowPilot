@@ -9,7 +9,7 @@ export function Services() {
 
   return (
     <section id="services" className="py-24 md:py-32">
-      <div className="mx-auto max-w-6xl px-4">
+      <div className="mx-auto max-w-[1500px] px-4">
         <SectionHeader
           eyebrow={t.services.eyebrow}
           title={t.services.title}

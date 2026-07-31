@@ -36,6 +36,16 @@ export const ro: TranslationDictionary = {
     trustStack: "Tehnologii moderne",
     trustSupport: "Suport continuu",
     imageAlt: "Ilustrație cu fluxuri digitale și automatizare business",
+    scrollCue: "Derulează",
+    mockup: {
+      browserLabel: "app.flowpilot.studio",
+      navItems: ["Prezentare generală", "Proiecte", "Analitice", "Asistent AI"],
+      chartLabel: "Performanță site, ultimele 30 de zile",
+      statValue: "+128%",
+      statLabel: "Conversii medii",
+      aiLabel: "Asistent AI",
+      aiMessage: "Am optimizat automat 3 pagini pentru conversii mai mari.",
+    },
   },
   trust: {
     intro: "Ajutăm afacerile să-și construiască prezența online cu site-uri",

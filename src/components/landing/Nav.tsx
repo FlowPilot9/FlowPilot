@@ -27,10 +27,10 @@ export function Nav() {
   return (
     <header
       className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
-        scrolled ? "py-3" : "py-5"
+        scrolled ? "bg-background/75 py-3 shadow-soft backdrop-blur-xl" : "py-5"
       }`}
     >
-      <div className="mx-auto max-w-6xl px-4">
+      <div className="mx-auto max-w-[1500px] px-4">
         <div
           className={`flex items-center justify-between rounded-2xl border px-4 py-2.5 transition-all ${
             scrolled

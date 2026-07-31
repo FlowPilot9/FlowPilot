@@ -39,6 +39,16 @@ export interface TranslationDictionary {
     trustStack: string;
     trustSupport: string;
     imageAlt: string;
+    scrollCue: string;
+    mockup: {
+      browserLabel: string;
+      navItems: string[];
+      chartLabel: string;
+      statValue: string;
+      statLabel: string;
+      aiLabel: string;
+      aiMessage: string;
+    };
   };
   trust: {
     intro: string;

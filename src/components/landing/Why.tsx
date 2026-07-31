@@ -9,7 +9,7 @@ export function Why() {
 
   return (
     <section className="bg-surface py-24 md:py-32">
-      <div className="mx-auto max-w-6xl px-4">
+      <div className="mx-auto max-w-[1500px] px-4">
         <SectionHeader eyebrow={t.why.eyebrow} title={t.why.title} />
         <div className="mt-14 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {t.why.items.map((item, index) => {

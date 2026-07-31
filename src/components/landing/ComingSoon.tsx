@@ -48,7 +48,7 @@ export function ComingSoon() {
       <div className="pointer-events-none absolute inset-0 -z-10">
         <div className="absolute left-1/2 top-1/2 h-[600px] w-[900px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(closest-side,oklch(0.7_0.18_260/0.14),transparent)]" />
       </div>
-      <div className="mx-auto max-w-6xl px-4">
+      <div className="mx-auto max-w-[1500px] px-4">
         <div className="glass-panel relative overflow-hidden rounded-[2rem] p-8 md:p-14">
           <div className="grid grid-cols-1 items-center gap-10 md:grid-cols-2">
             <div>

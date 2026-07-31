@@ -9,7 +9,7 @@ export function Process() {
 
   return (
     <section id="process" className="bg-surface py-24 md:py-32">
-      <div className="mx-auto max-w-6xl px-4">
+      <div className="mx-auto max-w-[1500px] px-4">
         <SectionHeader eyebrow={t.process.eyebrow} title={t.process.title} />
         <div className="relative mt-16">
           <div className="pointer-events-none absolute left-0 right-0 top-6 hidden h-px bg-gradient-to-r from-transparent via-border to-transparent md:block" />

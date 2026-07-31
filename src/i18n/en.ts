@@ -36,6 +36,16 @@ export const en: TranslationDictionary = {
     trustStack: "Modern stack",
     trustSupport: "Ongoing support",
     imageAlt: "Illustration of digital workflows and business automation",
+    scrollCue: "Scroll",
+    mockup: {
+      browserLabel: "app.flowpilot.studio",
+      navItems: ["Overview", "Projects", "Analytics", "AI Assistant"],
+      chartLabel: "Website performance, last 30 days",
+      statValue: "+128%",
+      statLabel: "Avg. conversions",
+      aiLabel: "AI Assistant",
+      aiMessage: "Automatically optimized 3 pages for higher conversions.",
+    },
   },
   trust: {
     intro: "We help businesses build their online presence with",

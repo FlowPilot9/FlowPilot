@@ -208,3 +208,16 @@
 }
 @utility animate-float { animation: float-slow 7s ease-in-out infinite; }
 @utility animate-fade-up { animation: fade-up 0.7s ease-out both; }
+
+/* Respect the person's OS-level motion preference for any plain-CSS
+   animation/transition elsewhere on the site. The Hero's Framer Motion
+   animations are handled separately via useReducedMotion() in JS, since
+   Motion drives transforms directly rather than through CSS animations. */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

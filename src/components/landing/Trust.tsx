@@ -5,7 +5,7 @@ export function Trust() {
 
   return (
     <section className="border-y border-border/60 bg-surface">
-      <div className="mx-auto max-w-6xl px-4 py-20">
+      <div className="mx-auto max-w-[1500px] px-4 py-20">
         <p className="mx-auto max-w-2xl text-center text-lg text-muted-foreground md:text-xl">
           {t.trust.intro}{" "}
           <span className="text-foreground">{t.trust.introHighlight}</span>.
