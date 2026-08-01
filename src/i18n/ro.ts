@@ -185,13 +185,41 @@ export const ro: TranslationDictionary = {
   why: {
     eyebrow: "De ce FlowPilot",
     title: "Un partener obsedat de detalii.",
+    intro:
+      "Nu bifăm o listă de funcționalități. Fiecare decizie pornește de la o singură întrebare: îmbunătățește asta experiența, sau doar umple spațiul?",
+    aiPrompt: "Ce integrări suportați?",
+    growthLabel: "Creștere anuală",
     items: [
-      { title: "Livrare rapidă", desc: "Lansare în săptămâni, nu trimestre." },
-      { title: "Design premium", desc: "Rafinat, gândit, aliniat brandului tău." },
-      { title: "Mobile first", desc: "Impecabil pe orice dispozitiv." },
-      { title: "Optimizat SEO", desc: "Construit să fie găsit." },
-      { title: "Pregătit pentru AI", desc: "Arhitecturat pentru viitor." },
-      { title: "Soluții scalabile", desc: "Crește fără reconstrucție." },
+      {
+        label: "Performanță",
+        title: "Rapid prin design.",
+        desc: "Viteza nu e un bonus adăugat la final — e o decizie luată din prima linie de cod.",
+      },
+      {
+        label: "Design",
+        title: "Șlefuit, nu decorat.",
+        desc: "Fiecare detaliu are un motiv să existe acolo. Nimic nu apare doar ca să pară plin.",
+      },
+      {
+        label: "Mobil",
+        title: "Întreg, pe orice ecran.",
+        desc: "Nu un desktop micșorat — un layout gândit special pentru ecranul pe care chiar apare.",
+      },
+      {
+        label: "SEO",
+        title: "Construit să fie găsit.",
+        desc: "Structură și viteză în care motoarele de căutare — și oamenii — au încredere.",
+      },
+      {
+        label: "AI",
+        title: "Pregătit pentru ce urmează.",
+        desc: "Arhitecturat ca funcționalitățile de mâine să se integreze firesc, nu să fie forțate.",
+      },
+      {
+        label: "Scalabilitate",
+        title: "Făcut să crească.",
+        desc: "Fundația rezistă pe măsură ce crești — fără reconstrucție de la zero.",
+      },
     ],
   },
   comingSoon: {

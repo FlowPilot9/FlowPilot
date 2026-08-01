@@ -185,13 +185,41 @@ export const en: TranslationDictionary = {
   why: {
     eyebrow: "Why FlowPilot",
     title: "A partner obsessed with the details.",
+    intro:
+      "We don't check boxes on a feature list. Every decision starts with one question: does this improve the experience, or just fill space?",
+    aiPrompt: "What integrations do you support?",
+    growthLabel: "Annual growth",
     items: [
-      { title: "Fast Delivery", desc: "Launch in weeks, not quarters." },
-      { title: "Premium Design", desc: "Refined, considered, on-brand." },
-      { title: "Mobile First", desc: "Beautiful on every device." },
-      { title: "SEO Optimized", desc: "Built to be discovered." },
-      { title: "Future AI Ready", desc: "Architected for what's next." },
-      { title: "Scalable Solutions", desc: "Grow without a rebuild." },
+      {
+        label: "Performance",
+        title: "Fast by design.",
+        desc: "Speed isn't a bonus tacked on at the end — it's a decision made in the first line of code.",
+      },
+      {
+        label: "Design",
+        title: "Crafted, not decorated.",
+        desc: "Every detail earns its place on the page. Nothing ships just to look busy.",
+      },
+      {
+        label: "Mobile",
+        title: "Whole, on every screen.",
+        desc: "Not a shrunken desktop — a layout built for the screen it's actually on.",
+      },
+      {
+        label: "SEO",
+        title: "Built to be found.",
+        desc: "Structure and speed that search engines — and people — trust.",
+      },
+      {
+        label: "AI",
+        title: "Ready for what's next.",
+        desc: "Architected so tomorrow's capabilities slot in naturally, not get bolted on.",
+      },
+      {
+        label: "Scale",
+        title: "Made to grow.",
+        desc: "The foundation holds as you scale — no rebuild required.",
+      },
     ],
   },
   comingSoon: {

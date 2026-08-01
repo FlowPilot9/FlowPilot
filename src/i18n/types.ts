@@ -98,7 +98,10 @@ export interface TranslationDictionary {
   why: {
     eyebrow: string;
     title: string;
-    items: Array<{ title: string; desc: string }>;
+    intro: string;
+    aiPrompt: string;
+    growthLabel: string;
+    items: Array<{ label: string; title: string; desc: string }>;
   };
   comingSoon: {
     badge: string;
