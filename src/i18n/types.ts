@@ -89,19 +89,22 @@ export interface TranslationDictionary {
     eyebrow: string;
     title: string;
     description: string;
-    projectMockup: string;
+    previewAlt: string;
+    liveLabel: string;
+    liveDemoLabel: string;
+    requestLabel: string;
     items: Array<{
       title: string;
       tag: string;
+      description: string;
+      stack: string[];
+      isLive: boolean;
     }>;
   };
   why: {
     eyebrow: string;
     title: string;
-    intro: string;
-    aiPrompt: string;
-    growthLabel: string;
-    items: Array<{ label: string; title: string; desc: string }>;
+    items: Array<{ title: string; desc: string }>;
   };
   comingSoon: {
     badge: string;
