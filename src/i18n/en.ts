@@ -48,13 +48,28 @@ export const en: TranslationDictionary = {
     },
   },
   trust: {
-    intro: "We help businesses build their online presence with",
-    introHighlight: "fast, modern and scalable",
-    stats: [
-      { value: "Direct", label: "Access to the Founders" },
-      { value: "Fixed-Price", label: "No Surprise Costs" },
-      { value: "2–6 Weeks", label: "Typical Delivery Time" },
-      { value: "Modern Stack", label: "React & Next.js" },
+    title: "Every decision we make is designed to make launching your product predictable.",
+    items: [
+      {
+        title: "Direct Communication",
+        description: "You work directly with the founders, from the first call to launch.",
+        detail: "No middlemen · no unnecessary delays",
+      },
+      {
+        title: "Fixed Pricing",
+        description: "Know the investment before development begins, through a transparent proposal.",
+        detail: "No hidden costs",
+      },
+      {
+        title: "Fast Delivery",
+        description: "Most projects launch within 2-6 weeks, with a clear roadmap from day one.",
+        detail: "Clear roadmap from the start",
+      },
+      {
+        title: "Modern Technology",
+        description: "Built with React, Next.js, and scalable architecture, ready to grow with your business.",
+        detail: "React & Next.js",
+      },
     ],
   },
   services: {

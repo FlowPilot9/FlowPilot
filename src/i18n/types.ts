@@ -51,9 +51,12 @@ export interface TranslationDictionary {
     };
   };
   trust: {
-    intro: string;
-    introHighlight: string;
-    stats: Array<{ value: string; label: string }>;
+    title: string;
+    items: Array<{
+      title: string;
+      description: string;
+      detail: string;
+    }>;
   };
   services: {
     eyebrow: string;

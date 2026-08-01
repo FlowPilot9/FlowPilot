@@ -48,13 +48,28 @@ export const ro: TranslationDictionary = {
     },
   },
   trust: {
-    intro: "Ajutăm afacerile să-și construiască prezența online cu site-uri",
-    introHighlight: "rapide, moderne și scalabile",
-    stats: [
-      { value: "Direct", label: "Acces la fondatori" },
-      { value: "Preț fix", label: "Fără costuri surpriză" },
-      { value: "2–6 săpt.", label: "Termen tipic de livrare" },
-      { value: "Stack modern", label: "React & Next.js" },
+    title: "Fiecare decizie e gândită să facă lansarea produsului tău predictibilă.",
+    items: [
+      {
+        title: "Comunicare directă",
+        description: "Lucrezi direct cu fondatorii, de la primul apel până la lansare.",
+        detail: "Fără intermediari · fără întârzieri inutile",
+      },
+      {
+        title: "Preț fix",
+        description: "Afli investiția înainte să înceapă dezvoltarea, printr-o ofertă transparentă.",
+        detail: "Fără costuri ascunse",
+      },
+      {
+        title: "Livrare rapidă",
+        description: "Majoritatea proiectelor sunt lansate în 2-6 săptămâni, cu un plan clar din prima zi.",
+        detail: "Roadmap clar, de la început",
+      },
+      {
+        title: "Tehnologie modernă",
+        description: "Construim cu React, Next.js și arhitecturi scalabile, gata să crească odată cu afacerea ta.",
+        detail: "React & Next.js",
+      },
     ],
   },
   services: {
