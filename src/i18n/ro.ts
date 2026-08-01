@@ -85,7 +85,74 @@ export const ro: TranslationDictionary = {
   process: {
     eyebrow: "Procesul nostru",
     title: "Un parcurs clar și predictibil, de la idee la lansare.",
-    steps: ["Descoperire", "Planificare", "Design", "Dezvoltare", "Lansare", "Creștere"],
+    labels: {
+      whatWeDo: "Ce facem",
+      whatClientGets: "Ce primești",
+      whyItMatters: "De ce contează",
+      duration: "Durată estimată",
+    },
+    steps: [
+      {
+        title: "Descoperire",
+        duration: "2-3 zile",
+        whatWeDo:
+          "Analizăm afacerea, publicul țintă și obiectivele tale, apoi cercetăm concurența și oportunitățile de piață.",
+        whatClientGets:
+          "Un brief clar, cu obiective măsurabile și un plan de proiect definit.",
+        whyItMatters:
+          "Fără o bază solidă de informații, orice decizie de design sau tehnologie devine o presupunere, nu o strategie.",
+      },
+      {
+        title: "Planificare",
+        duration: "2 zile",
+        whatWeDo:
+          "Structurăm arhitectura site-ului, definim fluxurile utilizatorului și stabilim stack-ul tehnic potrivit.",
+        whatClientGets:
+          "O hartă a site-ului (sitemap) și un plan tehnic aprobat, înainte să se scrie vreun cod.",
+        whyItMatters:
+          "Planificarea din timp elimină reconstrucțiile costisitoare mai târziu în proiect.",
+      },
+      {
+        title: "Design",
+        duration: "3-5 zile",
+        whatWeDo:
+          "Creăm machete (wireframes) și design-uri de mare fidelitate, aliniate cu identitatea brandului tău.",
+        whatClientGets:
+          "Un prototip interactiv, pe care îl poți vedea și testa înainte de dezvoltare.",
+        whyItMatters:
+          "Corectarea unui design costă minute; corectarea unui site deja dezvoltat costă zile.",
+      },
+      {
+        title: "Dezvoltare",
+        duration: "1-2 săptămâni",
+        whatWeDo:
+          "Transformăm design-ul aprobat în cod curat, performant și responsive, testat pe toate dispozitivele.",
+        whatClientGets:
+          "Un site funcțional, într-un mediu de testare, la care ai acces în timp real.",
+        whyItMatters:
+          "Aici prinde viață produsul — calitatea codului decide viteza și stabilitatea pe termen lung.",
+      },
+      {
+        title: "Lansare",
+        duration: "1-2 zile",
+        whatWeDo:
+          "Configurăm hosting-ul, verificăm securitatea și performanța, apoi publicăm site-ul live.",
+        whatClientGets:
+          "Un site live, optimizat și monitorizat, plus documentație de utilizare.",
+        whyItMatters:
+          "O lansare bine pregătită înseamnă zero timp de nefuncționare și o primă impresie impecabilă.",
+      },
+      {
+        title: "Mentenanță",
+        duration: "Continuu",
+        whatWeDo:
+          "Monitorizăm funcționarea site-ului, aplicăm actualizări de securitate și rezolvăm rapid orice problemă tehnică apărută.",
+        whatClientGets:
+          "Un site întreținut constant, cu suport direct atunci când apare o problemă.",
+        whyItMatters:
+          "Un site bun nu se termină la lansare — are nevoie de îngrijire constantă ca să rămână rapid, sigur și funcțional.",
+      },
+    ],
   },
   showcase: {
     eyebrow: "Proiecte",

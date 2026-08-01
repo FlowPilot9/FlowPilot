@@ -68,7 +68,19 @@ export interface TranslationDictionary {
   process: {
     eyebrow: string;
     title: string;
-    steps: string[];
+    labels: {
+      whatWeDo: string;
+      whatClientGets: string;
+      whyItMatters: string;
+      duration: string;
+    };
+    steps: Array<{
+      title: string;
+      duration?: string;
+      whatWeDo: string;
+      whatClientGets: string;
+      whyItMatters: string;
+    }>;
   };
   showcase: {
     eyebrow: string;

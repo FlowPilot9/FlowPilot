@@ -85,7 +85,74 @@ export const en: TranslationDictionary = {
   process: {
     eyebrow: "Our Process",
     title: "A calm, predictable path from idea to launch.",
-    steps: ["Discover", "Plan", "Design", "Develop", "Launch", "Grow"],
+    labels: {
+      whatWeDo: "What we do",
+      whatClientGets: "What you get",
+      whyItMatters: "Why it matters",
+      duration: "Estimated duration",
+    },
+    steps: [
+      {
+        title: "Discovery",
+        duration: "2-3 days",
+        whatWeDo:
+          "We dig into your business, audience, and goals, then map the competitive landscape and opportunities.",
+        whatClientGets:
+          "A clear brief with measurable goals and a defined project plan.",
+        whyItMatters:
+          "Without a solid base of information, every design or tech decision becomes a guess, not a strategy.",
+      },
+      {
+        title: "Planning",
+        duration: "2 days",
+        whatWeDo:
+          "We structure the site architecture, map user flows, and settle on the right tech stack.",
+        whatClientGets:
+          "An approved sitemap and technical plan, before a single line of code is written.",
+        whyItMatters:
+          "Planning ahead removes costly rebuilds later in the project.",
+      },
+      {
+        title: "Design",
+        duration: "3-5 days",
+        whatWeDo:
+          "We create wireframes and high-fidelity designs aligned with your brand identity.",
+        whatClientGets:
+          "An interactive prototype you can see and test before development starts.",
+        whyItMatters:
+          "Fixing a design takes minutes; fixing an already-built site takes days.",
+      },
+      {
+        title: "Development",
+        duration: "1-2 weeks",
+        whatWeDo:
+          "We turn the approved design into clean, fast, responsive code, tested across devices.",
+        whatClientGets:
+          "A working site on a staging environment you can access in real time.",
+        whyItMatters:
+          "This is where the product comes to life — code quality decides long-term speed and stability.",
+      },
+      {
+        title: "Launch",
+        duration: "1-2 days",
+        whatWeDo:
+          "We set up hosting, verify security and performance, then publish the site live.",
+        whatClientGets:
+          "A live, optimized, monitored site, plus usage documentation.",
+        whyItMatters:
+          "A well-prepared launch means zero downtime and a flawless first impression.",
+      },
+      {
+        title: "Maintenance",
+        duration: "Ongoing",
+        whatWeDo:
+          "We keep the site running smoothly, apply security updates, and quickly fix any technical issue that comes up.",
+        whatClientGets:
+          "A consistently maintained site, with direct support whenever something needs attention.",
+        whyItMatters:
+          "A great site doesn't end at launch — it needs ongoing care to stay fast, secure, and reliable.",
+      },
+    ],
   },
   showcase: {
     eyebrow: "Showcase",
