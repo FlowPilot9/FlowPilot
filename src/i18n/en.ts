@@ -219,14 +219,50 @@ export const en: TranslationDictionary = {
   why: {
     eyebrow: "Why FlowPilot",
     title: "A partner obsessed with the details.",
+    intro: "Every benefit below is a demonstration, not just a promise.",
     items: [
-      { title: "Fast Delivery", desc: "Launch in weeks, not quarters." },
-      { title: "Premium Design", desc: "Refined, considered, on-brand." },
-      { title: "Mobile First", desc: "Beautiful on every device." },
-      { title: "SEO Optimized", desc: "Built to be discovered." },
-      { title: "Future AI Ready", desc: "Architected for what's next." },
-      { title: "Scalable Solutions", desc: "Grow without a rebuild." },
+      {
+        label: "Performance",
+        title: "Fast Delivery",
+        desc: "Launch in weeks, not quarters — without cutting corners on speed.",
+      },
+      {
+        label: "Design",
+        title: "Premium Design",
+        desc: "Refined, considered, on-brand — crafted with intent, not decorated.",
+      },
+      {
+        label: "Responsive",
+        title: "Mobile First",
+        desc: "Flawless on desktop, tablet, and mobile, from day one.",
+      },
+      {
+        label: "SEO",
+        title: "Search Optimized",
+        desc: "Built so search engines — and your customers — find you first.",
+      },
+      {
+        label: "Artificial Intelligence",
+        title: "AI Ready",
+        desc: "Architected today for tomorrow's capabilities.",
+      },
+      {
+        label: "Scalability",
+        title: "Scalable Solutions",
+        desc: "Grow from a website to a digital ecosystem, without a rebuild.",
+      },
     ],
+    proof: {
+      loadTimeLabel: "Load time",
+      loadTimeValue: "0.8s",
+      scoreLabel: "Performance",
+      seoLabel: "SEO",
+      accessibilityLabel: "Accessibility",
+      searchQuery: "dental clinic Bucharest",
+      aiPrompt: "Create a homepage section",
+      generatingLabel: "Generating…",
+      architectureLayers: ["Website", "CMS", "Analytics", "AI"],
+    },
   },
   comingSoon: {
     badge: "In Development",

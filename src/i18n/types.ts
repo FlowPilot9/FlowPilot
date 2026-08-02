@@ -104,7 +104,19 @@ export interface TranslationDictionary {
   why: {
     eyebrow: string;
     title: string;
-    items: Array<{ title: string; desc: string }>;
+    intro: string;
+    items: Array<{ label: string; title: string; desc: string }>;
+    proof: {
+      loadTimeLabel: string;
+      loadTimeValue: string;
+      scoreLabel: string;
+      seoLabel: string;
+      accessibilityLabel: string;
+      searchQuery: string;
+      aiPrompt: string;
+      generatingLabel: string;
+      architectureLayers: string[];
+    };
   };
   comingSoon: {
     badge: string;

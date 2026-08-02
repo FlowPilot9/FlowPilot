@@ -18,7 +18,7 @@ Dacă răspunsul e "doar decor" — nu intră în site.
 
 ### 1.1 Cele cinci principii vizuale
 
-1. **Monocrom cu un singur accent.** 90% din interfață e text neutru pe fundal alb. Vezi §2.2, "Accent follows intention".
+1. **Monocrom cu un singur accent.** 90% din interfață e text neutru pe fundal alb. Vezi §2.2, "Accent follows intention". *Singura excepție: Hero-ul inversează luminozitatea (fundal aproape negru), nu paleta — vezi §2.4.*
 2. **Produsul e dovada, nu ilustrația.** Nu desenăm scene decorative. Arătăm mereu ceva ce *pare* interfață reală.
 3. **Spațiul alb e o afirmație de încredere.** La ezitare între două valori de spațiere, alegem întotdeauna pe cea mai mare.
 4. **Ierarhie prin mărime și greutate, nu prin culoare.** Culoarea nu creează ierarhie — asta e treaba tipografiei.
@@ -30,7 +30,7 @@ Nicio secțiune nu concurează cu alta pentru atenție, dar fiecare are **exact 
 
 | Secțiune | Emoție țintă | Momentul-semnătură |
 |---|---|---|
-| **Hero** | Inspirație | Cel mai mare și impresionant "product workspace" al site-ului — primul contact cu produsul |
+| **Hero** | Impact cinematic | Singurul fundal întunecat al site-ului + un "workspace" viu care construiește un site sub ochii vizitatorului (wireframe → site finit → mobil → dovezi) — primul contact cu produsul |
 | **Services** | Interacțiune | Ferestre de produs mai mici, modulare, fiecare demonstrând o capabilitate — utilizatorul "atinge" produsul |
 | **Portfolio** | Imersiune | Preview-uri aproape full-screen ale proiectelor reale, aceeași limbă vizuală dusă la scară maximă |
 | **Process** | Transformare | (rezervat pentru redesign viitor) — vizualizează explicit trecerea haos → claritate |
@@ -70,6 +70,24 @@ Consecințe directe:
 ### 2.3 Gradient-uri (vezi și §7)
 
 `--gradient-primary` e rezervat pentru: text de accent în titluri (`text-gradient`) și fundalul butonului CTA principal. Nu pentru fundaluri mari de secțiune.
+
+### 2.4 Hero dark scope (excepția de la §1.1)
+
+Hero-ul (și Navbar-ul cât timp plutește transparent peste el) e singurul loc unde fundalul e aproape negru în loc de alb. Nu e o paletă nouă, paralelă — e o **redefinire locală a acelorași tokens** pe care le folosește tot restul site-ului, aplicată printr-o singură clasă wrapper: `.hero-dark` (definită în `styles.css`, imediat după blocul `.dark` neutilizat).
+
+| Token redefinit în `.hero-dark` | De ce |
+|---|---|
+| `--background`, `--surface`, `--surface-strong` | fundal aproape negru + variante de card |
+| `--foreground`, `--muted-foreground` | text aproape alb / gri deschis, citibil pe fundal închis |
+| `--border`, `--secondary` | contururi și chip-uri subtile, albe la opacitate mică |
+
+**Ce NU se redefinește:** `--primary`, `--primary-foreground`, `--gradient-primary`. Albastrul FlowPilot e singura constantă între cele două lumi — de asta nu reutilizăm blocul generic `.dark` din `styles.css` (boilerplate shadcn, nefolosit altundeva): acolo `--primary` e aproape alb și ar șterge accentul de brand exact unde contează cel mai mult.
+
+**Utilități companion**, pentru elementele care altfel amestecă spre alb necondiționat (`glass-panel`, `btn-ghost` — corecte pe fundal deschis, greșite pe fundal închis):
+- `glass-panel-dark` — panou frost întunecat (echivalentul `glass-panel` pentru `.hero-dark`)
+- `btn-ghost-dark` — buton secundar pe fundal întunecat (echivalentul `btn-ghost`)
+
+**Regulă de aplicare:** orice element nou adăugat *în* Hero sau în Navbar-ul transparent trebuie să folosească aceleași utilități semantice ca peste tot (`bg-surface`, `text-muted-foreground`, `border-border`) — niciodată culori hardcodate — ca să rămână corect automat dacă scope-ul se ajustează vreodată. Excepție acceptată: elemente explicit "sticla pe negru" (panoul workspace-ului, chip-urile de dovadă) pot folosi direct `white/N%`, pentru că acolo alb-pe-negru e intenția, nu un fallback.
 
 ---
 

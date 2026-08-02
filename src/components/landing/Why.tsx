@@ -1,29 +1,85 @@
-import { useEffect, useRef, type RefObject } from "react";
+import { useEffect, useRef, type ReactNode, type RefObject } from "react";
 import { motion, useInView, useReducedMotion, type Variants } from "framer-motion";
+import { ArrowRight, Search, Sparkles } from "lucide-react";
 import { SectionHeader } from "@/components/landing/SectionHeader";
 import { useTranslation } from "@/i18n/I18nProvider";
+import type { TranslationDictionary } from "@/i18n";
 
 // ---------------------------------------------------------------------------
 // "Why FlowPilot" — principle-driven editorial section.
 //
-// This replaces the previous 6-card feature grid. Design system §1.2 reserves
-// one signature moment per section; this is Why's: instead of stating what we
-// offer, each row proves a principle with a tiny, quiet interaction that
-// demonstrates the claim rather than illustrating it decoratively (§1.1.5).
+// Design system §1.2 reserves one signature moment per section; this is
+// Why's: instead of stating what we offer, each row proves a principle with
+// a tiny, quiet interaction that demonstrates the claim rather than
+// illustrating it decoratively (§1.1.5).
 //
-// Every micro-visual below is built from transform/opacity, plus the narrow
-// small-SVG stroke exception in design system §7.1.3 (each SVG is well under
-// the 150px threshold). Nothing loops — every proof plays once, the first
-// time its row scrolls into view, then holds its resting state. This keeps
-// the section calm rather than busy, and costs nothing off-screen.
+// All six illustrations share one visual language now instead of six
+// unrelated ones: most are built on the same small-scale "Product Window"
+// (§6.3) already used in Hero/Services/Showcase — WindowChrome below is
+// that pattern, extracted as a real reusable piece for the first time.
+// Every proof lives inside ProofCanvas, a fixed-size box, so no illustration
+// carries more visual weight than another regardless of its content.
+//
+// Motion is transform/opacity only, plus the narrow small-SVG stroke
+// exception in §7.1.3 (every SVG here is well under the 150px threshold).
+// Nothing loops — every proof plays once, the first time its row scrolls
+// into view, then holds its resting state.
 // ---------------------------------------------------------------------------
+
+type ProofData = TranslationDictionary["why"]["proof"];
 
 type ProofProps = {
   active: boolean;
   reduceMotion: boolean;
-  prompt?: string;
-  growthLabel?: string;
+  proof: ProofData;
 };
+
+// --- Shared primitives ------------------------------------------------------
+
+function ProofCanvas({ children }: { children: ReactNode }) {
+  return <div className="mx-auto w-full max-w-[260px]">{children}</div>;
+}
+
+function WindowChrome({ label, children }: { label?: string; children: ReactNode }) {
+  return (
+    <div className="overflow-hidden rounded-xl border border-border/80 bg-background shadow-soft">
+      <div className="flex items-center gap-1.5 border-b border-border/70 px-3 py-2">
+        <span className="h-1.5 w-1.5 rounded-full bg-destructive/40" />
+        <span className="h-1.5 w-1.5 rounded-full bg-primary/30" />
+        <span className="h-1.5 w-1.5 rounded-full bg-muted-foreground/25" />
+        {label && (
+          <span className="ml-1.5 truncate text-[10px] font-medium text-muted-foreground/70">{label}</span>
+        )}
+      </div>
+      <div className="p-3.5">{children}</div>
+    </div>
+  );
+}
+
+function MetricBar({
+  label,
+  active,
+  delay,
+}: {
+  label: string;
+  active: boolean;
+  delay: number;
+}) {
+  return (
+    <div>
+      <div className="flex items-center justify-between">
+        <span className="text-[10px] text-muted-foreground">{label}</span>
+        <span className="text-[10px] font-medium text-foreground">100</span>
+      </div>
+      <div className="mt-1 h-1 overflow-hidden rounded-full bg-secondary">
+        <div
+          className="h-full origin-left rounded-full bg-primary transition-transform duration-700 ease-out motion-reduce:transition-none"
+          style={{ transitionDelay: `${delay}ms`, transform: active ? "scaleX(1)" : "scaleX(0)" }}
+        />
+      </div>
+    </div>
+  );
+}
 
 function useCountUp(
   ref: RefObject<HTMLSpanElement | null>,
@@ -56,61 +112,252 @@ function useCountUp(
   }, [active, reduceMotion]);
 }
 
-function PerformanceProof({ active, reduceMotion }: ProofProps) {
-  const valueRef = useRef<HTMLSpanElement>(null);
-  const circumference = 2 * Math.PI * 27;
+// --- 01 — Fast Delivery: a small performance dashboard ----------------------
 
-  useCountUp(valueRef, active, reduceMotion, 72, 100, 900, (v) => String(v));
+function PerformanceProof({ active, reduceMotion, proof }: ProofProps) {
+  const valueRef = useRef<HTMLSpanElement>(null);
+  const circumference = 2 * Math.PI * 18;
+
+  useCountUp(valueRef, active, reduceMotion, 62, 100, 900, (v) => String(v));
 
   return (
-    <div className="flex items-center gap-5">
-      <svg viewBox="0 0 64 64" className="h-14 w-14 shrink-0 -rotate-90">
-        <circle cx="32" cy="32" r="27" fill="none" strokeWidth="5" className="stroke-border" />
-        <circle
-          cx="32"
-          cy="32"
-          r="27"
-          fill="none"
-          strokeWidth="5"
-          strokeLinecap="round"
-          className="stroke-primary transition-[stroke-dashoffset] duration-[900ms] ease-out motion-reduce:transition-none"
-          style={{
-            strokeDasharray: circumference,
-            strokeDashoffset: active ? 0 : circumference * (1 - 0.72),
-          }}
-        />
-      </svg>
-      <div>
-        <div className="flex items-baseline gap-0.5 font-mono text-2xl font-semibold text-foreground">
-          <span ref={valueRef}>72</span>
-          <span className="text-base text-muted-foreground/50">/100</span>
+    <ProofCanvas>
+      <WindowChrome label={proof.scoreLabel}>
+        <div className="flex items-center justify-between">
+          <span className="text-[10px] text-muted-foreground">{proof.loadTimeLabel}</span>
+          <span className="font-mono text-xs font-semibold text-foreground">{proof.loadTimeValue}</span>
         </div>
-        <div className="mt-0.5 text-xs text-muted-foreground">Lighthouse score</div>
+
+        <div className="mt-3 flex items-center gap-3">
+          <svg viewBox="0 0 44 44" className="h-11 w-11 shrink-0 -rotate-90">
+            <circle cx="22" cy="22" r="18" fill="none" strokeWidth="4" className="stroke-secondary" />
+            <circle
+              cx="22"
+              cy="22"
+              r="18"
+              fill="none"
+              strokeWidth="4"
+              strokeLinecap="round"
+              className="stroke-primary transition-[stroke-dashoffset] duration-[900ms] ease-out motion-reduce:transition-none"
+              style={{
+                strokeDasharray: circumference,
+                strokeDashoffset: active ? 0 : circumference * (1 - 0.62),
+              }}
+            />
+          </svg>
+          <div className="flex-1 space-y-2">
+            <MetricBar label={proof.seoLabel} active={active} delay={250} />
+            <MetricBar label={proof.accessibilityLabel} active={active} delay={400} />
+          </div>
+        </div>
+      </WindowChrome>
+    </ProofCanvas>
+  );
+}
+
+// --- Shared: a tiny real webpage (nav + hero + cards), two tones -----------
+// Reused by both 02 (style transformation) and 03 (responsive layout) — same
+// "real site", shown two different ways, instead of two unrelated graphics.
+
+function MiniSite({
+  tone,
+  columns,
+  navCollapsed,
+}: {
+  tone: "wireframe" | "polished";
+  columns: number;
+  navCollapsed: boolean;
+}) {
+  const isWire = tone === "wireframe";
+
+  return (
+    <div className="flex h-full flex-col gap-1.5">
+      {/* nav */}
+      <div className="flex items-center justify-between">
+        <span
+          className={
+            isWire
+              ? "h-2 w-2 rounded-full border border-dashed border-muted-foreground/40"
+              : "h-2 w-2 rounded-full bg-primary"
+          }
+        />
+        {navCollapsed ? (
+          <div className="flex flex-col gap-[2px]">
+            {[0, 1, 2].map((i) => (
+              <span
+                key={i}
+                className={
+                  isWire
+                    ? "h-[2px] w-3 rounded-full border-t border-dashed border-muted-foreground/40"
+                    : "h-[2px] w-3 rounded-full bg-foreground/60"
+                }
+              />
+            ))}
+          </div>
+        ) : (
+          <div className="flex gap-1.5">
+            {[0, 1, 2].map((i) => (
+              <span
+                key={i}
+                className={
+                  isWire
+                    ? "h-1 w-3.5 rounded-full border border-dashed border-muted-foreground/35"
+                    : "h-1 w-3.5 rounded-full bg-muted-foreground/30"
+                }
+              />
+            ))}
+          </div>
+        )}
+      </div>
+
+      {/* hero */}
+      <div className={`flex gap-1.5 ${columns === 1 ? "flex-col" : "flex-row"}`}>
+        <span
+          className={
+            isWire
+              ? "h-6 flex-1 rounded border border-dashed border-muted-foreground/35"
+              : "h-6 flex-1 rounded-sm bg-primary/20"
+          }
+        />
+        <div className="flex flex-1 flex-col justify-center gap-1">
+          <span
+            className={
+              isWire
+                ? "block h-1 w-full rounded-full border-t border-dashed border-muted-foreground/35"
+                : "block h-1 w-full rounded-full bg-foreground/70"
+            }
+          />
+          <span
+            className={
+              isWire
+                ? "block h-1 w-2/3 rounded-full border-t border-dashed border-muted-foreground/35"
+                : "block h-1 w-2/3 rounded-full bg-muted-foreground/30"
+            }
+          />
+          {!isWire && <span className="mt-0.5 h-1.5 w-6 rounded-sm bg-primary" />}
+        </div>
+      </div>
+
+      {/* card grid */}
+      <div className="flex flex-1 gap-1.5">
+        {Array.from({ length: columns }).map((_, i) => (
+          <span
+            key={i}
+            className={
+              isWire
+                ? "flex-1 rounded border border-dashed border-muted-foreground/30"
+                : `flex-1 rounded-sm ${i === 0 ? "bg-primary/10" : "bg-secondary"}`
+            }
+          />
+        ))}
       </div>
     </div>
   );
 }
 
+// --- 02 — Premium Design: the same page, wireframe next to polished --------
+
 function CraftProof({ active }: ProofProps) {
   return (
-    <div className="relative h-14 w-full max-w-[220px]">
-      <div
-        className={`absolute inset-0 flex flex-col justify-center gap-2.5 transition-all duration-500 ease-out motion-reduce:transition-none ${
-          active ? "-translate-y-1 opacity-0" : "translate-y-0 opacity-100"
-        }`}
-      >
-        <span className="h-3 w-3/5 rounded border border-dashed border-muted-foreground/35" />
-        <span className="h-2 w-full rounded border border-dashed border-muted-foreground/35" />
-        <span className="h-2 w-2/5 rounded border border-dashed border-muted-foreground/35" />
+    <ProofCanvas>
+      <WindowChrome>
+        <div className="flex items-center gap-2">
+          <div
+            className={`h-16 flex-1 transition-all duration-500 ease-out motion-reduce:transition-none ${
+              active ? "translate-x-0 opacity-100" : "-translate-x-1 opacity-0"
+            }`}
+          >
+            <MiniSite tone="wireframe" columns={2} navCollapsed={false} />
+          </div>
+
+          <ArrowRight
+            className={`h-3.5 w-3.5 shrink-0 text-muted-foreground/40 transition-opacity delay-300 duration-400 ease-out motion-reduce:transition-none ${
+              active ? "opacity-100" : "opacity-0"
+            }`}
+          />
+
+          <div
+            className={`h-16 flex-1 transition-all delay-500 duration-500 ease-out motion-reduce:transition-none ${
+              active ? "translate-x-0 opacity-100" : "translate-x-1 opacity-0"
+            }`}
+          >
+            <MiniSite tone="polished" columns={2} navCollapsed={false} />
+          </div>
+        </div>
+      </WindowChrome>
+    </ProofCanvas>
+  );
+}
+
+// --- 03 — Mobile First: the same page, desktop → tablet → mobile -----------
+
+function DeviceFrame({
+  kind,
+  width,
+  height,
+  columns,
+  navCollapsed,
+  active,
+  delay,
+}: {
+  kind: "monitor" | "tablet" | "phone";
+  width: number;
+  height: number;
+  columns: number;
+  navCollapsed: boolean;
+  active: boolean;
+  delay: number;
+}) {
+  const reveal = `transition-all duration-500 ease-out motion-reduce:transition-none ${
+    active ? "translate-y-0 opacity-100" : "translate-y-2 opacity-0"
+  }`;
+
+  const screen = (
+    <div className="flex-1 overflow-hidden p-1.5">
+      <MiniSite tone="polished" columns={columns} navCollapsed={navCollapsed} />
+    </div>
+  );
+
+  if (kind === "monitor") {
+    return (
+      <div className={`flex flex-col items-center ${reveal}`} style={{ transitionDelay: `${delay}ms` }}>
+        <div
+          className="flex flex-col rounded-md border-[3px] border-border bg-background shadow-soft"
+          style={{ width, height }}
+        >
+          {screen}
+        </div>
+        <span className="h-2 w-2 bg-border" />
+        <span className="h-1 w-9 rounded-full bg-border" />
       </div>
+    );
+  }
+
+  if (kind === "tablet") {
+    return (
       <div
-        className={`absolute inset-0 flex flex-col justify-center gap-2.5 transition-all delay-150 duration-500 ease-out motion-reduce:transition-none ${
-          active ? "translate-y-0 opacity-100" : "translate-y-1 opacity-0"
-        }`}
+        className={`flex flex-col rounded-xl border-[3px] border-border bg-background shadow-soft ${reveal}`}
+        style={{ width, height, transitionDelay: `${delay}ms` }}
       >
-        <span className="h-3 w-3/5 rounded-full bg-primary/70" />
-        <span className="h-2 w-full rounded-full bg-muted-foreground/25" />
-        <span className="h-2 w-2/5 rounded-full bg-muted-foreground/15" />
+        <div className="flex justify-center pt-1">
+          <span className="h-[3px] w-[3px] rounded-full bg-muted-foreground/40" />
+        </div>
+        {screen}
+      </div>
+    );
+  }
+
+  return (
+    <div
+      className={`flex flex-col rounded-[14px] border-[3px] border-border bg-background shadow-soft ${reveal}`}
+      style={{ width, height, transitionDelay: `${delay}ms` }}
+    >
+      <div className="flex justify-center pt-1">
+        <span className="h-[3px] w-3 rounded-full bg-muted-foreground/40" />
+      </div>
+      {screen}
+      <div className="flex justify-center pb-1">
+        <span className="h-2 w-2 rounded-full border-[1.5px] border-muted-foreground/40" />
       </div>
     </div>
   );
@@ -118,163 +365,177 @@ function CraftProof({ active }: ProofProps) {
 
 function ScreenProof({ active }: ProofProps) {
   return (
-    <div className="relative mx-auto h-14 w-40 overflow-hidden rounded-lg border border-border bg-background">
-      <div className="flex h-full flex-col justify-center gap-1.5 px-4">
-        <span className="h-1.5 w-full rounded-full bg-muted-foreground/20" />
-        <span className="h-1.5 w-4/5 rounded-full bg-muted-foreground/15" />
-        <span className="h-1.5 w-1/2 rounded-full bg-primary/40" />
+    <ProofCanvas>
+      <div className="flex h-[86px] items-end justify-center gap-5">
+        <DeviceFrame
+          kind="monitor"
+          width={100}
+          height={54}
+          columns={3}
+          navCollapsed={false}
+          active={active}
+          delay={0}
+        />
+        <DeviceFrame
+          kind="tablet"
+          width={58}
+          height={74}
+          columns={2}
+          navCollapsed={false}
+          active={active}
+          delay={150}
+        />
+        <DeviceFrame
+          kind="phone"
+          width={34}
+          height={60}
+          columns={1}
+          navCollapsed={true}
+          active={active}
+          delay={300}
+        />
       </div>
-      <div
-        className={`absolute inset-y-0 left-0 w-10 bg-secondary transition-transform duration-700 ease-out motion-reduce:transition-none ${
-          active ? "translate-x-0" : "-translate-x-full"
-        }`}
-      />
-      <div
-        className={`absolute inset-y-0 right-0 w-10 bg-secondary transition-transform duration-700 ease-out motion-reduce:transition-none ${
-          active ? "translate-x-0" : "translate-x-full"
-        }`}
-      />
-    </div>
+    </ProofCanvas>
   );
 }
 
-function SeoProof({ active }: ProofProps) {
-  const rowHeight = 22;
+// --- 04 — SEO Optimized: search bar + rising rank ----------------------------
+
+function SeoProof({ active, proof }: ProofProps) {
+  const rowHeight = 18;
   const domains = ["agency-x.com", "studio-b.com", "webco.com", "flowpilot.com"];
 
   return (
-    <div className="relative h-24 w-full max-w-[220px]">
-      {domains.map((_, rank) => (
-        <span
-          key={rank}
-          className="absolute left-0 font-mono text-[10px] text-muted-foreground/40"
-          style={{ top: rank * rowHeight + 3 }}
-        >
-          {rank + 1}
-        </span>
-      ))}
-      <div className="absolute inset-0 left-6">
-        {domains.map((domain, i) => {
-          const isTarget = domain === "flowpilot.com";
-          const activeSlot = isTarget ? 0 : i + 1;
-          const slot = active ? activeSlot : i;
+    <ProofCanvas>
+      <WindowChrome>
+        <div className="flex items-center gap-1.5 rounded-md border border-border bg-secondary/50 px-2 py-1.5">
+          <Search className="h-3 w-3 shrink-0 text-muted-foreground/60" />
+          <span className="truncate text-[10px] text-muted-foreground">{proof.searchQuery}</span>
+        </div>
+
+        <div className="relative mt-2.5 h-[76px]">
+          {domains.map((_, rank) => (
+            <span
+              key={rank}
+              className="absolute left-0 font-mono text-[9px] text-muted-foreground/40"
+              style={{ top: rank * rowHeight + 2 }}
+            >
+              {rank + 1}
+            </span>
+          ))}
+          <div className="absolute inset-0 left-5">
+            {domains.map((domain, i) => {
+              const isTarget = domain === "flowpilot.com";
+              const activeSlot = isTarget ? 0 : i + 1;
+              const slot = active ? activeSlot : i;
+
+              return (
+                <div
+                  key={domain}
+                  className={`absolute left-0 whitespace-nowrap text-[11px] font-medium transition-transform duration-700 ease-out motion-reduce:transition-none ${
+                    isTarget ? "text-primary" : "text-muted-foreground/50"
+                  }`}
+                  style={{
+                    transform: `translateY(${slot * rowHeight}px)`,
+                    transitionDelay: `${i * 60}ms`,
+                  }}
+                >
+                  {domain}
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </WindowChrome>
+    </ProofCanvas>
+  );
+}
+
+// --- 05 — AI Ready: prompt → generating → component appears -----------------
+
+function AiProof({ active, reduceMotion, proof }: ProofProps) {
+  return (
+    <ProofCanvas>
+      <WindowChrome>
+        <div className="flex min-h-[76px] flex-col justify-center gap-2">
+          <div
+            className={`ml-auto max-w-[85%] rounded-xl rounded-br-sm bg-secondary px-2.5 py-1.5 text-[10px] text-muted-foreground transition-all duration-500 ease-out motion-reduce:transition-none ${
+              active ? "translate-y-0 opacity-100" : "translate-y-1 opacity-0"
+            }`}
+          >
+            {proof.aiPrompt}
+          </div>
+
+          <motion.span
+            initial={false}
+            animate={
+              reduceMotion
+                ? { opacity: 0 }
+                : active
+                  ? { opacity: [0, 1, 1, 0] }
+                  : { opacity: 0 }
+            }
+            transition={
+              reduceMotion
+                ? { duration: 0.01 }
+                : { duration: 1.6, delay: 0.5, times: [0, 0.2, 0.65, 1], ease: "easeInOut" }
+            }
+            className="inline-flex items-center gap-1 text-[10px] text-muted-foreground/70"
+          >
+            <Sparkles className="h-2.5 w-2.5 text-primary" />
+            {proof.generatingLabel}
+          </motion.span>
+
+          <div
+            className={`w-28 rounded-lg border border-primary/20 bg-primary/5 p-2 transition-all duration-500 ease-out motion-reduce:transition-none motion-reduce:delay-0 ${
+              active ? "scale-100 opacity-100" : "scale-90 opacity-0"
+            }`}
+            style={{ transitionDelay: reduceMotion ? "0ms" : "1700ms" }}
+          >
+            <span className="block h-1.5 w-10 rounded-full bg-primary/50" />
+            <span className="mt-1.5 block h-1.5 w-16 rounded-full bg-muted-foreground/20" />
+          </div>
+        </div>
+      </WindowChrome>
+    </ProofCanvas>
+  );
+}
+
+// --- 06 — Scalable Solutions: an architecture that grows in layers ----------
+
+function GrowthProof({ active, proof }: ProofProps) {
+  const layers = proof.architectureLayers;
+
+  return (
+    <ProofCanvas>
+      <div className="flex flex-col items-center">
+        {layers.map((layer, i) => {
+          const isLast = i === layers.length - 1;
 
           return (
-            <div
-              key={domain}
-              className={`absolute left-0 whitespace-nowrap text-xs font-medium transition-transform duration-700 ease-out motion-reduce:transition-none ${
-                isTarget ? "text-primary" : "text-muted-foreground/50"
-              }`}
-              style={{
-                transform: `translateY(${slot * rowHeight}px)`,
-                transitionDelay: `${i * 60}ms`,
-              }}
-            >
-              {domain}
+            <div key={layer} className="flex flex-col items-center">
+              {i > 0 && (
+                <span
+                  className={`h-3 w-px bg-border transition-opacity duration-300 ease-out motion-reduce:transition-none ${
+                    active ? "opacity-100" : "opacity-0"
+                  }`}
+                  style={{ transitionDelay: `${i * 150}ms` }}
+                />
+              )}
+              <div
+                className={`flex items-center gap-1.5 rounded-lg border px-3 py-1.5 text-xs font-medium transition-all duration-400 ease-out motion-reduce:transition-none ${
+                  isLast ? "border-primary/30 bg-primary/5 text-primary" : "border-border bg-secondary/50 text-muted-foreground"
+                } ${active ? "translate-y-0 opacity-100" : "translate-y-1.5 opacity-0"}`}
+                style={{ transitionDelay: `${i * 150}ms` }}
+              >
+                {isLast && <Sparkles className="h-3 w-3" />}
+                {layer}
+              </div>
             </div>
           );
         })}
       </div>
-    </div>
-  );
-}
-
-function AiProof({ active, prompt }: ProofProps) {
-  return (
-    <div className="flex h-14 w-full max-w-[220px] flex-col justify-center gap-2.5">
-      <div
-        className={`ml-auto max-w-[85%] rounded-xl rounded-br-sm bg-secondary px-3 py-1.5 text-[11px] text-muted-foreground transition-all duration-500 ease-out motion-reduce:transition-none ${
-          active ? "translate-y-0 opacity-100" : "translate-y-1 opacity-0"
-        }`}
-      >
-        {prompt}
-      </div>
-      <div className="flex items-center gap-1.5">
-        <span
-          className={`h-5 w-5 shrink-0 rounded-full bg-primary/10 transition-opacity delay-500 duration-400 motion-reduce:transition-none ${
-            active ? "opacity-100" : "opacity-0"
-          }`}
-        />
-        <div className="h-2 w-28 overflow-hidden rounded-full bg-primary/10">
-          <div
-            className={`h-full origin-left rounded-full bg-primary/50 transition-transform delay-[700ms] duration-[600ms] ease-out motion-reduce:transition-none ${
-              active ? "scale-x-100" : "scale-x-0"
-            }`}
-          />
-        </div>
-      </div>
-    </div>
-  );
-}
-
-function GrowthProof({ active, reduceMotion, growthLabel }: ProofProps) {
-  const dash = 190;
-  const valueRef = useRef<HTMLSpanElement>(null);
-  const points: Array<[number, number]> = [
-    [4, 44],
-    [32, 40],
-    [60, 42],
-    [88, 26],
-    [116, 30],
-    [156, 8],
-  ];
-  const linePath = `M${points.map(([x, y]) => `${x} ${y}`).join(" L")}`;
-  const areaPath = `M4 50 L${points.map(([x, y]) => `${x} ${y}`).join(" L")} L156 50 Z`;
-
-  useCountUp(valueRef, active, reduceMotion, 0, 128, 900, (v) => `+${v}%`);
-
-  return (
-    <div className="flex h-14 w-full max-w-[220px] flex-col justify-center gap-1.5">
-      <div className="flex items-center justify-between">
-        <span className="text-[10px] font-medium uppercase tracking-[0.1em] text-muted-foreground/50">
-          {growthLabel}
-        </span>
-        <span ref={valueRef} className="font-mono text-xs font-semibold text-primary">
-          +0%
-        </span>
-      </div>
-      <svg viewBox="0 0 160 56" className="h-11 w-full" aria-hidden>
-        {[14, 28, 42].map((y) => (
-          <line
-            key={y}
-            x1="0"
-            y1={y}
-            x2="160"
-            y2={y}
-            strokeWidth="1"
-            strokeDasharray="2 4"
-            className="stroke-border"
-          />
-        ))}
-        <path
-          d={areaPath}
-          className={`fill-primary/[0.07] transition-opacity delay-500 duration-500 ease-out motion-reduce:transition-none ${
-            active ? "opacity-100" : "opacity-0"
-          }`}
-        />
-        <path
-          d={linePath}
-          fill="none"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          className="stroke-primary/70 transition-all duration-[900ms] ease-out motion-reduce:transition-none"
-          style={{ strokeDasharray: dash, strokeDashoffset: active ? 0 : dash }}
-        />
-        {points.map(([x, y], i) => (
-          <circle
-            key={`${x}-${y}`}
-            cx={x}
-            cy={y}
-            r={i === points.length - 1 ? 3 : 2}
-            className={`transition-opacity duration-300 ease-out motion-reduce:transition-none ${
-              i === points.length - 1 ? "fill-primary" : "fill-primary/50"
-            } ${active ? "opacity-100" : "opacity-0"}`}
-            style={{ transitionDelay: `${300 + i * 90}ms` }}
-          />
-        ))}
-      </svg>
-    </div>
+    </ProofCanvas>
   );
 }
 
@@ -298,16 +559,14 @@ function PrincipleRow({
   title,
   desc,
   reduceMotion,
-  aiPrompt,
-  growthLabel,
+  proof,
 }: {
   index: number;
   label: string;
   title: string;
   desc: string;
   reduceMotion: boolean;
-  aiPrompt: string;
-  growthLabel: string;
+  proof: ProofData;
 }) {
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { once: true, amount: 0.5 });
@@ -338,16 +597,10 @@ function PrincipleRow({
       </div>
       <div className={`lg:col-span-6 ${reversed ? "lg:order-1" : "lg:order-2"}`}>
         <div
-          className={`flex min-h-[7.5rem] items-center rounded-2xl border border-border/70 bg-secondary/30 px-8 py-6 ${
-            reversed ? "lg:justify-start" : "lg:justify-end"
-          }`}
+          aria-hidden="true"
+          className="flex min-h-[7.5rem] items-center justify-center rounded-2xl border border-border/70 bg-secondary/30 px-8 py-6"
         >
-          <Proof
-            active={inView}
-            reduceMotion={reduceMotion}
-            prompt={aiPrompt}
-            growthLabel={growthLabel}
-          />
+          <Proof active={inView} reduceMotion={reduceMotion} proof={proof} />
         </div>
       </div>
     </motion.div>
@@ -372,8 +625,7 @@ export function Why() {
               title={item.title}
               desc={item.desc}
               reduceMotion={!!prefersReducedMotion}
-              aiPrompt={t.why.aiPrompt}
-              growthLabel={t.why.growthLabel}
+              proof={t.why.proof}
             />
           ))}
           <div className="border-t border-border" />

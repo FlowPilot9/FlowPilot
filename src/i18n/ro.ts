@@ -219,14 +219,50 @@ export const ro: TranslationDictionary = {
   why: {
     eyebrow: "De ce FlowPilot",
     title: "Un partener obsedat de detalii.",
+    intro: "Fiecare beneficiu de mai jos e o demonstrație, nu doar o promisiune.",
     items: [
-      { title: "Livrare rapidă", desc: "Lansare în săptămâni, nu trimestre." },
-      { title: "Design premium", desc: "Rafinat, gândit, aliniat brandului tău." },
-      { title: "Mobile first", desc: "Impecabil pe orice dispozitiv." },
-      { title: "Optimizat SEO", desc: "Construit să fie găsit." },
-      { title: "Pregătit pentru AI", desc: "Arhitecturat pentru viitor." },
-      { title: "Soluții scalabile", desc: "Crește fără reconstrucție." },
+      {
+        label: "Performanță",
+        title: "Livrare rapidă",
+        desc: "Lansare în săptămâni, nu trimestre — fără compromisuri de viteză.",
+      },
+      {
+        label: "Design",
+        title: "Design premium",
+        desc: "Rafinat, gândit, aliniat brandului tău — nu doar frumos, ci intenționat.",
+      },
+      {
+        label: "Responsive",
+        title: "Mobile first",
+        desc: "Impecabil pe desktop, tabletă și mobil, din prima zi.",
+      },
+      {
+        label: "SEO",
+        title: "Optimizat pentru căutare",
+        desc: "Construit ca motoarele de căutare — și clienții tăi — să te găsească primii.",
+      },
+      {
+        label: "Inteligență artificială",
+        title: "Pregătit pentru AI",
+        desc: "Arhitecturat azi pentru capabilitățile de mâine.",
+      },
+      {
+        label: "Scalabilitate",
+        title: "Soluții scalabile",
+        desc: "Crește de la site la ecosistem digital, fără reconstrucție.",
+      },
     ],
+    proof: {
+      loadTimeLabel: "Timp de încărcare",
+      loadTimeValue: "0.8s",
+      scoreLabel: "Performanță",
+      seoLabel: "SEO",
+      accessibilityLabel: "Accesibilitate",
+      searchQuery: "clinică stomatologică București",
+      aiPrompt: "Creează o secțiune pentru pagina de start",
+      generatingLabel: "Se generează…",
+      architectureLayers: ["Website", "CMS", "Analitice", "AI"],
+    },
   },
   comingSoon: {
     badge: "În dezvoltare",
