@@ -27,11 +27,11 @@ export function Contact() {
   });
 
   const onSubmit = async (values: ContactFormValues) => {
-    const { website, ...lead } = values;
+    const { hpToken, ...lead } = values;
 
     // Honeypot: un bot completează și câmpurile ascunse. Dacă are valoare,
     // pretindem succes și nu trimitem nimic către Supabase.
-    if (website) {
+    if (hpToken) {
       toast.success(t.contact.toastSuccess);
       reset();
       return;
@@ -79,9 +79,11 @@ export function Contact() {
           >
             <input
               type="text"
-              {...register("website")}
+              {...register("hpToken")}
               tabIndex={-1}
               autoComplete="off"
+              data-lpignore="true"
+              data-1p-ignore="true"
               aria-hidden="true"
               className="absolute left-[-9999px] top-auto h-px w-px overflow-hidden"
             />

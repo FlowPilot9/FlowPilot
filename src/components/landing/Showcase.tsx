@@ -57,7 +57,7 @@ export function Showcase() {
                   <div className="aspect-[16/10] overflow-hidden bg-surface-strong">
                     <img
                       src={showcaseImages[i]}
-                      alt={t.showcase.previewAlt.replace("{title}", product.title)}
+                      alt={(t.showcase.previewAlt ?? "{title}").replace("{title}", product.title)}
                       loading="lazy"
                       className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
                     />

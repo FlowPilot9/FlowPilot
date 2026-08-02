@@ -40,14 +40,12 @@ export interface TranslationDictionary {
     trustSupport: string;
     imageAlt: string;
     scrollCue: string;
-    mockup: {
+    workspace: {
       browserLabel: string;
       navItems: string[];
-      chartLabel: string;
-      statValue: string;
-      statLabel: string;
-      aiLabel: string;
-      aiMessage: string;
+      heroHeading: string;
+      heroCta: string;
+      badges: string[];
     };
   };
   trust: {

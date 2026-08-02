@@ -1,19 +1,47 @@
 import { useEffect, useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
 import { ArrowRight, Menu, X } from "lucide-react";
 import { Logo } from "@/components/landing/Logo";
 import { LanguageSwitcher } from "@/components/landing/LanguageSwitcher";
 import { useTranslation } from "@/i18n/I18nProvider";
 
+const EASE = [0.22, 1, 0.36, 1] as const;
+const SECTION_IDS = ["services", "process", "work", "future", "about"];
+
 export function Nav() {
   const { t } = useTranslation();
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [activeHref, setActiveHref] = useState<string | null>(null);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  // Sliding active-section indicator: whichever tracked section is most
+  // visible near the top of the viewport gets the pill. IntersectionObserver
+  // rather than a scroll-position calculation, so it stays correct
+  // regardless of how tall any given section is.
+  useEffect(() => {
+    const sections = SECTION_IDS.map((id) => document.getElementById(id)).filter(
+      (el): el is HTMLElement => el !== null,
+    );
+    if (sections.length === 0) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const mostVisible = entries
+          .filter((entry) => entry.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+        if (mostVisible) setActiveHref(`#${mostVisible.target.id}`);
+      },
+      { rootMargin: "-30% 0px -60% 0px", threshold: [0, 0.25, 0.5, 0.75, 1] },
+    );
+    sections.forEach((el) => observer.observe(el));
+    return () => observer.disconnect();
   }, []);
 
   const links = [
@@ -24,13 +52,22 @@ export function Nav() {
     { href: "#about", label: t.nav.about },
   ];
 
+  // Transparent state floats directly over the dark Hero and borrows its
+  // token scope (styles.css) so text/border/background utilities stay
+  // correct with no per-element color branching. Scrolled state sits over
+  // the light rest of the page and drops the scope, falling back to :root.
+  const dark = !scrolled;
+
   return (
-    <header
-      className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
+    <motion.header
+      initial={{ opacity: 0, y: -12 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6, ease: EASE }}
+      className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${dark ? "hero-dark" : ""} ${
         scrolled ? "bg-background/75 py-3 shadow-soft backdrop-blur-xl" : "py-5"
       }`}
     >
-      <div className="mx-auto max-w-[1500px] px-4">
+      <div className="mx-auto max-w-[1320px] px-4">
         <div
           className={`flex items-center justify-between rounded-2xl border px-4 py-2.5 transition-all ${
             scrolled
@@ -44,9 +81,16 @@ export function Nav() {
               <a
                 key={l.href}
                 href={l.href}
-                className="rounded-lg px-3 py-1.5 text-sm text-muted-foreground transition-colors hover:bg-surface-strong hover:text-foreground"
+                className="relative rounded-lg px-3 py-1.5 text-sm text-muted-foreground transition-colors hover:text-foreground"
               >
-                {l.label}
+                {activeHref === l.href && (
+                  <motion.span
+                    layoutId="nav-active-pill"
+                    className="absolute inset-0 rounded-lg bg-surface-strong"
+                    transition={{ type: "spring", stiffness: 380, damping: 32 }}
+                  />
+                )}
+                <span className="relative">{l.label}</span>
               </a>
             ))}
           </nav>
@@ -65,33 +109,53 @@ export function Nav() {
               className="rounded-lg border border-border p-2"
               onClick={() => setOpen((o) => !o)}
               aria-label={t.common.menu}
+              aria-expanded={open}
             >
               {open ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
             </button>
           </div>
         </div>
-        {open && (
-          <div className="glass-panel mt-2 rounded-2xl p-3 md:hidden animate-fade-up">
-            {links.map((l) => (
-              <a
-                key={l.href}
-                href={l.href}
-                onClick={() => setOpen(false)}
-                className="block rounded-lg px-3 py-2 text-sm text-foreground hover:bg-surface-strong"
-              >
-                {l.label}
-              </a>
-            ))}
-            <a
-              href="#contact"
-              onClick={() => setOpen(false)}
-              className="btn-primary mt-2 block rounded-xl px-4 py-2 text-center text-sm font-medium"
+
+        <AnimatePresence>
+          {open && (
+            <motion.div
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: "auto" }}
+              exit={{ opacity: 0, height: 0 }}
+              transition={{ duration: 0.25, ease: EASE }}
+              className={`mt-2 overflow-hidden rounded-2xl md:hidden ${
+                dark ? "glass-panel-dark" : "glass-panel"
+              }`}
             >
-              {t.common.getInTouch}
-            </a>
-          </div>
-        )}
+              <div className="p-3">
+                {links.map((l, i) => (
+                  <motion.a
+                    key={l.href}
+                    href={l.href}
+                    onClick={() => setOpen(false)}
+                    initial={{ opacity: 0, x: -8 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.3, delay: i * 0.04, ease: EASE }}
+                    className="block rounded-lg px-3 py-2 text-sm text-foreground hover:bg-surface-strong"
+                  >
+                    {l.label}
+                  </motion.a>
+                ))}
+                <motion.a
+                  href="#contact"
+                  onClick={() => setOpen(false)}
+                  initial={{ opacity: 0, x: -8 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.3, delay: links.length * 0.04, ease: EASE }}
+                  className="btn-primary mt-2 block rounded-xl px-4 py-2 text-center text-sm font-medium"
+                >
+                  {t.common.getInTouch}
+                </motion.a>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
-    </header>
+    </motion.header>
   );
 }

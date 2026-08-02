@@ -30,7 +30,7 @@ Nicio secțiune nu concurează cu alta pentru atenție, dar fiecare are **exact 
 
 | Secțiune | Emoție țintă | Momentul-semnătură |
 |---|---|---|
-| **Hero** | Impact cinematic | Singurul fundal întunecat al site-ului + un "workspace" viu care construiește un site sub ochii vizitatorului (wireframe → site finit → mobil → dovezi) — primul contact cu produsul |
+| **Hero** | Impact cinematic | Singurul fundal întunecat al site-ului + un "workspace" viu care construiește un site sub ochii vizitatorului (wireframe → site finit → scroll care dezvăluie conținut → dovezi) — primul contact cu produsul |
 | **Services** | Interacțiune | Ferestre de produs mai mici, modulare, fiecare demonstrând o capabilitate — utilizatorul "atinge" produsul |
 | **Portfolio** | Imersiune | Preview-uri aproape full-screen ale proiectelor reale, aceeași limbă vizuală dusă la scară maximă |
 | **Process** | Transformare | (rezervat pentru redesign viitor) — vizualizează explicit trecerea haos → claritate |

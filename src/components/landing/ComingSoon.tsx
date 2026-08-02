@@ -28,7 +28,7 @@ export function ComingSoon() {
   });
 
   const onSubmit = async (values: WaitlistFormValues) => {
-    if (values.website) {
+    if (values.hpToken) {
       toast.success(t.comingSoon.toastSuccess);
       reset();
       return;
@@ -64,9 +64,11 @@ export function ComingSoon() {
               <form onSubmit={handleSubmit(onSubmit)} noValidate>
                 <input
                   type="text"
-                  {...register("website")}
+                  {...register("hpToken")}
                   tabIndex={-1}
                   autoComplete="off"
+                  data-lpignore="true"
+                  data-1p-ignore="true"
                   aria-hidden="true"
                   className="absolute left-[-9999px] top-auto h-px w-px overflow-hidden"
                 />
