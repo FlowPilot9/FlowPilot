@@ -1,9 +1,10 @@
 import { Linkedin, Github, Mail } from "lucide-react";
 import { Logo } from "@/components/landing/Logo";
 import { useTranslation } from "@/i18n/I18nProvider";
+import { localePath } from "@/i18n";
 
 export function Footer() {
-  const { t } = useTranslation();
+  const { t, locale } = useTranslation();
 
   return (
     <footer className="border-t border-border">
@@ -15,6 +16,7 @@ export function Footer() {
           <a href="#work" className="hover:text-foreground">{t.nav.work}</a>
           <a href="#future" className="hover:text-foreground">{t.nav.comingSoon}</a>
           <a href="#contact" className="hover:text-foreground">{t.common.contact}</a>
+          <a href={localePath(locale, "/privacy")} className="hover:text-foreground">{t.footer.privacyPolicy}</a>
         </nav>
         <div className="flex items-center gap-2">
           <a href="#" aria-label={t.footer.linkedin} className="grid h-9 w-9 place-items-center rounded-lg border border-border text-muted-foreground transition-colors hover:border-primary/40 hover:text-primary">

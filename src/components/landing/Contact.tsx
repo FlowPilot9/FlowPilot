@@ -5,13 +5,14 @@ import { toast } from "sonner";
 import { ArrowRight, Mail, Check } from "lucide-react";
 import {
   createContactFormSchema,
-  submitLead,
+  submitContactLead,
   type ContactFormValues,
 } from "@/lib/leads";
 import { useTranslation } from "@/i18n/I18nProvider";
+import { localePath } from "@/i18n";
 
 export function Contact() {
-  const { t } = useTranslation();
+  const { t, locale } = useTranslation();
   const contactFormSchema = useMemo(
     () => createContactFormSchema(t.forms.validation),
     [t],
@@ -27,7 +28,7 @@ export function Contact() {
   });
 
   const onSubmit = async (values: ContactFormValues) => {
-    const { website, ...lead } = values;
+    const { website, consent, ...lead } = values;
 
     // Honeypot: un bot completează și câmpurile ascunse. Dacă are valoare,
     // pretindem succes și nu trimitem nimic către Supabase.
@@ -38,7 +39,7 @@ export function Contact() {
     }
 
     try {
-      await submitLead({ type: "contact", ...lead });
+      await submitContactLead(lead);
       toast.success(t.contact.toastSuccess);
       reset();
     } catch {
@@ -98,7 +99,10 @@ export function Contact() {
                 )}
               </label>
               <label className="block">
-                <span className="mb-1.5 block text-xs font-medium text-foreground">{t.contact.company}</span>
+                <span className="mb-1.5 block text-xs font-medium text-foreground">
+                  {t.contact.company}{" "}
+                  <span className="font-normal text-muted-foreground">({t.contact.optional})</span>
+                </span>
                 <input
                   type="text"
                   {...register("company")}
@@ -128,10 +132,32 @@ export function Contact() {
                 <span className="mt-1 block text-xs text-destructive">{errors.message.message}</span>
               )}
             </label>
+            
+            <label className="mt-4 flex items-start gap-2.5">
+              <input
+                type="checkbox"
+                {...register("consent")}
+                className="mt-0.5 h-4 w-4 shrink-0 rounded border-border text-primary focus:ring-2 focus:ring-primary/30"
+              />
+              <span className="text-xs text-muted-foreground">
+                {t.consent.prefix}{" "}
+                <a
+                  href={localePath(locale, "/privacy")}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="underline hover:text-foreground"
+                >
+                  {t.consent.linkText}
+                </a>
+              </span>
+            </label>
+            {errors.consent && (
+              <span className="mt-1 block text-xs text-destructive">{errors.consent.message}</span>
+            )}
             <button
               type="submit"
               disabled={isSubmitting}
-              className="btn-primary mt-6 inline-flex w-full items-center justify-center gap-2 rounded-xl px-5 py-3 text-sm font-medium disabled:opacity-60"
+              className="btn-primary mt-4 inline-flex w-full items-center justify-center gap-2 rounded-xl px-5 py-3 text-sm font-medium disabled:opacity-60"
             >
               {isSubmitting ? t.contact.submitting : t.contact.submit} <ArrowRight className="h-4 w-4" />
             </button>

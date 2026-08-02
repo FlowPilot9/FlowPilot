@@ -135,6 +135,7 @@ export const en: TranslationDictionary = {
     delivery: "Delivery in 2–6 weeks",
     name: "Name",
     company: "Company",
+    optional: "optional",
     email: "Email",
     message: "Message",
     submit: "Send message",
@@ -146,12 +147,57 @@ export const en: TranslationDictionary = {
     linkedin: "LinkedIn",
     github: "GitHub",
     email: "Email",
+    privacyPolicy: "Privacy Policy",
+  },
+  consent: {
+    prefix: "I agree to the",
+    linkText: "Privacy Policy",
+  },
+  privacy: {
+    metaTitle: "Privacy Policy — FlowPilot",
+    metaDescription: "How we collect, use, and protect your data on FlowPilot.",
+    title: "Privacy Policy",
+    lastUpdated: "Last updated: August 2026",
+    intro:
+      "This page explains what data we collect through the forms on this site, why we collect it, and what rights you have over it.",
+    sections: [
+      {
+        heading: "What data we collect",
+        body: "Through the contact form, we collect your name, optionally your company, your email address, and your message. Through the waitlist form, we only collect your email address.",
+      },
+      {
+        heading: "Why we collect this data",
+        body: "We use this data solely to respond to your request or to reach out when we launch new features, if you joined the waitlist.",
+      },
+      {
+        heading: "IP address and spam prevention",
+        body: "To protect our forms from spam and automated abuse, we temporarily retain (for a maximum of 48 hours) the IP address used at submission time, along with the submission time. This information is not linked to your name or email and is deleted automatically.",
+      },
+      {
+        heading: "How long we keep your data",
+        body: "Form data is kept for as long as needed to respond to your request or, for the waitlist, until launch or until you request deletion.",
+      },
+      {
+        heading: "Who has access to your data",
+        body: "Data is stored in Supabase's infrastructure and is accessible only to the FlowPilot team. We do not sell or share your data with third parties for marketing purposes.",
+      },
+      {
+        heading: "Your rights",
+        body: "Under GDPR, you have the right to access, rectify, erase, restrict, and port your data, as well as the right to object to processing. You can contact us at any time to exercise these rights.",
+      },
+      {
+        heading: "Contact",
+        body: "For any privacy question or to exercise your rights, email us at hello@flowpilot.studio.",
+      },
+    ],
+    backHome: "Back to homepage",
   },
   forms: {
     validation: {
       nameMin: "Name must be at least 2 characters",
       emailInvalid: "Enter a valid email address",
       messageMin: "Message must be at least 10 characters",
+      consentRequired: "You must accept the Privacy Policy",
     },
   },
   errors: {

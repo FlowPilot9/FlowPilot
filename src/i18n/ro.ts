@@ -135,6 +135,7 @@ export const ro: TranslationDictionary = {
     delivery: "Livrare în 2–6 săptămâni",
     name: "Nume",
     company: "Companie",
+    optional: "opțional",
     email: "Email",
     message: "Mesaj",
     submit: "Trimite mesajul",
@@ -146,12 +147,57 @@ export const ro: TranslationDictionary = {
     linkedin: "LinkedIn",
     github: "GitHub",
     email: "Email",
+    privacyPolicy: "Politica de Confidențialitate",
+  },
+  consent: {
+    prefix: "Sunt de acord cu",
+    linkText: "Politica de Confidențialitate",
+  },
+  privacy: {
+    metaTitle: "Politica de Confidențialitate — FlowPilot",
+    metaDescription: "Cum colectăm, folosim și protejăm datele tale pe FlowPilot.",
+    title: "Politica de Confidențialitate",
+    lastUpdated: "Ultima actualizare: august 2026",
+    intro:
+      "Această pagină explică ce date colectăm prin formularele de pe acest site, de ce le colectăm și ce drepturi ai în privința lor.",
+    sections: [
+      {
+        heading: "Ce date colectăm",
+        body: "Prin formularul de contact colectăm numele tău, opțional compania, adresa de email și mesajul trimis. Prin formularul de listă de așteptare colectăm doar adresa de email.",
+      },
+      {
+        heading: "De ce colectăm aceste date",
+        body: "Folosim aceste date exclusiv pentru a răspunde solicitării tale sau pentru a te contacta atunci când lansăm noi funcționalități, dacă te-ai înscris pe lista de așteptare.",
+      },
+      {
+        heading: "Adresa IP și prevenirea spam-ului",
+        body: "Pentru a proteja formularele împotriva spam-ului și abuzului automatizat, reținem temporar (maximum 48 de ore) adresa IP folosită la trimitere, împreună cu ora trimiterii. Aceste informații nu sunt asociate cu numele sau emailul tău și sunt șterse automat.",
+      },
+      {
+        heading: "Cât timp păstrăm datele",
+        body: "Datele din formulare sunt păstrate atât timp cât este necesar pentru a răspunde solicitării tale sau, în cazul listei de așteptare, până la lansare ori până când soliciți ștergerea lor.",
+      },
+      {
+        heading: "Cine are acces la date",
+        body: "Datele sunt stocate în infrastructura Supabase și sunt accesibile doar echipei FlowPilot. Nu vindem și nu partajăm datele tale cu terți în scopuri de marketing.",
+      },
+      {
+        heading: "Drepturile tale",
+        body: "Conform GDPR, ai dreptul de acces, rectificare, ștergere, restricționare și portabilitate a datelor tale, precum și dreptul de a te opune prelucrării. Ne poți contacta oricând pentru a-ți exercita aceste drepturi.",
+      },
+      {
+        heading: "Contact",
+        body: "Pentru orice întrebare legată de confidențialitate sau pentru a-ți exercita drepturile, scrie-ne la hello@flowpilot.studio.",
+      },
+    ],
+    backHome: "Înapoi la pagina principală",
   },
   forms: {
     validation: {
       nameMin: "Numele trebuie să aibă cel puțin 2 caractere",
       emailInvalid: "Introdu o adresă de email validă",
       messageMin: "Mesajul trebuie să aibă cel puțin 10 caractere",
+      consentRequired: "Trebuie să accepți Politica de Confidențialitate",
     },
   },
   errors: {

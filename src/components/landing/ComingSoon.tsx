@@ -5,14 +5,15 @@ import { toast } from "sonner";
 import { ArrowRight } from "lucide-react";
 import {
   createWaitlistFormSchema,
-  submitLead,
+  submitWaitlistLead,
   type WaitlistFormValues,
 } from "@/lib/leads";
 import { useTranslation } from "@/i18n/I18nProvider";
 import aiIllustration from "@/assets/ai-illustration.png";
+import { localePath } from "@/i18n";
 
 export function ComingSoon() {
-  const { t } = useTranslation();
+  const { t, locale } = useTranslation();
   const waitlistFormSchema = useMemo(
     () => createWaitlistFormSchema(t.forms.validation),
     [t],
@@ -35,7 +36,7 @@ export function ComingSoon() {
     }
 
     try {
-      await submitLead({ type: "waitlist", email: values.email });
+      await submitWaitlistLead({ email: values.email });
       toast.success(t.comingSoon.toastSuccess);
       reset();
     } catch {
@@ -87,6 +88,27 @@ export function ComingSoon() {
                 </div>
                 {errors.email && (
                   <span className="mt-2 block text-xs text-destructive">{errors.email.message}</span>
+                )}
+                <label className="mt-3 flex items-start gap-2.5">
+                  <input
+                    type="checkbox"
+                    {...register("consent")}
+                    className="mt-0.5 h-4 w-4 shrink-0 rounded border-border text-primary focus:ring-2 focus:ring-primary/30"
+                  />
+                 <span className="text-xs text-muted-foreground">
+                    {t.consent.prefix}{" "}
+                    <a
+                      href={localePath(locale, "/privacy")}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="underline hover:text-foreground"
+                    >
+                      {t.consent.linkText}
+                    </a>
+                  </span>
+                </label>
+                {errors.consent && (
+                  <span className="mt-1 block text-xs text-destructive">{errors.consent.message}</span>
                 )}
               </form>
               <div className="mt-4 text-xs text-muted-foreground">

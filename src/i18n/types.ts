@@ -4,6 +4,7 @@ export interface FormValidationMessages {
   nameMin: string;
   emailInvalid: string;
   messageMin: string;
+  consentRequired: string;
 }
 
 export interface TranslationDictionary {
@@ -105,6 +106,7 @@ export interface TranslationDictionary {
     delivery: string;
     name: string;
     company: string;
+    optional: string;
     email: string;
     message: string;
     submit: string;
@@ -116,7 +118,21 @@ export interface TranslationDictionary {
     linkedin: string;
     github: string;
     email: string;
+    privacyPolicy: string;
   };
+consent: {
+  prefix: string;
+  linkText: string;
+};
+privacy: {
+  metaTitle: string;
+  metaDescription: string;
+  title: string;
+  lastUpdated: string;
+  intro: string;
+  sections: Array<{ heading: string; body: string }>;
+  backHome: string;
+};
   forms: {
     validation: FormValidationMessages;
   };
