@@ -68,32 +68,37 @@
 
 :root {
   --radius: 0.875rem;
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.22 0.02 260);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.22 0.02 260);
+  /* Soft Tech Light. Background is a cool, faintly blue-tinted gray — never
+     pure white — so anything that's genuinely elevated (--card) has
+     somewhere to visually lift off from. Previously --background, --card,
+     and --surface all sat within 0.015 of each other in lightness
+     (0.985–1.0): functionally indistinguishable, which read as flat. */
+  --background: oklch(0.98 0.005 275); /* #F7F8FC */
+  --foreground: oklch(0.208 0.04 266); /* #0F172A */
+  --card: oklch(1 0 0); /* #FFFFFF — the one truly white layer, reserved for elevated surfaces */
+  --card-foreground: oklch(0.208 0.04 266);
   --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.22 0.02 260);
+  --popover-foreground: oklch(0.208 0.04 266);
   --primary: oklch(0.55 0.22 264);
   --primary-foreground: oklch(0.99 0.005 260);
-  --secondary: oklch(0.97 0.01 260);
+  --secondary: oklch(0.95 0.014 260);
   --secondary-foreground: oklch(0.28 0.03 260);
-  --muted: oklch(0.975 0.008 260);
+  --muted: oklch(0.968 0.007 248); /* #F1F5F9 */
   --muted-foreground: oklch(0.52 0.03 260);
   --accent: oklch(0.96 0.03 264);
   --accent-foreground: oklch(0.35 0.15 264);
   --destructive: oklch(0.62 0.24 27);
   --destructive-foreground: oklch(0.99 0.005 260);
-  --border: oklch(0.93 0.01 260);
-  --input: oklch(0.93 0.01 260);
+  --border: oklch(0.9 0.012 258);
+  --input: oklch(0.9 0.012 258);
   --ring: oklch(0.55 0.22 264);
-  --surface: oklch(0.985 0.005 260);
-  --surface-strong: oklch(0.97 0.008 260);
+  --surface: oklch(0.968 0.007 248); /* #F1F5F9 — recessed alternate section tone */
+  --surface-strong: oklch(0.93 0.012 258);
   --primary-glow: oklch(0.72 0.18 250);
   --gradient-primary: linear-gradient(135deg, oklch(0.55 0.22 264), oklch(0.62 0.2 250));
-  --gradient-soft: linear-gradient(180deg, oklch(1 0 0), oklch(0.975 0.008 260));
-  --shadow-soft: 0 1px 2px oklch(0.2 0.02 260 / 0.04), 0 8px 24px oklch(0.2 0.02 260 / 0.06);
-  --shadow-elevated: 0 10px 40px -12px oklch(0.4 0.15 264 / 0.18);
+  --gradient-soft: linear-gradient(180deg, oklch(1 0 0), oklch(0.968 0.007 248));
+  --shadow-soft: 0 1px 2px oklch(0.2 0.02 260 / 0.05), 0 8px 24px oklch(0.2 0.02 260 / 0.08);
+  --shadow-elevated: 0 10px 40px -12px oklch(0.4 0.15 264 / 0.22);
   --shadow-glow: 0 20px 60px -20px oklch(0.55 0.22 264 / 0.35);
   --chart-1: oklch(0.646 0.222 41.116);
   --chart-2: oklch(0.6 0.118 184.704);
@@ -187,10 +192,21 @@
 }
 
 @utility glass-panel {
-  background: color-mix(in oklab, var(--background) 70%, transparent);
+  background: color-mix(in oklab, var(--card) 82%, transparent);
   backdrop-filter: blur(16px) saturate(140%);
-  border: 1px solid color-mix(in oklab, var(--background) 60%, var(--border));
+  border: 1px solid color-mix(in oklab, var(--card) 35%, var(--border));
   box-shadow: var(--shadow-soft);
+}
+
+/* Same recipe as glass-panel, but more opaque and with the stronger shadow
+   — for the one panel on the page that needs to read as a genuinely
+   separate, elevated product (the Hero workspace), not just a soft glass
+   overlay like the Navbar. */
+@utility glass-panel-elevated {
+  background: color-mix(in oklab, var(--card) 90%, transparent);
+  backdrop-filter: blur(16px) saturate(140%);
+  border: 1px solid color-mix(in oklab, var(--card) 25%, var(--border));
+  box-shadow: var(--shadow-elevated);
 }
 
 @utility text-gradient {
@@ -222,6 +238,20 @@
     background: var(--surface-strong);
     border-color: color-mix(in oklab, var(--primary) 30%, var(--border));
   }
+}
+
+/* Faint technical grid, both themes. Uses --foreground instead of a fixed
+   color so it's always the right way round: a dark hairline grid on the
+   light background, a light one on the dark background. Static (no
+   animation cost) and very low opacity — texture, not decoration. Fades
+   out toward the edges via mask-image so it never reads as a hard-edged
+   tile. */
+@utility hero-grid {
+  background-image:
+    linear-gradient(color-mix(in oklab, var(--foreground) 6%, transparent) 1px, transparent 1px),
+    linear-gradient(90deg, color-mix(in oklab, var(--foreground) 6%, transparent) 1px, transparent 1px);
+  background-size: 56px 56px;
+  mask-image: radial-gradient(ellipse 75% 55% at 50% 0%, black 40%, transparent 100%);
 }
 
 /* Faint film grain — a constant texture across both themes (a photographic

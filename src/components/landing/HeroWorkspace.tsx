@@ -201,7 +201,7 @@ export function HeroWorkspace() {
     <div className="relative mx-auto w-full max-w-[540px] [perspective:1600px]">
       <div
         ref={frameRef}
-        className="glass-panel relative overflow-hidden rounded-2xl transition-transform duration-200 ease-out"
+        className="glass-panel-elevated relative overflow-hidden rounded-2xl transition-transform duration-200 ease-out"
         style={
           prefersReducedMotion
             ? undefined

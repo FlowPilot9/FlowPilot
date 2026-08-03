@@ -5,11 +5,11 @@ import { HeroWorkspace } from "@/components/landing/HeroWorkspace";
 import { AtmosphereScene } from "@/components/landing/AtmosphereScene";
 
 // ---------------------------------------------------------------------------
-// Hero — "Sky & Ocean": sunrise in light mode, night ocean in dark mode, the
-// same scene at a different moment (AtmosphereScene.tsx). This is no longer
-// a permanently-dark section (that was last session's "hero-dark" scope,
-// now retired) — it reads whatever theme the whole site is currently in,
-// same as every other section, via the semantic tokens.
+// Hero — night-ocean atmosphere in dark mode, a plain tinted surface + faint
+// technical grid in light mode (AtmosphereScene.tsx + hero-grid). This is
+// no longer a permanently-dark section (that was an earlier "hero-dark"
+// scope, retired) — it reads whatever theme the whole site is currently
+// in, same as every other section, via the semantic tokens.
 //
 // Entrance is a hand-timed sequence rather than a generic stagger, so it
 // reads in a specific order: badge -> headline (line by line, masked) ->
@@ -45,10 +45,12 @@ export function Hero() {
       id="top"
       className="relative isolate overflow-hidden bg-background pb-20 pt-28 transition-colors duration-500 md:flex md:min-h-[94vh] md:items-center md:pb-0 md:pt-0"
     >
-      {/* Atmosphere: sunrise <-> night ocean, cross-fading with the site
-          theme. Film grain on top for a constant photographic texture in
-          both modes — neither reads as "the technical one". */}
+      {/* Atmosphere: night ocean glow in dark mode only (see
+          AtmosphereScene.tsx). A faint technical grid sits on top of it in
+          both themes, and film grain on top of that for a constant
+          photographic texture. */}
       <AtmosphereScene />
+      <div aria-hidden className="hero-grid pointer-events-none absolute inset-0 -z-10" />
       <div aria-hidden className="hero-grain pointer-events-none absolute inset-0 -z-10" />
 
       {/* Soft hand-off into the section below, whatever theme that section
