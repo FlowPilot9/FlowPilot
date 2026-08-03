@@ -31,3 +31,6 @@ dist-ssr
 *.sln
 *.sw?
 .env.local
+
+# Cursor - Impeccable
+.cursor
