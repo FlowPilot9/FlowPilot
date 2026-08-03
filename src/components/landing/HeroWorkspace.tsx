@@ -199,6 +199,11 @@ export function HeroWorkspace() {
 
   return (
     <div className="relative mx-auto w-full max-w-[540px] [perspective:1600px]">
+      {/* Ambient glow behind the product window — present in both themes,
+          but doing more visible work in light mode, where there's no
+          illustrated atmosphere of its own to lend the panel separation
+          from the background the way the night-ocean glow does in dark. */}
+      <div aria-hidden className="workspace-glow absolute -inset-12 -z-10" />
       <div
         ref={frameRef}
         className="glass-panel-elevated relative overflow-hidden rounded-2xl transition-transform duration-200 ease-out"

@@ -59,7 +59,7 @@ export function Nav() {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6, ease: EASE }}
       className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
-        scrolled ? "bg-background/75 py-3 shadow-soft backdrop-blur-xl" : "py-5"
+        scrolled ? "py-3" : "py-5"
       }`}
     >
       <div className="mx-auto max-w-[1320px] px-4">
@@ -81,7 +81,7 @@ export function Nav() {
                 {activeHref === l.href && (
                   <motion.span
                     layoutId="nav-active-pill"
-                    className="absolute inset-0 rounded-lg bg-surface-strong"
+                    className="absolute inset-0 rounded-lg bg-primary/10"
                     transition={{ type: "spring", stiffness: 380, damping: 32 }}
                   />
                 )}

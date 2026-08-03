@@ -1,11 +1,15 @@
 import type { CSSProperties } from "react";
 // ---------------------------------------------------------------------------
-// The Hero's atmosphere: a night-ocean glow, dark mode only. Light mode
-// carries no color wash — depth there comes from the "Soft Tech Light"
-// surface hierarchy (styles.css) and the technical grid (hero-grid), not
-// from an illustrated scene. An earlier version mirrored this with a
-// sunrise glow for light mode; it read as decorative rather than premium,
-// so it's been removed rather than adjusted.
+// The Hero's atmosphere: a night-ocean glow in dark mode, a day glow in
+// light mode. An earlier version tried a "sunrise" for light mode and it
+// read as decorative rather than premium — but the fix was the same
+// mistake seen from the other side: dropping the light layer entirely left
+// light mode with a flat, atmosphere-less hero next to a rich, atmospheric
+// dark one. The day glow below fixes that without repeating the original
+// error: it's the same abstract-gradient technique as the night glow (no
+// illustrated sun disc, no horizon line, no scenery), just a soft gold-tinted
+// wash sitting mainly behind where the product window lands, so light mode
+// gets real depth while staying restrained.
 //
 // The night layers cross-fade in purely with the Tailwind `dark:` variant +
 // `transition-opacity` — animating between two raw oklch values on a single
@@ -35,6 +39,18 @@ const STAR_POSITIONS = [
 export function AtmosphereScene() {
   return (
     <div aria-hidden className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
+      {/* Day glow — soft gold ambient light, weighted toward the
+          upper-right where the product window sits, plus a faint secondary
+          wash top-left for balance. Light mode only; fades out via the same
+          dark: opacity-0 pattern the night glow uses in reverse. */}
+      <div
+        className="absolute inset-0 opacity-100 transition-opacity duration-[1200ms] ease-in-out dark:opacity-0"
+        style={{
+          background:
+            "radial-gradient(42% 38% at 76% 28%, oklch(0.75 0.09 87.1 / 0.24), transparent), radial-gradient(38% 30% at 12% 6%, oklch(0.82 0.05 87.1 / 0.14), transparent)",
+        }}
+      />
+
       {/* Night glow — cool, pale, higher in the frame (the moon). Dark mode only. */}
       <div
         className="absolute inset-0 opacity-0 transition-opacity duration-[1200ms] ease-in-out dark:opacity-100"
