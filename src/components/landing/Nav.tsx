@@ -3,6 +3,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { ArrowRight, Menu, X } from "lucide-react";
 import { Logo } from "@/components/landing/Logo";
 import { LanguageSwitcher } from "@/components/landing/LanguageSwitcher";
+import { ThemeToggle } from "@/components/landing/ThemeToggle";
 import { useTranslation } from "@/i18n/I18nProvider";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
@@ -52,18 +53,12 @@ export function Nav() {
     { href: "#about", label: t.nav.about },
   ];
 
-  // Transparent state floats directly over the dark Hero and borrows its
-  // token scope (styles.css) so text/border/background utilities stay
-  // correct with no per-element color branching. Scrolled state sits over
-  // the light rest of the page and drops the scope, falling back to :root.
-  const dark = !scrolled;
-
   return (
     <motion.header
       initial={{ opacity: 0, y: -12 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6, ease: EASE }}
-      className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${dark ? "hero-dark" : ""} ${
+      className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
         scrolled ? "bg-background/75 py-3 shadow-soft backdrop-blur-xl" : "py-5"
       }`}
     >
@@ -95,6 +90,7 @@ export function Nav() {
             ))}
           </nav>
           <div className="hidden items-center gap-3 md:flex">
+            <ThemeToggle />
             <LanguageSwitcher />
             <a
               href="#contact"
@@ -104,6 +100,7 @@ export function Nav() {
             </a>
           </div>
           <div className="flex items-center gap-2 md:hidden">
+            <ThemeToggle />
             <LanguageSwitcher />
             <button
               className="rounded-lg border border-border p-2"
@@ -123,9 +120,7 @@ export function Nav() {
               animate={{ opacity: 1, height: "auto" }}
               exit={{ opacity: 0, height: 0 }}
               transition={{ duration: 0.25, ease: EASE }}
-              className={`mt-2 overflow-hidden rounded-2xl md:hidden ${
-                dark ? "glass-panel-dark" : "glass-panel"
-              }`}
+              className="glass-panel mt-2 overflow-hidden rounded-2xl md:hidden"
             >
               <div className="p-3">
                 {links.map((l, i) => (

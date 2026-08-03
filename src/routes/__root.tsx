@@ -11,6 +11,7 @@ import { useEffect, type ReactNode } from "react";
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { Toaster } from "@/components/ui/sonner";
+import { ThemeProvider } from "@/theme/ThemeProvider";
 import { DEFAULT_LOCALE, getLocaleFromPathname, getMetaTags } from "@/i18n";
 
 // Locale-agnostic fallback only. In practice every real 404/error is caught
@@ -108,6 +109,17 @@ function RootShell({ children }: { children: ReactNode }) {
     <html lang={lang}>
       <head>
         <HeadContent />
+        {/* Blocking, runs before paint: sets the `dark` class from the
+            stored preference (or OS setting) so there's no flash of the
+            wrong theme on load. Plain <script> in <head>, not a head()
+            config entry — guaranteed to execute regardless of the exact
+            TanStack Start head-scripts API surface. */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html:
+              '(function(){try{var t=localStorage.getItem("flowpilot-theme");if(t==="dark"||(!t&&window.matchMedia("(prefers-color-scheme: dark)").matches)){document.documentElement.classList.add("dark")}}catch(e){}})();',
+          }}
+        />
       </head>
       <body>
         {children}
@@ -122,11 +134,13 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes.
-          The active locale, translations, and per-page <head> are provided further down
-          the tree by routes/{-$locale}.tsx and routes/{-$locale}/index.tsx. */}
-      <Outlet />
-      <Toaster position="bottom-right" />
+      <ThemeProvider>
+        {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes.
+            The active locale, translations, and per-page <head> are provided further down
+            the tree by routes/{-$locale}.tsx and routes/{-$locale}/index.tsx. */}
+        <Outlet />
+        <Toaster position="bottom-right" />
+      </ThemeProvider>
     </QueryClientProvider>
   );
 }

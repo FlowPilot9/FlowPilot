@@ -69,7 +69,7 @@ function NavPills({ items }: { items: string[] }) {
         <span
           key={label}
           className={`truncate rounded-md px-2 py-1 text-[9px] font-medium ${
-            i === 0 ? "bg-primary/15 text-primary" : "text-white/45"
+            i === 0 ? "bg-primary/15 text-primary" : "text-muted-foreground"
           }`}
         >
           {label}
@@ -83,19 +83,19 @@ function WireframeLayer() {
   return (
     <div className="scene-layer-wireframe absolute inset-0 flex flex-col gap-3 p-5">
       <div className="flex items-center gap-2">
-        <span className="h-2.5 w-2.5 rounded-[3px] border border-dashed border-white/25" />
+        <span className="h-2.5 w-2.5 rounded-[3px] border border-dashed border-foreground/20" />
         {[0, 1, 2, 3].map((i) => (
-          <span key={i} className="h-4 w-10 rounded-md border border-dashed border-white/20" />
+          <span key={i} className="h-4 w-10 rounded-md border border-dashed border-foreground/15" />
         ))}
       </div>
-      <div className="flex flex-1 flex-col justify-center gap-2 rounded-xl border border-dashed border-white/20 p-4">
-        <span className="h-3 w-2/5 rounded border border-dashed border-white/25" />
-        <span className="h-2 w-3/5 rounded border border-dashed border-white/15" />
-        <span className="mt-2 h-6 w-20 rounded-md border border-dashed border-white/20" />
+      <div className="flex flex-1 flex-col justify-center gap-2 rounded-xl border border-dashed border-foreground/15 p-4">
+        <span className="h-3 w-2/5 rounded border border-dashed border-foreground/20" />
+        <span className="h-2 w-3/5 rounded border border-dashed border-foreground/12" />
+        <span className="mt-2 h-6 w-20 rounded-md border border-dashed border-foreground/15" />
       </div>
       <div className="grid grid-cols-2 gap-3">
-        <span className="h-14 rounded-lg border border-dashed border-white/15" />
-        <span className="h-14 rounded-lg border border-dashed border-white/15" />
+        <span className="h-14 rounded-lg border border-dashed border-foreground/12" />
+        <span className="h-14 rounded-lg border border-dashed border-foreground/12" />
       </div>
     </div>
   );
@@ -125,18 +125,18 @@ function ColoredLayer({
       <div className="relative flex-1 overflow-hidden px-5 pb-5">
         <div className={`flex flex-col gap-3 ${animated ? "scene-scroll" : ""}`}>
           <div className="flex flex-col justify-center gap-2 rounded-xl bg-primary/10 p-4">
-            <span className="text-[13px] font-semibold leading-snug text-white">{heading}</span>
-            <span className="h-1.5 w-3/5 rounded-full bg-white/20" />
+            <span className="text-[13px] font-semibold leading-snug text-foreground">{heading}</span>
+            <span className="h-1.5 w-3/5 rounded-full bg-foreground/15" />
             <span className="mt-1.5 inline-flex w-fit items-center rounded-md bg-primary px-2.5 py-1 text-[9px] font-medium text-primary-foreground">
               {cta}
             </span>
           </div>
           <div className="grid grid-cols-2 gap-3">
             {[0, 1].map((i) => (
-              <div key={i} className="rounded-lg border border-white/10 bg-white/[0.04] p-2.5">
+              <div key={i} className="rounded-lg border border-border bg-foreground/[0.04] p-2.5">
                 <span className="mb-2 block h-5 w-5 rounded bg-primary/25" />
-                <span className="block h-1.5 w-3/5 rounded-full bg-white/20" />
-                <span className="mt-1.5 block h-1.5 w-2/5 rounded-full bg-white/10" />
+                <span className="block h-1.5 w-3/5 rounded-full bg-foreground/15" />
+                <span className="mt-1.5 block h-1.5 w-2/5 rounded-full bg-foreground/8" />
               </div>
             ))}
           </div>
@@ -145,15 +145,15 @@ function ColoredLayer({
               real to reveal instead of just moving for its own sake. */}
           <div className="grid grid-cols-2 gap-3">
             {[0, 1].map((i) => (
-              <div key={i} className="rounded-lg border border-white/10 bg-white/[0.04] p-2.5">
+              <div key={i} className="rounded-lg border border-border bg-foreground/[0.04] p-2.5">
                 <span className="mb-2 block h-5 w-5 rounded bg-primary/25" />
-                <span className="block h-1.5 w-2/5 rounded-full bg-white/20" />
-                <span className="mt-1.5 block h-1.5 w-3/5 rounded-full bg-white/10" />
+                <span className="block h-1.5 w-2/5 rounded-full bg-foreground/15" />
+                <span className="mt-1.5 block h-1.5 w-3/5 rounded-full bg-foreground/8" />
               </div>
             ))}
           </div>
-          <div className="flex items-center justify-between rounded-lg border border-white/10 bg-primary/10 p-3">
-            <span className="h-1.5 w-2/5 rounded-full bg-white/25" />
+          <div className="flex items-center justify-between rounded-lg border border-border bg-primary/10 p-3">
+            <span className="h-1.5 w-2/5 rounded-full bg-foreground/20" />
             <span className="h-5 w-14 shrink-0 rounded-md bg-primary" />
           </div>
         </div>
@@ -180,7 +180,7 @@ function StaticFinishedScene({
         {badges.map((label) => (
           <span
             key={label}
-            className="rounded-full border border-white/10 bg-white/[0.06] px-2.5 py-1 text-[10px] font-medium text-white/80 backdrop-blur"
+            className="rounded-full border border-border bg-foreground/[0.05] px-2.5 py-1 text-[10px] font-medium text-foreground/80 backdrop-blur"
           >
             {label}
           </span>
@@ -201,7 +201,7 @@ export function HeroWorkspace() {
     <div className="relative mx-auto w-full max-w-[540px] [perspective:1600px]">
       <div
         ref={frameRef}
-        className="glass-panel-dark relative overflow-hidden rounded-2xl transition-transform duration-200 ease-out"
+        className="glass-panel relative overflow-hidden rounded-2xl transition-transform duration-200 ease-out"
         style={
           prefersReducedMotion
             ? undefined
@@ -212,11 +212,11 @@ export function HeroWorkspace() {
               }
         }
       >
-        <div className="flex items-center gap-2 border-b border-white/10 px-4 py-3">
-          <span className="h-2.5 w-2.5 shrink-0 rounded-full bg-white/15" />
-          <span className="h-2.5 w-2.5 shrink-0 rounded-full bg-white/15" />
-          <span className="h-2.5 w-2.5 shrink-0 rounded-full bg-white/15" />
-          <span className="ml-2 truncate rounded-md bg-white/[0.06] px-2.5 py-0.5 text-[11px] text-white/50">
+        <div className="flex items-center gap-2 border-b border-border px-4 py-3">
+          <span className="h-2.5 w-2.5 shrink-0 rounded-full bg-foreground/12" />
+          <span className="h-2.5 w-2.5 shrink-0 rounded-full bg-foreground/12" />
+          <span className="h-2.5 w-2.5 shrink-0 rounded-full bg-foreground/12" />
+          <span className="ml-2 truncate rounded-md bg-foreground/[0.05] px-2.5 py-0.5 text-[11px] text-muted-foreground">
             {ws.browserLabel}
           </span>
         </div>
@@ -237,7 +237,7 @@ export function HeroWorkspace() {
               {ws.badges.map((label, i) => (
                 <span
                   key={label}
-                  className={`${badgeAnimations[i]} rounded-full border border-white/10 bg-white/[0.06] px-2.5 py-1 text-[10px] font-medium text-white/80 backdrop-blur`}
+                  className={`${badgeAnimations[i]} rounded-full border border-border bg-foreground/[0.05] px-2.5 py-1 text-[10px] font-medium text-foreground/80 backdrop-blur`}
                 >
                   {label}
                 </span>

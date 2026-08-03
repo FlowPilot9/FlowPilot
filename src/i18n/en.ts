@@ -16,6 +16,8 @@ export const en: TranslationDictionary = {
     comingSoon: "Coming Soon",
     contact: "Contact",
     allRightsReserved: "All rights reserved.",
+    switchToLight: "Switch to light mode",
+    switchToDark: "Switch to dark mode",
   },
   nav: {
     services: "Services",

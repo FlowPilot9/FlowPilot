@@ -2,20 +2,18 @@ import { motion, useReducedMotion } from "framer-motion";
 import { ArrowRight, ChevronDown } from "lucide-react";
 import { useTranslation } from "@/i18n/I18nProvider";
 import { HeroWorkspace } from "@/components/landing/HeroWorkspace";
+import { AtmosphereScene } from "@/components/landing/AtmosphereScene";
 
 // ---------------------------------------------------------------------------
-// Hero — the site's one deliberately dark, cinematic moment (design system
-// §1.1 reserves this as the single expressive exception; every other
-// section stays on the light, restrained grammar).
+// Hero — "Sky & Ocean": sunrise in light mode, night ocean in dark mode, the
+// same scene at a different moment (AtmosphereScene.tsx). This is no longer
+// a permanently-dark section (that was last session's "hero-dark" scope,
+// now retired) — it reads whatever theme the whole site is currently in,
+// same as every other section, via the semantic tokens.
 //
 // Entrance is a hand-timed sequence rather than a generic stagger, so it
 // reads in a specific order: badge -> headline (line by line, masked) ->
 // supporting text -> CTAs -> trust row -> the workspace scene powering on.
-// Each step is given an explicit delay below instead of relying on nested
-// Framer variant propagation, which does not stagger elements that aren't
-// direct siblings under the same orchestrator — with a two-line masked
-// headline that nesting would otherwise be needed, explicit delays are
-// simpler to read and impossible to get subtly wrong.
 // ---------------------------------------------------------------------------
 
 const EASE = [0.22, 1, 0.36, 1] as const;
@@ -42,54 +40,30 @@ export function Hero() {
           transition: { duration: 0.85, ease: EASE, delay },
         };
 
-  const glowLoop = prefersReducedMotion
-    ? {}
-    : {
-        animate: { x: [0, 24, 0], y: [0, -16, 0] },
-        transition: { duration: 16, repeat: Infinity, ease: "easeInOut" as const },
-      };
-
-  const glowLoopSlow = prefersReducedMotion
-    ? {}
-    : {
-        animate: { x: [0, -18, 0], y: [0, 14, 0] },
-        transition: { duration: 20, repeat: Infinity, ease: "easeInOut" as const, delay: 1 },
-      };
-
   return (
     <section
       id="top"
-      className="hero-dark relative isolate overflow-hidden bg-background pb-20 pt-28 md:flex md:min-h-[94vh] md:items-center md:pb-0 md:pt-0"
+      className="relative isolate overflow-hidden bg-background pb-20 pt-28 transition-colors duration-500 md:flex md:min-h-[94vh] md:items-center md:pb-0 md:pt-0"
     >
-      {/* Atmosphere: technical grid, film grain, two slow blue glows. Static
-          or GPU-transform-only — none of this competes with the foreground
-          content for attention. */}
-      <div aria-hidden className="hero-grid pointer-events-none absolute inset-0 -z-10" />
+      {/* Atmosphere: sunrise <-> night ocean, cross-fading with the site
+          theme. Film grain on top for a constant photographic texture in
+          both modes — neither reads as "the technical one". */}
+      <AtmosphereScene />
       <div aria-hidden className="hero-grain pointer-events-none absolute inset-0 -z-10" />
-      <motion.div
-        aria-hidden
-        className="pointer-events-none absolute right-[-8%] top-[-4%] -z-10 h-[560px] w-[560px] rounded-full bg-[radial-gradient(closest-side,oklch(0.62_0.2_264/0.28),transparent)] blur-3xl"
-        {...glowLoop}
-      />
-      <motion.div
-        aria-hidden
-        className="pointer-events-none absolute bottom-[-10%] left-[-10%] -z-10 h-[420px] w-[420px] rounded-full bg-[radial-gradient(closest-side,oklch(0.55_0.22_264/0.16),transparent)] blur-3xl"
-        {...glowLoopSlow}
-      />
 
-      {/* Soft hand-off into the light section below — hardcoded to the
-          light theme's surface color (not var(--background), which is
-          shadowed to the dark value inside this hero-dark scope). */}
+      {/* Soft hand-off into the section below, whatever theme that section
+          is currently in — var(--background), not a hardcoded light value,
+          so this stays correct in both light and dark mode. */}
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-x-0 bottom-0 z-10 h-28 bg-gradient-to-b from-transparent to-[oklch(0.985_0.005_260)] md:h-40"
+        className="pointer-events-none absolute inset-x-0 bottom-0 z-10 h-28 bg-gradient-to-b from-transparent to-[var(--background)] transition-colors duration-500 md:h-40"
       />
 
       <div className="relative z-0 mx-auto grid max-w-[1320px] grid-cols-1 items-center gap-16 px-4 md:grid-cols-2 md:gap-10">
         <div>
           <motion.span
             {...reveal(0)}
-            className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-3 py-1 text-xs font-medium text-muted-foreground backdrop-blur"
+            className="inline-flex items-center gap-2 rounded-full border border-border bg-secondary px-3 py-1 text-xs font-medium text-muted-foreground backdrop-blur"
           >
             <span className="relative flex h-1.5 w-1.5">
               <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-primary" />
@@ -132,7 +106,7 @@ export function Hero() {
               whileHover={prefersReducedMotion ? undefined : { scale: 1.03 }}
               whileTap={prefersReducedMotion ? undefined : { scale: 0.98 }}
               transition={{ duration: 0.2, ease: "easeOut" }}
-              className="btn-ghost-dark inline-flex items-center gap-2 rounded-xl px-5 py-3 text-sm font-medium"
+              className="btn-ghost inline-flex items-center gap-2 rounded-xl px-5 py-3 text-sm font-medium"
             >
               {t.hero.ctaSecondary}
             </motion.a>
@@ -143,17 +117,16 @@ export function Hero() {
             className="mt-10 flex flex-wrap items-center gap-x-4 gap-y-2 text-sm text-muted-foreground"
           >
             <span>{t.hero.trustTimeline}</span>
-            <span className="h-1 w-1 rounded-full bg-white/20" />
+            <span className="h-1 w-1 rounded-full bg-border" />
             <span>{t.hero.trustStack}</span>
-            <span className="h-1 w-1 rounded-full bg-white/20" />
+            <span className="h-1 w-1 rounded-full bg-border" />
             <span>{t.hero.trustSupport}</span>
           </motion.div>
         </div>
 
         {/* The workspace "powers on": starts very slightly scaled down and
             softly blurred, then clears — a deliberate one-shot entrance
-            (not a loop), timed to land just as the CTAs finish appearing,
-            per the requested choreography. */}
+            (not a loop), timed to land just as the CTAs finish appearing. */}
         <motion.div
           initial={
             prefersReducedMotion

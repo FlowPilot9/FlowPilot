@@ -21,6 +21,8 @@ export interface TranslationDictionary {
     comingSoon: string;
     contact: string;
     allRightsReserved: string;
+    switchToLight: string;
+    switchToDark: string;
   };
   nav: {
     services: string;

@@ -16,6 +16,8 @@ export const ro: TranslationDictionary = {
     comingSoon: "În curând",
     contact: "Contact",
     allRightsReserved: "Toate drepturile rezervate.",
+    switchToLight: "Comută la modul deschis",
+    switchToDark: "Comută la modul întunecat",
   },
   nav: {
     services: "Servicii",
