@@ -69,7 +69,7 @@ export function Contact() {
           <form
             onSubmit={handleSubmit(onSubmit)}
             noValidate
-            className="glass-panel rounded-3xl p-6 md:p-8"
+            className="rounded-3xl border border-border bg-background p-6 md:p-8 shadow-soft"
           >
             <input
               type="text"
@@ -89,7 +89,7 @@ export function Contact() {
                 <input
                   type="text"
                   {...register("name")}
-                  className="w-full rounded-xl border border-border bg-background px-3.5 py-2.5 text-sm outline-none transition-colors focus:border-primary focus:ring-4 focus:ring-primary/10"
+                  className="w-full rounded-xl border border-border bg-card px-3.5 py-2.5 text-sm outline-none transition-colors focus:border-primary focus:ring-4 focus:ring-primary/10"
                 />
                 {errors.name && (
                   <span className="mt-1 block text-xs text-destructive">{errors.name.message}</span>
@@ -103,7 +103,7 @@ export function Contact() {
                 <input
                   type="text"
                   {...register("company")}
-                  className="w-full rounded-xl border border-border bg-background px-3.5 py-2.5 text-sm outline-none transition-colors focus:border-primary focus:ring-4 focus:ring-primary/10"
+                  className="w-full rounded-xl border border-border bg-card px-3.5 py-2.5 text-sm outline-none transition-colors focus:border-primary focus:ring-4 focus:ring-primary/10"
                 />
               </label>
             </div>
@@ -114,7 +114,7 @@ export function Contact() {
               <input
                 type="email"
                 {...register("email")}
-                className="w-full rounded-xl border border-border bg-background px-3.5 py-2.5 text-sm outline-none transition-colors focus:border-primary focus:ring-4 focus:ring-primary/10"
+                className="w-full rounded-xl border border-border bg-card px-3.5 py-2.5 text-sm outline-none transition-colors focus:border-primary focus:ring-4 focus:ring-primary/10"
               />
               {errors.email && (
                 <span className="mt-1 block text-xs text-destructive">{errors.email.message}</span>
@@ -127,7 +127,7 @@ export function Contact() {
               <textarea
                 rows={5}
                 {...register("message")}
-                className="w-full resize-none rounded-xl border border-border bg-background px-3.5 py-2.5 text-sm outline-none transition-colors focus:border-primary focus:ring-4 focus:ring-primary/10"
+                className="w-full resize-none rounded-xl border border-border bg-card px-3.5 py-2.5 text-sm outline-none transition-colors focus:border-primary focus:ring-4 focus:ring-primary/10"
               />
               {errors.message && (
                 <span className="mt-1 block text-xs text-destructive">
