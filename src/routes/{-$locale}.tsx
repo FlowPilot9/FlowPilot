@@ -19,7 +19,9 @@ export const Route = createFileRoute("/{-$locale}")({
 });
 
 function LocaleLayout() {
-  const { locale } = Route.useParams({ select: (params) => ({ locale: resolveLocale(params.locale) }) });
+  const { locale } = Route.useParams({
+    select: (params) => ({ locale: resolveLocale(params.locale) }),
+  });
 
   return (
     <I18nProvider locale={locale}>
@@ -66,7 +68,9 @@ function LocaleError({ error }: { error: Error }) {
   return (
     <div className="flex min-h-screen items-center justify-center bg-background px-4">
       <div className="max-w-md text-center">
-        <h1 className="text-xl font-semibold tracking-tight text-foreground">{t.errors.pageErrorTitle}</h1>
+        <h1 className="text-xl font-semibold tracking-tight text-foreground">
+          {t.errors.pageErrorTitle}
+        </h1>
         <p className="mt-2 text-sm text-muted-foreground">{t.errors.pageErrorDescription}</p>
         <div className="mt-6 flex flex-wrap justify-center gap-2">
           <a

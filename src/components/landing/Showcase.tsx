@@ -15,12 +15,15 @@ const showcaseImages = [
   showcaseFitness,
 ] as const;
 
-const showcaseHrefs = [
-  "#contact",
+// Only the Dental Clinic template is a real, live product today — everything
+// else is presented honestly as "request this design" rather than a fake
+// demo link. As more templates go live, just flip isLive + add a url here.
+const showcaseUrls = [
+  undefined,
   "https://aurora-dental-rosy.vercel.app/",
-  "#contact",
-  "#contact",
-  "#contact",
+  undefined,
+  undefined,
+  undefined,
 ] as const;
 
 export function Showcase() {
@@ -28,53 +31,87 @@ export function Showcase() {
 
   return (
     <section id="work" className="py-24 md:py-32">
-      <div className="mx-auto max-w-6xl px-4">
+      <div className="mx-auto max-w-[1320px] px-4">
         <SectionHeader
           eyebrow={t.showcase.eyebrow}
           title={t.showcase.title}
           description={t.showcase.description}
         />
 
-        <div className="mt-14 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {t.showcase.items.map((item, i) => {
-            const href = showcaseHrefs[i];
-            const isExternal = href.startsWith("http");
+        <div className="mt-14 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
+          {t.showcase.items.map((product, i) => {
+            const liveUrl = showcaseUrls[i];
+            const ctaHref = product.isLive && liveUrl ? liveUrl : "#contact";
+            const ctaLabel = product.isLive ? t.showcase.liveDemoLabel : t.showcase.requestLabel;
 
             return (
-              <a
-                key={item.title}
-                href={href}
-                target={isExternal ? "_blank" : undefined}
-                rel={isExternal ? "noopener noreferrer" : undefined}
-                className={`group relative overflow-hidden rounded-3xl border border-border bg-card transition-all duration-500 hover:-translate-y-1 hover:shadow-[var(--shadow-elevated)] ${
-                  i === 0 ? "lg:col-span-2" : ""
-                }`}
-              >
-                <div className="aspect-[16/10] overflow-hidden bg-surface-strong">
-                  <img
-                    src={showcaseImages[i]}
-                    alt={t.showcase.projectMockup.replace("{title}", item.title)}
-                    loading="lazy"
-                    className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.04]"
-                  />
-                </div>
+              <div key={product.title} className="group flex flex-col">
+                {/* Product Window — XL+ scale (design system §6.3), the
+                    same visual grammar as Hero/Services, pushed here into
+                    its most immersive card-level presentation. */}
+                <a
+                  href={ctaHref}
+                  target={product.isLive ? "_blank" : undefined}
+                  rel={product.isLive ? "noopener noreferrer" : undefined}
+                  className="overflow-hidden rounded-2xl border border-border bg-card shadow-soft transition-all duration-300 group-hover:-translate-y-1 group-hover:border-primary/30 group-hover:shadow-[var(--shadow-elevated)]"
+                >
+                  <div className="flex items-center gap-1.5 border-b border-border/70 px-3.5 py-2.5">
+                    <span className="h-2 w-2 rounded-full bg-destructive/40" />
+                    <span className="h-2 w-2 rounded-full bg-primary/30" />
+                    <span className="h-2 w-2 rounded-full bg-muted-foreground/25" />
+                  </div>
+                  <div className="aspect-[16/10] overflow-hidden bg-surface-strong">
+                    <img
+                      src={showcaseImages[i]}
+                      alt={(t.showcase.previewAlt ?? "{title}").replace("{title}", product.title)}
+                      loading="lazy"
+                      className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+                    />
+                  </div>
+                </a>
 
-                <div className="flex items-center justify-between p-5">
-                  <div>
-                    <div className="text-xs font-medium uppercase tracking-wider text-muted-foreground">
-                      {item.tag}
-                    </div>
-
-                    <div className="mt-1 text-base font-semibold text-foreground">
-                      {item.title}
-                    </div>
+                <div className="mt-5 flex flex-1 flex-col px-1">
+                  <div className="flex items-center gap-2">
+                    <span className="text-xs font-medium uppercase tracking-wider text-muted-foreground">
+                      {product.tag}
+                    </span>
+                    {product.isLive && (
+                      <span className="inline-flex items-center gap-1.5 text-xs font-medium text-primary">
+                        <span className="h-1.5 w-1.5 rounded-full bg-primary" />
+                        {t.showcase.liveLabel}
+                      </span>
+                    )}
                   </div>
 
-                  <span className="grid h-9 w-9 place-items-center rounded-full border border-border text-muted-foreground transition-all group-hover:border-primary/40 group-hover:bg-[image:var(--gradient-primary)] group-hover:text-primary-foreground">
-                    <ArrowRight className="h-4 w-4" />
-                  </span>
+                  <h3 className="mt-1.5 text-base font-semibold text-foreground">
+                    {product.title}
+                  </h3>
+                  <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">
+                    {product.description}
+                  </p>
+
+                  <div className="mt-4 flex flex-wrap gap-1.5">
+                    {product.stack.map((tech) => (
+                      <span
+                        key={tech}
+                        className="rounded-full border border-border bg-secondary px-2.5 py-1 text-[11px] font-medium text-muted-foreground"
+                      >
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
+
+                  <a
+                    href={ctaHref}
+                    target={product.isLive ? "_blank" : undefined}
+                    rel={product.isLive ? "noopener noreferrer" : undefined}
+                    className="group/cta mt-5 inline-flex items-center gap-1.5 text-sm font-medium text-foreground transition-colors duration-200 hover:text-primary"
+                  >
+                    {ctaLabel}
+                    <ArrowRight className="h-3.5 w-3.5 transition-transform duration-200 group-hover/cta:translate-x-1" />
+                  </a>
                 </div>
-              </a>
+              </div>
             );
           })}
         </div>

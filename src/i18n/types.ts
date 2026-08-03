@@ -40,11 +40,22 @@ export interface TranslationDictionary {
     trustStack: string;
     trustSupport: string;
     imageAlt: string;
+    scrollCue: string;
+    workspace: {
+      browserLabel: string;
+      navItems: string[];
+      heroHeading: string;
+      heroCta: string;
+      badges: string[];
+    };
   };
   trust: {
-    intro: string;
-    introHighlight: string;
-    stats: Array<{ value: string; label: string }>;
+    title: string;
+    items: Array<{
+      title: string;
+      description: string;
+      detail: string;
+    }>;
   };
   services: {
     eyebrow: string;
@@ -59,22 +70,52 @@ export interface TranslationDictionary {
   process: {
     eyebrow: string;
     title: string;
-    steps: string[];
+    labels: {
+      whatWeDo: string;
+      whatClientGets: string;
+      whyItMatters: string;
+      duration: string;
+    };
+    steps: Array<{
+      title: string;
+      duration?: string;
+      whatWeDo: string;
+      whatClientGets: string;
+      whyItMatters: string;
+    }>;
   };
   showcase: {
     eyebrow: string;
     title: string;
     description: string;
-    projectMockup: string;
+    previewAlt: string;
+    liveLabel: string;
+    liveDemoLabel: string;
+    requestLabel: string;
     items: Array<{
       title: string;
       tag: string;
+      description: string;
+      stack: string[];
+      isLive: boolean;
     }>;
   };
   why: {
     eyebrow: string;
     title: string;
-    items: Array<{ title: string; desc: string }>;
+    intro: string;
+    items: Array<{ label: string; title: string; desc: string }>;
+    proof: {
+      loadTimeLabel: string;
+      loadTimeValue: string;
+      scoreLabel: string;
+      seoLabel: string;
+      accessibilityLabel: string;
+      searchQuery: string;
+      aiPrompt: string;
+      generatingLabel: string;
+      architectureLayers: string[];
+    };
   };
   comingSoon: {
     badge: string;
@@ -120,19 +161,19 @@ export interface TranslationDictionary {
     email: string;
     privacyPolicy: string;
   };
-consent: {
-  prefix: string;
-  linkText: string;
-};
-privacy: {
-  metaTitle: string;
-  metaDescription: string;
-  title: string;
-  lastUpdated: string;
-  intro: string;
-  sections: Array<{ heading: string; body: string }>;
-  backHome: string;
-};
+  consent: {
+    prefix: string;
+    linkText: string;
+  };
+  privacy: {
+    metaTitle: string;
+    metaDescription: string;
+    title: string;
+    lastUpdated: string;
+    intro: string;
+    sections: Array<{ heading: string; body: string }>;
+    backHome: string;
+  };
   forms: {
     validation: FormValidationMessages;
   };

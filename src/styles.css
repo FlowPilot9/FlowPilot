@@ -145,6 +145,37 @@
   --sidebar-ring: oklch(0.551 0.027 264.364);
 }
 
+/*
+ * Hero dark scope.
+ *
+ * The Hero — and the Navbar while it floats transparently over it — is the
+ * one deliberately dark moment on an otherwise light site (design system
+ * §1.1). Rather than inventing a parallel set of class names, this scope
+ * re-points the SAME semantic tokens every other section already reads
+ * (--background, --foreground, --border, --muted-foreground, --surface,
+ * --surface-strong, --secondary) to dark values, so `bg-surface`,
+ * `text-muted-foreground`, `border-border`, etc. keep working completely
+ * unchanged inside `.hero-dark` — only the underlying values flip.
+ * --primary and --gradient-primary are deliberately NOT overridden: the
+ * FlowPilot blue is the one constant between both worlds.
+ *
+ * This is intentionally NOT the generic `.dark` block above (unused
+ * sitewide, shadcn boilerplate). That block's --primary is near-white and
+ * has no opinion on --surface or --gradient-primary — applying it here
+ * would quietly drop the brand accent exactly where it matters most.
+ */
+.hero-dark {
+  color: var(--foreground);
+  --background: oklch(0.15 0.028 262);
+  --foreground: oklch(0.97 0.006 260);
+  --border: oklch(1 0 0 / 10%);
+  --muted-foreground: oklch(0.74 0.02 260);
+  --surface: oklch(0.19 0.03 262);
+  --surface-strong: oklch(0.23 0.032 262);
+  --secondary: oklch(1 0 0 / 6%);
+  --secondary-foreground: oklch(0.95 0.01 260);
+}
+
 @layer base {
   * {
     border-color: var(--color-border);
@@ -198,6 +229,50 @@
   }
 }
 
+/* Dark-surface companions to glass-panel / btn-ghost above. Those two mix
+   toward WHITE on purpose — correct for light panels on a light page, wrong
+   on the Hero's dark background (they'd render as a near-white card).
+   These mix toward the same white but at low opacity, which reads as a
+   dark frosted panel instead. Kept as their own utilities rather than
+   making the originals conditional, since the light versions are used
+   throughout the rest of the site and must stay exactly as they are. */
+@utility glass-panel-dark {
+  background: color-mix(in oklab, white 6%, transparent);
+  backdrop-filter: blur(20px) saturate(140%);
+  border: 1px solid color-mix(in oklab, white 12%, transparent);
+  box-shadow: var(--shadow-elevated);
+}
+
+@utility btn-ghost-dark {
+  background: color-mix(in oklab, white 6%, transparent);
+  color: var(--foreground);
+  border: 1px solid color-mix(in oklab, white 14%, transparent);
+  transition: all 0.2s ease;
+  &:hover {
+    background: color-mix(in oklab, white 10%, transparent);
+    border-color: color-mix(in oklab, white 24%, transparent);
+  }
+}
+
+/* Faint technical grid + film grain for the Hero's dark atmosphere. Both
+   are static (no animation cost) and very low opacity — texture, not
+   decoration. The grid fades out toward the edges via mask-image so it
+   never reads as a hard-edged tile. */
+@utility hero-grid {
+  background-image:
+    linear-gradient(color-mix(in oklab, white 6%, transparent) 1px, transparent 1px),
+    linear-gradient(90deg, color-mix(in oklab, white 6%, transparent) 1px, transparent 1px);
+  background-size: 56px 56px;
+  mask-image: radial-gradient(ellipse 75% 55% at 50% 0%, black 40%, transparent 100%);
+}
+
+@utility hero-grain {
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+  background-size: 180px 180px;
+  opacity: 0.05;
+  mix-blend-mode: overlay;
+}
+
 @keyframes float-slow {
   0%, 100% { transform: translateY(0px); }
   50% { transform: translateY(-14px); }
@@ -208,3 +283,68 @@
 }
 @utility animate-float { animation: float-slow 7s ease-in-out infinite; }
 @utility animate-fade-up { animation: fade-up 0.7s ease-out both; }
+
+/*
+ * Hero workspace scene — a single 12s CSS-driven loop (see HeroWorkspace.tsx)
+ * that plays: wireframe -> colored preview -> the preview scrolls down to
+ * reveal more content -> proof badges -> scrolls back up -> crossfade to
+ * wireframe. All layers share the same 12s duration and iteration-count, so
+ * they stay phase-locked indefinitely — no JS timers, no drift. Percentages
+ * are the single source of truth for timing; see the component for the
+ * plain-language timeline. Every layer animates only transform/opacity.
+ */
+@keyframes scene-wireframe {
+  0%, 6% { opacity: 1; }
+  14%, 92% { opacity: 0; }
+  100% { opacity: 1; }
+}
+@keyframes scene-colored {
+  0%, 6% { opacity: 0; }
+  14%, 90% { opacity: 1; }
+  96%, 100% { opacity: 0; }
+}
+@keyframes scene-scroll {
+  0%, 44% { transform: translateY(0); }
+  50%, 78% { transform: translateY(-160px); }
+  84%, 100% { transform: translateY(0); }
+}
+@keyframes scene-badge-1 {
+  0%, 50% { opacity: 0; transform: translateY(6px); }
+  54%, 74% { opacity: 1; transform: translateY(0); }
+  78%, 100% { opacity: 0; transform: translateY(6px); }
+}
+@keyframes scene-badge-2 {
+  0%, 54% { opacity: 0; transform: translateY(6px); }
+  58%, 74% { opacity: 1; transform: translateY(0); }
+  78%, 100% { opacity: 0; transform: translateY(6px); }
+}
+@keyframes scene-badge-3 {
+  0%, 58% { opacity: 0; transform: translateY(6px); }
+  62%, 74% { opacity: 1; transform: translateY(0); }
+  78%, 100% { opacity: 0; transform: translateY(6px); }
+}
+@keyframes scene-badge-4 {
+  0%, 62% { opacity: 0; transform: translateY(6px); }
+  66%, 74% { opacity: 1; transform: translateY(0); }
+  78%, 100% { opacity: 0; transform: translateY(6px); }
+}
+@utility scene-layer-wireframe { animation: scene-wireframe 12s ease-in-out infinite; }
+@utility scene-layer-colored { animation: scene-colored 12s ease-in-out infinite; }
+@utility scene-scroll { animation: scene-scroll 12s ease-in-out infinite; }
+@utility scene-badge-1 { animation: scene-badge-1 12s ease-out infinite; }
+@utility scene-badge-2 { animation: scene-badge-2 12s ease-out infinite; }
+@utility scene-badge-3 { animation: scene-badge-3 12s ease-out infinite; }
+@utility scene-badge-4 { animation: scene-badge-4 12s ease-out infinite; }
+
+/* Respect the person's OS-level motion preference for any plain-CSS
+   animation/transition elsewhere on the site. The Hero's Framer Motion
+   animations are handled separately via useReducedMotion() in JS, since
+   Motion drives transforms directly rather than through CSS animations. */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

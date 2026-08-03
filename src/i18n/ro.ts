@@ -26,25 +26,51 @@ export const ro: TranslationDictionary = {
   },
   hero: {
     badge: "Acceptăm proiecte noi · T4 2026",
-    title: "Construim experiențe digitale moderne pentru",
-    titleHighlight: "afaceri în creștere.",
+    title: "Construim site-uri care fac afacerile",
+    titleHighlight: "imposibil de ignorat.",
     description:
-      "Proiectăm site-uri premium astăzi, în timp ce construim instrumentele inteligente de business de mâine.",
-    ctaPrimary: "Programează o consultație gratuită",
-    ctaSecondary: "Vezi proiectele noastre",
-    trustTimeline: "Termene clare",
-    trustStack: "Tehnologii moderne",
+      "Design memorabil, dezvoltare rapidă și o fundație pregătită pentru ceea ce urmează.",
+    ctaPrimary: "Începe un proiect",
+    ctaSecondary: "Explorează modelele",
+    trustTimeline: "Livrare în 2-6 săptămâni",
+    trustStack: "React & Next.js",
     trustSupport: "Suport continuu",
     imageAlt: "Ilustrație cu fluxuri digitale și automatizare business",
+    scrollCue: "Derulează",
+    workspace: {
+      browserLabel: "flowpilot.studio",
+      navItems: ["Acasă", "Servicii", "Portofoliu", "Contact"],
+      heroHeading: "Afacerea ta, la superlativ.",
+      heroCta: "Vezi lucrările",
+      badges: ["Responsive", "SEO ready", "Rapid", "Live"],
+    },
   },
   trust: {
-    intro: "Ajutăm afacerile să-și construiască prezența online cu site-uri",
-    introHighlight: "rapide, moderne și scalabile",
-    stats: [
-      { value: "Direct", label: "Acces la fondatori" },
-      { value: "Preț fix", label: "Fără costuri surpriză" },
-      { value: "2–6 săpt.", label: "Termen tipic de livrare" },
-      { value: "Stack modern", label: "React & Next.js" },
+    title: "Fiecare decizie e gândită să facă lansarea produsului tău predictibilă.",
+    items: [
+      {
+        title: "Comunicare directă",
+        description: "Lucrezi direct cu fondatorii, de la primul apel până la lansare.",
+        detail: "Fără intermediari · fără întârzieri inutile",
+      },
+      {
+        title: "Preț fix",
+        description:
+          "Afli investiția înainte să înceapă dezvoltarea, printr-o ofertă transparentă.",
+        detail: "Fără costuri ascunse",
+      },
+      {
+        title: "Livrare rapidă",
+        description:
+          "Majoritatea proiectelor sunt lansate în 2-6 săptămâni, cu un plan clar din prima zi.",
+        detail: "Roadmap clar, de la început",
+      },
+      {
+        title: "Tehnologie modernă",
+        description:
+          "Construim cu React, Next.js și arhitecturi scalabile, gata să crească odată cu afacerea ta.",
+        detail: "React & Next.js",
+      },
     ],
   },
   services: {
@@ -75,32 +101,171 @@ export const ro: TranslationDictionary = {
   process: {
     eyebrow: "Procesul nostru",
     title: "Un parcurs clar și predictibil, de la idee la lansare.",
-    steps: ["Descoperire", "Planificare", "Design", "Dezvoltare", "Lansare", "Creștere"],
+    labels: {
+      whatWeDo: "Ce facem",
+      whatClientGets: "Ce primești",
+      whyItMatters: "De ce contează",
+      duration: "Durată estimată",
+    },
+    steps: [
+      {
+        title: "Descoperire",
+        duration: "2-3 zile",
+        whatWeDo:
+          "Analizăm afacerea, publicul țintă și obiectivele tale, apoi cercetăm concurența și oportunitățile de piață.",
+        whatClientGets: "Un brief clar, cu obiective măsurabile și un plan de proiect definit.",
+        whyItMatters:
+          "Fără o bază solidă de informații, orice decizie de design sau tehnologie devine o presupunere, nu o strategie.",
+      },
+      {
+        title: "Planificare",
+        duration: "2 zile",
+        whatWeDo:
+          "Structurăm arhitectura site-ului, definim fluxurile utilizatorului și stabilim stack-ul tehnic potrivit.",
+        whatClientGets:
+          "O hartă a site-ului (sitemap) și un plan tehnic aprobat, înainte să se scrie vreun cod.",
+        whyItMatters:
+          "Planificarea din timp elimină reconstrucțiile costisitoare mai târziu în proiect.",
+      },
+      {
+        title: "Design",
+        duration: "3-5 zile",
+        whatWeDo:
+          "Creăm machete (wireframes) și design-uri de mare fidelitate, aliniate cu identitatea brandului tău.",
+        whatClientGets:
+          "Un prototip interactiv, pe care îl poți vedea și testa înainte de dezvoltare.",
+        whyItMatters:
+          "Corectarea unui design costă minute; corectarea unui site deja dezvoltat costă zile.",
+      },
+      {
+        title: "Dezvoltare",
+        duration: "1-2 săptămâni",
+        whatWeDo:
+          "Transformăm design-ul aprobat în cod curat, performant și responsive, testat pe toate dispozitivele.",
+        whatClientGets:
+          "Un site funcțional, într-un mediu de testare, la care ai acces în timp real.",
+        whyItMatters:
+          "Aici prinde viață produsul — calitatea codului decide viteza și stabilitatea pe termen lung.",
+      },
+      {
+        title: "Lansare",
+        duration: "1-2 zile",
+        whatWeDo:
+          "Configurăm hosting-ul, verificăm securitatea și performanța, apoi publicăm site-ul live.",
+        whatClientGets: "Un site live, optimizat și monitorizat, plus documentație de utilizare.",
+        whyItMatters:
+          "O lansare bine pregătită înseamnă zero timp de nefuncționare și o primă impresie impecabilă.",
+      },
+      {
+        title: "Mentenanță",
+        duration: "Continuu",
+        whatWeDo:
+          "Monitorizăm funcționarea site-ului, aplicăm actualizări de securitate și rezolvăm rapid orice problemă tehnică apărută.",
+        whatClientGets:
+          "Un site întreținut constant, cu suport direct atunci când apare o problemă.",
+        whyItMatters:
+          "Un site bun nu se termină la lansare — are nevoie de îngrijire constantă ca să rămână rapid, sigur și funcțional.",
+      },
+    ],
   },
   showcase: {
-    eyebrow: "Proiecte",
-    title: "Proiecte selectate, create pentru conversii.",
-    description: "O privire asupra afacerilor cu care am colaborat, din industrii diverse.",
-    projectMockup: "Mockup proiect {title}",
+    eyebrow: "Șabloane",
+    title: "Produse premium, gata de explorat.",
+    description:
+      "Fiecare șablon e construit ca un produs complet — explorează-l live, apoi personalizează-l pentru afacerea ta.",
+    previewAlt: "Previzualizare {title}",
+    liveLabel: "Live",
+    liveDemoLabel: "Demo live",
+    requestLabel: "Solicită acest design",
     items: [
-      { title: "Site restaurant", tag: "HoReCa" },
-      { title: "Clinică stomatologică", tag: "Sănătate" },
-      { title: "Firmă de construcții", tag: "Industrial" },
-      { title: "Cabinet de avocatură", tag: "Profesional" },
-      { title: "Studio fitness", tag: "Lifestyle" },
+      {
+        title: "Restaurant Website Template",
+        tag: "HoReCa",
+        description:
+          "Site elegant pentru restaurante, cu meniu digital, rezervări și galerie foto.",
+        stack: ["React", "Next.js", "CMS"],
+        isLive: false,
+      },
+      {
+        title: "Dental Clinic Template",
+        tag: "Sănătate",
+        description: "Site modern pentru cabinete stomatologice, cu programări online, SEO și CMS.",
+        stack: ["React", "Next.js", "CMS"],
+        isLive: true,
+      },
+      {
+        title: "Construction Company Template",
+        tag: "Industrial",
+        description:
+          "Prezență solidă pentru companii de construcții, cu portofoliu de proiecte și oferte rapide.",
+        stack: ["React", "Next.js", "CMS"],
+        isLive: false,
+      },
+      {
+        title: "Law Firm Template",
+        tag: "Profesional",
+        description:
+          "Site de încredere pentru cabinete de avocatură, cu arii de practică și programare consultații.",
+        stack: ["React", "Next.js", "CMS"],
+        isLive: false,
+      },
+      {
+        title: "Fitness Studio Template",
+        tag: "Lifestyle",
+        description:
+          "Landing page dinamică pentru studiouri fitness, cu clase, abonamente și înscriere online.",
+        stack: ["React", "Next.js", "CMS"],
+        isLive: false,
+      },
     ],
   },
   why: {
     eyebrow: "De ce FlowPilot",
     title: "Un partener obsedat de detalii.",
+    intro: "Fiecare beneficiu de mai jos e o demonstrație, nu doar o promisiune.",
     items: [
-      { title: "Livrare rapidă", desc: "Lansare în săptămâni, nu trimestre." },
-      { title: "Design premium", desc: "Rafinat, gândit, aliniat brandului tău." },
-      { title: "Mobile first", desc: "Impecabil pe orice dispozitiv." },
-      { title: "Optimizat SEO", desc: "Construit să fie găsit." },
-      { title: "Pregătit pentru AI", desc: "Arhitecturat pentru viitor." },
-      { title: "Soluții scalabile", desc: "Crește fără reconstrucție." },
+      {
+        label: "Performanță",
+        title: "Livrare rapidă",
+        desc: "Lansare în săptămâni, nu trimestre — fără compromisuri de viteză.",
+      },
+      {
+        label: "Design",
+        title: "Design premium",
+        desc: "Rafinat, gândit, aliniat brandului tău — nu doar frumos, ci intenționat.",
+      },
+      {
+        label: "Responsive",
+        title: "Mobile first",
+        desc: "Impecabil pe desktop, tabletă și mobil, din prima zi.",
+      },
+      {
+        label: "SEO",
+        title: "Optimizat pentru căutare",
+        desc: "Construit ca motoarele de căutare — și clienții tăi — să te găsească primii.",
+      },
+      {
+        label: "Inteligență artificială",
+        title: "Pregătit pentru AI",
+        desc: "Arhitecturat azi pentru capabilitățile de mâine.",
+      },
+      {
+        label: "Scalabilitate",
+        title: "Soluții scalabile",
+        desc: "Crește de la site la ecosistem digital, fără reconstrucție.",
+      },
     ],
+    proof: {
+      loadTimeLabel: "Timp de încărcare",
+      loadTimeValue: "0.8s",
+      scoreLabel: "Performanță",
+      seoLabel: "SEO",
+      accessibilityLabel: "Accesibilitate",
+      searchQuery: "clinică stomatologică București",
+      aiPrompt: "Creează o secțiune pentru pagina de start",
+      generatingLabel: "Se generează…",
+      architectureLayers: ["Website", "CMS", "Analitice", "AI"],
+    },
   },
   comingSoon: {
     badge: "În dezvoltare",
@@ -118,7 +283,8 @@ export const ro: TranslationDictionary = {
   },
   about: {
     eyebrow: "Despre noi",
-    title: "O singură misiune: să ajutăm afacerile să economisească timp prin produse digitale excepționale.",
+    title:
+      "O singură misiune: să ajutăm afacerile să economisească timp prin produse digitale excepționale.",
     paragraph1:
       "FlowPilot a fost creat pentru a reduce distanța dintre designul frumos și tehnologia practică — site-uri care nu doar arată bine, ci propulsează afacerile înainte.",
     today: "Astăzi",

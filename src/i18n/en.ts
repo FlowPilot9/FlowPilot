@@ -26,25 +26,49 @@ export const en: TranslationDictionary = {
   },
   hero: {
     badge: "Now accepting new projects · Q4 2026",
-    title: "Building modern digital experiences for",
-    titleHighlight: "growing businesses.",
-    description:
-      "We design premium websites today while building the intelligent business tools of tomorrow.",
-    ctaPrimary: "Book a Free Consultation",
-    ctaSecondary: "View Our Work",
-    trustTimeline: "Fixed timelines",
-    trustStack: "Modern stack",
+    title: "We build websites that make businesses",
+    titleHighlight: "impossible to ignore.",
+    description: "Memorable design, fast delivery, and a foundation built for what's next.",
+    ctaPrimary: "Start a project",
+    ctaSecondary: "Explore the templates",
+    trustTimeline: "Launch in 2-6 weeks",
+    trustStack: "React & Next.js",
     trustSupport: "Ongoing support",
     imageAlt: "Illustration of digital workflows and business automation",
+    scrollCue: "Scroll",
+    workspace: {
+      browserLabel: "flowpilot.studio",
+      navItems: ["Home", "Services", "Work", "Contact"],
+      heroHeading: "Your business, elevated.",
+      heroCta: "See the work",
+      badges: ["Responsive", "SEO ready", "Fast", "Live"],
+    },
   },
   trust: {
-    intro: "We help businesses build their online presence with",
-    introHighlight: "fast, modern and scalable",
-    stats: [
-      { value: "Direct", label: "Access to the Founders" },
-      { value: "Fixed-Price", label: "No Surprise Costs" },
-      { value: "2–6 Weeks", label: "Typical Delivery Time" },
-      { value: "Modern Stack", label: "React & Next.js" },
+    title: "Every decision we make is designed to make launching your product predictable.",
+    items: [
+      {
+        title: "Direct Communication",
+        description: "You work directly with the founders, from the first call to launch.",
+        detail: "No middlemen · no unnecessary delays",
+      },
+      {
+        title: "Fixed Pricing",
+        description:
+          "Know the investment before development begins, through a transparent proposal.",
+        detail: "No hidden costs",
+      },
+      {
+        title: "Fast Delivery",
+        description: "Most projects launch within 2-6 weeks, with a clear roadmap from day one.",
+        detail: "Clear roadmap from the start",
+      },
+      {
+        title: "Modern Technology",
+        description:
+          "Built with React, Next.js, and scalable architecture, ready to grow with your business.",
+        detail: "React & Next.js",
+      },
     ],
   },
   services: {
@@ -75,32 +99,165 @@ export const en: TranslationDictionary = {
   process: {
     eyebrow: "Our Process",
     title: "A calm, predictable path from idea to launch.",
-    steps: ["Discover", "Plan", "Design", "Develop", "Launch", "Grow"],
+    labels: {
+      whatWeDo: "What we do",
+      whatClientGets: "What you get",
+      whyItMatters: "Why it matters",
+      duration: "Estimated duration",
+    },
+    steps: [
+      {
+        title: "Discovery",
+        duration: "2-3 days",
+        whatWeDo:
+          "We dig into your business, audience, and goals, then map the competitive landscape and opportunities.",
+        whatClientGets: "A clear brief with measurable goals and a defined project plan.",
+        whyItMatters:
+          "Without a solid base of information, every design or tech decision becomes a guess, not a strategy.",
+      },
+      {
+        title: "Planning",
+        duration: "2 days",
+        whatWeDo:
+          "We structure the site architecture, map user flows, and settle on the right tech stack.",
+        whatClientGets:
+          "An approved sitemap and technical plan, before a single line of code is written.",
+        whyItMatters: "Planning ahead removes costly rebuilds later in the project.",
+      },
+      {
+        title: "Design",
+        duration: "3-5 days",
+        whatWeDo:
+          "We create wireframes and high-fidelity designs aligned with your brand identity.",
+        whatClientGets: "An interactive prototype you can see and test before development starts.",
+        whyItMatters: "Fixing a design takes minutes; fixing an already-built site takes days.",
+      },
+      {
+        title: "Development",
+        duration: "1-2 weeks",
+        whatWeDo:
+          "We turn the approved design into clean, fast, responsive code, tested across devices.",
+        whatClientGets: "A working site on a staging environment you can access in real time.",
+        whyItMatters:
+          "This is where the product comes to life — code quality decides long-term speed and stability.",
+      },
+      {
+        title: "Launch",
+        duration: "1-2 days",
+        whatWeDo: "We set up hosting, verify security and performance, then publish the site live.",
+        whatClientGets: "A live, optimized, monitored site, plus usage documentation.",
+        whyItMatters: "A well-prepared launch means zero downtime and a flawless first impression.",
+      },
+      {
+        title: "Maintenance",
+        duration: "Ongoing",
+        whatWeDo:
+          "We keep the site running smoothly, apply security updates, and quickly fix any technical issue that comes up.",
+        whatClientGets:
+          "A consistently maintained site, with direct support whenever something needs attention.",
+        whyItMatters:
+          "A great site doesn't end at launch — it needs ongoing care to stay fast, secure, and reliable.",
+      },
+    ],
   },
   showcase: {
-    eyebrow: "Showcase",
-    title: "Selected work, made to convert.",
-    description: "A glimpse into the businesses we've partnered with across industries.",
-    projectMockup: "{title} project mockup",
+    eyebrow: "Templates",
+    title: "Premium products, ready to explore.",
+    description:
+      "Every template is built as a complete product — explore it live, then make it your own.",
+    previewAlt: "{title} preview",
+    liveLabel: "Live",
+    liveDemoLabel: "Live Demo",
+    requestLabel: "Request this design",
     items: [
-      { title: "Restaurant Website", tag: "Hospitality" },
-      { title: "Dental Clinic", tag: "Healthcare" },
-      { title: "Construction Company", tag: "Industrial" },
-      { title: "Law Firm", tag: "Professional" },
-      { title: "Fitness Studio", tag: "Lifestyle" },
+      {
+        title: "Restaurant Website Template",
+        tag: "Hospitality",
+        description:
+          "An elegant site for restaurants, with a digital menu, bookings, and a photo gallery.",
+        stack: ["React", "Next.js", "CMS"],
+        isLive: false,
+      },
+      {
+        title: "Dental Clinic Template",
+        tag: "Healthcare",
+        description: "Modern website for dental practices with booking, SEO and CMS.",
+        stack: ["React", "Next.js", "CMS"],
+        isLive: true,
+      },
+      {
+        title: "Construction Company Template",
+        tag: "Industrial",
+        description:
+          "A solid presence for construction companies, with a project portfolio and fast quotes.",
+        stack: ["React", "Next.js", "CMS"],
+        isLive: false,
+      },
+      {
+        title: "Law Firm Template",
+        tag: "Professional",
+        description:
+          "A trustworthy site for law firms, with practice areas and consultation booking.",
+        stack: ["React", "Next.js", "CMS"],
+        isLive: false,
+      },
+      {
+        title: "Fitness Studio Template",
+        tag: "Lifestyle",
+        description:
+          "A dynamic landing page for fitness studios, with classes, memberships, and online sign-up.",
+        stack: ["React", "Next.js", "CMS"],
+        isLive: false,
+      },
     ],
   },
   why: {
     eyebrow: "Why FlowPilot",
     title: "A partner obsessed with the details.",
+    intro: "Every benefit below is a demonstration, not just a promise.",
     items: [
-      { title: "Fast Delivery", desc: "Launch in weeks, not quarters." },
-      { title: "Premium Design", desc: "Refined, considered, on-brand." },
-      { title: "Mobile First", desc: "Beautiful on every device." },
-      { title: "SEO Optimized", desc: "Built to be discovered." },
-      { title: "Future AI Ready", desc: "Architected for what's next." },
-      { title: "Scalable Solutions", desc: "Grow without a rebuild." },
+      {
+        label: "Performance",
+        title: "Fast Delivery",
+        desc: "Launch in weeks, not quarters — without cutting corners on speed.",
+      },
+      {
+        label: "Design",
+        title: "Premium Design",
+        desc: "Refined, considered, on-brand — crafted with intent, not decorated.",
+      },
+      {
+        label: "Responsive",
+        title: "Mobile First",
+        desc: "Flawless on desktop, tablet, and mobile, from day one.",
+      },
+      {
+        label: "SEO",
+        title: "Search Optimized",
+        desc: "Built so search engines — and your customers — find you first.",
+      },
+      {
+        label: "Artificial Intelligence",
+        title: "AI Ready",
+        desc: "Architected today for tomorrow's capabilities.",
+      },
+      {
+        label: "Scalability",
+        title: "Scalable Solutions",
+        desc: "Grow from a website to a digital ecosystem, without a rebuild.",
+      },
     ],
+    proof: {
+      loadTimeLabel: "Load time",
+      loadTimeValue: "0.8s",
+      scoreLabel: "Performance",
+      seoLabel: "SEO",
+      accessibilityLabel: "Accessibility",
+      searchQuery: "dental clinic Bucharest",
+      aiPrompt: "Create a homepage section",
+      generatingLabel: "Generating…",
+      architectureLayers: ["Website", "CMS", "Analytics", "AI"],
+    },
   },
   comingSoon: {
     badge: "In Development",
@@ -129,8 +286,7 @@ export const en: TranslationDictionary = {
   contact: {
     eyebrow: "Contact",
     title: "Let's build something great together.",
-    description:
-      "Tell us about your project. We reply within 24 hours with a tailored proposal.",
+    description: "Tell us about your project. We reply within 24 hours with a tailored proposal.",
     fixedPrice: "Fixed-price engagements",
     delivery: "Delivery in 2–6 weeks",
     name: "Name",
@@ -205,7 +361,8 @@ export const en: TranslationDictionary = {
     notFoundDescription: "The page you're looking for doesn't exist or has been moved.",
     goHome: "Go home",
     pageErrorTitle: "This page didn't load",
-    pageErrorDescription: "Something went wrong on our end. You can try refreshing or head back home.",
+    pageErrorDescription:
+      "Something went wrong on our end. You can try refreshing or head back home.",
     tryAgain: "Try again",
   },
 };

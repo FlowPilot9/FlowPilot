@@ -89,7 +89,11 @@ export function buildHrefLangLinks(path: string = "/") {
       hrefLang: locale,
       href: `${SITE_URL}${localePath(locale, path)}`,
     })),
-    { rel: "alternate", hrefLang: "x-default", href: `${SITE_URL}${localePath(DEFAULT_LOCALE, path)}` },
+    {
+      rel: "alternate",
+      hrefLang: "x-default",
+      href: `${SITE_URL}${localePath(DEFAULT_LOCALE, path)}`,
+    },
   ];
 }
 

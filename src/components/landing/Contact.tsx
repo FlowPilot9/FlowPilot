@@ -3,20 +3,13 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "sonner";
 import { ArrowRight, Mail, Check } from "lucide-react";
-import {
-  createContactFormSchema,
-  submitContactLead,
-  type ContactFormValues,
-} from "@/lib/leads";
+import { createContactFormSchema, submitContactLead, type ContactFormValues } from "@/lib/leads";
 import { useTranslation } from "@/i18n/I18nProvider";
 import { localePath } from "@/i18n";
 
 export function Contact() {
   const { t, locale } = useTranslation();
-  const contactFormSchema = useMemo(
-    () => createContactFormSchema(t.forms.validation),
-    [t],
-  );
+  const contactFormSchema = useMemo(() => createContactFormSchema(t.forms.validation), [t]);
 
   const {
     register,
@@ -28,11 +21,11 @@ export function Contact() {
   });
 
   const onSubmit = async (values: ContactFormValues) => {
-    const { website, consent, ...lead } = values;
+    const { hpToken, consent, ...lead } = values;
 
     // Honeypot: un bot completează și câmpurile ascunse. Dacă are valoare,
     // pretindem succes și nu trimitem nimic către Supabase.
-    if (website) {
+    if (hpToken) {
       toast.success(t.contact.toastSuccess);
       reset();
       return;
@@ -80,15 +73,19 @@ export function Contact() {
           >
             <input
               type="text"
-              {...register("website")}
+              {...register("hpToken")}
               tabIndex={-1}
               autoComplete="off"
+              data-lpignore="true"
+              data-1p-ignore="true"
               aria-hidden="true"
               className="absolute left-[-9999px] top-auto h-px w-px overflow-hidden"
             />
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
               <label className="block">
-                <span className="mb-1.5 block text-xs font-medium text-foreground">{t.contact.name}</span>
+                <span className="mb-1.5 block text-xs font-medium text-foreground">
+                  {t.contact.name}
+                </span>
                 <input
                   type="text"
                   {...register("name")}
@@ -111,7 +108,9 @@ export function Contact() {
               </label>
             </div>
             <label className="mt-4 block">
-              <span className="mb-1.5 block text-xs font-medium text-foreground">{t.contact.email}</span>
+              <span className="mb-1.5 block text-xs font-medium text-foreground">
+                {t.contact.email}
+              </span>
               <input
                 type="email"
                 {...register("email")}
@@ -122,17 +121,21 @@ export function Contact() {
               )}
             </label>
             <label className="mt-4 block">
-              <span className="mb-1.5 block text-xs font-medium text-foreground">{t.contact.message}</span>
+              <span className="mb-1.5 block text-xs font-medium text-foreground">
+                {t.contact.message}
+              </span>
               <textarea
                 rows={5}
                 {...register("message")}
                 className="w-full resize-none rounded-xl border border-border bg-background px-3.5 py-2.5 text-sm outline-none transition-colors focus:border-primary focus:ring-4 focus:ring-primary/10"
               />
               {errors.message && (
-                <span className="mt-1 block text-xs text-destructive">{errors.message.message}</span>
+                <span className="mt-1 block text-xs text-destructive">
+                  {errors.message.message}
+                </span>
               )}
             </label>
-            
+
             <label className="mt-4 flex items-start gap-2.5">
               <input
                 type="checkbox"
@@ -154,12 +157,14 @@ export function Contact() {
             {errors.consent && (
               <span className="mt-1 block text-xs text-destructive">{errors.consent.message}</span>
             )}
+
             <button
               type="submit"
               disabled={isSubmitting}
-              className="btn-primary mt-4 inline-flex w-full items-center justify-center gap-2 rounded-xl px-5 py-3 text-sm font-medium disabled:opacity-60"
+              className="btn-primary mt-6 inline-flex w-full items-center justify-center gap-2 rounded-xl px-5 py-3 text-sm font-medium disabled:opacity-60"
             >
-              {isSubmitting ? t.contact.submitting : t.contact.submit} <ArrowRight className="h-4 w-4" />
+              {isSubmitting ? t.contact.submitting : t.contact.submit}{" "}
+              <ArrowRight className="h-4 w-4" />
             </button>
           </form>
         </div>

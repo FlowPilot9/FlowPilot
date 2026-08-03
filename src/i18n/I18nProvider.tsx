@@ -15,10 +15,7 @@ const I18nContext = createContext<I18nContextValue | null>(null);
  * URL, which naturally re-renders this provider with a new `locale` prop.
  */
 export function I18nProvider({ locale, children }: { locale: Locale; children: ReactNode }) {
-  const value = useMemo<I18nContextValue>(
-    () => ({ locale, t: getTranslation(locale) }),
-    [locale],
-  );
+  const value = useMemo<I18nContextValue>(() => ({ locale, t: getTranslation(locale) }), [locale]);
 
   return <I18nContext.Provider value={value}>{children}</I18nContext.Provider>;
 }
