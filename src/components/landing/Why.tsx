@@ -299,7 +299,7 @@ function CraftProof({ active }: ProofProps) {
 
 function MiniHeroScreen({ compact }: { compact?: boolean }) {
   return (
-    <div className="flex h-full flex-col justify-center gap-2 p-1">
+    <div className="flex h-full flex-col justify-center gap-1.5 p-0.5">
       {!compact && (
         <div className="flex items-center justify-between">
           <span className="h-[3px] w-[3px] rounded-full bg-primary" />
@@ -336,7 +336,7 @@ function DeviceFrame({
   }`;
 
   const screen = (
-    <div className="flex-1 overflow-hidden p-1.5">
+    <div className="flex-1 overflow-hidden p-1">
       <MiniHeroScreen compact={kind === "phone"} />
     </div>
   );
@@ -393,7 +393,7 @@ function ScreenProof({ active }: ProofProps) {
   return (
     <div className="mx-auto w-full max-w-[300px]">
       <div className="flex h-[128px] items-end justify-center gap-5">
-        <DeviceFrame kind="monitor" width={120} height={94} active={active} delay={0} />
+        <DeviceFrame kind="monitor" width={100} height={80} active={active} delay={0} />
         <DeviceFrame kind="tablet" width={72} height={104} active={active} delay={150} />
         <DeviceFrame kind="phone" width={44} height={78} active={active} delay={300} />
       </div>
