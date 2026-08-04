@@ -128,14 +128,17 @@ export interface TranslationDictionary {
     submit: string;
     submitting: string;
     disclaimer: string;
-    imageAlt: string;
     toastSuccess: string;
     toastError: string;
+    experiments: { label: string; status: string; description: string }[];
   };
   about: {
     eyebrow: string;
     title: string;
     paragraph1: string;
+    differentiators: string[];
+    foundersLabel: string;
+    founders: { initials: string; name: string; role: string }[];
     today: string;
     todayText: string;
     tomorrow: string;

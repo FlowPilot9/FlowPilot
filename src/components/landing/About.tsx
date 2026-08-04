@@ -1,23 +1,78 @@
 import { useTranslation } from "@/i18n/I18nProvider";
 
+// Deliberately left-aligned and split into two columns, unlike every other
+// section (SectionHeader centers everything into a narrow single column).
+// This section is a personal statement from the two founders, not a
+// marketing headline — a cramped, centered block read as corporate; a wide
+// editorial split (headline + founders on the left, story on the right)
+// uses the page's actual width and reads more like a studio's "about" page.
 export function About() {
   const { t } = useTranslation();
 
   return (
     <section id="about" className="py-24 md:py-32">
-      <div className="mx-auto max-w-3xl px-4 text-center">
-        <span className="text-xs font-semibold uppercase tracking-[0.18em] text-primary">
-          {t.about.eyebrow}
-        </span>
-        <h2 className="mt-3 text-3xl font-bold tracking-tight text-foreground sm:text-4xl md:text-[42px] md:leading-[1.1]">
-          {t.about.title}
-        </h2>
-        <div className="mx-auto mt-8 max-w-2xl space-y-4 text-base leading-relaxed text-muted-foreground md:text-lg">
-          <p>{t.about.paragraph1}</p>
-          <p>
-            <span className="text-foreground">{t.about.today}</span> {t.about.todayText}{" "}
-            <span className="text-foreground">{t.about.tomorrow}</span> {t.about.tomorrowText}
-          </p>
+      <div className="mx-auto max-w-6xl px-4">
+        <div className="grid gap-10 md:grid-cols-12 md:gap-x-16">
+          <div className="md:col-span-5">
+            <span className="text-xs font-semibold uppercase tracking-[0.18em] text-primary">
+              {t.about.eyebrow}
+            </span>
+            <h2 className="mt-4 text-3xl font-bold tracking-tight text-foreground sm:text-4xl md:text-[42px] md:leading-[1.15]">
+              {t.about.title}
+            </h2>
+
+            {/* Founders live under the headline, not aligned into the same
+                grid as the story column — stacked and slightly offset
+                rather than a neat two-up row, so this doesn't read as
+                another perfectly boxed module. */}
+            <div className="mt-12">
+              <span className="text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+                {t.about.foundersLabel}
+              </span>
+              <div className="mt-5 space-y-5">
+                {t.about.founders.map((founder, index) => (
+                  <div
+                    key={founder.name}
+                    className={`group flex items-start gap-4 ${index === 1 ? "sm:ml-8" : ""}`}
+                  >
+                    <span
+                      aria-hidden
+                      className="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-[image:var(--gradient-primary)] text-sm font-semibold text-primary-foreground shadow-soft transition-transform duration-300 group-hover:scale-105"
+                    >
+                      {founder.initials}
+                    </span>
+                    <div className="min-w-0 pt-0.5">
+                      <div className="font-semibold text-foreground">{founder.name}</div>
+                      <div className="text-sm text-muted-foreground">{founder.role}</div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          <div className="md:col-span-7">
+            <p className="text-base leading-relaxed text-muted-foreground md:text-lg">
+              {t.about.paragraph1}
+            </p>
+
+            {/* Differentiators as plain statements, not icon cards — a
+                repeated card grid here would reintroduce the generic-agency
+                feeling the brief asks to avoid. */}
+            <ul className="mt-8 space-y-2.5">
+              {t.about.differentiators.map((line) => (
+                <li key={line} className="flex items-start gap-2.5 text-sm text-foreground/90 md:text-base">
+                  <span aria-hidden className="mt-2 h-1 w-1 shrink-0 rounded-full bg-primary/60" />
+                  {line}
+                </li>
+              ))}
+            </ul>
+
+            <div className="mt-10 border-t border-border pt-8 text-base leading-relaxed text-muted-foreground md:text-lg">
+              <span className="font-semibold text-foreground">{t.about.today}</span> {t.about.todayText}{" "}
+              <span className="font-semibold text-foreground">{t.about.tomorrow}</span> {t.about.tomorrowText}
+            </div>
+          </div>
         </div>
       </div>
     </section>

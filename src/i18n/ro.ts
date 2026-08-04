@@ -271,28 +271,58 @@ export const ro: TranslationDictionary = {
   },
   comingSoon: {
     badge: "În dezvoltare",
-    title: "Viitorul",
-    titleHighlight: "FlowPilot.",
+    title: "Dincolo de site-uri.",
+    titleHighlight: "Construim ce urmează.",
     description:
-      "Construim asistenți AI inteligenți concepuți să automatizeze sarcini repetitive de business — procesare documente, gestionare email și fluxuri de lucru.",
+      "FlowPilot Labs e spațiul unde explorăm ce vine după site-uri — asistenți AI, automatizări și produse digitale noi. Nimic de aici nu e lansat încă; construim în văzul tuturor.",
     emailPlaceholder: "tu@compania.ro",
-    submit: "Înscrie-te pe listă",
+    submit: "Fii primul anunțat",
     submitting: "Se înscrie...",
-    disclaimer: "Acces timpuriu · Fără spam · Dezabonare oricând",
-    imageAlt: "Ilustrație cu un asistent AI care orchestrează sarcini de business",
-    toastSuccess: "Ești pe listă — revenim curând.",
+    disclaimer: "Notificări rare · Fără spam · Dezabonare oricând",
+    toastSuccess: "Ești pe listă — te anunțăm când apare ceva nou.",
     toastError: "Ceva nu a mers bine. Te rugăm să încerci din nou.",
+    experiments: [
+      {
+        label: "Asistent AI",
+        status: "Cercetare",
+        description: "Un asistent conversațional care preia sarcini repetitive din email și documente.",
+      },
+      {
+        label: "Automatizări fără cod",
+        status: "Prototip",
+        description: "Fluxuri de lucru care leagă unelte existente, fără nicio linie de cod.",
+      },
+      {
+        label: "Documente inteligente",
+        status: "Explorare",
+        description: "Extragere și organizare automată a informațiilor din documente.",
+      },
+      {
+        label: "Copilot analitic",
+        status: "Concept",
+        description: "Rapoarte și observații generate automat din datele afacerii.",
+      },
+    ],
   },
   about: {
     eyebrow: "Despre noi",
-    title:
-      "O singură misiune: să ajutăm afacerile să economisească timp prin produse digitale excepționale.",
+    title: "Nu suntem o agenție mare. Suntem doi oameni care construiesc fiecare proiect cu mâna lor.",
     paragraph1:
-      "FlowPilot a fost creat pentru a reduce distanța dintre designul frumos și tehnologia practică — site-uri care nu doar arată bine, ci propulsează afacerile înainte.",
+      "FlowPilot a pornit dintr-o observație simplă: prea multe site-uri de afaceri mici arată ca niște șabloane reciclate, fără nimeni în spate căruia să-i pese cu adevărat. Suntem studenți la ETTI (Facultatea de Electronică, Telecomunicații și Tehnologia Informației) din Universitatea Politehnica București și am pornit FlowPilot fiindcă ne pasă de detalii mai mult decât ne cere cineva.",
+    differentiators: [
+      "Lucrezi direct cu noi, nu printr-un manager de cont.",
+      "Fiecare site trece prin mâinile amândurora, nu printr-o echipă anonimă.",
+      "Compensăm anii de experiență cu atenția pe care echipele mari nu mai au timp s-o dea unui singur proiect.",
+    ],
+    foundersLabel: "Fondatori",
+    founders: [
+      { initials: "SD", name: "Ștefan Dima", role: "Frontend development & design" },
+      { initials: "AP", name: "Alexandru Pîrvu", role: "Backend development & sisteme" },
+    ],
     today: "Astăzi",
-    todayText: "construim site-uri premium.",
+    todayText: "construim site-uri premium, unul câte unul.",
     tomorrow: "Mâine",
-    tomorrowText: "construim software de business inteligent.",
+    tomorrowText: "vrem să construim mult mai mult decât site-uri.",
   },
   contact: {
     eyebrow: "Contact",
