@@ -336,6 +336,10 @@ export const en: TranslationDictionary = {
     toastError: "Something went wrong. Please try again.",
   },
   footer: {
+    statement: "A small studio, run by two people who build every site by hand.",
+    cta: "Start a project",
+    navLabel: "Navigate",
+    connectLabel: "Connect",
     linkedin: "LinkedIn",
     github: "GitHub",
     email: "Email",

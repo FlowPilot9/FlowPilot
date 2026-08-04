@@ -160,6 +160,10 @@ export interface TranslationDictionary {
     toastError: string;
   };
   footer: {
+    statement: string;
+    cta: string;
+    navLabel: string;
+    connectLabel: string;
     linkedin: string;
     github: string;
     email: string;

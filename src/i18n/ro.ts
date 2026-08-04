@@ -345,6 +345,10 @@ export const ro: TranslationDictionary = {
     toastError: "Ceva nu a mers bine. Te rugăm să încerci din nou.",
   },
   footer: {
+    statement: "Un studio mic, condus de doi oameni care construiesc fiecare site cu mâna lor.",
+    cta: "Începe un proiect",
+    navLabel: "Navigare",
+    connectLabel: "Conectare",
     linkedin: "LinkedIn",
     github: "GitHub",
     email: "Email",
