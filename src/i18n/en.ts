@@ -320,8 +320,11 @@ export const en: TranslationDictionary = {
     eyebrow: "Contact",
     title: "Let's build something great together.",
     description: "Tell us about your project. We reply within 24 hours with a tailored proposal.",
-    fixedPrice: "Fixed-price engagements",
-    delivery: "Delivery in 2–6 weeks",
+    trustIndicators: [
+      "Direct communication with us, no middlemen.",
+      "A transparent process, from the first sketch to launch.",
+      "Websites built for your business, not repackaged templates.",
+    ],
     name: "Name",
     company: "Company",
     optional: "optional",

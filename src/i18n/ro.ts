@@ -329,8 +329,11 @@ export const ro: TranslationDictionary = {
     title: "Hai să construim ceva remarcabil împreună.",
     description:
       "Spune-ne despre proiectul tău. Răspundem în 24 de ore cu o propunere personalizată.",
-    fixedPrice: "Proiecte cu preț fix",
-    delivery: "Livrare în 2–6 săptămâni",
+    trustIndicators: [
+      "Comunicare directă cu noi, fără intermediari.",
+      "Proces transparent, de la prima schiță până la lansare.",
+      "Site-uri construite pentru afacerea ta, nu șabloane reambalate.",
+    ],
     name: "Nume",
     company: "Companie",
     optional: "opțional",

@@ -148,8 +148,7 @@ export interface TranslationDictionary {
     eyebrow: string;
     title: string;
     description: string;
-    fixedPrice: string;
-    delivery: string;
+    trustIndicators: string[];
     name: string;
     company: string;
     optional: string;
