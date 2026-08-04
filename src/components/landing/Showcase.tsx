@@ -1,11 +1,11 @@
 import { ArrowRight } from "lucide-react";
 import { SectionHeader } from "@/components/landing/SectionHeader";
 import { useTranslation } from "@/i18n/I18nProvider";
-import showcaseRestaurant from "@/assets/showcase-restaurant.jpg";
-import showcaseDental from "@/assets/showcase-dental.jpg";
-import showcaseConstruction from "@/assets/showcase-construction.jpg";
-import showcaseLaw from "@/assets/showcase-law.jpg";
-import showcaseFitness from "@/assets/showcase-fitness.jpg";
+import showcaseRestaurant from "@/assets/showcase-restaurant.webp";
+import showcaseDental from "@/assets/showcase-dental.webp";
+import showcaseConstruction from "@/assets/showcase-construction.webp";
+import showcaseLaw from "@/assets/showcase-law.webp";
+import showcaseFitness from "@/assets/showcase-fitness.webp";
 
 const showcaseImages = [
   showcaseRestaurant,

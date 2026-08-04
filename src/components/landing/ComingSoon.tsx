@@ -5,7 +5,7 @@ import { toast } from "sonner";
 import { ArrowRight } from "lucide-react";
 import { createWaitlistFormSchema, submitWaitlistLead, type WaitlistFormValues } from "@/lib/leads";
 import { useTranslation } from "@/i18n/I18nProvider";
-import aiIllustration from "@/assets/ai-illustration.png";
+import aiIllustration from "@/assets/ai-illustration.webp";
 import { localePath } from "@/i18n";
 
 export function ComingSoon() {
