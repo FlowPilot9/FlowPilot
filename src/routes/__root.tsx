@@ -106,7 +106,7 @@ function RootShell({ children }: { children: ReactNode }) {
   const lang = getLocaleFromPathname(pathname);
 
   return (
-    <html lang={lang}>
+    <html lang={lang} suppressHydrationWarning>
       <head>
         <HeadContent />
         {/* Blocking, runs before paint: sets the `dark` class from the

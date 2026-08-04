@@ -1,4 +1,12 @@
-import { createContext, useContext, useEffect, useMemo, useState, type ReactNode } from "react";
+import {
+  createContext,
+  useContext,
+  useEffect,
+  useLayoutEffect,
+  useMemo,
+  useState,
+  type ReactNode,
+} from "react";
 
 export type Theme = "light" | "dark";
 
@@ -11,8 +19,7 @@ interface ThemeContextValue {
 
 const ThemeContext = createContext<ThemeContextValue | null>(null);
 
-function getInitialTheme(): Theme {
-  if (typeof window === "undefined") return "light";
+function getStoredTheme(): Theme | null {
   try {
     const stored = window.localStorage.getItem(STORAGE_KEY);
     if (stored === "light" || stored === "dark") return stored;
@@ -20,17 +27,30 @@ function getInitialTheme(): Theme {
     // localStorage can throw in locked-down environments (private mode,
     // disabled storage) — fall through to the media-query default.
   }
+  return null;
+}
+
+function getSystemTheme(): Theme {
   return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
 }
 
 /**
  * Site-wide light/dark theme. A tiny blocking script in routes/__root.tsx's
  * head() sets the `dark` class on <html> before hydration (same idea as
- * next-themes) so there's no flash of the wrong theme on load; this
- * provider just keeps React and localStorage in sync with that afterwards.
+ * next-themes) so there's no flash of the wrong *background* on load.
+ *
+ * React state always starts as "light" on both server and the first client
+ * render — matching the SSR output exactly, so there's no hydration
+ * mismatch. The real theme (from localStorage/system) is picked up right
+ * after via useLayoutEffect, which runs on the client before the browser
+ * paints, so the ThemeToggle icon never actually flashes the wrong state.
  */
 export function ThemeProvider({ children }: { children: ReactNode }) {
-  const [theme, setTheme] = useState<Theme>(getInitialTheme);
+  const [theme, setTheme] = useState<Theme>("light");
+
+  useLayoutEffect(() => {
+    setTheme(getStoredTheme() ?? getSystemTheme());
+  }, []);
 
   useEffect(() => {
     document.documentElement.classList.toggle("dark", theme === "dark");
