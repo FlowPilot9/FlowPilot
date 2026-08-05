@@ -73,14 +73,14 @@ export function Hero() {
             {t.hero.badge}
           </motion.span>
 
-          <h1 className="mt-6 text-5xl font-bold leading-[1.18] tracking-tight text-foreground sm:text-6xl md:text-[3.75rem] md:leading-[1.18]">
+          <h1 className="mt-6 text-5xl font-display font-bold leading-[1.18] tracking-tight text-foreground sm:text-6xl md:text-[3.75rem] md:leading-[1.18]">
             <span className="block overflow-hidden">
               <motion.span {...maskLine(0.32)} className="block">
                 {t.hero.title}
               </motion.span>
             </span>
             <span className="block overflow-hidden">
-              <motion.span {...maskLine(0.44)} className="text-gradient block">
+              <motion.span {...maskLine(0.44)} className="block font-semibold text-primary">
                 {t.hero.titleHighlight}
               </motion.span>
             </span>

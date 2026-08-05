@@ -111,7 +111,7 @@ export function Process() {
                   <span className="text-xs font-semibold uppercase tracking-[0.14em] text-muted-foreground">
                     {t.process.eyebrow} · {String(active + 1).padStart(2, "0")}
                   </span>
-                  <h3 className="mt-1.5 text-2xl font-bold tracking-tight text-foreground md:text-3xl">
+                  <h3 className="mt-1.5 text-2xl font-display font-bold tracking-tight text-foreground md:text-3xl">
                     {activeStep.title}
                   </h3>
                 </div>

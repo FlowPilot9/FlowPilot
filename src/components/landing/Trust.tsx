@@ -9,7 +9,7 @@ export function Trust() {
   return (
     <section className="border-y border-border/60 bg-surface">
       <div className="mx-auto max-w-[1320px] px-4 py-20">
-        <h2 className="mx-auto max-w-2xl text-center text-2xl font-semibold tracking-tight text-foreground md:text-3xl">
+        <h2 className="mx-auto max-w-2xl text-center text-2xl font-display font-semibold tracking-tight text-foreground md:text-3xl">
           {t.trust.title}
         </h2>
 
