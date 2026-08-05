@@ -178,7 +178,7 @@ export const en: TranslationDictionary = {
         description:
           "An elegant site for restaurants, with a digital menu, bookings, and a photo gallery.",
         stack: ["React", "Next.js", "CMS"],
-        isLive: false,
+        isLive: true,
       },
       {
         title: "Dental Clinic Template",

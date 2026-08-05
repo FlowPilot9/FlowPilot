@@ -186,7 +186,7 @@ export const ro: TranslationDictionary = {
         description:
           "Site elegant pentru restaurante, cu meniu digital, rezervări și galerie foto.",
         stack: ["React", "Next.js", "CMS"],
-        isLive: false,
+        isLive: true,
       },
       {
         title: "Dental Clinic Template",

@@ -19,7 +19,7 @@ const showcaseImages = [
 // else is presented honestly as "request this design" rather than a fake
 // demo link. As more templates go live, just flip isLive + add a url here.
 const showcaseUrls = [
-  undefined,
+  "https://conacul-digital-romania.vercel.app/",
   "https://aurora-dental-rosy.vercel.app/",
   undefined,
   undefined,
