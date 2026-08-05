@@ -63,7 +63,7 @@ export function Contact() {
     "w-full rounded-xl border border-border bg-card px-3.5 py-2.5 text-sm outline-none transition-all duration-200 hover:border-foreground/20 focus:border-primary focus:ring-4 focus:ring-primary/10";
 
   return (
-    <section id="contact" className="bg-surface py-24 md:py-32">
+    <section id="contact" className="py-24 md:py-32">
       <div className="mx-auto max-w-5xl px-4">
         <div className="grid grid-cols-1 gap-10 md:grid-cols-2 md:gap-14">
           <motion.div

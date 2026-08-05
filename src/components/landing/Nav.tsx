@@ -7,7 +7,7 @@ import { ThemeToggle } from "@/components/landing/ThemeToggle";
 import { useTranslation } from "@/i18n/I18nProvider";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
-const SECTION_IDS = ["services", "process", "work", "future", "about"];
+const SECTION_IDS = ["process", "services", "work", "future", "about"];
 
 export function Nav() {
   const { t } = useTranslation();
@@ -46,8 +46,8 @@ export function Nav() {
   }, []);
 
   const links = [
-    { href: "#services", label: t.nav.services },
     { href: "#process", label: t.nav.process },
+    { href: "#services", label: t.nav.services },
     { href: "#work", label: t.nav.work },
     { href: "#future", label: t.nav.comingSoon },
     { href: "#about", label: t.nav.about },

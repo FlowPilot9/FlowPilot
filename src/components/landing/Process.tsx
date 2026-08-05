@@ -24,7 +24,7 @@ export function Process() {
   const trackInset = `${100 / (steps.length * 2)}%`;
 
   return (
-    <section id="process" className="bg-surface py-24 md:py-32">
+    <section id="process" className="py-24 md:py-32">
       <div className="mx-auto max-w-[1320px] px-4">
         <SectionHeader eyebrow={t.process.eyebrow} title={t.process.title} />
 

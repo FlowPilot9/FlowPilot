@@ -38,8 +38,8 @@ export function Landing() {
       <Nav />
       <Hero />
       <Trust />
-      <Services />
       <Process />
+      <Services />
       <Showcase />
       <Why />
       <ComingSoon />

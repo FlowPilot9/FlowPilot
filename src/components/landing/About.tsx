@@ -10,7 +10,7 @@ export function About() {
   const { t } = useTranslation();
 
   return (
-    <section id="about" className="py-24 md:py-32">
+    <section id="about" className="bg-surface py-24 md:py-32">
       <div className="mx-auto max-w-6xl px-4">
         <div className="grid gap-10 md:grid-cols-12 md:gap-x-16">
           <div className="md:col-span-5">
