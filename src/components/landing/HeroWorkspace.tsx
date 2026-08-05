@@ -236,10 +236,14 @@ export function HeroWorkspace() {
         }
       >
         <div className="flex items-center gap-2 border-b border-border px-4 py-3">
-          {/* Brand-styled browser dots */}
-          <div className={`flex gap-1.5 ${!prefersReducedMotion ? "scene-nav-reveal" : ""}`}>
+          {/* Brand-styled browser dots — always visible: unlike the rest of
+              the scene these never fade out at the end of the loop. Colors
+              stay within the theme's own palette in each mode (gold/cream
+              in light, blue in dark for the night-ocean feel) rather than a
+              fixed blue that only worked in dark mode. */}
+          <div className="flex gap-1.5">
             <span className="h-2.5 w-2.5 shrink-0 rounded-full bg-primary" /> {/* Gold accent */}
-            <span className="h-2.5 w-2.5 shrink-0 rounded-full bg-blue-500/80 dark:bg-blue-400" /> {/* Blue accent */}
+            <span className="h-2.5 w-2.5 shrink-0 rounded-full bg-accent dark:bg-blue-400" /> {/* Cream-gold in light, blue in dark */}
             <span className="h-2.5 w-2.5 shrink-0 rounded-full bg-muted-foreground/30" /> {/* Neutral gray */}
           </div>
           <span className="ml-3 truncate rounded-md bg-foreground/[0.05] px-2.5 py-0.5 text-[11px] text-muted-foreground">

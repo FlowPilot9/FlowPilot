@@ -367,8 +367,8 @@
 }
 @keyframes scene-badge-reveal {
   0%, 50% { opacity: 0; transform: translateY(6px); }
-  60%, 90% { opacity: 1; transform: translateY(0); }
-  95%, 100% { opacity: 0; }
+  60%, 85% { opacity: 1; transform: translateY(0); }
+  90%, 100% { opacity: 0; }
 }
 @utility scene-layer-wireframe { animation: scene-wireframe 12s ease-in-out infinite; }
 @utility scene-layer-colored { animation: scene-colored 12s ease-in-out infinite; }
