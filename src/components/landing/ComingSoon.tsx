@@ -64,7 +64,7 @@ export function ComingSoon() {
               <span className="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/5 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-primary">
                 {t.comingSoon.badge}
               </span>
-              <h2 className="mt-5 text-3xl font-bold tracking-tight text-foreground sm:text-4xl md:text-5xl md:leading-[1.15]">
+              <h2 className="mt-5 text-3xl font-display font-bold tracking-tight text-foreground sm:text-4xl md:text-5xl md:leading-[1.15]">
                 {t.comingSoon.title}{" "}
                 <span className="text-gradient">{t.comingSoon.titleHighlight}</span>
               </h2>

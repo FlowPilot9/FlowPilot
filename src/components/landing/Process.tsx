@@ -24,7 +24,7 @@ export function Process() {
   const trackInset = `${100 / (steps.length * 2)}%`;
 
   return (
-    <section id="process" className="bg-surface py-24 md:py-32">
+    <section id="process" className="py-24 md:py-32">
       <div className="mx-auto max-w-[1320px] px-4">
         <SectionHeader eyebrow={t.process.eyebrow} title={t.process.title} />
 
@@ -111,7 +111,7 @@ export function Process() {
                   <span className="text-xs font-semibold uppercase tracking-[0.14em] text-muted-foreground">
                     {t.process.eyebrow} · {String(active + 1).padStart(2, "0")}
                   </span>
-                  <h3 className="mt-1.5 text-2xl font-bold tracking-tight text-foreground md:text-3xl">
+                  <h3 className="mt-1.5 text-2xl font-display font-bold tracking-tight text-foreground md:text-3xl">
                     {activeStep.title}
                   </h3>
                 </div>

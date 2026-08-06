@@ -118,7 +118,7 @@ export function Services() {
   const prefersReducedMotion = useReducedMotion();
 
   return (
-    <section id="services" className="py-24 md:py-32">
+    <section id="services" className="bg-surface py-24 md:py-32">
       <div className="mx-auto max-w-[1320px] px-4">
         <SectionHeader
           eyebrow={t.services.eyebrow}

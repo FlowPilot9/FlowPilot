@@ -590,7 +590,7 @@ function PrincipleRow({
             {label}
           </span>
         </div>
-        <h3 className="mt-4 text-2xl font-semibold tracking-tight text-foreground md:text-[26px]">
+        <h3 className="mt-4 text-2xl font-display font-semibold tracking-tight text-foreground md:text-[26px]">
           {title}
         </h3>
         <p className="mt-3 max-w-[38ch] text-base leading-[1.6] text-muted-foreground">{desc}</p>

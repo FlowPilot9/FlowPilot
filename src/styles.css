@@ -1,6 +1,16 @@
 @import "tailwindcss" source(none);
 @source "../src";
 @import "tw-animate-css";
+@import "@fontsource/inter/400.css";
+@import "@fontsource/inter/500.css";
+@import "@fontsource/inter/600.css";
+@import "@fontsource/inter/700.css";
+@import "@fontsource/geist-sans/400.css";
+@import "@fontsource/geist-sans/500.css";
+@import "@fontsource/geist-sans/600.css";
+@import "@fontsource/geist-sans/700.css";
+@import "@fontsource/geist-mono/400.css";
+@import "@fontsource/geist-mono/500.css";
 
 @custom-variant dark (&:is(.dark *));
 
@@ -63,7 +73,8 @@
   --color-surface-strong: var(--surface-strong);
   --color-primary-glow: var(--primary-glow);
   --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
-  --font-display: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Geist Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "Geist Mono", ui-monospace, monospace;
 }
 
 :root {
@@ -261,8 +272,8 @@
    hard-edged tile. */
 @utility hero-grid {
   background-image:
-    linear-gradient(color-mix(in oklab, var(--primary) 9%, transparent) 1px, transparent 1px),
-    linear-gradient(90deg, color-mix(in oklab, var(--primary) 9%, transparent) 1px, transparent 1px);
+    linear-gradient(color-mix(in oklab, var(--primary) 5%, transparent) 1px, transparent 1px),
+    linear-gradient(90deg, color-mix(in oklab, var(--primary) 5%, transparent) 1px, transparent 1px);
   background-size: 56px 56px;
   mask-image: radial-gradient(ellipse 75% 55% at 50% 0%, black 40%, transparent 100%);
 }
@@ -330,47 +341,44 @@
  * plain-language timeline. Every layer animates only transform/opacity.
  */
 @keyframes scene-wireframe {
-  0%, 6% { opacity: 1; }
-  14%, 92% { opacity: 0; }
-  100% { opacity: 1; }
+  0%, 15% { opacity: 1; }
+  20%, 90% { opacity: 0; }
+  95%, 100% { opacity: 1; }
 }
 @keyframes scene-colored {
-  0%, 6% { opacity: 0; }
-  14%, 90% { opacity: 1; }
-  96%, 100% { opacity: 0; }
+  0%, 15% { opacity: 0; }
+  20%, 90% { opacity: 1; }
+  95%, 100% { opacity: 0; }
 }
 @keyframes scene-scroll {
-  0%, 44% { transform: translateY(0); }
-  50%, 78% { transform: translateY(-160px); }
-  84%, 100% { transform: translateY(0); }
+  0%, 40% { transform: translateY(0); }
+  50%, 80% { transform: translateY(-160px); }
+  90%, 100% { transform: translateY(0); }
 }
-@keyframes scene-badge-1 {
+@keyframes scene-nav-reveal {
+  0%, 20% { opacity: 0; }
+  30%, 90% { opacity: 1; }
+  95%, 100% { opacity: 0; }
+}
+@keyframes scene-content-reveal {
+  0%, 30% { opacity: 0; }
+  40%, 90% { opacity: 1; }
+  95%, 100% { opacity: 0; }
+}
+@keyframes scene-badge-reveal {
   0%, 50% { opacity: 0; transform: translateY(6px); }
-  54%, 74% { opacity: 1; transform: translateY(0); }
-  78%, 100% { opacity: 0; transform: translateY(6px); }
-}
-@keyframes scene-badge-2 {
-  0%, 54% { opacity: 0; transform: translateY(6px); }
-  58%, 74% { opacity: 1; transform: translateY(0); }
-  78%, 100% { opacity: 0; transform: translateY(6px); }
-}
-@keyframes scene-badge-3 {
-  0%, 58% { opacity: 0; transform: translateY(6px); }
-  62%, 74% { opacity: 1; transform: translateY(0); }
-  78%, 100% { opacity: 0; transform: translateY(6px); }
-}
-@keyframes scene-badge-4 {
-  0%, 62% { opacity: 0; transform: translateY(6px); }
-  66%, 74% { opacity: 1; transform: translateY(0); }
-  78%, 100% { opacity: 0; transform: translateY(6px); }
+  60%, 85% { opacity: 1; transform: translateY(0); }
+  90%, 100% { opacity: 0; }
 }
 @utility scene-layer-wireframe { animation: scene-wireframe 12s ease-in-out infinite; }
 @utility scene-layer-colored { animation: scene-colored 12s ease-in-out infinite; }
 @utility scene-scroll { animation: scene-scroll 12s ease-in-out infinite; }
-@utility scene-badge-1 { animation: scene-badge-1 12s ease-out infinite; }
-@utility scene-badge-2 { animation: scene-badge-2 12s ease-out infinite; }
-@utility scene-badge-3 { animation: scene-badge-3 12s ease-out infinite; }
-@utility scene-badge-4 { animation: scene-badge-4 12s ease-out infinite; }
+@utility scene-nav-reveal { animation: scene-nav-reveal 12s ease-out infinite; }
+@utility scene-content-reveal { animation: scene-content-reveal 12s ease-out infinite; }
+@utility scene-badge-1 { animation: scene-badge-reveal 12s ease-out infinite; animation-delay: 0.1s; }
+@utility scene-badge-2 { animation: scene-badge-reveal 12s ease-out infinite; animation-delay: 0.2s; }
+@utility scene-badge-3 { animation: scene-badge-reveal 12s ease-out infinite; animation-delay: 0.3s; }
+@utility scene-badge-4 { animation: scene-badge-reveal 12s ease-out infinite; animation-delay: 0.4s; }
 
 /* Respect the person's OS-level motion preference for any plain-CSS
    animation/transition elsewhere on the site. The Hero's Framer Motion

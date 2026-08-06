@@ -81,21 +81,23 @@ function NavPills({ items }: { items: string[] }) {
 
 function WireframeLayer() {
   return (
-    <div className="scene-layer-wireframe absolute inset-0 flex flex-col gap-3 p-5">
-      <div className="flex items-center gap-2">
-        <span className="h-2.5 w-2.5 rounded-[3px] border border-dashed border-foreground/20" />
-        {[0, 1, 2, 3].map((i) => (
-          <span key={i} className="h-4 w-10 rounded-md border border-dashed border-foreground/15" />
+    <div className="scene-layer-wireframe absolute inset-0 flex flex-col gap-6 p-6">
+      <div className="flex justify-between items-center">
+        <span className="h-4 w-20 rounded border border-dashed border-foreground/20" />
+        <div className="flex gap-4">
+          {[0, 1, 2].map((i) => (
+            <span key={i} className="h-3 w-12 rounded border border-dashed border-foreground/15" />
+          ))}
+        </div>
+      </div>
+      <div className="flex flex-1 flex-col justify-center gap-3 rounded-xl border border-dashed border-foreground/15 p-6">
+        <span className="h-4 w-1/2 rounded border border-dashed border-foreground/20" />
+        <span className="h-3 w-3/4 rounded border border-dashed border-foreground/15" />
+      </div>
+      <div className="grid grid-cols-3 gap-4">
+        {[0, 1, 2].map((i) => (
+          <span key={i} className="h-20 rounded-lg border border-dashed border-foreground/12" />
         ))}
-      </div>
-      <div className="flex flex-1 flex-col justify-center gap-2 rounded-xl border border-dashed border-foreground/15 p-4">
-        <span className="h-3 w-2/5 rounded border border-dashed border-foreground/20" />
-        <span className="h-2 w-3/5 rounded border border-dashed border-foreground/12" />
-        <span className="mt-2 h-6 w-20 rounded-md border border-dashed border-foreground/15" />
-      </div>
-      <div className="grid grid-cols-2 gap-3">
-        <span className="h-14 rounded-lg border border-dashed border-foreground/12" />
-        <span className="h-14 rounded-lg border border-dashed border-foreground/12" />
       </div>
     </div>
   );
@@ -116,45 +118,61 @@ function ColoredLayer({
     <div
       className={`absolute inset-0 flex flex-col ${animated ? "scene-layer-colored" : "opacity-100"}`}
     >
-      {/* Pinned header — stays put while the content below scrolls, the
-          way a real site's nav would. */}
-      <div className="shrink-0 px-5 pb-3 pt-5">
-        <NavPills items={navItems} />
+      <div className={`flex shrink-0 justify-between items-center px-6 py-4 ${animated ? "scene-nav-reveal" : ""}`}>
+        <span className="text-sm font-bold text-foreground">FlowPilot</span>
+        <div className="flex gap-4">
+          {navItems.map((item) => (
+            <span key={item} className="text-[10px] font-medium text-muted-foreground">{item}</span>
+          ))}
+        </div>
       </div>
 
-      <div className="relative flex-1 overflow-hidden px-5 pb-5">
-        <div className={`flex flex-col gap-3 ${animated ? "scene-scroll" : ""}`}>
-          <div className="flex flex-col justify-center gap-2 rounded-xl bg-primary/10 p-4">
-            <span className="text-[13px] font-semibold leading-snug text-foreground">{heading}</span>
-            <span className="h-1.5 w-3/5 rounded-full bg-foreground/15" />
-            <span className="mt-1.5 inline-flex w-fit items-center rounded-md bg-primary px-2.5 py-1 text-[9px] font-medium text-primary-foreground">
-              {cta}
-            </span>
-          </div>
-          <div className="grid grid-cols-2 gap-3">
-            {[0, 1].map((i) => (
-              <div key={i} className="rounded-lg border border-border bg-foreground/[0.04] p-2.5">
-                <span className="mb-2 block h-5 w-5 rounded bg-primary/25" />
-                <span className="block h-1.5 w-3/5 rounded-full bg-foreground/15" />
-                <span className="mt-1.5 block h-1.5 w-2/5 rounded-full bg-foreground/8" />
-              </div>
-            ))}
-          </div>
-          {/* Below-the-fold content — only visible once the scene scrolls
-              down, which is the whole point: it gives the scroll something
-              real to reveal instead of just moving for its own sake. */}
-          <div className="grid grid-cols-2 gap-3">
-            {[0, 1].map((i) => (
-              <div key={i} className="rounded-lg border border-border bg-foreground/[0.04] p-2.5">
-                <span className="mb-2 block h-5 w-5 rounded bg-primary/25" />
-                <span className="block h-1.5 w-2/5 rounded-full bg-foreground/15" />
-                <span className="mt-1.5 block h-1.5 w-3/5 rounded-full bg-foreground/8" />
-              </div>
-            ))}
-          </div>
-          <div className="flex items-center justify-between rounded-lg border border-border bg-primary/10 p-3">
-            <span className="h-1.5 w-2/5 rounded-full bg-foreground/20" />
-            <span className="h-5 w-14 shrink-0 rounded-md bg-primary" />
+      <div className="relative flex-1 overflow-hidden px-6 pb-6">
+        <div className={`flex flex-col gap-6 ${animated ? "scene-scroll" : ""}`}>
+          <div className={`${animated ? "scene-content-reveal" : ""}`}>
+            <div className="flex flex-col justify-center gap-2 rounded-xl bg-secondary/50 p-6 border border-border/50">
+              <span className="text-sm font-semibold leading-tight text-foreground">{heading}</span>
+              <span className="text-[10px] text-muted-foreground leading-relaxed w-5/6">
+                Modern digital infrastructure built for scale and performance.
+              </span>
+              <span className="mt-2 inline-flex w-fit items-center rounded-md bg-primary px-3 py-1.5 text-[10px] font-semibold text-primary-foreground shadow-sm">
+                {cta}
+              </span>
+            </div>
+            <div className="grid grid-cols-2 gap-4 mt-6">
+              {[
+                { title: "Responsive", desc: "Adaptive design" },
+                { title: "SEO Ready", desc: "Optimized architecture" },
+              ].map((feature, i) => (
+                <div key={i} className="rounded-lg border border-border bg-card p-4 shadow-sm">
+                  <span className="mb-2 block text-xs font-semibold text-foreground">{feature.title}</span>
+                  <span className="block text-[10px] text-muted-foreground">{feature.desc}</span>
+                </div>
+              ))}
+            </div>
+            
+            {/* Below-the-fold content: Client Spotlight */}
+            <div className="rounded-xl border border-border bg-card p-6 shadow-sm mt-6">
+              <span className="mb-4 block text-xs font-semibold text-foreground">Client Spotlight</span>
+              <span className="text-[10px] text-muted-foreground leading-relaxed italic">
+                "FlowPilot transformed our online presence into a high-converting asset."
+              </span>
+              <span className="mt-3 block text-[9px] font-bold text-foreground">— Business Lead</span>
+            </div>
+
+            {/* Bottom badges with existing stagger animation */}
+            <div className="grid grid-cols-4 gap-2 mt-6">
+              {[
+                { label: "Responsive" },
+                { label: "SEO" },
+                { label: "Rapid" },
+                { label: "Live" },
+              ].map((badge, i) => (
+                <div key={i} className={`rounded-lg border border-border bg-card p-3 shadow-sm ${animated ? `scene-badge-${i + 1}` : ""}`}>
+                  <span className="block text-[9px] font-bold text-foreground text-center">{badge.label}</span>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </div>
@@ -218,10 +236,17 @@ export function HeroWorkspace() {
         }
       >
         <div className="flex items-center gap-2 border-b border-border px-4 py-3">
-          <span className="h-2.5 w-2.5 shrink-0 rounded-full bg-foreground/12" />
-          <span className="h-2.5 w-2.5 shrink-0 rounded-full bg-foreground/12" />
-          <span className="h-2.5 w-2.5 shrink-0 rounded-full bg-foreground/12" />
-          <span className="ml-2 truncate rounded-md bg-foreground/[0.05] px-2.5 py-0.5 text-[11px] text-muted-foreground">
+          {/* Brand-styled browser dots — always visible: unlike the rest of
+              the scene these never fade out at the end of the loop. Colors
+              stay within the theme's own palette in each mode (gold/cream
+              in light, blue in dark for the night-ocean feel) rather than a
+              fixed blue that only worked in dark mode. */}
+          <div className="flex gap-1.5">
+            <span className="h-2.5 w-2.5 shrink-0 rounded-full bg-primary" /> {/* Gold accent */}
+            <span className="h-2.5 w-2.5 shrink-0 rounded-full bg-accent dark:bg-blue-400" /> {/* Cream-gold in light, blue in dark */}
+            <span className="h-2.5 w-2.5 shrink-0 rounded-full bg-muted-foreground/30" /> {/* Neutral gray */}
+          </div>
+          <span className="ml-3 truncate rounded-md bg-foreground/[0.05] px-2.5 py-0.5 text-[11px] text-muted-foreground">
             {ws.browserLabel}
           </span>
         </div>

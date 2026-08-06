@@ -10,14 +10,14 @@ export function About() {
   const { t } = useTranslation();
 
   return (
-    <section id="about" className="py-24 md:py-32">
+    <section id="about" className="bg-surface py-24 md:py-32">
       <div className="mx-auto max-w-6xl px-4">
         <div className="grid gap-10 md:grid-cols-12 md:gap-x-16">
           <div className="md:col-span-5">
             <span className="text-xs font-semibold uppercase tracking-[0.18em] text-primary">
               {t.about.eyebrow}
             </span>
-            <h2 className="mt-4 text-3xl font-bold tracking-tight text-foreground sm:text-4xl md:text-[42px] md:leading-[1.15]">
+            <h2 className="mt-4 text-3xl font-display font-bold tracking-tight text-foreground sm:text-4xl md:text-[42px] md:leading-[1.15]">
               {t.about.title}
             </h2>
 
