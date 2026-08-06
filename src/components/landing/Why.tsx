@@ -293,21 +293,41 @@ function CraftProof({ active }: ProofProps) {
 }
 
 // --- 03 — Mobile First: the same page, desktop → tablet → mobile -----------
+// The screen content is a simplified likeness of our own Hero (badge,
+// two-tone headline, filled CTA) rather than a generic abstract page — the
+// proof should read as "this is our site, at three sizes", not "a website".
+
+function MiniHeroScreen({ compact }: { compact?: boolean }) {
+  return (
+    <div className="flex h-full flex-col justify-center gap-1.5 p-0.5">
+      {!compact && (
+        <div className="flex items-center justify-between">
+          <span className="h-[3px] w-[3px] rounded-full bg-primary" />
+          <div className="flex gap-1">
+            <span className="h-[2px] w-2 rounded-full bg-muted-foreground/30" />
+            <span className="h-[2px] w-2 rounded-full bg-muted-foreground/30" />
+          </div>
+        </div>
+      )}
+      <span className="h-[3px] w-2/5 rounded-full bg-primary/20" />
+      <span className="block h-[5px] w-full rounded-full bg-foreground/70" />
+      {!compact && <span className="block h-[5px] w-4/5 rounded-full bg-foreground/70" />}
+      <span className="block h-[5px] w-2/3 rounded-full bg-primary" />
+      <span className="h-[7px] w-2/5 rounded-sm bg-primary" />
+    </div>
+  );
+}
 
 function DeviceFrame({
   kind,
   width,
   height,
-  columns,
-  navCollapsed,
   active,
   delay,
 }: {
   kind: "monitor" | "tablet" | "phone";
   width: number;
   height: number;
-  columns: number;
-  navCollapsed: boolean;
   active: boolean;
   delay: number;
 }) {
@@ -316,8 +336,8 @@ function DeviceFrame({
   }`;
 
   const screen = (
-    <div className="flex-1 overflow-hidden p-1.5">
-      <MiniSite tone="polished" columns={columns} navCollapsed={navCollapsed} />
+    <div className="flex-1 overflow-hidden p-1">
+      <MiniHeroScreen compact={kind === "phone"} />
     </div>
   );
 
@@ -328,7 +348,7 @@ function DeviceFrame({
         style={{ transitionDelay: `${delay}ms` }}
       >
         <div
-          className="flex flex-col rounded-md border-[3px] border-border bg-background shadow-soft"
+          className="flex flex-col rounded-md border-[3px] border-border bg-background shadow-soft transition-colors duration-300"
           style={{ width, height }}
         >
           {screen}
@@ -371,37 +391,13 @@ function DeviceFrame({
 
 function ScreenProof({ active }: ProofProps) {
   return (
-    <ProofCanvas>
-      <div className="flex h-[86px] items-end justify-center gap-5">
-        <DeviceFrame
-          kind="monitor"
-          width={100}
-          height={54}
-          columns={3}
-          navCollapsed={false}
-          active={active}
-          delay={0}
-        />
-        <DeviceFrame
-          kind="tablet"
-          width={58}
-          height={74}
-          columns={2}
-          navCollapsed={false}
-          active={active}
-          delay={150}
-        />
-        <DeviceFrame
-          kind="phone"
-          width={34}
-          height={60}
-          columns={1}
-          navCollapsed={true}
-          active={active}
-          delay={300}
-        />
+    <div className="mx-auto w-full max-w-[300px]">
+      <div className="flex h-[128px] items-end justify-center gap-5">
+        <DeviceFrame kind="monitor" width={100} height={80} active={active} delay={0} />
+        <DeviceFrame kind="tablet" width={72} height={104} active={active} delay={150} />
+        <DeviceFrame kind="phone" width={44} height={78} active={active} delay={300} />
       </div>
-    </ProofCanvas>
+    </div>
   );
 }
 
