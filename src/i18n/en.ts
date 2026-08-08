@@ -383,7 +383,7 @@ export const en: TranslationDictionary = {
       },
       {
         heading: "Contact",
-        body: "For any privacy question or to exercise your rights, email us at hello@flowpilot.studio.",
+        body: "For any privacy question or to exercise your rights, email us at tflowpilot@gmail.com.",
       },
     ],
     backHome: "Back to homepage",

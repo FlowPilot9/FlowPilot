@@ -392,7 +392,7 @@ export const ro: TranslationDictionary = {
       },
       {
         heading: "Contact",
-        body: "Pentru orice întrebare legată de confidențialitate sau pentru a-ți exercita drepturile, scrie-ne la hello@flowpilot.studio.",
+        body: "Pentru orice întrebare legată de confidențialitate sau pentru a-ți exercita drepturile, scrie-ne la tflowpilot@gmail.com.",
       },
     ],
     backHome: "Înapoi la pagina principală",
