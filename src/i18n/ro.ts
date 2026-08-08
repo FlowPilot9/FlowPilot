@@ -201,24 +201,24 @@ export const ro: TranslationDictionary = {
         description:
           "Prezență solidă pentru companii de construcții, cu portofoliu de proiecte și oferte rapide.",
         stack: ["React", "Next.js", "CMS"],
-        isLive: false,
+        isLive: true,
       },
       {
-        title: "Law Firm Template",
-        tag: "Profesional",
+        title: "Product Presentation Template",
+        tag: "E-commerce",
         description:
-          "Site de încredere pentru cabinete de avocatură, cu arii de practică și programare consultații.",
+          "Landing page de prezentare produs, cu galerie foto, detalii de anatomie și colecție de modele.",
         stack: ["React", "Next.js", "CMS"],
-        isLive: false,
+        isLive: true,
       },
       {
-        title: "Fitness Studio Template",
-        tag: "Lifestyle",
-        description:
-          "Landing page dinamică pentru studiouri fitness, cu clase, abonamente și înscriere online.",
-        stack: ["React", "Next.js", "CMS"],
-        isLive: false,
-      },
+      title: "Product Showcase Template",
+      tag: "E-commerce",
+      description:
+        "Vitrină digitală cinematică pentru o colecție de sneakers, cu storytelling orizontal și animații de lux.",
+      stack: ["React", "Next.js", "CMS"],
+      isLive: true,
+    },
     ],
   },
   why: {

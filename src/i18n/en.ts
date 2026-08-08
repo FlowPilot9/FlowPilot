@@ -193,24 +193,24 @@ export const en: TranslationDictionary = {
         description:
           "A solid presence for construction companies, with a project portfolio and fast quotes.",
         stack: ["React", "Next.js", "CMS"],
-        isLive: false,
+        isLive: true,
       },
       {
-        title: "Law Firm Template",
-        tag: "Professional",
+        title: "Product Presentation Template",
+        tag: "E-commerce",
         description:
-          "A trustworthy site for law firms, with practice areas and consultation booking.",
+          "Product presentation landing page, with photo gallery, product anatomy and model collection.",
         stack: ["React", "Next.js", "CMS"],
-        isLive: false,
+        isLive: true,
       },
       {
-        title: "Fitness Studio Template",
-        tag: "Lifestyle",
-        description:
-          "A dynamic landing page for fitness studios, with classes, memberships, and online sign-up.",
-        stack: ["React", "Next.js", "CMS"],
-        isLive: false,
-      },
+      title: "Product Showcase Template",
+      tag: "E-commerce",
+      description:
+        "Cinematic product showcase for a sneaker collection, with horizontal storytelling and luxury motion design.",
+      stack: ["React", "Next.js", "CMS"],
+      isLive: true,
+    },
     ],
   },
   why: {

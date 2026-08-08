@@ -4,15 +4,15 @@ import { useTranslation } from "@/i18n/I18nProvider";
 import showcaseRestaurant from "@/assets/showcase-restaurant.webp";
 import showcaseDental from "@/assets/showcase-dental.webp";
 import showcaseConstruction from "@/assets/showcase-construction.webp";
-import showcaseLaw from "@/assets/showcase-law.webp";
-import showcaseFitness from "@/assets/showcase-fitness.webp";
+import showcaseProduct from "@/assets/showcase-product.webp";
+import showcaseCollection from "@/assets/showcase-collection.webp";
 
 const showcaseImages = [
   showcaseRestaurant,
   showcaseDental,
   showcaseConstruction,
-  showcaseLaw,
-  showcaseFitness,
+  showcaseProduct,
+  showcaseCollection,
 ] as const;
 
 // Only the Dental Clinic template is a real, live product today — everything
@@ -21,9 +21,9 @@ const showcaseImages = [
 const showcaseUrls = [
   "https://conacul-digital-romania.vercel.app/",
   "https://aurora-dental-rosy.vercel.app/",
-  undefined,
-  undefined,
-  undefined,
+  "https://axion-build-blueprint.vercel.app/",
+  "https://noir-atelier-showcase-umber.vercel.app/",
+  "https://arq-aura-showcase.vercel.app/",
 ] as const;
 
 export function Showcase() {
