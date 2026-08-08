@@ -90,10 +90,10 @@ export function Contact() {
 
             <motion.a
               variants={item}
-              href="mailto:hello@flowpilot.studio"
+              href="mailto:tflowpilot@gmail.com"
               className="mt-7 inline-flex items-center gap-2.5 text-sm font-medium text-foreground transition-colors duration-200 hover:text-primary"
             >
-              <Mail className="h-4 w-4 text-primary" /> hello@flowpilot.studio
+              <Mail className="h-4 w-4 text-primary" /> tflowpilot@gmail.com
             </motion.a>
 
             <ul className="mt-7 space-y-4">

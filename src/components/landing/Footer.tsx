@@ -74,7 +74,7 @@ export function Footer() {
                 <Github className="h-[18px] w-[18px]" />
               </a>
               <a
-                href="mailto:hello@flowpilot.studio"
+                href="mailto:tflowpilot@gmail.com"
                 aria-label={t.footer.email}
                 className={socialButtonClass}
               >
