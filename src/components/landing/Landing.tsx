@@ -9,18 +9,14 @@ import { ComingSoon } from "@/components/landing/ComingSoon";
 import { About } from "@/components/landing/About";
 import { Contact } from "@/components/landing/Contact";
 import { Footer } from "@/components/landing/Footer";
+import { Preloader } from "@/components/landing/Preloader"; 
 
 export function Landing() {
   return (
-    <main className="relative min-h-screen bg-background text-foreground">
-      {/* The Hero's atmosphere doesn't just stop — it fades out gradually
-          over roughly the first section and a half, so scrolling past the
-          Hero feels like leaving the same world rather than hitting a hard
-          cut. `absolute` (not `fixed`): it only exists for this height at
-          the top of the document, then is simply gone for the rest of the
-          page. Cross-fades with the theme the same way AtmosphereScene
-          does — pure `dark:` opacity, no JS. */}
-      <div aria-hidden className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-[140vh] overflow-hidden">
+  <main className="relative min-h-screen bg-background text-foreground">
+    <Preloader />   {/* ← linie nouă */}
+
+    <div aria-hidden className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-[140vh] overflow-hidden">
         <div
           className="absolute inset-0 opacity-100 transition-opacity duration-[1200ms] ease-in-out dark:opacity-0"
           style={{

@@ -13,6 +13,7 @@ import { reportLovableError } from "../lib/lovable-error-reporting";
 import { Toaster } from "@/components/ui/sonner";
 import { ThemeProvider } from "@/theme/ThemeProvider";
 import { DEFAULT_LOCALE, getLocaleFromPathname, getMetaTags } from "@/i18n";
+import { PageReadyProvider } from "@/hooks/use-page-ready";
 
 // Locale-agnostic fallback only. In practice every real 404/error is caught
 // inside routes/{-$locale}.tsx, which knows the locale and renders a
@@ -135,11 +136,10 @@ function RootComponent() {
   return (
     <QueryClientProvider client={queryClient}>
       <ThemeProvider>
-        {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes.
-            The active locale, translations, and per-page <head> are provided further down
-            the tree by routes/{-$locale}.tsx and routes/{-$locale}/index.tsx. */}
-        <Outlet />
-        <Toaster position="bottom-right" />
+        <PageReadyProvider>
+          <Outlet />
+          <Toaster position="bottom-right" />
+        </PageReadyProvider>
       </ThemeProvider>
     </QueryClientProvider>
   );

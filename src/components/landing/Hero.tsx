@@ -3,6 +3,7 @@ import { ArrowRight, ChevronDown } from "lucide-react";
 import { useTranslation } from "@/i18n/I18nProvider";
 import { HeroWorkspace } from "@/components/landing/HeroWorkspace";
 import { AtmosphereScene } from "@/components/landing/AtmosphereScene";
+import { usePageReady } from "@/hooks/use-page-ready"; 
 
 // ---------------------------------------------------------------------------
 // Hero — night-ocean atmosphere in dark mode, a plain tinted surface + faint
@@ -21,13 +22,14 @@ const EASE = [0.22, 1, 0.36, 1] as const;
 export function Hero() {
   const { t } = useTranslation();
   const prefersReducedMotion = useReducedMotion();
+  const ready = usePageReady(); 
 
   const reveal = (delay: number, distance = 18) =>
     prefersReducedMotion
       ? { initial: { opacity: 1 }, animate: { opacity: 1 }, transition: { duration: 0.01 } }
       : {
           initial: { opacity: 0, y: distance },
-          animate: { opacity: 1, y: 0 },
+          animate: ready ? { opacity: 1, y: 0 } : { opacity: 0, y: distance },
           transition: { duration: 0.7, ease: EASE, delay },
         };
 
@@ -36,7 +38,7 @@ export function Hero() {
       ? { initial: { y: "0%" }, animate: { y: "0%" }, transition: { duration: 0.01 } }
       : {
           initial: { y: "115%" },
-          animate: { y: "0%" },
+          animate: ready ? { y: "0%" } : { y: "115%" },
           transition: { duration: 0.85, ease: EASE, delay },
         };
 
@@ -135,7 +137,11 @@ export function Hero() {
               ? { opacity: 1, scale: 1, filter: "blur(0px)" }
               : { opacity: 0, scale: 0.97, filter: "blur(6px)" }
           }
-          animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
+          animate={
+            prefersReducedMotion || ready
+              ? { opacity: 1, scale: 1, filter: "blur(0px)" }
+              : { opacity: 0, scale: 0.97, filter: "blur(6px)" }
+          }
           transition={
             prefersReducedMotion ? { duration: 0.01 } : { duration: 0.9, ease: EASE, delay: 0.85 }
           }
@@ -148,7 +154,13 @@ export function Hero() {
         href="#about"
         aria-label={t.hero.scrollCue}
         initial={prefersReducedMotion ? { opacity: 1 } : { opacity: 0 }}
-        animate={prefersReducedMotion ? { opacity: 1 } : { opacity: 1, y: [0, 6, 0] }}
+        animate={
+          prefersReducedMotion
+            ? { opacity: 1 }
+            : ready
+              ? { opacity: 1, y: [0, 6, 0] }
+              : { opacity: 0 }
+        }
         transition={
           prefersReducedMotion
             ? { duration: 0.01 }
