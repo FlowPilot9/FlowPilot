@@ -6,8 +6,8 @@ export function Logo() {
 
   return (
     <a href={localePath(locale, "/")} className="flex items-center gap-2 font-semibold tracking-tight">
-      <img src="/logo-light.png" alt="FlowPilot" className="block h-16 w-16 object-contain dark:hidden" />
-      <img src="/logo-dark.png" alt="FlowPilot" className="hidden h-16 w-16 object-contain dark:block" />
+      <img src="/logo-light.png" alt="FlowPilot" className="block h-8 w-8 object-contain dark:hidden" />
+      <img src="/logo-dark.png" alt="FlowPilot" className="hidden h-8 w-8 object-contain dark:block" />
       <span className="text-[17px]">FlowPilot</span>
     </a>
   );
