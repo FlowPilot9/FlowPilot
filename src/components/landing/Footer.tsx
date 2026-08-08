@@ -12,6 +12,7 @@ const socialButtonClass =
 // sees.
 export function Footer() {
   const { t, locale } = useTranslation();
+  const homePath = localePath(locale, "/");
 
   return (
     <footer className="relative overflow-hidden border-t border-border bg-surface-strong dark:bg-background">
@@ -27,7 +28,7 @@ export function Footer() {
               {t.footer.statement}
             </p>
             <a
-              href="#contact"
+              href={`${homePath}#contact`}
               className="group mt-5 inline-flex items-center gap-2 text-base font-medium text-primary"
             >
               {t.footer.cta}
@@ -40,22 +41,22 @@ export function Footer() {
               {t.footer.navLabel}
             </span>
             <nav className="mt-5 flex flex-col gap-3.5 text-base text-muted-foreground">
-              <a href="#services" className="w-fit transition-colors hover:text-foreground">
+              <a href={`${homePath}#services`} className="w-fit transition-colors hover:text-foreground">
                 {t.nav.services}
               </a>
-              <a href="#process" className="w-fit transition-colors hover:text-foreground">
+              <a href={`${homePath}#process`} className="w-fit transition-colors hover:text-foreground">
                 {t.nav.process}
               </a>
-              <a href="#work" className="w-fit transition-colors hover:text-foreground">
+              <a href={`${homePath}#work`} className="w-fit transition-colors hover:text-foreground">
                 {t.nav.work}
               </a>
-              <a href="#future" className="w-fit transition-colors hover:text-foreground">
+              <a href={`${homePath}#future`} className="w-fit transition-colors hover:text-foreground">
                 {t.nav.comingSoon}
               </a>
-              <a href="#about" className="w-fit transition-colors hover:text-foreground">
+              <a href={`${homePath}#about`} className="w-fit transition-colors hover:text-foreground">
                 {t.nav.about}
               </a>
-              <a href="#contact" className="w-fit transition-colors hover:text-foreground">
+              <a href={`${homePath}#contact`} className="w-fit transition-colors hover:text-foreground">
                 {t.common.contact}
               </a>
             </nav>

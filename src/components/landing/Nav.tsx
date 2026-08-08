@@ -5,12 +5,14 @@ import { Logo } from "@/components/landing/Logo";
 import { LanguageSwitcher } from "@/components/landing/LanguageSwitcher";
 import { ThemeToggle } from "@/components/landing/ThemeToggle";
 import { useTranslation } from "@/i18n/I18nProvider";
+import { localePath } from "@/i18n";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 const SECTION_IDS = ["process", "services", "work", "future", "about"];
 
 export function Nav() {
-  const { t } = useTranslation();
+  const { t, locale } = useTranslation();
+  const homePath = localePath(locale, "/");
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [activeHref, setActiveHref] = useState<string | null>(null);
@@ -46,11 +48,11 @@ export function Nav() {
   }, []);
 
   const links = [
-    { href: "#process", label: t.nav.process },
-    { href: "#services", label: t.nav.services },
-    { href: "#work", label: t.nav.work },
-    { href: "#future", label: t.nav.comingSoon },
-    { href: "#about", label: t.nav.about },
+    { href: `${homePath}#process`, label: t.nav.process },
+    { href: `${homePath}#services`, label: t.nav.services },
+    { href: `${homePath}#work`, label: t.nav.work },
+    { href: `${homePath}#future`, label: t.nav.comingSoon },
+    { href: `${homePath}#about`, label: t.nav.about },
   ];
 
   return (
@@ -93,7 +95,7 @@ export function Nav() {
             <ThemeToggle />
             <LanguageSwitcher />
             <a
-              href="#contact"
+              href={`${homePath}#contact`}
               className="btn-primary inline-flex items-center gap-1.5 rounded-xl px-4 py-2 text-sm font-medium"
             >
               {t.common.getInTouch} <ArrowRight className="h-3.5 w-3.5" />
@@ -137,7 +139,7 @@ export function Nav() {
                   </motion.a>
                 ))}
                 <motion.a
-                  href="#contact"
+                  href={`${homePath}#contact`}
                   onClick={() => setOpen(false)}
                   initial={{ opacity: 0, x: -8 }}
                   animate={{ opacity: 1, x: 0 }}

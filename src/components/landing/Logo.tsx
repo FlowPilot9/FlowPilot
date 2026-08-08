@@ -1,6 +1,11 @@
+import { useTranslation } from "@/i18n/I18nProvider";
+import { localePath } from "@/i18n";
+
 export function Logo() {
+  const { locale } = useTranslation();
+
   return (
-    <a href="#top" className="flex items-center gap-2 font-semibold tracking-tight">
+    <a href={localePath(locale, "/")} className="flex items-center gap-2 font-semibold tracking-tight">
       <span className="grid h-8 w-8 place-items-center rounded-lg bg-[image:var(--gradient-primary)] text-primary-foreground shadow-[var(--shadow-elevated)]">
         <svg
           viewBox="0 0 24 24"
