@@ -364,35 +364,51 @@ export const ro: TranslationDictionary = {
     title: "Politica de Confidențialitate",
     lastUpdated: "Ultima actualizare: august 2026",
     intro:
-      "Această pagină explică ce date colectăm prin formularele de pe acest site, de ce le colectăm și ce drepturi ai în privința lor.",
+      "Această Politică de Confidențialitate explică ce date cu caracter personal colectăm prin intermediul acestui site, în ce scop le utilizăm, cât timp le păstrăm și ce drepturi ai în legătură cu acestea.",
     sections: [
       {
         heading: "Ce date colectăm",
-        body: "Prin formularul de contact colectăm numele tău, opțional compania, adresa de email și mesajul trimis. Prin formularul de listă de așteptare colectăm doar adresa de email.",
+        body: "În funcție de formularul utilizat pe site, putem colecta: prin formularul de contact — numele tău, compania (dacă alegi să o furnizezi), adresa de email și conținutul mesajului transmis; prin formularul pentru lista de așteptare — doar adresa de email. De asemenea, pentru protejarea formularelor împotriva spamului și abuzului, putem prelucra temporar adresa IP asociată unei trimiteri, precum și data și ora solicitării. Nu solicităm date care nu sunt necesare pentru scopurile descrise mai jos.",
       },
       {
-        heading: "De ce colectăm aceste date",
-        body: "Folosim aceste date exclusiv pentru a răspunde solicitării tale sau pentru a te contacta atunci când lansăm noi funcționalități, dacă te-ai înscris pe lista de așteptare.",
+        heading: "De ce folosim datele",
+        body: "Utilizăm datele colectate pentru a răspunde mesajelor și solicitărilor transmise prin formularul de contact, pentru a contacta persoanele înscrise pe lista de așteptare atunci când serviciul devine disponibil, pentru a preveni spamul și abuzul asupra formularelor și pentru a asigura securitatea și funcționarea corespunzătoare a site-ului. Nu vindem datele personale și nu le folosim pentru publicitate sau profilare în afara acestor scopuri.",
       },
       {
-        heading: "Adresa IP și prevenirea spam-ului",
-        body: "Pentru a proteja formularele împotriva spam-ului și abuzului automatizat, reținem temporar (maximum 48 de ore) adresa IP folosită la trimitere, împreună cu ora trimiterii. Aceste informații nu sunt asociate cu numele sau emailul tău și sunt șterse automat.",
+        heading: "Adresa IP și prevenirea spamului",
+        body: "Pentru protejarea formularelor împotriva spamului, abuzului și trimiterilor automatizate, putem prelucra temporar adresa IP asociată unei trimiteri, împreună cu data și ora solicitării. Aceste informații sunt utilizate exclusiv pentru aplicarea unor limite de trimitere și pentru detectarea și prevenirea abuzului, fiind păstrate maximum 48 de ore, după care sunt șterse automat. Nu folosim aceste date pentru publicitate, profilare sau marketing.",
+      },
+      {
+        heading: "Temeiul prelucrării",
+        body: "Prelucrăm datele personale în conformitate cu legislația aplicabilă privind protecția datelor, inclusiv Regulamentul General privind Protecția Datelor (GDPR). În funcție de situație, prelucrarea se bazează pe demersurile necesare pentru a răspunde solicitării tale, pe interesul nostru legitim de a asigura securitatea site-ului și de a preveni spamul și abuzul, sau pe consimțământul tău, atunci când acesta este necesar.",
       },
       {
         heading: "Cât timp păstrăm datele",
-        body: "Datele din formulare sunt păstrate atât timp cât este necesar pentru a răspunde solicitării tale sau, în cazul listei de așteptare, până la lansare ori până când soliciți ștergerea lor.",
+        body: "Datele transmise prin formularul de contact sunt păstrate atât timp cât este necesar pentru soluționarea solicitării tale și, ulterior, pentru o perioadă rezonabilă în scop de evidență a comunicării. Adresele de email de pe lista de așteptare sunt păstrate până la lansarea serviciului respectiv sau până când soliciți ștergerea lor. Datele folosite pentru prevenirea spamului sunt păstrate maximum 48 de ore. Putem păstra anumite date pentru perioade mai lungi atunci când este necesar pentru îndeplinirea unei obligații legale sau pentru constatarea, exercitarea ori apărarea unor drepturi.",
+      },
+      {
+        heading: "Furnizori și servicii terțe",
+        body: "Pentru funcționarea site-ului și procesarea datelor transmise prin formulare folosim servicii furnizate de terți, inclusiv Supabase (stocarea și gestionarea datelor din formulare), Resend (transmiterea emailurilor generate de formulare) și Vercel (găzduirea site-ului). Acești furnizori pot prelucra date în numele nostru, doar în măsura necesară furnizării serviciilor respective, și nu au voie să le folosească în scopuri de marketing propriu.",
       },
       {
         heading: "Cine are acces la date",
-        body: "Datele sunt stocate în infrastructura Supabase și sunt accesibile doar echipei FlowPilot. Nu vindem și nu partajăm datele tale cu terți în scopuri de marketing.",
+        body: "Accesul la date este limitat la persoanele care au nevoie de acesta pentru administrarea site-ului, gestionarea solicitărilor și furnizarea serviciilor asociate. Luăm măsuri rezonabile pentru protejarea datelor împotriva accesului neautorizat, pierderii, modificării sau divulgării.",
       },
       {
         heading: "Drepturile tale",
-        body: "Conform GDPR, ai dreptul de acces, rectificare, ștergere, restricționare și portabilitate a datelor tale, precum și dreptul de a te opune prelucrării. Ne poți contacta oricând pentru a-ți exercita aceste drepturi.",
+        body: "Conform GDPR, ai dreptul să soliciți accesul la datele tale personale, rectificarea celor incorecte, ștergerea lor, restricționarea prelucrării sau opoziția față de anumite prelucrări, portabilitatea datelor (atunci când este aplicabilă) și retragerea consimțământului, în cazul prelucrărilor bazate pe acesta. Ne poți contacta oricând pentru a-ți exercita aceste drepturi și ai, de asemenea, dreptul de a depune o plângere la autoritatea competentă pentru protecția datelor.",
+      },
+      {
+        heading: "Cookies și tehnologii similare",
+        body: "Acest site poate utiliza cookie-uri sau tehnologii similare necesare pentru funcționarea și securitatea site-ului. Dacă vom utiliza servicii de analiză, publicitate sau alte tehnologii care necesită consimțământul tău, îți vom furniza informațiile și opțiunile necesare, în conformitate cu legislația aplicabilă.",
+      },
+      {
+        heading: "Modificarea acestei politici",
+        body: "Putem actualiza această Politică de Confidențialitate atunci când modificăm modul în care funcționează site-ul, serviciile pe care le utilizăm sau modul în care prelucrăm datele. Versiunea actuală va fi disponibilă permanent pe această pagină, împreună cu data ultimei actualizări.",
       },
       {
         heading: "Contact",
-        body: "Pentru orice întrebare legată de confidențialitate sau pentru a-ți exercita drepturile, scrie-ne la tflowpilot@gmail.com.",
+        body: "Pentru întrebări privind această Politică de Confidențialitate sau pentru exercitarea drepturilor tale privind protecția datelor, ne poți contacta la tflowpilot@gmail.com.",
       },
     ],
     backHome: "Înapoi la pagina principală",
