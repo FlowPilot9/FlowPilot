@@ -33,7 +33,7 @@ export const en: TranslationDictionary = {
     description: "Memorable design, fast delivery, and a foundation built for what's next.",
     ctaPrimary: "Start a project",
     ctaSecondary: "Explore the templates",
-    trustTimeline: "Launch in 2-6 weeks",
+    trustTimeline: "Launch in 1 - 2 weeks",
     trustStack: "React & Next.js",
     trustSupport: "Ongoing support",
     imageAlt: "Illustration of digital workflows and business automation",
@@ -62,7 +62,7 @@ export const en: TranslationDictionary = {
       },
       {
         title: "Fast Delivery",
-        description: "Most projects launch within 2-6 weeks, with a clear roadmap from day one.",
+        description: "Most projects launch within 1-2 weeks, with a clear roadmap from day one.",
         detail: "Clear roadmap from the start",
       },
       {
