@@ -156,7 +156,9 @@ export function ComingSoon() {
                         </span>
                         <div className="min-w-0 flex-1 pt-0.5">
                           <div className="flex flex-wrap items-center justify-between gap-x-3 gap-y-1">
-                            <span className="text-sm font-semibold text-foreground">{exp.label}</span>
+                            <span className="text-sm font-semibold text-foreground">
+                              {exp.label}
+                            </span>
                             <span className="shrink-0 rounded-full border border-border px-2 py-0.5 text-[10px] font-medium uppercase tracking-wide text-muted-foreground">
                               {exp.status}
                             </span>

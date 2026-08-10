@@ -61,7 +61,10 @@ export function About() {
                 feeling the brief asks to avoid. */}
             <ul className="mt-8 space-y-2.5">
               {t.about.differentiators.map((line) => (
-                <li key={line} className="flex items-start gap-2.5 text-sm text-foreground/90 md:text-base">
+                <li
+                  key={line}
+                  className="flex items-start gap-2.5 text-sm text-foreground/90 md:text-base"
+                >
                   <span aria-hidden className="mt-2 h-1 w-1 shrink-0 rounded-full bg-primary/60" />
                   {line}
                 </li>
@@ -69,8 +72,10 @@ export function About() {
             </ul>
 
             <div className="mt-10 border-t border-border pt-8 text-base leading-relaxed text-muted-foreground md:text-lg">
-              <span className="font-semibold text-foreground">{t.about.today}</span> {t.about.todayText}{" "}
-              <span className="font-semibold text-foreground">{t.about.tomorrow}</span> {t.about.tomorrowText}
+              <span className="font-semibold text-foreground">{t.about.today}</span>{" "}
+              {t.about.todayText}{" "}
+              <span className="font-semibold text-foreground">{t.about.tomorrow}</span>{" "}
+              {t.about.tomorrowText}
             </div>
           </div>
         </div>

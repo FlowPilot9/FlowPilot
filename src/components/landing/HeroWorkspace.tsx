@@ -118,11 +118,15 @@ function ColoredLayer({
     <div
       className={`absolute inset-0 flex flex-col ${animated ? "scene-layer-colored" : "opacity-100"}`}
     >
-      <div className={`flex shrink-0 justify-between items-center px-6 py-4 ${animated ? "scene-nav-reveal" : ""}`}>
+      <div
+        className={`flex shrink-0 justify-between items-center px-6 py-4 ${animated ? "scene-nav-reveal" : ""}`}
+      >
         <span className="text-sm font-bold text-foreground">FlowPilot</span>
         <div className="flex gap-4">
           {navItems.map((item) => (
-            <span key={item} className="text-[10px] font-medium text-muted-foreground">{item}</span>
+            <span key={item} className="text-[10px] font-medium text-muted-foreground">
+              {item}
+            </span>
           ))}
         </div>
       </div>
@@ -145,19 +149,25 @@ function ColoredLayer({
                 { title: "SEO Ready", desc: "Optimized architecture" },
               ].map((feature, i) => (
                 <div key={i} className="rounded-lg border border-border bg-card p-4 shadow-sm">
-                  <span className="mb-2 block text-xs font-semibold text-foreground">{feature.title}</span>
+                  <span className="mb-2 block text-xs font-semibold text-foreground">
+                    {feature.title}
+                  </span>
                   <span className="block text-[10px] text-muted-foreground">{feature.desc}</span>
                 </div>
               ))}
             </div>
-            
+
             {/* Below-the-fold content: Client Spotlight */}
             <div className="rounded-xl border border-border bg-card p-6 shadow-sm mt-6">
-              <span className="mb-4 block text-xs font-semibold text-foreground">Client Spotlight</span>
+              <span className="mb-4 block text-xs font-semibold text-foreground">
+                Client Spotlight
+              </span>
               <span className="text-[10px] text-muted-foreground leading-relaxed italic">
                 "FlowPilot transformed our online presence into a high-converting asset."
               </span>
-              <span className="mt-3 block text-[9px] font-bold text-foreground">— Business Lead</span>
+              <span className="mt-3 block text-[9px] font-bold text-foreground">
+                — Business Lead
+              </span>
             </div>
 
             {/* Bottom badges with existing stagger animation */}
@@ -168,8 +178,13 @@ function ColoredLayer({
                 { label: "Rapid" },
                 { label: "Live" },
               ].map((badge, i) => (
-                <div key={i} className={`rounded-lg border border-border bg-card p-3 shadow-sm ${animated ? `scene-badge-${i + 1}` : ""}`}>
-                  <span className="block text-[9px] font-bold text-foreground text-center">{badge.label}</span>
+                <div
+                  key={i}
+                  className={`rounded-lg border border-border bg-card p-3 shadow-sm ${animated ? `scene-badge-${i + 1}` : ""}`}
+                >
+                  <span className="block text-[9px] font-bold text-foreground text-center">
+                    {badge.label}
+                  </span>
                 </div>
               ))}
             </div>
@@ -243,8 +258,10 @@ export function HeroWorkspace() {
               fixed blue that only worked in dark mode. */}
           <div className="flex gap-1.5">
             <span className="h-2.5 w-2.5 shrink-0 rounded-full bg-primary" /> {/* Gold accent */}
-            <span className="h-2.5 w-2.5 shrink-0 rounded-full bg-accent dark:bg-blue-400" /> {/* Cream-gold in light, blue in dark */}
-            <span className="h-2.5 w-2.5 shrink-0 rounded-full bg-muted-foreground/30" /> {/* Neutral gray */}
+            <span className="h-2.5 w-2.5 shrink-0 rounded-full bg-accent dark:bg-blue-400" />{" "}
+            {/* Cream-gold in light, blue in dark */}
+            <span className="h-2.5 w-2.5 shrink-0 rounded-full bg-muted-foreground/30" />{" "}
+            {/* Neutral gray */}
           </div>
           <span className="ml-3 truncate rounded-md bg-foreground/[0.05] px-2.5 py-0.5 text-[11px] text-muted-foreground">
             {ws.browserLabel}

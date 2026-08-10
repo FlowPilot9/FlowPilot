@@ -84,7 +84,10 @@ export function Contact() {
             >
               {t.contact.title}
             </motion.h2>
-            <motion.p variants={item} className="mt-4 max-w-md text-base text-muted-foreground md:text-lg">
+            <motion.p
+              variants={item}
+              className="mt-4 max-w-md text-base text-muted-foreground md:text-lg"
+            >
               {t.contact.description}
             </motion.p>
 
@@ -148,13 +151,17 @@ export function Contact() {
                   </span>
                   <input type="text" {...register("name")} className={inputClass} />
                   {errors.name && (
-                    <span className="mt-1 block text-xs text-destructive">{errors.name.message}</span>
+                    <span className="mt-1 block text-xs text-destructive">
+                      {errors.name.message}
+                    </span>
                   )}
                 </label>
                 <label className="block">
                   <span className="mb-1.5 block text-xs font-medium text-foreground">
                     {t.contact.company}{" "}
-                    <span className="font-normal text-muted-foreground">({t.contact.optional})</span>
+                    <span className="font-normal text-muted-foreground">
+                      ({t.contact.optional})
+                    </span>
                   </span>
                   <input type="text" {...register("company")} className={inputClass} />
                 </label>
@@ -165,14 +172,20 @@ export function Contact() {
                 </span>
                 <input type="email" {...register("email")} className={inputClass} />
                 {errors.email && (
-                  <span className="mt-1 block text-xs text-destructive">{errors.email.message}</span>
+                  <span className="mt-1 block text-xs text-destructive">
+                    {errors.email.message}
+                  </span>
                 )}
               </label>
               <label className="mt-4 block">
                 <span className="mb-1.5 block text-xs font-medium text-foreground">
                   {t.contact.message}
                 </span>
-                <textarea rows={5} {...register("message")} className={`resize-none ${inputClass}`} />
+                <textarea
+                  rows={5}
+                  {...register("message")}
+                  className={`resize-none ${inputClass}`}
+                />
                 {errors.message && (
                   <span className="mt-1 block text-xs text-destructive">
                     {errors.message.message}
@@ -199,7 +212,9 @@ export function Contact() {
                 </span>
               </label>
               {errors.consent && (
-                <span className="mt-1 block text-xs text-destructive">{errors.consent.message}</span>
+                <span className="mt-1 block text-xs text-destructive">
+                  {errors.consent.message}
+                </span>
               )}
 
               <button

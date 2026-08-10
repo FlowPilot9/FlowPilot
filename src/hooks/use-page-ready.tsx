@@ -27,9 +27,12 @@ export function PageReadyProvider({ children }: { children: ReactNode }) {
     const markReady = () => {
       if (cancelled) return;
       const elapsed = Date.now() - start;
-      window.setTimeout(() => {
-        if (!cancelled) setReady(true);
-      }, Math.max(MIN_DISPLAY_MS - elapsed, 0));
+      window.setTimeout(
+        () => {
+          if (!cancelled) setReady(true);
+        },
+        Math.max(MIN_DISPLAY_MS - elapsed, 0),
+      );
     };
 
     if (document.readyState === "complete") {

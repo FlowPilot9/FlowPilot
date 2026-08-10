@@ -212,13 +212,13 @@ export const ro: TranslationDictionary = {
         isLive: true,
       },
       {
-      title: "Product Showcase Template",
-      tag: "E-commerce",
-      description:
-        "Vitrină digitală cinematică pentru o colecție de sneakers, cu storytelling orizontal și animații de lux.",
-      stack: ["React", "Next.js", "CMS"],
-      isLive: true,
-    },
+        title: "Product Showcase Template",
+        tag: "E-commerce",
+        description:
+          "Vitrină digitală cinematică pentru o colecție de sneakers, cu storytelling orizontal și animații de lux.",
+        stack: ["React", "Next.js", "CMS"],
+        isLive: true,
+      },
     ],
   },
   why: {
@@ -285,7 +285,8 @@ export const ro: TranslationDictionary = {
       {
         label: "Asistent AI",
         status: "Cercetare",
-        description: "Un asistent conversațional care preia sarcini repetitive din email și documente.",
+        description:
+          "Un asistent conversațional care preia sarcini repetitive din email și documente.",
       },
       {
         label: "Automatizări fără cod",
@@ -306,7 +307,8 @@ export const ro: TranslationDictionary = {
   },
   about: {
     eyebrow: "Despre noi",
-    title: "Nu suntem o agenție mare. Suntem doi oameni care construiesc fiecare proiect cu mâna lor.",
+    title:
+      "Nu suntem o agenție mare. Suntem doi oameni care construiesc fiecare proiect cu mâna lor.",
     paragraph1:
       "FlowPilot a pornit dintr-o observație simplă: prea multe site-uri de afaceri mici arată ca niște șabloane reciclate, fără nimeni în spate căruia să-i pese cu adevărat. Suntem studenți la ETTI (Facultatea de Electronică, Telecomunicații și Tehnologia Informației) din Universitatea Politehnica București și am pornit FlowPilot fiindcă ne pasă de detalii mai mult decât ne cere cineva.",
     differentiators: [

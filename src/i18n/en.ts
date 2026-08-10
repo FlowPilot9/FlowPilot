@@ -204,13 +204,13 @@ export const en: TranslationDictionary = {
         isLive: true,
       },
       {
-      title: "Product Showcase Template",
-      tag: "E-commerce",
-      description:
-        "Cinematic product showcase for a sneaker collection, with horizontal storytelling and luxury motion design.",
-      stack: ["React", "Next.js", "CMS"],
-      isLive: true,
-    },
+        title: "Product Showcase Template",
+        tag: "E-commerce",
+        description:
+          "Cinematic product showcase for a sneaker collection, with horizontal storytelling and luxury motion design.",
+        stack: ["React", "Next.js", "CMS"],
+        isLive: true,
+      },
     ],
   },
   why: {

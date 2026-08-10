@@ -3,7 +3,7 @@ import { ArrowRight, ChevronDown } from "lucide-react";
 import { useTranslation } from "@/i18n/I18nProvider";
 import { HeroWorkspace } from "@/components/landing/HeroWorkspace";
 import { AtmosphereScene } from "@/components/landing/AtmosphereScene";
-import { usePageReady } from "@/hooks/use-page-ready"; 
+import { usePageReady } from "@/hooks/use-page-ready";
 
 // ---------------------------------------------------------------------------
 // Hero — night-ocean atmosphere in dark mode, a plain tinted surface + faint
@@ -22,7 +22,7 @@ const EASE = [0.22, 1, 0.36, 1] as const;
 export function Hero() {
   const { t } = useTranslation();
   const prefersReducedMotion = useReducedMotion();
-  const ready = usePageReady(); 
+  const ready = usePageReady();
 
   const reveal = (delay: number, distance = 18) =>
     prefersReducedMotion
