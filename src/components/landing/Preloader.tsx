@@ -39,12 +39,12 @@ export function Preloader() {
             }
           >
             <img
-              src="/logo-light.png"
+              src="/logo-light.webp"
               alt="FlowPilot"
               className="block h-20 w-20 object-contain dark:hidden"
             />
             <img
-              src="/logo-dark.png"
+              src="/logo-dark.webp"
               alt="FlowPilot"
               className="hidden h-20 w-20 object-contain dark:block"
             />

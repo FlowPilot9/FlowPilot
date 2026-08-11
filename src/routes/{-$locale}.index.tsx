@@ -14,9 +14,9 @@ export const Route = createFileRoute("/{-$locale}/")({
         { property: "og:title", content: meta.ogTitle },
         { property: "og:description", content: meta.ogDescription },
         { property: "og:type", content: "website" },
-        { property: "og:image", content: "/og-image.png" },
+        { property: "og:image", content: "/og-image.jpg" },
         { name: "twitter:card", content: "summary_large_image" },
-        { name: "twitter:image", content: "/og-image.png" },
+        { name: "twitter:image", content: "/og-image.jpg" },
       ],
       links: buildHrefLangLinks("/"),
     };

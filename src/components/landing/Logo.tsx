@@ -10,12 +10,12 @@ export function Logo() {
       className="flex items-center gap-2 font-semibold tracking-tight"
     >
       <img
-        src="/logo-light.png"
+        src="/logo-light.webp"
         alt="FlowPilot"
         className="block h-8 w-8 object-contain dark:hidden"
       />
       <img
-        src="/logo-dark.png"
+        src="/logo-dark.webp"
         alt="FlowPilot"
         className="hidden h-8 w-8 object-contain dark:block"
       />
