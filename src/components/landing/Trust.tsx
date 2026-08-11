@@ -493,7 +493,7 @@ function Typewriter({
 // Pacing for the whole "system booting up, module by module" sequence.
 // Deliberately unhurried — this reads as a system reporting its own
 // status, not a page trying to load quickly.
-const TYPE_SPEED = 10; // ms per character
+const TYPE_SPEED = 12; // ms per character
 const ICON_FADE_MS = 150; // icon + status dot fade-in
 const BLOCK_PAUSE_MS = 300; // pause between title -> description -> detail
 const CARD_STAGGER_MS = 100; // fixed delay before each card starts — independent of how long the previous one takes to finish typing, so the row doesn't feel like it's waiting on itself
