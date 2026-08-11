@@ -13,7 +13,7 @@ import { createContext, useContext, useEffect, useState, type ReactNode } from "
 // ---------------------------------------------------------------------------
 
 const MIN_DISPLAY_MS = 500;
-const FALLBACK_MS = 3000;
+const FALLBACK_MS = 1000;
 
 const PageReadyContext = createContext(false);
 
