@@ -34,7 +34,7 @@ export const ro: TranslationDictionary = {
       "Design memorabil, dezvoltare rapidă și o fundație pregătită pentru ceea ce urmează.",
     ctaPrimary: "Începe un proiect",
     ctaSecondary: "Explorează modelele",
-    trustTimeline: "Livrare în 2-6 săptămâni",
+    trustTimeline: "Livrare în 1 - 2 săptămâni",
     trustStack: "React & Next.js",
     trustSupport: "Suport continuu",
     imageAlt: "Ilustrație cu fluxuri digitale și automatizare business",
@@ -64,7 +64,7 @@ export const ro: TranslationDictionary = {
       {
         title: "Livrare rapidă",
         description:
-          "Majoritatea proiectelor sunt lansate în 2-6 săptămâni, cu un plan clar din prima zi.",
+          "Majoritatea proiectelor sunt lansate în 1-2 săptămâni, cu un plan clar din prima zi.",
         detail: "Roadmap clar, de la început",
       },
       {
