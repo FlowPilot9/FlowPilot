@@ -53,6 +53,7 @@ export function Showcase() {
                   href={ctaHref}
                   target={product.isLive ? "_blank" : undefined}
                   rel={product.isLive ? "noopener noreferrer" : undefined}
+                  aria-label={`${ctaLabel} — ${product.title}`}
                   className="overflow-hidden rounded-2xl border border-border bg-card shadow-soft transition-all duration-300 group-hover:-translate-y-1 group-hover:border-primary/30 group-hover:shadow-[var(--shadow-elevated)]"
                 >
                   <div className="flex items-center gap-1.5 border-b border-border/70 px-3.5 py-2.5">
