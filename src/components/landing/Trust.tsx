@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { memo, useCallback, useEffect, useRef, useState } from "react";
 import { Handshake, Wallet, Zap, Layers } from "lucide-react";
 import { motion, useInView, useReducedMotion, type Variants } from "framer-motion";
 import { useTranslation } from "@/i18n/I18nProvider";
@@ -29,27 +29,12 @@ const cardOffset = ["lg:mt-0", "lg:mt-16", "lg:mt-16", "lg:mt-0"] as const;
 const SPINE_PATH =
   "M -20 60 L 250 60 Q 272 60 272 82 L 272 178 Q 272 200 294 200 L 906 200 Q 928 200 928 178 L 928 82 Q 928 60 950 60 L 1220 60";
 
-// The spine split into three pieces that trace the exact same combined
-// shape as SPINE_PATH above — used only for the reveal animation, so each
-// arm can fade in on its own schedule (outer arms first, center segment
-// last) while still reading as one unbroken line once fully visible.
-// SPINE_PATH itself stays intact for the moving pulses below, which travel
-// its full length continuously.
-const SPINE_LEFT = "M -20 60 L 250 60 Q 272 60 272 82 L 272 178 Q 272 200 294 200";
-const SPINE_CENTER = "M 294 200 L 906 200";
-const SPINE_RIGHT = "M 906 200 Q 928 200 928 178 L 928 82 Q 928 60 950 60 L 1220 60";
-
 // A second, fainter rail running above the spine at a different level —
 // same left-to-right, step-down/step-up shape, offset so it crosses in and
 // out of the spine's territory rather than running parallel to it. Reads
 // as a second bus on the same board rather than a duplicate of the first.
 const RAIL_PATH =
   "M -20 25 L 370 25 Q 392 25 392 47 L 392 84 Q 392 106 414 106 L 786 106 Q 808 106 808 84 L 808 47 Q 808 25 830 25 L 1220 25";
-
-// Same split-for-reveal treatment as the spine above.
-const RAIL_LEFT = "M -20 25 L 370 25 Q 392 25 392 47 L 392 84 Q 392 106 414 106";
-const RAIL_CENTER = "M 414 106 L 786 106";
-const RAIL_RIGHT = "M 786 106 Q 808 106 808 84 L 808 47 Q 808 25 830 25 L 1220 25";
 
 // Short stubs connecting the spine into each card's near edge, plus the
 // two elbow junctions — the "mici puncte/noduri unde se întâlnesc".
@@ -81,7 +66,6 @@ const ARC_RIGHT =
 // dense/alive rather than a minimal diagram of exactly four connections.
 const stubs = [
   { d: "M 340 60 L 340 38 L 366 38", node: { cx: 366, cy: 38 } },
-  { d: "M 600 200 L 600 223", node: { cx: 600, cy: 223 } },
   { d: "M 860 60 L 860 38 L 834 38", node: { cx: 834, cy: 38 } },
 ];
 
@@ -140,10 +124,27 @@ const pulses = [
 const CONNECTORS_STAGGER = 1.7; // seconds, edge -> center spread (2x slower to develop)
 const CENTER_X = 600;
 
+// SPINE_PATH and RAIL_PATH each render as a single element — not split
+// into per-zone pieces — specifically so they can never show a seam. Two
+// adjacent elements with different delays are, for the whole overlap of
+// their transitions, at two different opacity values at any given
+// instant; that reads as a visible step right at the join no matter how
+// much their fade windows overlap. A single element has one opacity value
+// for its entire length, so a "two-part" look is structurally impossible.
+// They still get a modest, early, fixed delay each (not 0, and gently
+// offset from each other) so they don't feel completely disconnected from
+// the edge-to-center wave the surrounding dots/arcs/branches use.
+const SPINE_DELAY_S = 0.1;
+const RAIL_DELAY_S = 0.25;
+
 function edgeToCenterDelay(x: number) {
   const distanceFromCenter = Math.min(Math.abs(x - CENTER_X), CENTER_X);
   return (1 - distanceFromCenter / CENTER_X) * CONNECTORS_STAGGER;
 }
+
+// BRIDGE_PATH is also a single element (never split), so its own fixed,
+// overlap-safe delay is fine as-is — no seam risk there.
+const CONNECTOR_CENTER_DELAY_S = 0.45;
 
 // Shared fade-in used by every connector path/node — opacity and delay are
 // passed per-element via `custom` since each one has its own target
@@ -158,9 +159,17 @@ const traceVariants: Variants = {
 
 // Small technical status indicator shown next to each card's icon —
 // a live "system state" read (colored dot + mono label), not a badge.
-function StatusIndicator({ label }: { label: string }) {
-  const prefersReducedMotion = useReducedMotion();
-
+// Takes prefersReducedMotion as a prop (rather than calling the hook
+// itself) so every card doesn't register its own matchMedia listener, and
+// is memoized so it never re-renders unless its own props actually change
+// — see the note above Trust's markCardComplete for why that matters.
+const StatusIndicator = memo(function StatusIndicator({
+  label,
+  prefersReducedMotion,
+}: {
+  label: string;
+  prefersReducedMotion: boolean | null;
+}) {
   return (
     <div className="flex items-center gap-1.5 font-mono text-[10px] font-medium uppercase tracking-[0.14em] text-muted-foreground/70">
       <span className="relative flex h-1.5 w-1.5 shrink-0">
@@ -172,14 +181,22 @@ function StatusIndicator({ label }: { label: string }) {
       {label}
     </div>
   );
-}
+});
 
 // `visible` gates the whole reveal: false renders every trace at opacity 0
 // (still laid out, just invisible) so nothing pops in until the caller
 // flips it — which Trust does only once every card has fully finished its
-// own boot-up sequence.
-function CircuitConnectors({ visible }: { visible: boolean }) {
-  const prefersReducedMotion = useReducedMotion();
+// own boot-up sequence. Memoized: this renders ~40 SVG elements, and
+// `visible`/`prefersReducedMotion` only ever change once or twice each —
+// without memo, it would re-render (and rebuild all of them) on every
+// unrelated state change in Trust while the cards are booting up.
+const CircuitConnectors = memo(function CircuitConnectors({
+  visible,
+  prefersReducedMotion,
+}: {
+  visible: boolean;
+  prefersReducedMotion: boolean | null;
+}) {
   const anim = visible ? "visible" : "hidden";
 
   return (
@@ -190,7 +207,7 @@ function CircuitConnectors({ visible }: { visible: boolean }) {
       className="pointer-events-none absolute inset-0 z-0 hidden h-full w-full lg:block"
     >
       <motion.path
-        d={RAIL_LEFT}
+        d={RAIL_PATH}
         fill="none"
         stroke="var(--primary)"
         strokeWidth="1"
@@ -198,29 +215,7 @@ function CircuitConnectors({ visible }: { visible: boolean }) {
         variants={traceVariants}
         initial="hidden"
         animate={anim}
-        custom={{ opacity: 0.4, delay: edgeToCenterDelay(-20), reduce: prefersReducedMotion }}
-      />
-      <motion.path
-        d={RAIL_CENTER}
-        fill="none"
-        stroke="var(--primary)"
-        strokeWidth="1"
-        vectorEffect="non-scaling-stroke"
-        variants={traceVariants}
-        initial="hidden"
-        animate={anim}
-        custom={{ opacity: 0.4, delay: edgeToCenterDelay(CENTER_X), reduce: prefersReducedMotion }}
-      />
-      <motion.path
-        d={RAIL_RIGHT}
-        fill="none"
-        stroke="var(--primary)"
-        strokeWidth="1"
-        vectorEffect="non-scaling-stroke"
-        variants={traceVariants}
-        initial="hidden"
-        animate={anim}
-        custom={{ opacity: 0.4, delay: edgeToCenterDelay(1220), reduce: prefersReducedMotion }}
+        custom={{ opacity: 0.4, delay: RAIL_DELAY_S, reduce: prefersReducedMotion }}
       />
       <motion.path
         d={ARC_LEFT}
@@ -245,7 +240,7 @@ function CircuitConnectors({ visible }: { visible: boolean }) {
         custom={{ opacity: 0.45, delay: edgeToCenterDelay(1050), reduce: prefersReducedMotion }}
       />
       <motion.path
-        d={SPINE_LEFT}
+        d={SPINE_PATH}
         fill="none"
         stroke="var(--primary)"
         strokeWidth="1.5"
@@ -253,29 +248,7 @@ function CircuitConnectors({ visible }: { visible: boolean }) {
         variants={traceVariants}
         initial="hidden"
         animate={anim}
-        custom={{ opacity: 0.6, delay: edgeToCenterDelay(-20), reduce: prefersReducedMotion }}
-      />
-      <motion.path
-        d={SPINE_CENTER}
-        fill="none"
-        stroke="var(--primary)"
-        strokeWidth="1.5"
-        vectorEffect="non-scaling-stroke"
-        variants={traceVariants}
-        initial="hidden"
-        animate={anim}
-        custom={{ opacity: 0.6, delay: edgeToCenterDelay(CENTER_X), reduce: prefersReducedMotion }}
-      />
-      <motion.path
-        d={SPINE_RIGHT}
-        fill="none"
-        stroke="var(--primary)"
-        strokeWidth="1.5"
-        vectorEffect="non-scaling-stroke"
-        variants={traceVariants}
-        initial="hidden"
-        animate={anim}
-        custom={{ opacity: 0.6, delay: edgeToCenterDelay(1220), reduce: prefersReducedMotion }}
+        custom={{ opacity: 0.6, delay: SPINE_DELAY_S, reduce: prefersReducedMotion }}
       />
       <motion.path
         d={BRIDGE_PATH}
@@ -286,7 +259,7 @@ function CircuitConnectors({ visible }: { visible: boolean }) {
         variants={traceVariants}
         initial="hidden"
         animate={anim}
-        custom={{ opacity: 0.55, delay: edgeToCenterDelay(CENTER_X), reduce: prefersReducedMotion }}
+        custom={{ opacity: 0.55, delay: CONNECTOR_CENTER_DELAY_S, reduce: prefersReducedMotion }}
       />
       {branches.map((b) => (
         <motion.path
@@ -460,72 +433,14 @@ function CircuitConnectors({ visible }: { visible: boolean }) {
         ))}
     </svg>
   );
-}
-
-// Types out `text` one character at a time once `start` flips true, then
-// calls `onComplete` — used to chain title -> description -> detail within
-// a card, and then card N -> card N+1 across the row. The animated part is
-// aria-hidden; a permanent sr-only span carries the real text, so screen
-// readers get the full content immediately regardless of animation state.
-function Typewriter({
-  text,
-  start,
-  onComplete,
-  speed = TYPE_SPEED,
-}: {
-  text: string;
-  start: boolean;
-  onComplete?: () => void;
-  speed?: number;
-}) {
-  const prefersReducedMotion = useReducedMotion();
-  const [count, setCount] = useState(0);
-  const doneRef = useRef(false);
-  const onCompleteRef = useRef(onComplete);
-  onCompleteRef.current = onComplete;
-
-  useEffect(() => {
-    if (!start) return;
-    if (prefersReducedMotion) {
-      setCount(text.length);
-      if (!doneRef.current) {
-        doneRef.current = true;
-        onCompleteRef.current?.();
-      }
-      return;
-    }
-    if (count >= text.length) {
-      if (!doneRef.current) {
-        doneRef.current = true;
-        onCompleteRef.current?.();
-      }
-      return;
-    }
-    const id = setTimeout(() => setCount((c) => c + 1), speed);
-    return () => clearTimeout(id);
-  }, [start, count, text, speed, prefersReducedMotion]);
-
-  return (
-    <>
-      <span aria-hidden="true">
-        {text.slice(0, count)}
-        {start && count < text.length && (
-          <span className="-mb-[2px] ml-0.5 inline-block h-[1em] w-[2px] animate-pulse bg-primary/70" />
-        )}
-      </span>
-      <span className="sr-only">{text}</span>
-    </>
-  );
-}
+});
 
 // Pacing for the whole "system booting up, module by module" sequence.
 // Deliberately unhurried — this reads as a system reporting its own
 // status, not a page trying to load quickly.
-const TYPE_SPEED = 12; // ms per character
 const ICON_FADE_MS = 150; // icon + status dot fade-in
-const BLOCK_PAUSE_MS = 300; // pause between title -> description -> detail
-const CARD_STAGGER_MS = 100; // fixed delay before each card starts — independent of how long the previous one takes to finish typing, so the row doesn't feel like it's waiting on itself
-const TITLE_TO_CARDS_DELAY_MS = 200; // pause after the section title reveals before card 1 begins
+const CARD_STAGGER_MS = 200; // fixed delay before each card starts — independent of how long the previous one takes to finish typing, so the row doesn't feel like it's waiting on itself
+const TITLE_TO_CARDS_DELAY_MS = 100; // pause after the section title reveals before card 1 begins
 
 // hidden -> visible fade/rise for the card shell itself. No per-index
 // delay here anymore — pacing between cards is driven by the fixed
@@ -533,42 +448,67 @@ const TITLE_TO_CARDS_DELAY_MS = 200; // pause after the section title reveals be
 // on purpose: opacity and y move together at one constant speed, so the
 // rise reads as a single continuous motion rather than a fast-then-slow
 // ease that can look like it "settles" in two steps.
+const CARD_ENTRANCE_DELAY_S = 0.1;
+const CARD_ENTRANCE_DURATION_S = 0.9;
+// Total time (ms) from shouldStart flipping true to the shell being fully
+// visible — used below to time the icon/text reveal off a plain timer
+// instead of Framer's onAnimationComplete, which proved unreliable here.
+const CARD_ENTRANCE_MS = (CARD_ENTRANCE_DELAY_S + CARD_ENTRANCE_DURATION_S) * 1000;
 const cardVariants: Variants = {
   hidden: { opacity: 0, y: 20 },
   visible: ({ reduce }: { reduce: boolean }) => ({
     opacity: 1,
     y: 0,
-    transition: reduce ? { duration: 0.01 } : { duration: 0.9, delay: 0.1, ease: "linear" },
+    transition: reduce ? { duration: 0.01 } : { duration: CARD_ENTRANCE_DURATION_S, delay: CARD_ENTRANCE_DELAY_S, ease: "linear" },
   }),
 };
 
 function TrustCard({
+  index,
   title,
   description,
   detail,
   status,
   Icon,
   shouldStart,
+  prefersReducedMotion,
   onCardComplete,
   offsetClass,
 }: {
+  index: number;
   title: string;
   description: string;
   detail: string;
   status: string;
   Icon: (typeof trustIcons)[number];
   shouldStart: boolean;
-  onCardComplete: () => void;
+  prefersReducedMotion: boolean | null;
+  onCardComplete: (index: number) => void;
   offsetClass: string;
 }) {
-  const prefersReducedMotion = useReducedMotion();
-  const pause = prefersReducedMotion ? 0 : BLOCK_PAUSE_MS;
-
   const [iconVisible, setIconVisible] = useState(false);
-  const [titleStart, setTitleStart] = useState(false);
-  const [descStart, setDescStart] = useState(false);
-  const [detailStart, setDetailStart] = useState(false);
+  const [textVisible, setTextVisible] = useState(false);
   const startedRef = useRef(false);
+
+  // Timer-driven, not gesture/animation-completion-driven — see the note
+  // on CARD_ENTRANCE_MS above for why onAnimationComplete isn't safe here.
+  useEffect(() => {
+    if (!shouldStart || startedRef.current) return;
+    startedRef.current = true;
+    const entranceMs = prefersReducedMotion ? 0 : CARD_ENTRANCE_MS;
+    const toIcon = entranceMs;
+    const toText = toIcon + (prefersReducedMotion ? 0 : ICON_FADE_MS + 150);
+    const toComplete = toText + (prefersReducedMotion ? 0 : 450);
+    const t1 = setTimeout(() => setIconVisible(true), toIcon);
+    const t2 = setTimeout(() => setTextVisible(true), toText);
+    const t3 = setTimeout(() => onCardComplete(index), toComplete);
+    return () => {
+      clearTimeout(t1);
+      clearTimeout(t2);
+      clearTimeout(t3);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [shouldStart, prefersReducedMotion]);
 
   return (
     <motion.div
@@ -576,68 +516,40 @@ function TrustCard({
       custom={{ reduce: prefersReducedMotion }}
       initial="hidden"
       animate={shouldStart ? "visible" : "hidden"}
-      whileHover={
-        prefersReducedMotion ? undefined : { y: -4, transition: { duration: 0.3, ease: EASE } }
-      }
-      onAnimationComplete={(definition) => {
-        if (definition !== "visible" || startedRef.current) return;
-        startedRef.current = true;
-        // Card shell is in — fade the icon/status in next (a plain fade,
-        // not typed), then hand off to the title's typewriter.
-        setIconVisible(true);
-        setTimeout(() => setTitleStart(true), prefersReducedMotion ? 0 : ICON_FADE_MS + 150);
-      }}
-      className={`group relative z-10 rounded-2xl glass-panel p-6 transition-[border-color,box-shadow] duration-300 hover:border-primary/30 hover:shadow-[var(--shadow-elevated)] ${offsetClass}`}
+      className={`relative z-10 ${offsetClass}`}
     >
-      <div className="flex items-center gap-3">
-        <div
-          className={`transition-opacity duration-[450ms] ${iconVisible ? "opacity-100" : "opacity-0"}`}
-        >
-          <div className="grid h-10 w-10 place-items-center rounded-xl bg-secondary text-muted-foreground transition-colors duration-300 group-hover:bg-primary/10 group-hover:text-primary">
-            <Icon className="h-4 w-4" />
+      {/* Hover lives on this inner, non-framer-controlled element. The
+          outer motion.div above owns `transform` for the entrance
+          animation (opacity/y via variants); if the hover translate lived
+          on that same element, framer-motion's inline transform style
+          would fight the CSS hover class for the same property and the
+          movement would look janky/inconsistent. Keeping them on separate
+          elements lets each animation system own its own `transform`. */}
+      <div className="group rounded-2xl glass-panel p-6 transition-[border-color,box-shadow] duration-300 ease-out hover:border-primary/30 hover:shadow-[var(--shadow-elevated)]">
+        <div className="flex items-center gap-3">
+          <div
+            className={`transition-opacity duration-[450ms] ${iconVisible ? "opacity-100" : "opacity-0"}`}
+          >
+            <div className="grid h-10 w-10 place-items-center rounded-xl bg-secondary text-muted-foreground transition-colors duration-300 group-hover:bg-primary/10 group-hover:text-primary">
+              <Icon className="h-4 w-4" />
+            </div>
+          </div>
+          <div className={`transition-opacity duration-[450ms] ${iconVisible ? "opacity-100" : "opacity-0"}`}>
+            <StatusIndicator label={status} prefersReducedMotion={prefersReducedMotion} />
           </div>
         </div>
-        <div
-          className={`transition-opacity duration-[450ms] ${iconVisible ? "opacity-100" : "opacity-0"}`}
-        >
-          <StatusIndicator label={status} />
+        <div className={`transition-opacity duration-[450ms] ${textVisible ? "opacity-100" : "opacity-0"}`}>
+          <h3 className="mt-4 text-base font-semibold text-foreground transition-transform duration-300 group-hover:translate-x-0.5">
+            {title}
+          </h3>
+          <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">{description}</p>
+          <p className="mt-3 text-xs text-muted-foreground/70">{detail}</p>
         </div>
       </div>
-      <h3 className="relative mt-4 text-base font-semibold text-foreground transition-transform duration-300 group-hover:translate-x-0.5">
-        <span aria-hidden="true" className="invisible">
-          {title}
-        </span>
-        <span className="absolute inset-0">
-          <Typewriter
-            text={title}
-            start={titleStart}
-            onComplete={() => setTimeout(() => setDescStart(true), pause)}
-          />
-        </span>
-      </h3>
-      <p className="relative mt-1.5 text-sm leading-relaxed text-muted-foreground">
-        <span aria-hidden="true" className="invisible">
-          {description}
-        </span>
-        <span className="absolute inset-0">
-          <Typewriter
-            text={description}
-            start={descStart}
-            onComplete={() => setTimeout(() => setDetailStart(true), pause)}
-          />
-        </span>
-      </p>
-      <p className="relative mt-3 text-xs text-muted-foreground/70">
-        <span aria-hidden="true" className="invisible">
-          {detail}
-        </span>
-        <span className="absolute inset-0">
-          <Typewriter text={detail} start={detailStart} onComplete={onCardComplete} />
-        </span>
-      </p>
     </motion.div>
   );
 }
+const MemoTrustCard = memo(TrustCard);
 
 export function Trust() {
   const { t } = useTranslation();
@@ -646,21 +558,24 @@ export function Trust() {
   const sectionInView = useInView(sectionRef, { once: true, amount: 0.2 });
 
   // Each card starts on its own fixed timer (CARD_STAGGER_MS apart) once
-  // the row is ready — no longer waiting for the previous card's typing to
-  // finish, so the row cascades in briskly regardless of how long any one
-  // card's text takes to type out.
+  // the row is ready — independent of how long the previous card's own
+  // reveal (icon/status, then text) takes to finish.
   const [startedCards, setStartedCards] = useState<boolean[]>(() => trustIcons.map(() => false));
   // Separately, how many cards have fully finished their own sequence
-  // (shell -> icon/status -> title/description/detail typed out) — tracked
-  // only to know when the connectors should light up, not to gate the next
+  // (shell -> icon/status -> text faded in) — tracked only to know when
+  // the connectors should light up, not to gate the next
   // card's start.
   const completedRef = useRef<Set<number>>(new Set());
   const [completedCount, setCompletedCount] = useState(0);
-  const markCardComplete = (index: number) => {
+  // useCallback with a stable identity (no deps — uses a ref + functional
+  // setState) so it can be passed to the memoized MemoTrustCard without
+  // defeating the memo: a freshly-created arrow function every render
+  // would make React treat the prop as "changed" every time regardless.
+  const markCardComplete = useCallback((index: number) => {
     if (completedRef.current.has(index)) return;
     completedRef.current.add(index);
     setCompletedCount((c) => c + 1);
-  };
+  }, []);
 
   // A short pause after the title finishes revealing before card 1 begins.
   const [cardsReady, setCardsReady] = useState(false);
@@ -720,7 +635,7 @@ export function Trust() {
                   <div className="grid h-10 w-10 place-items-center rounded-xl bg-secondary text-muted-foreground transition-colors duration-300 group-hover:bg-primary/10 group-hover:text-primary">
                     <Icon className="h-4 w-4" />
                   </div>
-                  <StatusIndicator label={cardStatus[index]} />
+                  <StatusIndicator label={cardStatus[index]} prefersReducedMotion={prefersReducedMotion} />
                 </div>
                 <h3 className="mt-4 text-base font-semibold text-foreground transition-transform duration-300 group-hover:translate-x-0.5">
                   {trustItem.title}
@@ -739,22 +654,24 @@ export function Trust() {
             in CircuitConnectors above. Title reveals first; then cards
             cascade in left to right on a fixed stagger (CARD_STAGGER_MS
             apart) — each card's shell fades in, then its icon/status, then
-            its title, description, and detail type out, independent of
-            the next card's own timer. Once every card has finished typing,
-            the connectors fade in edge-to-center (see `edgeToCenterDelay`
+            its text block, all plain opacity fades, independent of the
+            next card's own timer. Once every card has finished, the
+            connectors fade in edge-to-center (see `edgeToCenterDelay`
             above) as a closing flourish. */}
         <div className="relative mt-16 hidden lg:grid lg:grid-cols-4 lg:items-start lg:gap-6 lg:pb-10">
-          <CircuitConnectors visible={connectionsVisible} />
+          <CircuitConnectors visible={connectionsVisible} prefersReducedMotion={prefersReducedMotion} />
           {t.trust.items.map((trustItem, index) => (
-            <TrustCard
+            <MemoTrustCard
               key={trustItem.title}
+              index={index}
               title={trustItem.title}
               description={trustItem.description}
               detail={trustItem.detail}
               status={cardStatus[index]}
               Icon={trustIcons[index]}
               shouldStart={startedCards[index]}
-              onCardComplete={() => markCardComplete(index)}
+              prefersReducedMotion={prefersReducedMotion}
+              onCardComplete={markCardComplete}
               offsetClass={cardOffset[index]}
             />
           ))}
