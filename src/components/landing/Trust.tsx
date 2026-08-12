@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { memo, useCallback, useEffect, useRef, useState } from "react";
 import { Handshake, Wallet, Zap, Layers } from "lucide-react";
 import { motion, useInView, useReducedMotion, type Variants } from "framer-motion";
 import { useTranslation } from "@/i18n/I18nProvider";
@@ -160,9 +160,17 @@ const traceVariants: Variants = {
 
 // Small technical status indicator shown next to each card's icon —
 // a live "system state" read (colored dot + mono label), not a badge.
-function StatusIndicator({ label }: { label: string }) {
-  const prefersReducedMotion = useReducedMotion();
-
+// Takes prefersReducedMotion as a prop (rather than calling the hook
+// itself) so every card doesn't register its own matchMedia listener, and
+// is memoized so it never re-renders unless its own props actually change
+// — see the note above Trust's markCardComplete for why that matters.
+const StatusIndicator = memo(function StatusIndicator({
+  label,
+  prefersReducedMotion,
+}: {
+  label: string;
+  prefersReducedMotion: boolean | null;
+}) {
   return (
     <div className="flex items-center gap-1.5 font-mono text-[10px] font-medium uppercase tracking-[0.14em] text-muted-foreground/70">
       <span className="relative flex h-1.5 w-1.5 shrink-0">
@@ -174,14 +182,22 @@ function StatusIndicator({ label }: { label: string }) {
       {label}
     </div>
   );
-}
+});
 
 // `visible` gates the whole reveal: false renders every trace at opacity 0
 // (still laid out, just invisible) so nothing pops in until the caller
 // flips it — which Trust does only once every card has fully finished its
-// own boot-up sequence.
-function CircuitConnectors({ visible }: { visible: boolean }) {
-  const prefersReducedMotion = useReducedMotion();
+// own boot-up sequence. Memoized: this renders ~40 SVG elements, and
+// `visible`/`prefersReducedMotion` only ever change once or twice each —
+// without memo, it would re-render (and rebuild all of them) on every
+// unrelated state change in Trust while the cards are booting up.
+const CircuitConnectors = memo(function CircuitConnectors({
+  visible,
+  prefersReducedMotion,
+}: {
+  visible: boolean;
+  prefersReducedMotion: boolean | null;
+}) {
   const anim = visible ? "visible" : "hidden";
 
   return (
@@ -390,7 +406,7 @@ function CircuitConnectors({ visible }: { visible: boolean }) {
         ))}
     </svg>
   );
-}
+});
 
 // Pacing for the whole "system booting up, module by module" sequence.
 // Deliberately unhurried — this reads as a system reporting its own
@@ -426,26 +442,28 @@ const cardVariants: Variants = {
 };
 
 function TrustCard({
+  index,
   title,
   description,
   detail,
   status,
   Icon,
   shouldStart,
+  prefersReducedMotion,
   onCardComplete,
   offsetClass,
 }: {
+  index: number;
   title: string;
   description: string;
   detail: string;
   status: string;
   Icon: (typeof trustIcons)[number];
   shouldStart: boolean;
-  onCardComplete: () => void;
+  prefersReducedMotion: boolean | null;
+  onCardComplete: (index: number) => void;
   offsetClass: string;
 }) {
-  const prefersReducedMotion = useReducedMotion();
-
   const [iconVisible, setIconVisible] = useState(false);
   const [textVisible, setTextVisible] = useState(false);
   const startedRef = useRef(false);
@@ -461,7 +479,7 @@ function TrustCard({
     const toComplete = toText + (prefersReducedMotion ? 0 : 450);
     const t1 = setTimeout(() => setIconVisible(true), toIcon);
     const t2 = setTimeout(() => setTextVisible(true), toText);
-    const t3 = setTimeout(() => onCardComplete(), toComplete);
+    const t3 = setTimeout(() => onCardComplete(index), toComplete);
     return () => {
       clearTimeout(t1);
       clearTimeout(t2);
@@ -488,7 +506,7 @@ function TrustCard({
           </div>
         </div>
         <div className={`transition-opacity duration-[450ms] ${iconVisible ? "opacity-100" : "opacity-0"}`}>
-          <StatusIndicator label={status} />
+          <StatusIndicator label={status} prefersReducedMotion={prefersReducedMotion} />
         </div>
       </div>
       <div className={`transition-opacity duration-[450ms] ${textVisible ? "opacity-100" : "opacity-0"}`}>
@@ -501,6 +519,7 @@ function TrustCard({
     </motion.div>
   );
 }
+const MemoTrustCard = memo(TrustCard);
 
 export function Trust() {
   const { t } = useTranslation();
@@ -518,11 +537,15 @@ export function Trust() {
   // card's start.
   const completedRef = useRef<Set<number>>(new Set());
   const [completedCount, setCompletedCount] = useState(0);
-  const markCardComplete = (index: number) => {
+  // useCallback with a stable identity (no deps — uses a ref + functional
+  // setState) so it can be passed to the memoized MemoTrustCard without
+  // defeating the memo: a freshly-created arrow function every render
+  // would make React treat the prop as "changed" every time regardless.
+  const markCardComplete = useCallback((index: number) => {
     if (completedRef.current.has(index)) return;
     completedRef.current.add(index);
     setCompletedCount((c) => c + 1);
-  };
+  }, []);
 
   // A short pause after the title finishes revealing before card 1 begins.
   const [cardsReady, setCardsReady] = useState(false);
@@ -579,7 +602,7 @@ export function Trust() {
                   <div className="grid h-10 w-10 place-items-center rounded-xl bg-secondary text-muted-foreground transition-colors duration-300 group-hover:bg-primary/10 group-hover:text-primary">
                     <Icon className="h-4 w-4" />
                   </div>
-                  <StatusIndicator label={cardStatus[index]} />
+                  <StatusIndicator label={cardStatus[index]} prefersReducedMotion={prefersReducedMotion} />
                 </div>
                 <h3 className="mt-4 text-base font-semibold text-foreground transition-transform duration-300 group-hover:translate-x-0.5">
                   {trustItem.title}
@@ -603,17 +626,19 @@ export function Trust() {
             connectors fade in edge-to-center (see `edgeToCenterDelay`
             above) as a closing flourish. */}
         <div className="relative mt-16 hidden lg:grid lg:grid-cols-4 lg:items-start lg:gap-6 lg:pb-10">
-          <CircuitConnectors visible={connectionsVisible} />
+          <CircuitConnectors visible={connectionsVisible} prefersReducedMotion={prefersReducedMotion} />
           {t.trust.items.map((trustItem, index) => (
-            <TrustCard
+            <MemoTrustCard
               key={trustItem.title}
+              index={index}
               title={trustItem.title}
               description={trustItem.description}
               detail={trustItem.detail}
               status={cardStatus[index]}
               Icon={trustIcons[index]}
               shouldStart={startedCards[index]}
-              onCardComplete={() => markCardComplete(index)}
+              prefersReducedMotion={prefersReducedMotion}
+              onCardComplete={markCardComplete}
               offsetClass={cardOffset[index]}
             />
           ))}
