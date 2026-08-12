@@ -103,7 +103,7 @@
   --secondary: oklch(0.959 0.01 87.5); /* #F4F1EA — secondary/alt section tone */
   --secondary-foreground: oklch(0.32 0.02 85);
   --muted: oklch(0.95 0.01 87.5); /* #F1EEE7 — muted surface, slightly deeper than secondary */
-  --muted-foreground: oklch(0.554 0.041 257.4); /* #64748B */
+  --muted-foreground: oklch(37.195% 0.02392 255.706); /* #64748B */
   --accent: oklch(
     0.864 0.064 82.5
   ); /* #E7CFA3 — soft gold accent surface (hover chips, menu items) */
@@ -159,7 +159,7 @@
   --secondary: oklch(1 0 0 / 6%);
   --secondary-foreground: oklch(0.95 0.01 260);
   --muted: oklch(1 0 0 / 6%);
-  --muted-foreground: oklch(0.74 0.02 260);
+  --muted-foreground: oklch(79.613% 0.0205 260.223);
   --accent: oklch(1 0 0 / 8%);
   --accent-foreground: oklch(0.95 0.01 260);
   --destructive: oklch(0.7 0.2 25);
