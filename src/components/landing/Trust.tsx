@@ -299,7 +299,11 @@ function CircuitConnectors({ visible }: { visible: boolean }) {
           variants={traceVariants}
           initial="hidden"
           animate={anim}
-          custom={{ opacity: 0.6, delay: edgeToCenterDelay(b.node.cx), reduce: prefersReducedMotion }}
+          custom={{
+            opacity: 0.6,
+            delay: edgeToCenterDelay(b.node.cx),
+            reduce: prefersReducedMotion,
+          }}
         />
       ))}
       {sideLinks.map((s) => (
@@ -313,7 +317,11 @@ function CircuitConnectors({ visible }: { visible: boolean }) {
           variants={traceVariants}
           initial="hidden"
           animate={anim}
-          custom={{ opacity: 0.55, delay: edgeToCenterDelay(s.node.cx), reduce: prefersReducedMotion }}
+          custom={{
+            opacity: 0.55,
+            delay: edgeToCenterDelay(s.node.cx),
+            reduce: prefersReducedMotion,
+          }}
         />
       ))}
       {stubs.map((s) => (
@@ -327,7 +335,11 @@ function CircuitConnectors({ visible }: { visible: boolean }) {
           variants={traceVariants}
           initial="hidden"
           animate={anim}
-          custom={{ opacity: 0.4, delay: edgeToCenterDelay(s.node.cx), reduce: prefersReducedMotion }}
+          custom={{
+            opacity: 0.4,
+            delay: edgeToCenterDelay(s.node.cx),
+            reduce: prefersReducedMotion,
+          }}
         />
       ))}
 
@@ -355,7 +367,11 @@ function CircuitConnectors({ visible }: { visible: boolean }) {
             variants={traceVariants}
             initial="hidden"
             animate={anim}
-            custom={{ opacity: 0.4, delay: edgeToCenterDelay(b.node.cx), reduce: prefersReducedMotion }}
+            custom={{
+              opacity: 0.4,
+              delay: edgeToCenterDelay(b.node.cx),
+              reduce: prefersReducedMotion,
+            }}
           />
           <motion.circle
             cx={b.node.cx}
@@ -365,7 +381,11 @@ function CircuitConnectors({ visible }: { visible: boolean }) {
             variants={traceVariants}
             initial="hidden"
             animate={anim}
-            custom={{ opacity: 0.8, delay: edgeToCenterDelay(b.node.cx), reduce: prefersReducedMotion }}
+            custom={{
+              opacity: 0.8,
+              delay: edgeToCenterDelay(b.node.cx),
+              reduce: prefersReducedMotion,
+            }}
           />
         </g>
       ))}
@@ -379,7 +399,11 @@ function CircuitConnectors({ visible }: { visible: boolean }) {
           variants={traceVariants}
           initial="hidden"
           animate={anim}
-          custom={{ opacity: 0.7, delay: edgeToCenterDelay(s.node.cx), reduce: prefersReducedMotion }}
+          custom={{
+            opacity: 0.7,
+            delay: edgeToCenterDelay(s.node.cx),
+            reduce: prefersReducedMotion,
+          }}
         />
       ))}
       {stubs.map((s) => (
@@ -392,7 +416,11 @@ function CircuitConnectors({ visible }: { visible: boolean }) {
           variants={traceVariants}
           initial="hidden"
           animate={anim}
-          custom={{ opacity: 0.55, delay: edgeToCenterDelay(s.node.cx), reduce: prefersReducedMotion }}
+          custom={{
+            opacity: 0.55,
+            delay: edgeToCenterDelay(s.node.cx),
+            reduce: prefersReducedMotion,
+          }}
         />
       ))}
       {flowMarkers.map((m) => (
@@ -548,7 +576,9 @@ function TrustCard({
       custom={{ reduce: prefersReducedMotion }}
       initial="hidden"
       animate={shouldStart ? "visible" : "hidden"}
-      whileHover={prefersReducedMotion ? undefined : { y: -4, transition: { duration: 0.3, ease: EASE } }}
+      whileHover={
+        prefersReducedMotion ? undefined : { y: -4, transition: { duration: 0.3, ease: EASE } }
+      }
       onAnimationComplete={(definition) => {
         if (definition !== "visible" || startedRef.current) return;
         startedRef.current = true;
@@ -567,7 +597,9 @@ function TrustCard({
             <Icon className="h-4 w-4" />
           </div>
         </div>
-        <div className={`transition-opacity duration-[450ms] ${iconVisible ? "opacity-100" : "opacity-0"}`}>
+        <div
+          className={`transition-opacity duration-[450ms] ${iconVisible ? "opacity-100" : "opacity-0"}`}
+        >
           <StatusIndicator label={status} />
         </div>
       </div>
@@ -576,7 +608,11 @@ function TrustCard({
           {title}
         </span>
         <span className="absolute inset-0">
-          <Typewriter text={title} start={titleStart} onComplete={() => setTimeout(() => setDescStart(true), pause)} />
+          <Typewriter
+            text={title}
+            start={titleStart}
+            onComplete={() => setTimeout(() => setDescStart(true), pause)}
+          />
         </span>
       </h3>
       <p className="relative mt-1.5 text-sm leading-relaxed text-muted-foreground">
@@ -630,7 +666,10 @@ export function Trust() {
   const [cardsReady, setCardsReady] = useState(false);
   useEffect(() => {
     if (!sectionInView) return;
-    const id = setTimeout(() => setCardsReady(true), prefersReducedMotion ? 0 : TITLE_TO_CARDS_DELAY_MS);
+    const id = setTimeout(
+      () => setCardsReady(true),
+      prefersReducedMotion ? 0 : TITLE_TO_CARDS_DELAY_MS,
+    );
     return () => clearTimeout(id);
   }, [sectionInView, prefersReducedMotion]);
 

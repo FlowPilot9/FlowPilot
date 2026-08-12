@@ -75,10 +75,7 @@ function SitePreview({ compact = false }: { compact?: boolean }) {
       {/* Cards */}
       <div className={`grid gap-2 px-4 ${compact ? "mt-3 grid-cols-1" : "mt-5 grid-cols-3"}`}>
         {(compact ? [0] : [0, 1, 2]).map((i) => (
-          <div
-            key={i}
-            className="rounded-md border border-border/60 bg-card px-2.5 py-2 shadow-sm"
-          >
+          <div key={i} className="rounded-md border border-border/60 bg-card px-2.5 py-2 shadow-sm">
             <span className="mb-1.5 block h-2 w-2 rounded-[3px] bg-primary/80" />
             <span className="block h-[5px] w-4/5 rounded-full bg-foreground/70" />
             <span className="mt-1 block h-[4px] w-3/5 rounded-full bg-muted-foreground/25" />
