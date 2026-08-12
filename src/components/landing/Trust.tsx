@@ -66,7 +66,6 @@ const ARC_RIGHT =
 // dense/alive rather than a minimal diagram of exactly four connections.
 const stubs = [
   { d: "M 340 60 L 340 38 L 366 38", node: { cx: 366, cy: 38 } },
-  { d: "M 600 200 L 600 223", node: { cx: 600, cy: 223 } },
   { d: "M 860 60 L 860 38 L 834 38", node: { cx: 834, cy: 38 } },
 ];
 
@@ -425,12 +424,7 @@ const CARD_ENTRANCE_DELAY_S = 0.1;
 const CARD_ENTRANCE_DURATION_S = 0.9;
 // Total time (ms) from shouldStart flipping true to the shell being fully
 // visible — used below to time the icon/text reveal off a plain timer
-// instead of Framer's onAnimationComplete, which is unreliable here: the
-// entrance transition and `whileHover` both animate the same `y` property,
-// so if the pointer is already resting on the card the moment it starts
-// (e.g. right after a refresh, before the mouse has moved), the hover
-// gesture and the entrance animation contend for `y` and the completion
-// event can fire late or not at all until the hover ends.
+// instead of Framer's onAnimationComplete, which proved unreliable here.
 const CARD_ENTRANCE_MS = (CARD_ENTRANCE_DELAY_S + CARD_ENTRANCE_DURATION_S) * 1000;
 const cardVariants: Variants = {
   hidden: { opacity: 0, y: 20 },
