@@ -171,6 +171,7 @@ export const en: TranslationDictionary = {
     liveLabel: "Live",
     liveDemoLabel: "Live Demo",
     requestLabel: "Request this design",
+    featuredLabel: "Featured project",
     items: [
       {
         title: "Restaurant Website Template",

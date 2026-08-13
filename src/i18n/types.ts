@@ -94,6 +94,7 @@ export interface TranslationDictionary {
     liveLabel: string;
     liveDemoLabel: string;
     requestLabel: string;
+    featuredLabel: string;
     items: Array<{
       title: string;
       tag: string;

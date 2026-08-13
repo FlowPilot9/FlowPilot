@@ -179,6 +179,7 @@ export const ro: TranslationDictionary = {
     liveLabel: "Live",
     liveDemoLabel: "Demo live",
     requestLabel: "Solicită acest design",
+    featuredLabel: "Proiect featured",
     items: [
       {
         title: "Restaurant Website Template",
