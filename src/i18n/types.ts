@@ -94,6 +94,7 @@ export interface TranslationDictionary {
     liveLabel: string;
     liveDemoLabel: string;
     requestLabel: string;
+    featuredLabel: string;
     items: Array<{
       title: string;
       tag: string;
@@ -136,6 +137,8 @@ export interface TranslationDictionary {
     eyebrow: string;
     title: string;
     paragraph1: string;
+    paragraph2: string;
+    paragraph3: string;
     differentiators: string[];
     foundersLabel: string;
     founders: { initials: string; name: string; role: string }[];

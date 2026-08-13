@@ -66,7 +66,6 @@ const ARC_RIGHT =
 // dense/alive rather than a minimal diagram of exactly four connections.
 const stubs = [
   { d: "M 340 60 L 340 38 L 366 38", node: { cx: 366, cy: 38 } },
-  { d: "M 600 200 L 600 223", node: { cx: 600, cy: 223 } },
   { d: "M 860 60 L 860 38 L 834 38", node: { cx: 834, cy: 38 } },
 ];
 
@@ -273,7 +272,11 @@ const CircuitConnectors = memo(function CircuitConnectors({
           variants={traceVariants}
           initial="hidden"
           animate={anim}
-          custom={{ opacity: 0.6, delay: edgeToCenterDelay(b.node.cx), reduce: prefersReducedMotion }}
+          custom={{
+            opacity: 0.6,
+            delay: edgeToCenterDelay(b.node.cx),
+            reduce: prefersReducedMotion,
+          }}
         />
       ))}
       {sideLinks.map((s) => (
@@ -287,7 +290,11 @@ const CircuitConnectors = memo(function CircuitConnectors({
           variants={traceVariants}
           initial="hidden"
           animate={anim}
-          custom={{ opacity: 0.55, delay: edgeToCenterDelay(s.node.cx), reduce: prefersReducedMotion }}
+          custom={{
+            opacity: 0.55,
+            delay: edgeToCenterDelay(s.node.cx),
+            reduce: prefersReducedMotion,
+          }}
         />
       ))}
       {stubs.map((s) => (
@@ -301,7 +308,11 @@ const CircuitConnectors = memo(function CircuitConnectors({
           variants={traceVariants}
           initial="hidden"
           animate={anim}
-          custom={{ opacity: 0.4, delay: edgeToCenterDelay(s.node.cx), reduce: prefersReducedMotion }}
+          custom={{
+            opacity: 0.4,
+            delay: edgeToCenterDelay(s.node.cx),
+            reduce: prefersReducedMotion,
+          }}
         />
       ))}
 
@@ -329,7 +340,11 @@ const CircuitConnectors = memo(function CircuitConnectors({
             variants={traceVariants}
             initial="hidden"
             animate={anim}
-            custom={{ opacity: 0.4, delay: edgeToCenterDelay(b.node.cx), reduce: prefersReducedMotion }}
+            custom={{
+              opacity: 0.4,
+              delay: edgeToCenterDelay(b.node.cx),
+              reduce: prefersReducedMotion,
+            }}
           />
           <motion.circle
             cx={b.node.cx}
@@ -339,7 +354,11 @@ const CircuitConnectors = memo(function CircuitConnectors({
             variants={traceVariants}
             initial="hidden"
             animate={anim}
-            custom={{ opacity: 0.8, delay: edgeToCenterDelay(b.node.cx), reduce: prefersReducedMotion }}
+            custom={{
+              opacity: 0.8,
+              delay: edgeToCenterDelay(b.node.cx),
+              reduce: prefersReducedMotion,
+            }}
           />
         </g>
       ))}
@@ -353,7 +372,11 @@ const CircuitConnectors = memo(function CircuitConnectors({
           variants={traceVariants}
           initial="hidden"
           animate={anim}
-          custom={{ opacity: 0.7, delay: edgeToCenterDelay(s.node.cx), reduce: prefersReducedMotion }}
+          custom={{
+            opacity: 0.7,
+            delay: edgeToCenterDelay(s.node.cx),
+            reduce: prefersReducedMotion,
+          }}
         />
       ))}
       {stubs.map((s) => (
@@ -366,7 +389,11 @@ const CircuitConnectors = memo(function CircuitConnectors({
           variants={traceVariants}
           initial="hidden"
           animate={anim}
-          custom={{ opacity: 0.55, delay: edgeToCenterDelay(s.node.cx), reduce: prefersReducedMotion }}
+          custom={{
+            opacity: 0.55,
+            delay: edgeToCenterDelay(s.node.cx),
+            reduce: prefersReducedMotion,
+          }}
         />
       ))}
       {flowMarkers.map((m) => (
@@ -425,12 +452,7 @@ const CARD_ENTRANCE_DELAY_S = 0.1;
 const CARD_ENTRANCE_DURATION_S = 0.9;
 // Total time (ms) from shouldStart flipping true to the shell being fully
 // visible — used below to time the icon/text reveal off a plain timer
-// instead of Framer's onAnimationComplete, which is unreliable here: the
-// entrance transition and `whileHover` both animate the same `y` property,
-// so if the pointer is already resting on the card the moment it starts
-// (e.g. right after a refresh, before the mouse has moved), the hover
-// gesture and the entrance animation contend for `y` and the completion
-// event can fire late or not at all until the hover ends.
+// instead of Framer's onAnimationComplete, which proved unreliable here.
 const CARD_ENTRANCE_MS = (CARD_ENTRANCE_DELAY_S + CARD_ENTRANCE_DURATION_S) * 1000;
 const cardVariants: Variants = {
   hidden: { opacity: 0, y: 20 },
@@ -494,27 +516,35 @@ function TrustCard({
       custom={{ reduce: prefersReducedMotion }}
       initial="hidden"
       animate={shouldStart ? "visible" : "hidden"}
-      whileHover={prefersReducedMotion ? undefined : { y: -4, transition: { duration: 0.3, ease: EASE } }}
-      className={`group relative z-10 rounded-2xl glass-panel p-6 transition-[border-color,box-shadow] duration-300 hover:border-primary/30 hover:shadow-[var(--shadow-elevated)] ${offsetClass}`}
+      className={`relative z-10 ${offsetClass}`}
     >
-      <div className="flex items-center gap-3">
-        <div
-          className={`transition-opacity duration-[450ms] ${iconVisible ? "opacity-100" : "opacity-0"}`}
-        >
-          <div className="grid h-10 w-10 place-items-center rounded-xl bg-secondary text-muted-foreground transition-colors duration-300 group-hover:bg-primary/10 group-hover:text-primary">
-            <Icon className="h-4 w-4" />
+      {/* Hover lives on this inner, non-framer-controlled element. The
+          outer motion.div above owns `transform` for the entrance
+          animation (opacity/y via variants); if the hover translate lived
+          on that same element, framer-motion's inline transform style
+          would fight the CSS hover class for the same property and the
+          movement would look janky/inconsistent. Keeping them on separate
+          elements lets each animation system own its own `transform`. */}
+      <div className="group rounded-2xl glass-panel p-6 transition-[border-color,box-shadow] duration-300 ease-out hover:border-primary/30 hover:shadow-[var(--shadow-elevated)]">
+        <div className="flex items-center gap-3">
+          <div
+            className={`transition-opacity duration-[450ms] ${iconVisible ? "opacity-100" : "opacity-0"}`}
+          >
+            <div className="grid h-10 w-10 place-items-center rounded-xl bg-secondary text-muted-foreground transition-colors duration-300 group-hover:bg-primary/10 group-hover:text-primary">
+              <Icon className="h-4 w-4" />
+            </div>
+          </div>
+          <div className={`transition-opacity duration-[450ms] ${iconVisible ? "opacity-100" : "opacity-0"}`}>
+            <StatusIndicator label={status} prefersReducedMotion={prefersReducedMotion} />
           </div>
         </div>
-        <div className={`transition-opacity duration-[450ms] ${iconVisible ? "opacity-100" : "opacity-0"}`}>
-          <StatusIndicator label={status} prefersReducedMotion={prefersReducedMotion} />
+        <div className={`transition-opacity duration-[450ms] ${textVisible ? "opacity-100" : "opacity-0"}`}>
+          <h3 className="mt-4 text-base font-semibold text-foreground transition-transform duration-300 group-hover:translate-x-0.5">
+            {title}
+          </h3>
+          <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">{description}</p>
+          <p className="mt-3 text-xs text-muted-foreground/70">{detail}</p>
         </div>
-      </div>
-      <div className={`transition-opacity duration-[450ms] ${textVisible ? "opacity-100" : "opacity-0"}`}>
-        <h3 className="mt-4 text-base font-semibold text-foreground transition-transform duration-300 group-hover:translate-x-0.5">
-          {title}
-        </h3>
-        <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">{description}</p>
-        <p className="mt-3 text-xs text-muted-foreground/70">{detail}</p>
       </div>
     </motion.div>
   );
@@ -551,7 +581,10 @@ export function Trust() {
   const [cardsReady, setCardsReady] = useState(false);
   useEffect(() => {
     if (!sectionInView) return;
-    const id = setTimeout(() => setCardsReady(true), prefersReducedMotion ? 0 : TITLE_TO_CARDS_DELAY_MS);
+    const id = setTimeout(
+      () => setCardsReady(true),
+      prefersReducedMotion ? 0 : TITLE_TO_CARDS_DELAY_MS,
+    );
     return () => clearTimeout(id);
   }, [sectionInView, prefersReducedMotion]);
 

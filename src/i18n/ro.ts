@@ -179,6 +179,7 @@ export const ro: TranslationDictionary = {
     liveLabel: "Live",
     liveDemoLabel: "Demo live",
     requestLabel: "Solicită acest design",
+    featuredLabel: "Proiect featured",
     items: [
       {
         title: "Restaurant Website Template",
@@ -306,20 +307,25 @@ export const ro: TranslationDictionary = {
     ],
   },
   about: {
-    eyebrow: "Despre noi",
+    eyebrow: "DESPRE NOI",
     title:
-      "Nu suntem o agenție mare. Suntem doi oameni care construiesc fiecare proiect cu mâna lor.",
+      "Nu suntem o agenție mare. Suntem trei oameni care construiesc fiecare proiect cu grijă.",
     paragraph1:
-      "FlowPilot a pornit dintr-o observație simplă: prea multe site-uri de afaceri mici arată ca niște șabloane reciclate, fără nimeni în spate căruia să-i pese cu adevărat. Suntem studenți la ETTI (Facultatea de Electronică, Telecomunicații și Tehnologia Informației) din Universitatea Politehnica București și am pornit FlowPilot fiindcă ne pasă de detalii mai mult decât ne cere cineva.",
+      "FlowPilot a pornit dintr-o observație simplă: prea multe site-uri de afaceri mici arată ca niște șabloane reciclate, fără personalitate și fără cineva care să se implice cu adevărat în rezultat.",
+    paragraph2:
+      "Suntem o echipă de studenți pasionați de tehnologie, design și dezvoltarea produselor digitale. Combinăm partea tehnică și creativă pentru a construi site-uri care nu doar arată bine, ci ajută afacerile să crească.",
+    paragraph3:
+      "La FlowPilot fiecare proiect este tratat personal: comunicăm direct cu clienții, înțelegem obiectivele lor și construim soluții adaptate nevoilor reale.",
     differentiators: [
-      "Lucrezi direct cu noi, nu printr-un manager de cont.",
-      "Fiecare site trece prin mâinile amândurora, nu printr-o echipă anonimă.",
-      "Compensăm anii de experiență cu atenția pe care echipele mari nu mai au timp s-o dea unui singur proiect.",
+      "Lucrezi direct cu echipa care construiește produsul, nu prin intermediari.",
+      "Fiecare proiect este analizat și dezvoltat cu atenție, de la prima discuție până la lansare.",
+      "Combinăm dezvoltarea software, designul și comunicarea cu clientul pentru o experiență completă.",
     ],
-    foundersLabel: "Fondatori",
+    foundersLabel: "ECHIPA",
     founders: [
-      { initials: "SD", name: "Ștefan Dima", role: "Frontend development & design" },
-      { initials: "AP", name: "Alexandru Pîrvu", role: "Backend development & sisteme" },
+      { initials: "ȘD", name: "Ștefan Dima", role: "Frontend development & design" },
+      { initials: "AP", name: "Alexandru Pirvu", role: "Backend development & sisteme" },
+      { initials: "MB", name: "Morar Bogdan", role: "Project management & relații cu clienții" },
     ],
     today: "Astăzi",
     todayText: "construim site-uri premium, unul câte unul.",

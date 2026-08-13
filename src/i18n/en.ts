@@ -171,6 +171,7 @@ export const en: TranslationDictionary = {
     liveLabel: "Live",
     liveDemoLabel: "Live Demo",
     requestLabel: "Request this design",
+    featuredLabel: "Featured project",
     items: [
       {
         title: "Restaurant Website Template",
@@ -297,22 +298,27 @@ export const en: TranslationDictionary = {
     ],
   },
   about: {
-    eyebrow: "About",
-    title: "We're not a big agency. We're two people who build every project by hand.",
+    eyebrow: "ABOUT US",
+    title: "We are not a big agency. We are three people who build every project with care.",
     paragraph1:
-      "FlowPilot started from a simple observation: too many small-business websites look like recycled templates, with no one behind them who actually cares. We're students at ETTI (the Faculty of Electronics, Telecommunications and Information Technology) at the Politehnica University of Bucharest, and we started FlowPilot because we care about the details more than anyone's paying us to.",
+      "FlowPilot started from a simple observation: too many small business websites look like recycled templates, without personality and without someone truly invested in the outcome.",
+    paragraph2:
+      "We are a team of students passionate about technology, design, and digital products. We combine technical expertise and creativity to build websites that do not just look good, but help businesses grow.",
+    paragraph3:
+      "At FlowPilot, every project receives personal attention: we communicate directly with clients, understand their goals, and build solutions tailored to their real needs.",
     differentiators: [
-      "You work directly with us, not through an account manager.",
-      "Every site passes through both our hands, not an anonymous team.",
-      "We make up for years of experience with the attention bigger teams no longer have time to give a single project.",
+      "You work directly with the people building your product, not through intermediaries.",
+      "Every project is carefully planned and developed from the first conversation to launch.",
+      "We combine software development, design, and client communication to create a complete experience.",
     ],
-    foundersLabel: "Founders",
+    foundersLabel: "TEAM",
     founders: [
-      { initials: "SD", name: "Ștefan Dima", role: "Frontend development & design" },
-      { initials: "AP", name: "Alexandru Pîrvu", role: "Backend development & systems" },
+      { initials: "ȘD", name: "Ștefan Dima", role: "Frontend development & design" },
+      { initials: "AP", name: "Alexandru Pirvu", role: "Backend development & systems" },
+      { initials: "MB", name: "Morar Bogdan", role: "Project management & client relations" },
     ],
     today: "Today",
-    todayText: "we build premium websites, one at a time.",
+    todayText: "we build premium websites, one project at a time.",
     tomorrow: "Tomorrow",
     tomorrowText: "we want to build much more than websites.",
   },

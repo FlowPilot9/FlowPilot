@@ -1,4 +1,4 @@
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Star } from "lucide-react";
 import { SectionHeader } from "@/components/landing/SectionHeader";
 import { useTranslation } from "@/i18n/I18nProvider";
 import showcaseRestaurant from "@/assets/showcase-restaurant.webp";
@@ -26,6 +26,47 @@ const showcaseUrls = [
   "https://arq-aura-showcase.vercel.app/",
 ] as const;
 
+// Bento arrangement: the Product Presentation template (index 3) is the
+// featured, large tile; Dental (1) and the restaurant (0) stack beside it;
+// Construction (2) and the sneaker showcase (4) share the bottom row.
+// `span` places each tile on the lg:grid-cols-12 grid below. The featured
+// tile uses row-span-2 to physically span the two stacked tiles' rows —
+// its 600px height is what row1 (288px) + row2 (288px) + the 24px row gap
+// between them add up to, so the right column stays flush against it. If
+// the gap-6 (24px) below ever changes, keep these numbers in sync.
+const layout = [
+  {
+    index: 3,
+    span: "lg:col-span-7 lg:row-span-2 lg:row-start-1 lg:col-start-1",
+    featured: true,
+    heightClass: "lg:h-[600px]",
+  },
+  {
+    index: 1,
+    span: "lg:col-span-5 lg:col-start-8 lg:row-start-1",
+    featured: false,
+    heightClass: "lg:h-[288px]",
+  },
+  {
+    index: 0,
+    span: "lg:col-span-5 lg:col-start-8 lg:row-start-2",
+    featured: false,
+    heightClass: "lg:h-[288px]",
+  },
+  {
+    index: 2,
+    span: "lg:col-span-6 lg:col-start-1 lg:row-start-3",
+    featured: false,
+    heightClass: "lg:h-[380px]",
+  },
+  {
+    index: 4,
+    span: "lg:col-span-6 lg:col-start-7 lg:row-start-3",
+    featured: false,
+    heightClass: "lg:h-[380px]",
+  },
+] as const;
+
 export function Showcase() {
   const { t } = useTranslation();
 
@@ -38,42 +79,42 @@ export function Showcase() {
           description={t.showcase.description}
         />
 
-        <div className="mt-14 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
-          {t.showcase.items.map((product, i) => {
+        <div className="mt-14 grid grid-cols-1 gap-6 lg:grid-cols-12">
+          {layout.map(({ index: i, span, featured, heightClass }) => {
+            const product = t.showcase.items[i];
             const liveUrl = showcaseUrls[i];
             const ctaHref = product.isLive && liveUrl ? liveUrl : "#contact";
             const ctaLabel = product.isLive ? t.showcase.liveDemoLabel : t.showcase.requestLabel;
 
             return (
-              <div key={product.title} className="group flex flex-col">
-                {/* Product Window — XL+ scale (design system §6.3), the
-                    same visual grammar as Hero/Services, pushed here into
-                    its most immersive card-level presentation. */}
-                <a
-                  href={ctaHref}
-                  target={product.isLive ? "_blank" : undefined}
-                  rel={product.isLive ? "noopener noreferrer" : undefined}
-                  aria-label={`${ctaLabel} — ${product.title}`}
-                  className="overflow-hidden rounded-2xl border border-border bg-card shadow-soft transition-all duration-300 group-hover:-translate-y-1 group-hover:border-primary/30 group-hover:shadow-[var(--shadow-elevated)]"
-                >
-                  <div className="flex items-center gap-1.5 border-b border-border/70 px-3.5 py-2.5">
-                    <span className="h-2 w-2 rounded-full bg-destructive/40" />
-                    <span className="h-2 w-2 rounded-full bg-primary/30" />
-                    <span className="h-2 w-2 rounded-full bg-muted-foreground/25" />
-                  </div>
-                  <div className="aspect-[16/10] overflow-hidden bg-surface-strong">
-                    <img
-                      src={showcaseImages[i]}
-                      alt={(t.showcase.previewAlt ?? "{title}").replace("{title}", product.title)}
-                      loading="lazy"
-                      className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
-                    />
-                  </div>
-                </a>
+              <a
+                key={product.title}
+                href={ctaHref}
+                target={product.isLive ? "_blank" : undefined}
+                rel={product.isLive ? "noopener noreferrer" : undefined}
+                aria-label={`${ctaLabel} — ${product.title}`}
+                className={`group relative flex flex-col justify-end overflow-hidden rounded-2xl border border-border shadow-soft transition-all duration-300 hover:-translate-y-1 hover:border-primary/30 hover:shadow-[var(--shadow-elevated)] ${featured ? "aspect-[4/5] sm:aspect-[16/11] lg:aspect-auto" : "aspect-[16/10] lg:aspect-auto"} ${span} ${heightClass}`}
+              >
+                <img
+                  src={showcaseImages[i]}
+                  alt={(t.showcase.previewAlt ?? "{title}").replace("{title}", product.title)}
+                  loading="lazy"
+                  className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.04]"
+                />
+                {/* Scrim: strong enough at the bottom to keep the overlaid
+                    copy readable against any screenshot, light or dark. */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/35 to-black/0" />
 
-                <div className="mt-5 flex flex-1 flex-col px-1">
+                {featured && (
+                  <span className="absolute left-5 top-5 inline-flex items-center gap-1.5 rounded-full bg-black/40 px-3 py-1.5 text-xs font-medium text-primary backdrop-blur-sm">
+                    <Star className="h-3 w-3 fill-current" />
+                    {t.showcase.featuredLabel}
+                  </span>
+                )}
+
+                <div className="relative z-10 p-5 md:p-6">
                   <div className="flex items-center gap-2">
-                    <span className="text-xs font-medium uppercase tracking-wider text-muted-foreground">
+                    <span className="text-xs font-medium uppercase tracking-wider text-white/70">
                       {product.tag}
                     </span>
                     {product.isLive && (
@@ -84,35 +125,23 @@ export function Showcase() {
                     )}
                   </div>
 
-                  <h3 className="mt-1.5 text-base font-semibold text-foreground">
+                  <h3
+                    className={`mt-1.5 font-display font-semibold text-white ${featured ? "text-2xl md:text-[28px]" : "text-lg"}`}
+                  >
                     {product.title}
                   </h3>
-                  <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">
+                  <p
+                    className={`mt-2 leading-relaxed text-white/80 ${featured ? "max-w-md text-sm md:text-base" : "text-sm"}`}
+                  >
                     {product.description}
                   </p>
 
-                  <div className="mt-4 flex flex-wrap gap-1.5">
-                    {product.stack.map((tech) => (
-                      <span
-                        key={tech}
-                        className="rounded-full border border-border bg-secondary px-2.5 py-1 text-[11px] font-medium text-muted-foreground"
-                      >
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
-
-                  <a
-                    href={ctaHref}
-                    target={product.isLive ? "_blank" : undefined}
-                    rel={product.isLive ? "noopener noreferrer" : undefined}
-                    className="group/cta mt-5 inline-flex items-center gap-1.5 text-sm font-medium text-foreground transition-colors duration-200 hover:text-primary"
-                  >
+                  <span className="group/cta mt-4 inline-flex items-center gap-1.5 rounded-full border border-white/25 bg-white/10 px-4 py-2 text-xs font-medium text-white backdrop-blur-sm transition-colors duration-200 group-hover:bg-white/20">
                     {ctaLabel}
-                    <ArrowRight className="h-3.5 w-3.5 transition-transform duration-200 group-hover/cta:translate-x-1" />
-                  </a>
+                    <ArrowRight className="h-3.5 w-3.5 transition-transform duration-200 group-hover:translate-x-1" />
+                  </span>
                 </div>
-              </div>
+              </a>
             );
           })}
         </div>
