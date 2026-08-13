@@ -4,7 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "sonner";
 import { ArrowRight, Bot, Workflow, FileText, BarChart3 } from "lucide-react";
 import { motion, useReducedMotion, type Variants } from "framer-motion";
-import { createWaitlistFormSchema, submitWaitlistLead, type WaitlistFormValues } from "@/lib/leads";
+import { createWaitlistFormSchema, type WaitlistFormValues } from "@/lib/lead-schemas";
 import { useTranslation } from "@/i18n/I18nProvider";
 import { localePath } from "@/i18n";
 
@@ -44,6 +44,7 @@ export function ComingSoon() {
     }
 
     try {
+      const { submitWaitlistLead } = await import("@/lib/leads");
       await submitWaitlistLead({ email: values.email });
       toast.success(t.comingSoon.toastSuccess);
       reset();

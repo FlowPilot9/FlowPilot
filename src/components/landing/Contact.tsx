@@ -4,7 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "sonner";
 import { ArrowRight, Mail, MessageCircle, Eye, Fingerprint } from "lucide-react";
 import { motion, useReducedMotion, type Variants } from "framer-motion";
-import { createContactFormSchema, submitContactLead, type ContactFormValues } from "@/lib/leads";
+import { createContactFormSchema, type ContactFormValues } from "@/lib/lead-schemas";
 import { useTranslation } from "@/i18n/I18nProvider";
 import { localePath } from "@/i18n";
 
@@ -51,6 +51,7 @@ export function Contact() {
     }
 
     try {
+      const { submitContactLead } = await import("@/lib/leads");
       await submitContactLead(lead);
       toast.success(t.contact.toastSuccess);
       reset();
