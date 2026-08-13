@@ -119,7 +119,7 @@ function PerformanceProof({ active, reduceMotion, proof }: ProofProps) {
       <WindowChrome label={proof.scoreLabel}>
         <div className="flex items-center justify-between">
           <span className="text-[10px] text-muted-foreground">{proof.loadTimeLabel}</span>
-          <span className="font-mono text-xs font-semibold text-foreground">
+          <span className="font-mono text-xs font-medium text-foreground">
             {proof.loadTimeValue}
           </span>
         </div>
