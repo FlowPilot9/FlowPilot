@@ -72,7 +72,7 @@ export function Showcase() {
 
   return (
     <section id="work" className="py-24 md:py-32">
-      <div className="mx-auto max-w-[1320px] px-4">
+      <div className="mx-auto w-full px-4 sm:px-6 lg:px-8">
         <SectionHeader
           eyebrow={t.showcase.eyebrow}
           title={t.showcase.title}
@@ -114,11 +114,11 @@ export function Showcase() {
 
                 <div className="relative z-10 p-5 md:p-6">
                   <div className="flex items-center gap-2">
-                    <span className="text-xs font-medium uppercase tracking-wider text-white/70">
+                    <span className="text-sm font-medium uppercase tracking-wider text-white/70">
                       {product.tag}
                     </span>
                     {product.isLive && (
-                      <span className="inline-flex items-center gap-1.5 text-xs font-medium text-primary">
+                      <span className="inline-flex items-center gap-1.5 text-sm font-medium text-primary">
                         <span className="h-1.5 w-1.5 rounded-full bg-primary" />
                         {t.showcase.liveLabel}
                       </span>
@@ -126,15 +126,10 @@ export function Showcase() {
                   </div>
 
                   <h3
-                    className={`mt-1.5 font-display font-semibold text-white ${featured ? "text-2xl md:text-[28px]" : "text-lg"}`}
+                    className={`mt-1.5 font-display font-semibold text-white ${featured ? "text-3xl md:text-[34px]" : "text-2xl"}`}
                   >
                     {product.title}
                   </h3>
-                  <p
-                    className={`mt-2 leading-relaxed text-white/80 ${featured ? "max-w-md text-sm md:text-base" : "text-sm"}`}
-                  >
-                    {product.description}
-                  </p>
 
                   <span className="group/cta mt-4 inline-flex items-center gap-1.5 rounded-full border border-white/25 bg-white/10 px-4 py-2 text-xs font-medium text-white backdrop-blur-sm transition-colors duration-200 group-hover:bg-white/20">
                     {ctaLabel}

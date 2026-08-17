@@ -171,12 +171,12 @@ const StatusIndicator = memo(function StatusIndicator({
   prefersReducedMotion: boolean | null;
 }) {
   return (
-    <div className="flex items-center gap-1.5 font-mono text-[10px] font-medium uppercase tracking-[0.14em] text-muted-foreground/70">
-      <span className="relative flex h-1.5 w-1.5 shrink-0">
+    <div className="flex items-center gap-1.5 font-mono text-[11px] font-medium uppercase tracking-[0.14em] text-muted-foreground/70">
+      <span className="relative flex h-[7px] w-[7px] shrink-0">
         {!prefersReducedMotion && (
           <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary/60 opacity-75" />
         )}
-        <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-primary shadow-[0_0_6px_var(--primary)]" />
+        <span className="relative inline-flex h-[7px] w-[7px] rounded-full bg-primary shadow-[0_0_6px_var(--primary)]" />
       </span>
       {label}
     </div>
@@ -525,13 +525,13 @@ function TrustCard({
           would fight the CSS hover class for the same property and the
           movement would look janky/inconsistent. Keeping them on separate
           elements lets each animation system own its own `transform`. */}
-      <div className="group rounded-2xl glass-panel p-6 transition-[border-color,box-shadow] duration-300 ease-out hover:border-primary/30 hover:shadow-[var(--shadow-elevated)]">
+      <div className="group rounded-2xl glass-panel p-7 transition-[border-color,box-shadow] duration-300 ease-out hover:border-primary/30 hover:shadow-[var(--shadow-elevated)]">
         <div className="flex items-center gap-3">
           <div
             className={`transition-opacity duration-[450ms] ${iconVisible ? "opacity-100" : "opacity-0"}`}
           >
-            <div className="grid h-10 w-10 place-items-center rounded-xl bg-secondary text-muted-foreground transition-colors duration-300 group-hover:bg-primary/10 group-hover:text-primary">
-              <Icon className="h-4 w-4" />
+            <div className="grid h-11 w-11 place-items-center rounded-xl bg-secondary text-muted-foreground transition-colors duration-300 group-hover:bg-primary/10 group-hover:text-primary">
+              <Icon className="h-[18px] w-[18px]" />
             </div>
           </div>
           <div className={`transition-opacity duration-[450ms] ${iconVisible ? "opacity-100" : "opacity-0"}`}>
@@ -539,11 +539,11 @@ function TrustCard({
           </div>
         </div>
         <div className={`transition-opacity duration-[450ms] ${textVisible ? "opacity-100" : "opacity-0"}`}>
-          <h3 className="mt-4 text-base font-semibold text-foreground transition-transform duration-300 group-hover:translate-x-0.5">
+          <h3 className="mt-4 text-lg font-semibold text-foreground transition-transform duration-300 group-hover:translate-x-0.5">
             {title}
           </h3>
-          <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">{description}</p>
-          <p className="mt-3 text-xs text-muted-foreground/70">{detail}</p>
+          <p className="mt-1.5 text-base leading-relaxed text-muted-foreground">{description}</p>
+          <p className="mt-3 text-sm text-muted-foreground/70">{detail}</p>
         </div>
       </div>
     </motion.div>
@@ -612,12 +612,12 @@ export function Trust() {
 
   return (
     <section className="border-y border-border/60 bg-surface">
-      <div ref={sectionRef} className="mx-auto max-w-[1320px] px-4 py-20">
+      <div ref={sectionRef} className="mx-auto w-full px-4 py-20 sm:px-6 lg:px-8">
         <motion.h2
           initial={{ opacity: 0, y: 14 }}
           animate={sectionInView ? { opacity: 1, y: 0 } : {}}
           transition={prefersReducedMotion ? { duration: 0.01 } : { duration: 0.6, ease: EASE }}
-          className="mx-auto max-w-2xl text-center text-2xl font-display font-semibold tracking-tight text-foreground md:text-3xl"
+          className="mx-auto max-w-3xl text-center text-3xl font-display font-semibold tracking-tight text-foreground md:text-4xl"
         >
           {t.trust.title}
         </motion.h2>
@@ -629,21 +629,21 @@ export function Trust() {
             return (
               <div
                 key={trustItem.title}
-                className="group rounded-2xl border border-border bg-background p-6 shadow-soft transition-all duration-300 hover:-translate-y-1 hover:border-primary/30 hover:shadow-[var(--shadow-elevated)]"
+                className="group rounded-2xl border border-border bg-background p-7 shadow-soft transition-all duration-300 hover:-translate-y-1 hover:border-primary/30 hover:shadow-[var(--shadow-elevated)]"
               >
                 <div className="flex items-center gap-3">
-                  <div className="grid h-10 w-10 place-items-center rounded-xl bg-secondary text-muted-foreground transition-colors duration-300 group-hover:bg-primary/10 group-hover:text-primary">
-                    <Icon className="h-4 w-4" />
+                  <div className="grid h-11 w-11 place-items-center rounded-xl bg-secondary text-muted-foreground transition-colors duration-300 group-hover:bg-primary/10 group-hover:text-primary">
+                    <Icon className="h-[18px] w-[18px]" />
                   </div>
                   <StatusIndicator label={cardStatus[index]} prefersReducedMotion={prefersReducedMotion} />
                 </div>
-                <h3 className="mt-4 text-base font-semibold text-foreground transition-transform duration-300 group-hover:translate-x-0.5">
+                <h3 className="mt-4 text-lg font-semibold text-foreground transition-transform duration-300 group-hover:translate-x-0.5">
                   {trustItem.title}
                 </h3>
-                <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">
+                <p className="mt-1.5 text-base leading-relaxed text-muted-foreground">
                   {trustItem.description}
                 </p>
-                <p className="mt-3 text-xs text-muted-foreground/70">{trustItem.detail}</p>
+                <p className="mt-3 text-sm text-muted-foreground/70">{trustItem.detail}</p>
               </div>
             );
           })}
