@@ -583,22 +583,24 @@ function PrincipleRow({
     >
       <div className={`lg:col-span-6 ${reversed ? "lg:order-2" : "lg:order-1"}`}>
         <div className="flex items-baseline gap-3">
-          <span className="font-mono text-sm text-muted-foreground/40">
+          <span className="font-mono text-base text-muted-foreground/40">
             {String(index + 1).padStart(2, "0")}
           </span>
-          <span className="text-xs font-medium uppercase tracking-[0.14em] text-muted-foreground">
+          <span className="text-sm font-semibold uppercase tracking-[0.14em] text-muted-foreground">
             {label}
           </span>
         </div>
-        <h3 className="mt-4 text-2xl font-display font-semibold tracking-tight text-foreground md:text-[26px]">
+        <h3 className="mt-4 text-2xl font-display font-semibold tracking-tight text-foreground md:text-3xl">
           {title}
         </h3>
-        <p className="mt-3 max-w-[38ch] text-base leading-[1.6] text-muted-foreground">{desc}</p>
+        <p className="mt-3 max-w-[42ch] text-base leading-[1.6] text-muted-foreground">
+          {desc}
+        </p>
       </div>
       <div className={`lg:col-span-6 ${reversed ? "lg:order-1" : "lg:order-2"}`}>
         <div
           aria-hidden="true"
-          className="flex min-h-[7.5rem] items-center justify-center rounded-2xl border border-border/70 bg-secondary/30 px-8 py-6"
+          className="flex min-h-[9rem] items-center justify-center rounded-2xl border border-border/70 bg-secondary/30 px-8 py-8 md:px-10"
         >
           <Proof active={inView} reduceMotion={reduceMotion} proof={proof} />
         </div>
@@ -613,7 +615,7 @@ export function Why() {
 
   return (
     <section className="bg-surface py-24 md:py-32">
-      <div className="mx-auto max-w-[1320px] px-4">
+      <div className="mx-auto w-full max-w-[1600px] px-6 md:px-10 lg:px-16">
         <SectionHeader eyebrow={t.why.eyebrow} title={t.why.title} description={t.why.intro} />
 
         <div className="mt-16 md:mt-20">
