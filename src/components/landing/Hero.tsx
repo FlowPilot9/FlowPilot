@@ -13,8 +13,8 @@ import { usePageReady } from "@/hooks/use-page-ready";
 // in, same as every other section, via the semantic tokens.
 //
 // Entrance is a hand-timed sequence rather than a generic stagger, so it
-// reads in a specific order: badge -> headline (line by line, masked) ->
-// supporting text -> CTAs -> trust row -> the workspace scene powering on.
+// reads in a specific order: headline (line by line, masked) -> subtitle ->
+// CTAs -> the workspace scene powering on.
 // ---------------------------------------------------------------------------
 
 const EASE = [0.22, 1, 0.36, 1] as const;
@@ -45,7 +45,7 @@ export function Hero() {
   return (
     <section
       id="top"
-      className="relative isolate overflow-hidden bg-background pb-20 pt-28 transition-colors duration-500 md:flex md:min-h-[94vh] md:items-center md:pb-0 md:pt-0"
+      className="relative isolate overflow-hidden bg-background pb-20 pt-28 transition-colors duration-500 md:flex md:min-h-screen md:flex-col md:pb-16 md:pt-48"
     >
       {/* Atmosphere: night ocean glow in dark mode only (see
           AtmosphereScene.tsx). A faint technical grid sits on top of it in
@@ -63,68 +63,61 @@ export function Hero() {
         className="pointer-events-none absolute inset-x-0 bottom-0 z-10 h-28 bg-gradient-to-b from-transparent to-[var(--background)] transition-colors duration-500 md:h-40"
       />
 
-      <div className="relative z-0 mx-auto grid max-w-[1320px] grid-cols-1 items-center gap-16 px-4 md:grid-cols-2 md:gap-10">
+      <div className="relative z-0 mx-auto grid w-full max-w-[1600px] grid-cols-1 items-start gap-16 px-6 md:flex-1 md:grid-cols-[1fr_1.1fr] md:gap-28 md:px-10 lg:gap-44 lg:px-16">
         <div>
-          <motion.span
-            {...reveal(0)}
-            className="inline-flex items-center gap-2 rounded-full border border-border bg-secondary px-3 py-1 text-xs font-medium text-muted-foreground backdrop-blur"
-          >
-            <span className="relative flex h-1.5 w-1.5">
-              <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-primary" />
-            </span>
-            {t.hero.badge}
-          </motion.span>
-
-          <h1 className="mt-6 text-5xl font-display font-bold leading-[1.18] tracking-tight text-foreground sm:text-6xl md:text-[3.75rem] md:leading-[1.18]">
+          <h1 className="w-fit text-5xl font-display font-bold leading-[1.15] tracking-tight text-foreground sm:text-6xl md:text-[3.75rem] md:leading-[1.15] lg:text-[4.25rem]">
             <span className="block overflow-hidden">
-              <motion.span {...maskLine(0.32)} className="block">
+              <motion.span {...maskLine(0.32)} className="block text-[1.08em]">
                 {t.hero.title}
               </motion.span>
             </span>
-            <span className="block overflow-hidden">
-              <motion.span {...maskLine(0.44)} className="block font-semibold text-primary">
-                {t.hero.titleHighlight}
+            <span className="block overflow-hidden pb-3 text-center">
+              <motion.span {...maskLine(0.4)} className="block text-[0.88em]">
+                <span className="font-accent text-[1.2em] italic font-semibold text-primary">
+                  {t.hero.titleLine2}
+                </span>{" "}
+                <span className="relative inline-block whitespace-nowrap">
+                  {t.hero.titleUnderline}
+                  <span className="pointer-events-none absolute -bottom-3 left-0 h-[4px] w-full origin-left -rotate-[4deg] rounded-full bg-primary" />
+                </span>
+              </motion.span>
+            </span>
+            <span className="block overflow-hidden pb-1 pt-0">
+              <motion.span {...maskLine(0.52)} className="block text-[0.92em]">
+                {t.hero.subtitlePrefix}{" "}
+                <span className="font-accent text-[1.15em] italic font-medium text-primary">
+                  {t.hero.titleHighlight}
+                </span>
               </motion.span>
             </span>
           </h1>
 
           <motion.p
-            {...reveal(0.6)}
+            {...reveal(0.64)}
             className="mt-6 max-w-xl text-base leading-relaxed text-muted-foreground md:text-lg"
           >
             {t.hero.description}
           </motion.p>
 
-          <motion.div {...reveal(0.72)} className="mt-8 flex flex-wrap items-center gap-3">
+          <motion.div {...reveal(0.76)} className="mt-10 flex flex-wrap items-center gap-3">
             <motion.a
               href="#contact"
               whileHover={prefersReducedMotion ? undefined : { scale: 1.03 }}
               whileTap={prefersReducedMotion ? undefined : { scale: 0.98 }}
               transition={{ duration: 0.2, ease: "easeOut" }}
-              className="btn-primary inline-flex items-center gap-2 rounded-xl px-5 py-3 text-sm font-medium"
+              className="btn-primary inline-flex items-center gap-2 rounded-xl px-7 py-4 text-base font-medium"
             >
-              {t.hero.ctaPrimary} <ArrowRight className="h-4 w-4" />
+              {t.hero.ctaPrimary} <ArrowRight className="h-5 w-5" />
             </motion.a>
             <motion.a
               href="#work"
               whileHover={prefersReducedMotion ? undefined : { scale: 1.03 }}
               whileTap={prefersReducedMotion ? undefined : { scale: 0.98 }}
               transition={{ duration: 0.2, ease: "easeOut" }}
-              className="btn-ghost inline-flex items-center gap-2 rounded-xl px-5 py-3 text-sm font-medium"
+              className="btn-ghost inline-flex items-center gap-2 rounded-xl px-7 py-4 text-base font-medium"
             >
               {t.hero.ctaSecondary}
             </motion.a>
-          </motion.div>
-
-          <motion.div
-            {...reveal(0.84)}
-            className="mt-10 flex flex-wrap items-center gap-x-4 gap-y-2 text-sm text-muted-foreground"
-          >
-            <span>{t.hero.trustTimeline}</span>
-            <span className="h-1 w-1 rounded-full bg-border" />
-            <span>{t.hero.trustStack}</span>
-            <span className="h-1 w-1 rounded-full bg-border" />
-            <span>{t.hero.trustSupport}</span>
           </motion.div>
         </div>
 

@@ -34,6 +34,9 @@ export interface TranslationDictionary {
   hero: {
     badge: string;
     title: string;
+    titleLine2: string;
+    titleUnderline: string;
+    subtitlePrefix: string;
     titleHighlight: string;
     description: string;
     ctaPrimary: string;

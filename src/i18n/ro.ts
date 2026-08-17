@@ -28,10 +28,12 @@ export const ro: TranslationDictionary = {
   },
   hero: {
     badge: "Acceptăm proiecte noi · T4 2026",
-    title: "Construim site-uri care fac afacerile",
-    titleHighlight: "imposibil de ignorat.",
-    description:
-      "Design memorabil, dezvoltare rapidă și o fundație pregătită pentru ceea ce urmează.",
+    title: "Un site nu este",
+    titleLine2: "doar",
+    titleUnderline: "o pagină.",
+    subtitlePrefix: "Este",
+    titleHighlight: "prima impresie.",
+    description: "Creăm site-uri rapide, moderne și adaptate afacerii tale.",
     ctaPrimary: "Începe un proiect",
     ctaSecondary: "Explorează modelele",
     trustTimeline: "Livrare în 1 - 2 săptămâni",

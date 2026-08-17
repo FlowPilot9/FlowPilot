@@ -169,25 +169,6 @@ function ColoredLayer({
                 — Business Lead
               </span>
             </div>
-
-            {/* Bottom badges with existing stagger animation */}
-            <div className="grid grid-cols-4 gap-2 mt-6">
-              {[
-                { label: "Responsive" },
-                { label: "SEO" },
-                { label: "Rapid" },
-                { label: "Live" },
-              ].map((badge, i) => (
-                <div
-                  key={i}
-                  className={`rounded-lg border border-border bg-card p-3 shadow-sm ${animated ? `scene-badge-${i + 1}` : ""}`}
-                >
-                  <span className="block text-[9px] font-bold text-foreground text-center">
-                    {badge.label}
-                  </span>
-                </div>
-              ))}
-            </div>
           </div>
         </div>
       </div>
@@ -207,7 +188,7 @@ function StaticFinishedScene({
   badges: string[];
 }) {
   return (
-    <div className="relative h-[300px]">
+    <div className="relative h-[360px]">
       <ColoredLayer navItems={navItems} heading={heading} cta={cta} animated={false} />
       <div className="absolute inset-x-0 bottom-3 flex flex-wrap justify-center gap-1.5 px-4">
         {badges.map((label) => (
@@ -231,7 +212,7 @@ export function HeroWorkspace() {
   const badgeAnimations = ["scene-badge-1", "scene-badge-2", "scene-badge-3", "scene-badge-4"];
 
   return (
-    <div className="relative mx-auto w-full max-w-[540px] [perspective:1600px]">
+    <div className="relative ml-auto w-full max-w-[600px] [perspective:1600px]">
       {/* Ambient glow behind the product window — present in both themes,
           but doing more visible work in light mode, where there's no
           illustrated atmosphere of its own to lend the panel separation
@@ -276,7 +257,7 @@ export function HeroWorkspace() {
             badges={ws.badges}
           />
         ) : (
-          <div className="relative h-[300px] overflow-hidden bg-background">
+          <div className="relative h-[360px] overflow-hidden bg-background">
             <WireframeLayer />
             <ColoredLayer navItems={ws.navItems} heading={ws.heroHeading} cta={ws.heroCta} />
 
