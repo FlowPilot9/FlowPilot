@@ -25,7 +25,7 @@ export function Process() {
 
   return (
     <section id="process" className="py-24 md:py-32">
-      <div className="mx-auto w-full px-4 sm:px-6 lg:px-8">
+      <div className="mx-auto w-full max-w-[1680px] px-6 sm:px-10 lg:px-16">
         <SectionHeader eyebrow={t.process.eyebrow} title={t.process.title} />
 
         {/* Timeline — the navigation element. Only the active step ever
@@ -33,7 +33,7 @@ export function Process() {
             else stays neutral, regardless of position. */}
         <div className="relative mt-16">
           <div
-            className="pointer-events-none absolute top-7 hidden h-px overflow-hidden rounded-full bg-border md:block"
+            className="pointer-events-none absolute top-6 hidden h-px overflow-hidden rounded-full bg-border md:block"
             style={{ left: trackInset, right: trackInset }}
           >
             <motion.div
@@ -63,15 +63,15 @@ export function Process() {
                     className="flex w-full flex-col items-center text-center focus-visible:outline-none"
                   >
                     <span
-                      className={`relative grid h-14 w-14 place-items-center rounded-2xl border shadow-soft transition-all duration-300 ${
+                      className={`relative grid h-12 w-12 place-items-center rounded-2xl border shadow-soft transition-all duration-300 ${
                         isActive
                           ? "scale-110 border-primary/50 bg-background text-primary shadow-[var(--shadow-elevated)] ring-2 ring-primary/15"
                           : "border-border bg-background text-muted-foreground hover:border-primary/25"
                       }`}
                     >
-                      <Icon className="h-6 w-6" />
+                      <Icon className="h-5 w-5" />
                       <span
-                        className={`absolute -bottom-2 -right-2 grid h-6 w-6 place-items-center rounded-full text-xs font-semibold transition-colors duration-300 ${
+                        className={`absolute -bottom-2 -right-2 grid h-5 w-5 place-items-center rounded-full text-[10px] font-semibold transition-colors duration-300 ${
                           isActive
                             ? "bg-[image:var(--gradient-primary)] text-primary-foreground"
                             : "bg-secondary text-muted-foreground"
@@ -81,7 +81,7 @@ export function Process() {
                       </span>
                     </span>
                     <span
-                      className={`mt-4 text-base font-medium transition-colors duration-300 ${
+                      className={`mt-4 text-sm font-medium transition-colors duration-300 ${
                         isActive ? "text-foreground" : "text-muted-foreground"
                       }`}
                     >
@@ -104,19 +104,19 @@ export function Process() {
               animate={{ opacity: 1, y: 0 }}
               exit={prefersReducedMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: -10 }}
               transition={{ duration: prefersReducedMotion ? 0.01 : 0.35, ease: "easeOut" }}
-              className="rounded-3xl border border-border bg-card p-9 shadow-soft md:p-12"
+              className="rounded-3xl border border-border bg-card p-8 shadow-soft md:p-10"
             >
               <div className="flex flex-wrap items-baseline justify-between gap-3">
                 <div>
-                  <span className="text-sm font-semibold uppercase tracking-[0.14em] text-muted-foreground">
+                  <span className="text-xs font-semibold uppercase tracking-[0.14em] text-muted-foreground">
                     {t.process.eyebrow} · {String(active + 1).padStart(2, "0")}
                   </span>
-                  <h3 className="mt-1.5 text-3xl font-display font-bold tracking-tight text-foreground md:text-4xl">
+                  <h3 className="mt-1.5 text-2xl font-display font-bold tracking-tight text-foreground md:text-3xl">
                     {activeStep.title}
                   </h3>
                 </div>
                 {activeStep.duration && (
-                  <span className="rounded-full border border-border bg-secondary px-3.5 py-1.5 text-sm font-medium text-muted-foreground">
+                  <span className="rounded-full border border-border bg-secondary px-3 py-1 text-xs font-medium text-muted-foreground">
                     {t.process.labels.duration}: {activeStep.duration}
                   </span>
                 )}
@@ -124,26 +124,26 @@ export function Process() {
 
               <div className="mt-8 grid grid-cols-1 gap-8 sm:grid-cols-3">
                 <div>
-                  <div className="text-sm font-semibold uppercase tracking-[0.1em] text-foreground">
+                  <div className="text-xs font-semibold uppercase tracking-[0.1em] text-foreground">
                     {t.process.labels.whatWeDo}
                   </div>
-                  <p className="mt-2 text-base leading-relaxed text-muted-foreground">
+                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
                     {activeStep.whatWeDo}
                   </p>
                 </div>
                 <div>
-                  <div className="text-sm font-semibold uppercase tracking-[0.1em] text-foreground">
+                  <div className="text-xs font-semibold uppercase tracking-[0.1em] text-foreground">
                     {t.process.labels.whatClientGets}
                   </div>
-                  <p className="mt-2 text-base leading-relaxed text-muted-foreground">
+                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
                     {activeStep.whatClientGets}
                   </p>
                 </div>
                 <div>
-                  <div className="text-sm font-semibold uppercase tracking-[0.1em] text-foreground">
+                  <div className="text-xs font-semibold uppercase tracking-[0.1em] text-foreground">
                     {t.process.labels.whyItMatters}
                   </div>
-                  <p className="mt-2 text-base leading-relaxed text-muted-foreground">
+                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
                     {activeStep.whyItMatters}
                   </p>
                 </div>

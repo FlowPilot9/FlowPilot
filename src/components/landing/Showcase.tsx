@@ -72,7 +72,7 @@ export function Showcase() {
 
   return (
     <section id="work" className="py-24 md:py-32">
-      <div className="mx-auto w-full px-4 sm:px-6 lg:px-8">
+      <div className="mx-auto w-full max-w-[1680px] px-6 sm:px-10 lg:px-16">
         <SectionHeader
           eyebrow={t.showcase.eyebrow}
           title={t.showcase.title}
@@ -114,11 +114,11 @@ export function Showcase() {
 
                 <div className="relative z-10 p-5 md:p-6">
                   <div className="flex items-center gap-2">
-                    <span className="text-sm font-medium uppercase tracking-wider text-white/70">
+                    <span className="text-xs font-medium uppercase tracking-wider text-white/70">
                       {product.tag}
                     </span>
                     {product.isLive && (
-                      <span className="inline-flex items-center gap-1.5 text-sm font-medium text-primary">
+                      <span className="inline-flex items-center gap-1.5 text-xs font-medium text-primary">
                         <span className="h-1.5 w-1.5 rounded-full bg-primary" />
                         {t.showcase.liveLabel}
                       </span>
@@ -126,7 +126,7 @@ export function Showcase() {
                   </div>
 
                   <h3
-                    className={`mt-1.5 font-display font-semibold text-white ${featured ? "text-3xl md:text-[34px]" : "text-2xl"}`}
+                    className={`mt-1.5 font-display font-semibold text-white ${featured ? "text-2xl md:text-[28px]" : "text-xl"}`}
                   >
                     {product.title}
                   </h3>

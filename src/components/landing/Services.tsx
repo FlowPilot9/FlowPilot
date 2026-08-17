@@ -119,7 +119,7 @@ export function Services() {
 
   return (
     <section id="services" className="bg-surface py-24 md:py-32">
-      <div className="mx-auto w-full px-4 sm:px-6 lg:px-8">
+      <div className="mx-auto w-full max-w-[1680px] px-6 sm:px-10 lg:px-16">
         <SectionHeader
           eyebrow={t.services.eyebrow}
           title={t.services.title}
@@ -141,26 +141,26 @@ export function Services() {
               <motion.div
                 key={service.title}
                 variants={item}
-                className="group relative flex flex-col overflow-hidden rounded-2xl border border-border bg-card p-7 shadow-soft transition-all duration-300 hover:-translate-y-1 hover:border-primary/30 hover:shadow-[var(--shadow-elevated)]"
+                className="group relative flex flex-col overflow-hidden rounded-2xl border border-border bg-card p-6 shadow-soft transition-all duration-300 hover:-translate-y-1 hover:border-primary/30 hover:shadow-[var(--shadow-elevated)]"
               >
                 <div className="absolute inset-x-0 -top-px h-px bg-gradient-to-r from-transparent via-primary/40 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
 
-                <div className="mb-5 grid h-12 w-12 place-items-center rounded-xl bg-secondary text-muted-foreground transition-colors duration-300 group-hover:bg-primary/10 group-hover:text-primary">
-                  <Icon className="h-[22px] w-[22px]" />
+                <div className="mb-5 grid h-11 w-11 place-items-center rounded-xl bg-secondary text-muted-foreground transition-colors duration-300 group-hover:bg-primary/10 group-hover:text-primary">
+                  <Icon className="h-5 w-5" />
                 </div>
 
                 <div className="flex items-center gap-2">
-                  <h3 className="text-xl font-semibold text-foreground">{service.title}</h3>
+                  <h3 className="text-lg font-semibold text-foreground">{service.title}</h3>
                   {service.badge && (
-                    <span className="rounded-full border border-primary/30 bg-primary/5 px-2.5 py-1 text-xs font-semibold uppercase tracking-wider text-primary">
+                    <span className="rounded-full border border-primary/30 bg-primary/5 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-primary">
                       {service.badge}
                     </span>
                   )}
                 </div>
-                <p className="mt-2 text-base leading-relaxed text-muted-foreground">{service.desc}</p>
+                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{service.desc}</p>
 
                 {/* M-scale product window — design system §6.3 */}
-                <div className="mt-5 rounded-xl border border-border/70 bg-secondary/40 p-4">
+                <div className="mt-5 rounded-xl border border-border/70 bg-secondary/40 p-3">
                   <Preview />
                 </div>
               </motion.div>
