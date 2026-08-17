@@ -12,14 +12,14 @@ export function Logo() {
       <img
         src="/logo-light.webp"
         alt="FlowPilot"
-        className="block h-8 w-8 object-contain dark:hidden"
+        className="block h-9 w-9 object-contain dark:hidden"
       />
       <img
         src="/logo-dark.webp"
         alt="FlowPilot"
-        className="hidden h-8 w-8 object-contain dark:block"
+        className="hidden h-9 w-9 object-contain dark:block"
       />
-      <span className="text-[17px]">FlowPilot</span>
+      <span className="text-[19px]">FlowPilot</span>
     </a>
   );
 }

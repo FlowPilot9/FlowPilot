@@ -64,21 +64,21 @@ export function Nav() {
         scrolled ? "py-3" : "py-5"
       }`}
     >
-      <div className="mx-auto max-w-[1320px] px-4">
+      <div className="mx-auto w-full px-4 sm:px-6 lg:px-8">
         <div
-          className={`flex items-center justify-between rounded-2xl border px-4 py-2.5 transition-all ${
+          className={`flex items-center justify-between rounded-2xl border px-5 py-3.5 transition-all ${
             scrolled
               ? "glass-panel border-transparent"
               : "border-transparent bg-transparent shadow-none"
           }`}
         >
           <Logo />
-          <nav className="hidden items-center gap-1 md:flex">
+          <nav className="hidden items-center gap-1.5 md:flex">
             {links.map((l) => (
               <a
                 key={l.href}
                 href={l.href}
-                className="relative rounded-lg px-3 py-1.5 text-sm text-muted-foreground transition-colors hover:text-foreground"
+                className="relative rounded-lg px-4 py-2 text-base text-muted-foreground transition-colors hover:text-foreground"
               >
                 {activeHref === l.href && (
                   <motion.span
@@ -91,14 +91,14 @@ export function Nav() {
               </a>
             ))}
           </nav>
-          <div className="hidden items-center gap-3 md:flex">
+          <div className="hidden items-center gap-4 md:flex">
             <ThemeToggle />
             <LanguageSwitcher />
             <a
               href={`${homePath}#contact`}
-              className="btn-primary inline-flex items-center gap-1.5 rounded-xl px-4 py-2 text-sm font-medium"
+              className="btn-primary inline-flex items-center gap-2 rounded-xl px-5 py-2.5 text-base font-medium"
             >
-              {t.common.getInTouch} <ArrowRight className="h-3.5 w-3.5" />
+              {t.common.getInTouch} <ArrowRight className="h-4 w-4" />
             </a>
           </div>
           <div className="flex items-center gap-2 md:hidden">
