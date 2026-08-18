@@ -25,6 +25,20 @@ const item: Variants = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] } },
 };
 
+// Three sparse rain drops for the pricing-grid backdrop, falling straight
+// down, spaced so only one or two are ever visible at once. Left
+// position, fall duration/delay, and trail length are varied by hand so
+// the set reads as scattered rather than a repeating pattern; the
+// durations (4.2/5.6/4.8) share no common small multiple, so the overlap
+// between drops keeps shifting over time instead of settling into a
+// visible loop. Kept within ~40–60% so they stay inside the grid's masked
+// center spotlight rather than the faded edges.
+const rainDrops = [
+  { id: 0, left: 41, duration: 4.2, delay: 0, height: 46 },
+  { id: 1, left: 57, duration: 5.6, delay: 2.4, height: 60 },
+  { id: 2, left: 48, duration: 4.8, delay: 4.6, height: 36 },
+];
+
 export function Services() {
   const { t } = useTranslation();
   const prefersReducedMotion = useReducedMotion();
@@ -35,7 +49,27 @@ export function Services() {
       {/* Faint technical grid, concentrated top-center and fading out —
           same family as the Hero background. A small ambient glow sits
           above/behind it, like a soft light source the grid catches. */}
-      <div aria-hidden className="pricing-grid pointer-events-none absolute inset-0 -z-10" />
+      <div aria-hidden className="pricing-grid pointer-events-none absolute inset-0 -z-10">
+        {/* Rain drops live *inside* the masked grid element itself (not a
+            sibling), so they inherit the exact same radial fade the grid
+            pattern uses — guarantees they stay centered on the grid's
+            spotlight instead of a separately-guessed box. Left position,
+            duration, delay and trail length are all varied per drop so
+            the handful of drops drift in and out of sync over time instead
+            of visibly repeating the same pattern. */}
+        {rainDrops.map((drop) => (
+          <span
+            key={drop.id}
+            className="pricing-rain-drop"
+            style={{
+              left: `${drop.left}%`,
+              height: `${drop.height}px`,
+              animationDuration: `${drop.duration}s`,
+              animationDelay: `${drop.delay}s`,
+            }}
+          />
+        ))}
+      </div>
       <div
         aria-hidden
         className="pointer-events-none absolute inset-x-0 top-0 -z-10 mx-auto h-[720px] w-full max-w-5xl"

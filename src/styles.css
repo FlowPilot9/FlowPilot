@@ -413,6 +413,48 @@
   mix-blend-mode: overlay;
 }
 
+/* Three sparse "rain" streaks falling straight down through the
+   pricing-grid's top spotlight — each a short vertical trail that falls
+   and fades on its own loop, with durations/delays spaced so only one or
+   two are ever visible together. `animation-fill-mode: backwards` (plus
+   the base opacity: 0) matters here: without it, every drop would render
+   fully visible and frozen in its start position for the length of its
+   `animation-delay`, until its very first loop kicks in — this keeps them
+   invisible until they actually begin falling. Uses --primary so it's
+   gold in light mode and blue in dark mode, matching the section's
+   existing accent. */
+@keyframes pricing-rain-fall {
+  0% {
+    transform: translateY(-30px);
+    opacity: 0;
+  }
+  15% {
+    opacity: 1;
+  }
+  75% {
+    opacity: 0.5;
+  }
+  100% {
+    transform: translateY(320px);
+    opacity: 0;
+  }
+}
+@utility pricing-rain-drop {
+  position: absolute;
+  top: 0;
+  width: 2px;
+  height: 58px;
+  border-radius: 999px;
+  background: linear-gradient(
+    to top,
+    color-mix(in oklab, var(--primary) 85%, transparent),
+    transparent
+  );
+  opacity: 0;
+  animation: pricing-rain-fall linear infinite;
+  animation-fill-mode: backwards;
+}
+
 @keyframes float-slow {
   0%,
   100% {
