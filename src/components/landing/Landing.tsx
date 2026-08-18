@@ -5,7 +5,6 @@ import { Trust } from "@/components/landing/Trust";
 import { Services } from "@/components/landing/Services";
 import { Process } from "@/components/landing/Process";
 import { Showcase } from "@/components/landing/Showcase";
-import { ComingSoon } from "@/components/landing/ComingSoon";
 import { About } from "@/components/landing/About";
 import { Footer } from "@/components/landing/Footer";
 import { Preloader } from "@/components/landing/Preloader";
@@ -54,7 +53,6 @@ export function Landing() {
       <Suspense fallback={<div className="py-24 md:py-32" aria-hidden />}>
         <Why />
       </Suspense>
-      <ComingSoon />
       <About />
       <Suspense fallback={<div className="py-24 md:py-32" aria-hidden />}>
         <Contact />

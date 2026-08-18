@@ -24,7 +24,7 @@ export function LanguageSwitcher({ className = "" }: { className?: string }) {
             key={code}
             href={localePath(code as Locale, basePath)}
             aria-current={active ? "page" : undefined}
-            className={`rounded-md px-3 py-1.5 text-sm font-semibold tracking-wide transition-colors ${
+            className={`rounded-md px-2.5 py-1 text-xs font-semibold tracking-wide transition-colors ${
               active
                 ? "bg-primary text-primary-foreground shadow-sm"
                 : "text-muted-foreground hover:text-foreground"

@@ -10,10 +10,10 @@ export function About() {
   const { t } = useTranslation();
 
   return (
-    <section id="about" className="bg-surface py-24 md:py-32">
-      <div className="mx-auto max-w-6xl px-4">
-        <div className="grid gap-10 md:grid-cols-12 md:gap-x-16">
-          <div className="md:col-span-5">
+    <section id="about" className="py-24 md:py-32">
+      <div className="mx-auto w-full max-w-[1680px] px-4 sm:px-6 lg:px-8">
+        <div className="grid gap-10 md:grid-cols-12 md:gap-x-12">
+          <div className="md:col-span-4">
             <span className="text-xs font-semibold uppercase tracking-[0.18em] text-primary">
               {t.about.eyebrow}
             </span>
@@ -48,8 +48,8 @@ export function About() {
             </div>
           </div>
 
-          <div className="md:col-span-7">
-            <div className="space-y-4 text-base leading-relaxed text-muted-foreground md:text-lg">
+          <div className="md:col-span-8">
+            <div className="space-y-5 text-lg leading-relaxed text-muted-foreground md:text-xl">
               <p>{t.about.paragraph1}</p>
               <p>{t.about.paragraph2}</p>
               <p>{t.about.paragraph3}</p>
@@ -58,19 +58,19 @@ export function About() {
             {/* Differentiators as plain statements, not icon cards — a
                 repeated card grid here would reintroduce the generic-agency
                 feeling the brief asks to avoid. */}
-            <ul className="mt-8 space-y-2.5">
+            <ul className="mt-8 space-y-3">
               {t.about.differentiators.map((line) => (
                 <li
                   key={line}
-                  className="flex items-start gap-2.5 text-sm text-foreground/90 md:text-base"
+                  className="flex items-start gap-3 text-base text-foreground/90 md:text-lg"
                 >
-                  <span aria-hidden className="mt-2 h-1 w-1 shrink-0 rounded-full bg-primary/60" />
+                  <span aria-hidden className="mt-2.5 h-1.5 w-1.5 shrink-0 rounded-full bg-primary/60" />
                   {line}
                 </li>
               ))}
             </ul>
 
-            <div className="mt-10 border-t border-border pt-8 text-base leading-relaxed text-muted-foreground md:text-lg">
+            <div className="mt-10 border-t border-border pt-8 text-lg leading-relaxed text-muted-foreground md:text-xl">
               <span className="font-semibold text-foreground">{t.about.today}</span>{" "}
               {t.about.todayText}{" "}
               <span className="font-semibold text-foreground">{t.about.tomorrow}</span>{" "}

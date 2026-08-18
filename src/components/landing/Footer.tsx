@@ -20,7 +20,7 @@ export function Footer() {
         <div className="absolute left-1/2 top-0 h-[420px] w-[720px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(closest-side,color-mix(in_oklab,var(--color-primary-glow)_18%,transparent),transparent)]" />
       </div>
 
-      <div className="mx-auto max-w-[1500px] px-4 py-16 md:py-20">
+      <div className="mx-auto max-w-[1680px] px-6 py-16 sm:px-10 lg:px-16 md:py-20">
         <div className="grid gap-12 md:grid-cols-[1.4fr_1fr_1fr]">
           <div>
             <Logo />
@@ -58,12 +58,6 @@ export function Footer() {
                 className="w-fit transition-colors hover:text-foreground"
               >
                 {t.nav.work}
-              </a>
-              <a
-                href={`${homePath}#future`}
-                className="w-fit transition-colors hover:text-foreground"
-              >
-                {t.nav.comingSoon}
               </a>
               <a
                 href={`${homePath}#about`}

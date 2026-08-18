@@ -64,30 +64,30 @@ export function Contact() {
     "w-full rounded-xl border border-border bg-card px-3.5 py-2.5 text-sm outline-none transition-all duration-200 hover:border-foreground/20 focus:border-primary focus:ring-4 focus:ring-primary/10";
 
   return (
-    <section id="contact" className="py-24 md:py-32">
-      <div className="mx-auto max-w-5xl px-4">
-        <div className="grid grid-cols-1 gap-10 md:grid-cols-2 md:gap-14">
+    <section id="contact" className="bg-surface py-24 md:py-32">
+      <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="text-center">
+          <span className="text-sm font-semibold uppercase tracking-[0.2em] text-primary">
+            {t.contact.eyebrow}
+          </span>
+        </div>
+
+        <div className="mt-8 grid grid-cols-1 gap-10 md:grid-cols-2 md:gap-14">
           <motion.div
             initial={prefersReducedMotion ? "visible" : "hidden"}
             whileInView="visible"
             viewport={{ once: true, amount: 0.3 }}
             variants={container}
           >
-            <motion.span
-              variants={item}
-              className="block text-xs font-semibold uppercase tracking-[0.18em] text-primary"
-            >
-              {t.contact.eyebrow}
-            </motion.span>
             <motion.h2
               variants={item}
-              className="mt-3 text-3xl font-bold tracking-tight text-foreground sm:text-4xl md:text-[42px] md:leading-[1.1]"
+              className="text-4xl font-bold tracking-tight text-foreground sm:text-5xl md:text-[46px] md:leading-[1.1]"
             >
               {t.contact.title}
             </motion.h2>
             <motion.p
               variants={item}
-              className="mt-4 max-w-md text-base text-muted-foreground md:text-lg"
+              className="mt-5 max-w-lg text-lg text-muted-foreground md:text-xl"
             >
               {t.contact.description}
             </motion.p>
@@ -95,21 +95,21 @@ export function Contact() {
             <motion.a
               variants={item}
               href="mailto:tflowpilot@gmail.com"
-              className="mt-7 inline-flex items-center gap-2.5 text-sm font-medium text-foreground transition-colors duration-200 hover:text-primary"
+              className="mt-8 inline-flex items-center gap-2.5 text-lg font-medium text-foreground transition-colors duration-200 hover:text-primary"
             >
-              <Mail className="h-4 w-4 text-primary" /> tflowpilot@gmail.com
+              <Mail className="h-5 w-5 text-primary" /> tflowpilot@gmail.com
             </motion.a>
 
-            <ul className="mt-7 space-y-4">
+            <ul className="mt-8 space-y-4">
               {t.contact.trustIndicators.map((line, index) => {
                 const Icon = trustIcons[index];
                 return (
                   <motion.li
                     key={line}
                     variants={item}
-                    className="flex items-start gap-3 text-sm text-muted-foreground"
+                    className="flex items-start gap-3 text-lg text-muted-foreground"
                   >
-                    <Icon className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
+                    <Icon className="mt-0.5 h-5 w-5 shrink-0 text-primary" />
                     {line}
                   </motion.li>
                 );

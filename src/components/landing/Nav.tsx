@@ -8,7 +8,7 @@ import { useTranslation } from "@/i18n/I18nProvider";
 import { localePath } from "@/i18n";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
-const SECTION_IDS = ["process", "services", "work", "future", "about"];
+const SECTION_IDS = ["process", "services", "work", "about"];
 
 export function Nav() {
   const { t, locale } = useTranslation();
@@ -51,7 +51,6 @@ export function Nav() {
     { href: `${homePath}#process`, label: t.nav.process },
     { href: `${homePath}#services`, label: t.nav.services },
     { href: `${homePath}#work`, label: t.nav.work },
-    { href: `${homePath}#future`, label: t.nav.comingSoon },
     { href: `${homePath}#about`, label: t.nav.about },
   ];
 
@@ -66,14 +65,14 @@ export function Nav() {
     >
       <div className="mx-auto w-full max-w-[1680px] px-6 sm:px-10 lg:px-16">
         <div
-          className={`flex items-center justify-between rounded-2xl border px-5 py-3 transition-all ${
+          className={`relative flex items-center justify-between rounded-2xl border px-5 py-3 transition-all ${
             scrolled
               ? "glass-panel border-transparent"
               : "border-transparent bg-transparent shadow-none"
           }`}
         >
           <Logo />
-          <nav className="hidden items-center gap-1.5 md:flex">
+          <nav className="absolute left-1/2 top-1/2 hidden -translate-x-1/2 -translate-y-1/2 items-center gap-1.5 md:flex">
             {links.map((l) => (
               <a
                 key={l.href}
@@ -91,12 +90,12 @@ export function Nav() {
               </a>
             ))}
           </nav>
-          <div className="hidden items-center gap-3.5 md:flex">
+          <div className="hidden items-center gap-3 md:flex">
             <ThemeToggle />
             <LanguageSwitcher />
             <a
               href={`${homePath}#contact`}
-              className="btn-primary inline-flex items-center gap-2 rounded-xl px-4 py-2.5 text-sm font-medium"
+              className="btn-primary inline-flex items-center gap-1.5 rounded-xl px-3.5 py-2 text-sm font-medium"
             >
               {t.common.getInTouch} <ArrowRight className="h-3.5 w-3.5" />
             </a>
