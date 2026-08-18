@@ -66,11 +66,29 @@ export interface TranslationDictionary {
     eyebrow: string;
     title: string;
     description: string;
-    items: Array<{
-      title: string;
-      desc: string;
+    priceFromLabel: string;
+    plans: Array<{
+      name: string;
+      tagline: string;
+      description: string;
+      price: string;
+      currency: string;
+      featured?: boolean;
       badge?: string;
+      features: string[];
+      cta: string;
     }>;
+    maintenance: {
+      title: string;
+      priceFromLabel: string;
+      priceValue: string;
+      priceSuffix: string;
+      description: string;
+      features: string[];
+      note: string;
+      cta: string;
+    };
+    disclaimer: string;
   };
   process: {
     eyebrow: string;

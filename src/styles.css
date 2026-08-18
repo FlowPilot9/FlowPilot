@@ -322,6 +322,72 @@
     );
 }
 
+/* Same faint technical grid recipe as `hero-grid`, dialed down further and
+   concentrated at the top-center of the section (matching the reference
+   design: a quiet spotlight of grid up top, fading out toward the edges
+   and disappearing well before the bottom). Kept as its own utility so
+   Hero's grid is untouched. */
+@utility pricing-grid {
+  background-image:
+    linear-gradient(color-mix(in oklab, var(--primary) 7%, transparent) 1px, transparent 1px),
+    linear-gradient(90deg, color-mix(in oklab, var(--primary) 6%, transparent) 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: radial-gradient(ellipse 78% 62% at 50% 0%, black 30%, transparent 100%);
+}
+.dark .pricing-grid {
+  background-image:
+    linear-gradient(color-mix(in oklab, var(--foreground) 7%, transparent) 1px, transparent 1px),
+    linear-gradient(
+      90deg,
+      color-mix(in oklab, var(--foreground) 7%, transparent) 1px,
+      transparent 1px
+    );
+}
+
+@utility pricing-header-glow {
+  position: relative;
+  isolation: isolate;
+
+  &::before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    pointer-events: none;
+    left: 50%;
+    top: 50%;
+    width: min(880px, 88vw);
+    height: 220px;
+    transform: translate(-50%, -50%);
+    background: radial-gradient(
+      ellipse at center,
+      color-mix(in oklab, var(--primary-glow) 32%, transparent) 0%,
+      color-mix(in oklab, var(--primary-glow) 16%, transparent) 38%,
+      transparent 74%
+    );
+    filter: blur(34px);
+    opacity: 0.9;
+  }
+}
+
+@utility pricing-card-glow {
+  background: radial-gradient(
+    ellipse 72% 62% at 50% 100%,
+    color-mix(in oklab, var(--primary-glow) 72%, transparent) 0%,
+    color-mix(in oklab, var(--primary-glow) 42%, transparent) 28%,
+    color-mix(in oklab, var(--primary-glow) 18%, transparent) 50%,
+    transparent 76%
+  );
+}
+
+@utility pricing-card-inner-glow {
+  background: radial-gradient(
+    ellipse 78% 82% at 50% 100%,
+    color-mix(in oklab, var(--primary-glow) 28%, transparent) 0%,
+    color-mix(in oklab, var(--primary-glow) 14%, transparent) 35%,
+    transparent 76%
+  );
+}
+
 /* Ambient glow for anything that needs to visually lift off the background
    without an illustrated scene behind it — currently the Hero product
    window. Reuses --primary-glow (already defined per-theme) so it's

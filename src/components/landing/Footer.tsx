@@ -42,7 +42,7 @@ export function Footer() {
             </span>
             <nav className="mt-5 flex flex-col gap-3.5 text-base text-muted-foreground">
               <a
-                href={`${homePath}#services`}
+                href={`${homePath}#pricing`}
                 className="w-fit transition-colors hover:text-foreground"
               >
                 {t.nav.services}

@@ -8,7 +8,7 @@ import { useTranslation } from "@/i18n/I18nProvider";
 import { localePath } from "@/i18n";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
-const SECTION_IDS = ["process", "services", "work", "about"];
+const SECTION_IDS = ["process", "pricing", "work", "future", "about"];
 
 export function Nav() {
   const { t, locale } = useTranslation();
@@ -49,7 +49,7 @@ export function Nav() {
 
   const links = [
     { href: `${homePath}#process`, label: t.nav.process },
-    { href: `${homePath}#services`, label: t.nav.services },
+    { href: `${homePath}#pricing`, label: t.nav.services },
     { href: `${homePath}#work`, label: t.nav.work },
     { href: `${homePath}#about`, label: t.nav.about },
   ];
