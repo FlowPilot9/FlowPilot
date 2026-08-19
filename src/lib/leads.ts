@@ -31,17 +31,3 @@ export async function submitContactLead(params: {
     throw new Error(error.message);
   }
 }
-
-/**
- * Trimite un lead din formularul de Waitlist (Coming Soon).
- * Vezi comentariul de la submitContactLead — aceeași abordare securizată.
- */
-export async function submitWaitlistLead(params: { email: string }): Promise<void> {
-  const { error } = await supabase.rpc("submit_waitlist_lead", {
-    p_email: params.email,
-  });
-
-  if (error) {
-    throw new Error(error.message);
-  }
-}

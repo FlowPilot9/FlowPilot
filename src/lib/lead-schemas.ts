@@ -26,15 +26,3 @@ export function createContactFormSchema(messages: FormValidationMessages) {
 }
 
 export type ContactFormValues = z.infer<ReturnType<typeof createContactFormSchema>>;
-
-export function createWaitlistFormSchema(messages: FormValidationMessages) {
-  return z.object({
-    email: z.string().email(messages.emailInvalid),
-    hpToken: z.string().optional(), // honeypot — must stay empty
-    consent: z.boolean().refine((v) => v === true, {
-      message: messages.consentRequired,
-    }),
-  });
-}
-
-export type WaitlistFormValues = z.infer<ReturnType<typeof createWaitlistFormSchema>>;
