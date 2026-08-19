@@ -1,6 +1,12 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Landing } from "@/components/landing/Landing";
-import { buildHrefLangLinks, getMetaTags, resolveLocale } from "@/i18n";
+import {
+  buildHrefLangLinks,
+  getMetaTags,
+  localePath,
+  resolveLocale,
+  SITE_URL,
+} from "@/i18n";
 
 export const Route = createFileRoute("/{-$locale}/")({
   head: ({ params }) => {
@@ -18,7 +24,13 @@ export const Route = createFileRoute("/{-$locale}/")({
         { name: "twitter:card", content: "summary_large_image" },
         { name: "twitter:image", content: "/og-image.jpg" },
       ],
-      links: buildHrefLangLinks("/"),
+      links: [
+        ...buildHrefLangLinks("/"),
+        {
+          rel: "canonical",
+          href: `${SITE_URL}${localePath(locale, "/")}`,
+        },
+      ],
     };
   },
   component: Index,

@@ -1,7 +1,13 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Nav } from "@/components/landing/Nav";
 import { Footer } from "@/components/landing/Footer";
-import { buildHrefLangLinks, getTranslation, localePath, resolveLocale } from "@/i18n";
+import {
+  buildHrefLangLinks,
+  getTranslation,
+  localePath,
+  resolveLocale,
+  SITE_URL,
+} from "@/i18n";
 
 export const Route = createFileRoute("/{-$locale}/privacy")({
   head: ({ params }) => {
@@ -13,7 +19,13 @@ export const Route = createFileRoute("/{-$locale}/privacy")({
         { title: t.privacy.metaTitle },
         { name: "description", content: t.privacy.metaDescription },
       ],
-      links: buildHrefLangLinks("/privacy"),
+      links: [
+        ...buildHrefLangLinks("/privacy"),
+        {
+          rel: "canonical",
+          href: `${SITE_URL}${localePath(locale, "/privacy")}`,
+        },
+      ],
     };
   },
   component: PrivacyPage,
