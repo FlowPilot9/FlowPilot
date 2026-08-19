@@ -64,14 +64,14 @@ export function Hero() {
       />
 
       <div className="relative z-0 mx-auto grid w-full max-w-[1600px] grid-cols-1 items-start gap-16 px-6 md:flex-1 md:grid-cols-[1fr_1.1fr] md:gap-28 md:px-10 lg:gap-44 lg:px-16">
-        <div>
-          <h1 className="w-fit text-5xl font-display font-bold leading-[1.15] tracking-tight text-foreground sm:text-6xl md:text-[3.75rem] md:leading-[1.15] lg:text-[4.25rem]">
+        <div className="[container-type:inline-size]">
+          <h1 className="w-full text-center text-[clamp(1.75rem,-0.33rem+11.1cqw,4.25rem)] font-display font-bold leading-[1.15] tracking-tight text-foreground md:w-fit md:text-left">
             <span className="block overflow-hidden">
               <motion.span {...maskLine(0.32)} className="block text-[1.08em]">
                 {t.hero.title}
               </motion.span>
             </span>
-            <span className="block overflow-hidden pb-3 text-center">
+            <span className="block overflow-hidden pb-3">
               <motion.span {...maskLine(0.4)} className="block text-[0.88em]">
                 <span className="font-accent text-[1.2em] italic font-semibold text-primary">
                   {t.hero.titleLine2}
@@ -94,27 +94,28 @@ export function Hero() {
 
           <motion.p
             {...reveal(0.64)}
-            className="mt-6 max-w-xl text-base leading-relaxed text-muted-foreground md:text-lg"
+            className="mt-6 max-w-xl text-center text-[clamp(0.9rem,0.75rem+0.7cqw,1.125rem)] leading-relaxed text-muted-foreground md:text-left"
           >
             {t.hero.description}
           </motion.p>
 
-          <motion.div {...reveal(0.76)} className="mt-10 flex flex-wrap items-center gap-3">
+          <motion.div {...reveal(0.76)} className="mt-10 grid grid-cols-2 gap-3">
             <motion.a
               href="#contact"
               whileHover={prefersReducedMotion ? undefined : { scale: 1.03 }}
               whileTap={prefersReducedMotion ? undefined : { scale: 0.98 }}
               transition={{ duration: 0.2, ease: "easeOut" }}
-              className="btn-primary inline-flex items-center gap-2 rounded-xl px-7 py-4 text-base font-medium"
+              className="btn-primary flex items-center justify-center gap-2 rounded-xl px-[clamp(0.85rem,0.5rem+2.6cqw,1.75rem)] py-[clamp(0.6rem,0.3rem+1.8cqw,1rem)] text-[clamp(0.75rem,0.5rem+1.8cqw,1rem)] font-medium"
             >
-              {t.hero.ctaPrimary} <ArrowRight className="h-5 w-5" />
+              {t.hero.ctaPrimary}{" "}
+              <ArrowRight className="h-[clamp(0.9rem,0.7rem+0.9cqw,1.25rem)] w-[clamp(0.9rem,0.7rem+0.9cqw,1.25rem)] shrink-0" />
             </motion.a>
             <motion.a
               href="#work"
               whileHover={prefersReducedMotion ? undefined : { scale: 1.03 }}
               whileTap={prefersReducedMotion ? undefined : { scale: 0.98 }}
               transition={{ duration: 0.2, ease: "easeOut" }}
-              className="btn-ghost inline-flex items-center gap-2 rounded-xl px-7 py-4 text-base font-medium"
+              className="btn-ghost flex items-center justify-center gap-2 rounded-xl px-[clamp(0.85rem,0.5rem+2.6cqw,1.75rem)] py-[clamp(0.6rem,0.3rem+1.8cqw,1rem)] text-[clamp(0.75rem,0.5rem+1.8cqw,1rem)] font-medium"
             >
               {t.hero.ctaSecondary}
             </motion.a>

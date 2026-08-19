@@ -24,6 +24,17 @@ import { useTranslation } from "@/i18n/I18nProvider";
 
 const MAX_TILT_DEG = 3.5;
 
+// The panel is authored at one fixed "design" size (matches the old
+// max-w-[600px] frame + 48px header + 360px scene). At any container width
+// we scale this whole rigid box down/up with a single CSS transform driven
+// by container query units instead of letting it reflow — that's what keeps
+// every padding/gap/font-size inside proportionally correct on a narrow tab
+// or a phone, rather than the browser squashing/wrapping the content.
+const WORKSPACE_DESIGN_WIDTH = 600;
+const WORKSPACE_HEADER_HEIGHT = 48;
+const WORKSPACE_SCENE_HEIGHT = 360;
+const WORKSPACE_DESIGN_HEIGHT = WORKSPACE_HEADER_HEIGHT + WORKSPACE_SCENE_HEIGHT;
+
 function useSubtleTilt(reduceMotion: boolean) {
   const frameRef = useRef<HTMLDivElement>(null);
   const [tilt, setTilt] = useState({ x: 0, y: 0 });
@@ -211,68 +222,90 @@ export function HeroWorkspace() {
   const ws = t.hero.workspace;
   const badgeAnimations = ["scene-badge-1", "scene-badge-2", "scene-badge-3", "scene-badge-4"];
 
+  const tiltX = prefersReducedMotion ? 0 : -tilt.y * MAX_TILT_DEG;
+  const tiltY = prefersReducedMotion ? 0 : tilt.x * MAX_TILT_DEG;
+
   return (
-    <div className="relative ml-auto w-full max-w-[600px] [perspective:1600px]">
+    <div className="relative ml-auto w-full max-w-[600px] [container-type:inline-size] [perspective:1600px]">
       {/* Ambient glow behind the product window — present in both themes,
           but doing more visible work in light mode, where there's no
           illustrated atmosphere of its own to lend the panel separation
           from the background the way the night-ocean glow does in dark. */}
       <div aria-hidden className="workspace-glow absolute -inset-12 -z-10" />
+
+      {/* "Stage": reserves the correctly-scaled height in normal page flow.
+          Its aspect-ratio mirrors the panel's true (unscaled) proportions,
+          so as the stage's width tracks the container (100% — shrinking on
+          a narrow tab or a phone), its height follows automatically in the
+          same proportion, with zero JS/layout measurement needed. */}
       <div
-        ref={frameRef}
-        className="glass-panel-elevated relative overflow-hidden rounded-2xl transition-transform duration-200 ease-out"
-        style={
-          prefersReducedMotion
-            ? undefined
-            : {
-                transform: `rotateX(${(-tilt.y * MAX_TILT_DEG).toFixed(2)}deg) rotateY(${(
-                  tilt.x * MAX_TILT_DEG
-                ).toFixed(2)}deg)`,
-              }
-        }
+        className="relative w-full"
+        style={{ aspectRatio: `${WORKSPACE_DESIGN_WIDTH} / ${WORKSPACE_DESIGN_HEIGHT}` }}
       >
-        <div className="flex items-center gap-2 border-b border-border px-4 py-3">
-          {/* Brand-styled browser dots — always visible: unlike the rest of
-              the scene these never fade out at the end of the loop. Colors
-              stay within the theme's own palette in each mode (gold/cream
-              in light, blue in dark for the night-ocean feel) rather than a
-              fixed blue that only worked in dark mode. */}
-          <div className="flex gap-1.5">
-            <span className="h-2.5 w-2.5 shrink-0 rounded-full bg-primary" /> {/* Gold accent */}
-            <span className="h-2.5 w-2.5 shrink-0 rounded-full bg-accent dark:bg-blue-400" />{" "}
-            {/* Cream-gold in light, blue in dark */}
-            <span className="h-2.5 w-2.5 shrink-0 rounded-full bg-muted-foreground/30" />{" "}
-            {/* Neutral gray */}
-          </div>
-          <span className="ml-3 truncate rounded-md bg-foreground/[0.05] px-2.5 py-0.5 text-[11px] text-muted-foreground">
-            {ws.browserLabel}
-          </span>
-        </div>
-
-        {prefersReducedMotion ? (
-          <StaticFinishedScene
-            navItems={ws.navItems}
-            heading={ws.heroHeading}
-            cta={ws.heroCta}
-            badges={ws.badges}
-          />
-        ) : (
-          <div className="relative h-[360px] overflow-hidden bg-background">
-            <WireframeLayer />
-            <ColoredLayer navItems={ws.navItems} heading={ws.heroHeading} cta={ws.heroCta} />
-
-            <div className="absolute inset-x-0 bottom-3 flex flex-wrap justify-center gap-1.5 px-4">
-              {ws.badges.map((label, i) => (
-                <span
-                  key={label}
-                  className={`${badgeAnimations[i]} rounded-full border border-border bg-foreground/[0.05] px-2.5 py-1 text-[10px] font-medium text-foreground/80 backdrop-blur`}
-                >
-                  {label}
-                </span>
-              ))}
+        <div
+          ref={frameRef}
+          className="glass-panel-elevated absolute left-0 top-0 origin-top-left overflow-hidden rounded-2xl transition-transform duration-200 ease-out"
+          style={{
+            width: WORKSPACE_DESIGN_WIDTH,
+            height: WORKSPACE_DESIGN_HEIGHT,
+            // Scaled as one rigid unit (never reflowed): 100cqw is the
+            // stage's actual current width, so this ratio is exactly
+            // "how much smaller than the 600px design the box currently
+            // is" — every padding/gap/font-size inside stays in the same
+            // proportion to each other at any size, phone included. The
+            // mouse tilt rides along on the same transform.
+            transform: `scale(calc(100cqw / ${WORKSPACE_DESIGN_WIDTH}px)) rotateX(${tiltX.toFixed(2)}deg) rotateY(${tiltY.toFixed(2)}deg)`,
+          }}
+        >
+          <div
+            className="flex items-center gap-2 border-b border-border px-4"
+            style={{ height: WORKSPACE_HEADER_HEIGHT }}
+          >
+            {/* Brand-styled browser dots — always visible: unlike the rest of
+                the scene these never fade out at the end of the loop. Colors
+                stay within the theme's own palette in each mode (gold/cream
+                in light, blue in dark for the night-ocean feel) rather than a
+                fixed blue that only worked in dark mode. */}
+            <div className="flex gap-1.5">
+              <span className="h-2.5 w-2.5 shrink-0 rounded-full bg-primary" /> {/* Gold accent */}
+              <span className="h-2.5 w-2.5 shrink-0 rounded-full bg-accent dark:bg-blue-400" />{" "}
+              {/* Cream-gold in light, blue in dark */}
+              <span className="h-2.5 w-2.5 shrink-0 rounded-full bg-muted-foreground/30" />{" "}
+              {/* Neutral gray */}
             </div>
+            <span className="ml-3 truncate rounded-md bg-foreground/[0.05] px-2.5 py-0.5 text-[11px] text-muted-foreground">
+              {ws.browserLabel}
+            </span>
           </div>
-        )}
+
+          {prefersReducedMotion ? (
+            <StaticFinishedScene
+              navItems={ws.navItems}
+              heading={ws.heroHeading}
+              cta={ws.heroCta}
+              badges={ws.badges}
+            />
+          ) : (
+            <div
+              className="relative overflow-hidden bg-background"
+              style={{ height: WORKSPACE_SCENE_HEIGHT }}
+            >
+              <WireframeLayer />
+              <ColoredLayer navItems={ws.navItems} heading={ws.heroHeading} cta={ws.heroCta} />
+
+              <div className="absolute inset-x-0 bottom-3 flex flex-wrap justify-center gap-1.5 px-4">
+                {ws.badges.map((label, i) => (
+                  <span
+                    key={label}
+                    className={`${badgeAnimations[i]} rounded-full border border-border bg-foreground/[0.05] px-2.5 py-1 text-[10px] font-medium text-foreground/80 backdrop-blur`}
+                  >
+                    {label}
+                  </span>
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );
