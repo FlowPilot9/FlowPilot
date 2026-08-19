@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { Outlet, createFileRoute, notFound } from "@tanstack/react-router";
-import { reportLovableError } from "@/lib/lovable-error-reporting";
+import { reportError } from "@/lib/error-reporting";
 import { DEFAULT_LOCALE, getTranslation, isLocale, localePath, resolveLocale } from "@/i18n";
 import { I18nProvider } from "@/i18n/I18nProvider";
 
@@ -62,7 +62,7 @@ function LocaleError({ error }: { error: Error }) {
   const locale = resolveLocale(params.locale);
   const t = getTranslation(locale);
   useEffect(() => {
-    reportLovableError(error, { boundary: "tanstack_locale_error_component" });
+    reportError(error, { boundary: "tanstack_locale_error_component" });
   }, [error]);
 
   return (

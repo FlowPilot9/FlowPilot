@@ -9,7 +9,7 @@ import {
 import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
-import { reportLovableError } from "../lib/lovable-error-reporting";
+import { reportError } from "../lib/error-reporting";
 import { Toaster } from "@/components/ui/sonner";
 import { ThemeProvider } from "@/theme/ThemeProvider";
 import { DEFAULT_LOCALE, getLocaleFromPathname, getMetaTags } from "@/i18n";
@@ -43,7 +43,7 @@ function RootNotFoundComponent() {
 function RootErrorComponent({ error }: { error: Error }) {
   console.error(error);
   useEffect(() => {
-    reportLovableError(error, { boundary: "tanstack_root_error_component" });
+    reportError(error, { boundary: "tanstack_root_error_component" });
   }, [error]);
 
   return (
