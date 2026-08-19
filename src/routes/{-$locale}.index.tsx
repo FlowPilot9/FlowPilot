@@ -30,6 +30,32 @@ export const Route = createFileRoute("/{-$locale}/")({
         { name: "twitter:description", content: meta.ogDescription },
         { name: "twitter:image", content: "/og-image.jpg" },
       ],
+      scripts: [
+        {
+          type: "application/ld+json",
+          children: JSON.stringify({
+            "@context": "https://schema.org",
+            "@graph": [
+              {
+                "@type": "Organization",
+                "@id": `${SITE_URL}/#organization`,
+                name: "FlowPilot",
+                url: SITE_URL,
+                logo: `${SITE_URL}/favicon.ico`,
+              },
+              {
+                "@type": "WebSite",
+                "@id": `${SITE_URL}/#website`,
+                name: "FlowPilot",
+                url: SITE_URL,
+                publisher: {
+                  "@id": `${SITE_URL}/#organization`,
+                },
+              },
+            ],
+          }),
+        },
+      ],
       links: [
         ...buildHrefLangLinks("/"),
         {
