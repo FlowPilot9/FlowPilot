@@ -72,7 +72,7 @@ export function Nav() {
           }`}
         >
           <Logo />
-          <nav className="absolute left-1/2 top-1/2 hidden -translate-x-1/2 -translate-y-1/2 items-center gap-1.5 md:flex">
+          <nav className="absolute left-1/2 top-1/2 hidden -translate-x-1/2 -translate-y-1/2 items-center gap-1.5 min-[1200px]:flex">
             {links.map((l) => (
               <a
                 key={l.href}
@@ -90,7 +90,7 @@ export function Nav() {
               </a>
             ))}
           </nav>
-          <div className="hidden items-center gap-3 md:flex">
+          <div className="hidden items-center gap-3 min-[1200px]:flex">
             <ThemeToggle />
             <LanguageSwitcher />
             <a
@@ -100,7 +100,7 @@ export function Nav() {
               {t.common.getInTouch} <ArrowRight className="h-3.5 w-3.5" />
             </a>
           </div>
-          <div className="flex items-center gap-2 md:hidden">
+          <div className="flex items-center gap-2 min-[1200px]:hidden">
             <ThemeToggle />
             <LanguageSwitcher />
             <button
@@ -121,7 +121,7 @@ export function Nav() {
               animate={{ opacity: 1, height: "auto" }}
               exit={{ opacity: 0, height: 0 }}
               transition={{ duration: 0.25, ease: EASE }}
-              className="glass-panel mt-2 overflow-hidden rounded-2xl md:hidden"
+              className="glass-panel mt-2 overflow-hidden rounded-2xl min-[1200px]:hidden"
             >
               <div className="p-3">
                 {links.map((l, i) => (

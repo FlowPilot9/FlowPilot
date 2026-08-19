@@ -65,13 +65,13 @@ export function Hero() {
 
       <div className="relative z-0 mx-auto grid w-full max-w-[1600px] grid-cols-1 items-start gap-16 px-6 md:flex-1 md:grid-cols-[1fr_1.1fr] md:gap-28 md:px-10 lg:gap-44 lg:px-16">
         <div className="[container-type:inline-size]">
-          <h1 className="w-full text-center text-[clamp(1.75rem,-0.33rem+11.1cqw,4.25rem)] font-display font-bold leading-[1.15] tracking-tight text-foreground md:w-fit md:text-left">
+          <h1 className="w-full text-center text-[clamp(1.75rem,1.14rem+3.58cqw,2.75rem)] font-display font-bold leading-[1.15] tracking-tight text-foreground md:w-fit md:text-left md:text-[clamp(1.75rem,-0.3rem+11.73cqw,4.25rem)]">
             <span className="block overflow-hidden">
               <motion.span {...maskLine(0.32)} className="block text-[1.08em]">
                 {t.hero.title}
               </motion.span>
             </span>
-            <span className="block overflow-hidden pb-3">
+            <span className="block overflow-hidden pb-3 text-center">
               <motion.span {...maskLine(0.4)} className="block text-[0.88em]">
                 <span className="font-accent text-[1.2em] italic font-semibold text-primary">
                   {t.hero.titleLine2}
@@ -94,7 +94,7 @@ export function Hero() {
 
           <motion.p
             {...reveal(0.64)}
-            className="mt-6 max-w-xl text-center text-[clamp(0.9rem,0.75rem+0.7cqw,1.125rem)] leading-relaxed text-muted-foreground md:text-left"
+            className="mx-auto mt-6 max-w-xl text-center text-[clamp(0.9rem,0.84rem+0.358cqw,1rem)] leading-relaxed text-muted-foreground md:mx-0 md:text-left md:text-[clamp(0.95rem,0.81rem+0.821cqw,1.125rem)]"
           >
             {t.hero.description}
           </motion.p>
