@@ -99,6 +99,12 @@ export function Footer() {
             >
               {t.footer.privacyPolicy}
             </a>
+            <a
+              href={localePath(locale, "/cookies")}
+              className="mt-3 block w-fit text-base text-muted-foreground transition-colors hover:text-foreground"
+            >
+              {t.footer.cookiesPolicy}
+            </a>
           </div>
         </div>
 

@@ -421,6 +421,7 @@ export const ro: TranslationDictionary = {
     github: "GitHub",
     email: "Email",
     privacyPolicy: "Politica de Confidențialitate",
+    cookiesPolicy: "Politica de Cookies",
   },
   consent: {
     prefix: "Sunt de acord cu",
@@ -477,6 +478,51 @@ export const ro: TranslationDictionary = {
       {
         heading: "Contact",
         body: "Pentru întrebări privind această Politică de Confidențialitate sau pentru exercitarea drepturilor tale privind protecția datelor, ne poți contacta la tflowpilot@gmail.com.",
+      },
+    ],
+    backHome: "Înapoi la pagina principală",
+  },
+  cookies: {
+    metaTitle: "Politica de Cookies — FlowPilot",
+    metaDescription: "Informații despre utilizarea cookie-urilor pe site-ul FlowPilot.",
+    title: "Politica de Cookies",
+    lastUpdated: "Ultima actualizare: 19 august 2026",
+    sections: [
+      {
+        heading: "1. Ce sunt cookie-urile?",
+        body: "Cookie-urile sunt fișiere de mici dimensiuni stocate pe dispozitivul utilizatorului atunci când acesta accesează un site web. Acestea pot avea roluri diferite, precum asigurarea funcționării tehnice a site-ului, memorarea unor preferințe sau colectarea de informații privind modul în care este utilizat site-ul.",
+      },
+      {
+        heading: "2. Utilizarea cookie-urilor pe flowpilot.ro",
+        body: "În prezent, site-ul FlowPilot, disponibil la adresa https://flowpilot.ro, nu utilizează cookie-uri neesențiale pentru analiză, publicitate, marketing sau urmărirea comportamentului utilizatorilor. La momentul ultimei verificări, site-ul nu plasează cookie-uri proprii pe dispozitivul utilizatorului pentru aceste scopuri. Site-ul poate utiliza tehnologii și mecanisme tehnice necesare pentru furnizarea și securizarea serviciilor web. Acestea nu sunt utilizate de FlowPilot pentru a urmări comportamentul utilizatorilor în scopuri de marketing sau publicitate.",
+      },
+      {
+        heading: "3. Cookie-uri de analiză și statistice",
+        body: "În prezent, FlowPilot nu utilizează servicii de analiză web care să plaseze cookie-uri de analiză sau statistice pe dispozitivul utilizatorului. În cazul în care vom introduce în viitor servicii precum Google Analytics sau alte instrumente similare, acestea vor fi configurate și utilizate în conformitate cu legislația aplicabilă, iar politica de cookies va fi actualizată corespunzător.",
+      },
+      {
+        heading: "4. Cookie-uri de marketing și publicitate",
+        body: "În prezent, FlowPilot nu utilizează cookie-uri pentru publicitate comportamentală, remarketing sau urmărirea utilizatorilor în scopuri de marketing. Dacă astfel de tehnologii vor fi introduse în viitor, acestea nu vor fi activate înainte de obținerea consimțământului utilizatorului, atunci când consimțământul este necesar potrivit legislației aplicabile.",
+      },
+      {
+        heading: "5. Cookie-uri ale unor terți",
+        body: "Site-ul poate utiliza în viitor servicii furnizate de terți care pot implica stocarea sau accesarea unor informații pe dispozitivul utilizatorului. În cazul introducerii unor astfel de servicii, FlowPilot va actualiza prezenta Politică de Cookies pentru a informa utilizatorii cu privire la: furnizorul serviciului; scopul utilizării; tipul de cookie sau tehnologie utilizată; durata de stocare; eventualii destinatari sau terți care pot avea acces la informații; modalitatea prin care utilizatorul își poate exprima sau retrage consimțământul, atunci când acesta este necesar.",
+      },
+      {
+        heading: "6. Consimțământul pentru cookie-uri",
+        body: "Întrucât FlowPilot nu utilizează în prezent cookie-uri neesențiale care necesită consimțământ, nu este necesară solicitarea consimțământului utilizatorului pentru astfel de cookie-uri în momentul accesării site-ului. În cazul în care vor fi introduse cookie-uri sau tehnologii similare pentru scopuri care necesită consimțământ, acestea vor fi activate numai după obținerea unui consimțământ valabil, acolo unde legislația aplicabilă impune acest lucru. Utilizatorul va avea posibilitatea de a-și exprima opțiunea în mod liber și informat.",
+      },
+      {
+        heading: "7. Modificarea Politicii de Cookies",
+        body: "FlowPilot își rezervă dreptul de a modifica prezenta Politică de Cookies atunci când apar modificări ale site-ului, ale tehnologiilor utilizate sau ale legislației aplicabile. Versiunea actualizată va fi publicată pe această pagină și va include data ultimei actualizări.",
+      },
+      {
+        heading: "8. Legătura cu Politica de Confidențialitate",
+        body: "Pentru informații privind modul în care FlowPilot prelucrează datele cu caracter personal, inclusiv datele transmise prin intermediul formularului de contact, vă rugăm să consultați Politica de Confidențialitate disponibilă pe site.",
+      },
+      {
+        heading: "9. Contact",
+        body: "Pentru întrebări referitoare la utilizarea cookie-urilor sau la protecția datelor cu caracter personal, ne puteți contacta prin intermediul datelor de contact disponibile pe site-ul FlowPilot. FlowPilot — Website: https://flowpilot.ro",
       },
     ],
     backHome: "Înapoi la pagina principală",

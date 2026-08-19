@@ -408,6 +408,7 @@ export const en: TranslationDictionary = {
     github: "GitHub",
     email: "Email",
     privacyPolicy: "Privacy Policy",
+    cookiesPolicy: "Cookie Policy",
   },
   consent: {
     prefix: "I agree to the",
@@ -464,6 +465,51 @@ export const en: TranslationDictionary = {
       {
         heading: "Contact",
         body: "For questions about this Privacy Policy or to exercise your data protection rights, you can reach us at tflowpilot@gmail.com.",
+      },
+    ],
+    backHome: "Back to homepage",
+  },
+  cookies: {
+    metaTitle: "Cookie Policy — FlowPilot",
+    metaDescription: "Information about how FlowPilot uses cookies on this site.",
+    title: "Cookie Policy",
+    lastUpdated: "Last updated: August 19, 2026",
+    sections: [
+      {
+        heading: "1. What are cookies?",
+        body: "Cookies are small files stored on a user's device when they visit a website. They can serve different purposes, such as keeping a site technically functional, remembering preferences, or gathering information about how the site is used.",
+      },
+      {
+        heading: "2. How cookies are used on flowpilot.ro",
+        body: "FlowPilot, available at https://flowpilot.ro, does not currently use non-essential cookies for analytics, advertising, marketing, or tracking user behavior. As of our most recent review, the site does not set any first-party cookies for these purposes. The site may rely on technical mechanisms needed to deliver and secure its web services. FlowPilot does not use these to track user behavior for marketing or advertising purposes.",
+      },
+      {
+        heading: "3. Analytics and statistics cookies",
+        body: "FlowPilot does not currently use any web analytics service that would place analytics or statistics cookies on a user's device. If we introduce services such as Google Analytics or similar tools in the future, they will be configured and used in line with applicable law, and this Cookie Policy will be updated accordingly.",
+      },
+      {
+        heading: "4. Marketing and advertising cookies",
+        body: "FlowPilot does not currently use cookies for behavioral advertising, remarketing, or tracking users for marketing purposes. Should such technologies be introduced in the future, they will not be activated until the user's consent has been obtained, wherever consent is required under applicable law.",
+      },
+      {
+        heading: "5. Third-party cookies",
+        body: "The site may, in the future, rely on services provided by third parties that involve storing or accessing information on a user's device. If such services are introduced, FlowPilot will update this Cookie Policy to inform users about: the service provider; the purpose of use; the type of cookie or technology involved; the retention period; any recipients or third parties who may have access to the information; and how users can give or withdraw their consent, where required.",
+      },
+      {
+        heading: "6. Consent for cookies",
+        body: "Because FlowPilot does not currently use non-essential cookies that require consent, no consent request is shown when the site is accessed. If cookies or similar technologies requiring consent are introduced in the future, they will only be activated after valid consent has been obtained, wherever applicable law requires it. Users will always be able to make this choice freely and with full information.",
+      },
+      {
+        heading: "7. Changes to this Cookie Policy",
+        body: "FlowPilot may update this Cookie Policy whenever the site, the technologies it uses, or applicable law change. The updated version will be published on this page, along with the date it was last revised.",
+      },
+      {
+        heading: "8. Relationship to the Privacy Policy",
+        body: "For information about how FlowPilot processes personal data, including data submitted through the contact form, please refer to the Privacy Policy available on the site.",
+      },
+      {
+        heading: "9. Contact",
+        body: "If you have any questions about our use of cookies or about the protection of personal data, you can reach us through the contact details available on the FlowPilot website. FlowPilot — Website: https://flowpilot.ro",
       },
     ],
     backHome: "Back to homepage",

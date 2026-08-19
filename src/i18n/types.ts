@@ -192,6 +192,7 @@ export interface TranslationDictionary {
     github: string;
     email: string;
     privacyPolicy: string;
+    cookiesPolicy: string;
   };
   consent: {
     prefix: string;
@@ -203,6 +204,14 @@ export interface TranslationDictionary {
     title: string;
     lastUpdated: string;
     intro: string;
+    sections: Array<{ heading: string; body: string }>;
+    backHome: string;
+  };
+  cookies: {
+    metaTitle: string;
+    metaDescription: string;
+    title: string;
+    lastUpdated: string;
     sections: Array<{ heading: string; body: string }>;
     backHome: string;
   };

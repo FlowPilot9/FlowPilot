@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as Char123LocaleChar125RouteImport } from './routes/{-$locale}'
 import { Route as Char123LocaleChar125IndexRouteImport } from './routes/{-$locale}.index'
+import { Route as Char123LocaleChar125CookiesRouteImport } from './routes/{-$locale}.cookies'
 import { Route as Char123LocaleChar125PrivacyRouteImport } from './routes/{-$locale}.privacy'
 
 const Char123LocaleChar125Route = Char123LocaleChar125RouteImport.update({
@@ -24,6 +25,12 @@ const Char123LocaleChar125IndexRoute =
     path: '/',
     getParentRoute: () => Char123LocaleChar125Route,
   } as any)
+const Char123LocaleChar125CookiesRoute =
+  Char123LocaleChar125CookiesRouteImport.update({
+    id: '/cookies',
+    path: '/cookies',
+    getParentRoute: () => Char123LocaleChar125Route,
+  } as any)
 const Char123LocaleChar125PrivacyRoute =
   Char123LocaleChar125PrivacyRouteImport.update({
     id: '/privacy',
@@ -33,25 +40,37 @@ const Char123LocaleChar125PrivacyRoute =
 
 export interface FileRoutesByFullPath {
   '/{-$locale}': typeof Char123LocaleChar125RouteWithChildren
+  '/{-$locale}/cookies': typeof Char123LocaleChar125CookiesRoute
   '/{-$locale}/privacy': typeof Char123LocaleChar125PrivacyRoute
   '/{-$locale}/': typeof Char123LocaleChar125IndexRoute
 }
 export interface FileRoutesByTo {
+  '/{-$locale}/cookies': typeof Char123LocaleChar125CookiesRoute
   '/{-$locale}/privacy': typeof Char123LocaleChar125PrivacyRoute
   '/{-$locale}': typeof Char123LocaleChar125IndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/{-$locale}': typeof Char123LocaleChar125RouteWithChildren
+  '/{-$locale}/cookies': typeof Char123LocaleChar125CookiesRoute
   '/{-$locale}/privacy': typeof Char123LocaleChar125PrivacyRoute
   '/{-$locale}/': typeof Char123LocaleChar125IndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/{-$locale}' | '/{-$locale}/privacy' | '/{-$locale}/'
+  fullPaths:
+    | '/{-$locale}'
+    | '/{-$locale}/cookies'
+    | '/{-$locale}/privacy'
+    | '/{-$locale}/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/{-$locale}/privacy' | '/{-$locale}'
-  id: '__root__' | '/{-$locale}' | '/{-$locale}/privacy' | '/{-$locale}/'
+  to: '/{-$locale}/cookies' | '/{-$locale}/privacy' | '/{-$locale}'
+  id:
+    | '__root__'
+    | '/{-$locale}'
+    | '/{-$locale}/cookies'
+    | '/{-$locale}/privacy'
+    | '/{-$locale}/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -74,6 +93,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof Char123LocaleChar125IndexRouteImport
       parentRoute: typeof Char123LocaleChar125Route
     }
+    '/{-$locale}/cookies': {
+      id: '/{-$locale}/cookies'
+      path: '/cookies'
+      fullPath: '/{-$locale}/cookies'
+      preLoaderRoute: typeof Char123LocaleChar125CookiesRouteImport
+      parentRoute: typeof Char123LocaleChar125Route
+    }
     '/{-$locale}/privacy': {
       id: '/{-$locale}/privacy'
       path: '/privacy'
@@ -85,11 +111,13 @@ declare module '@tanstack/react-router' {
 }
 
 interface Char123LocaleChar125RouteChildren {
+  Char123LocaleChar125CookiesRoute: typeof Char123LocaleChar125CookiesRoute
   Char123LocaleChar125PrivacyRoute: typeof Char123LocaleChar125PrivacyRoute
   Char123LocaleChar125IndexRoute: typeof Char123LocaleChar125IndexRoute
 }
 
 const Char123LocaleChar125RouteChildren: Char123LocaleChar125RouteChildren = {
+  Char123LocaleChar125CookiesRoute: Char123LocaleChar125CookiesRoute,
   Char123LocaleChar125PrivacyRoute: Char123LocaleChar125PrivacyRoute,
   Char123LocaleChar125IndexRoute: Char123LocaleChar125IndexRoute,
 }
