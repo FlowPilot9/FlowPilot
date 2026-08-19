@@ -42,7 +42,7 @@ export const ro: TranslationDictionary = {
     imageAlt: "Ilustrație cu fluxuri digitale și automatizare business",
     scrollCue: "Derulează",
     workspace: {
-      browserLabel: "flowpilot.studio",
+      browserLabel: "flowpilot.ro",
       navItems: ["Acasă", "Servicii", "Portofoliu", "Contact"],
       heroHeading: "Afacerea ta, la superlativ.",
       heroCta: "Vezi lucrările",

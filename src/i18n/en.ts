@@ -42,7 +42,7 @@ export const en: TranslationDictionary = {
     imageAlt: "Illustration of digital workflows and business automation",
     scrollCue: "Scroll",
     workspace: {
-      browserLabel: "flowpilot.studio",
+      browserLabel: "flowpilot.ro",
       navItems: ["Home", "Services", "Work", "Contact"],
       heroHeading: "Your business, elevated.",
       heroCta: "See the work",

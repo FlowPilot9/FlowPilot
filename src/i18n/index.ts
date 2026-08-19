@@ -11,8 +11,7 @@ export const LOCALE_LABELS: Record<Locale, string> = {
   en: "EN",
 };
 
-// TODO: update if the production domain ends up being different.
-export const SITE_URL = "https://flowpilot.studio";
+export const SITE_URL = "https://flowpilot.ro";
 
 export const translations: Record<Locale, TranslationDictionary> = {
   ro,

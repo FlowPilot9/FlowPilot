@@ -2,34 +2,34 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://flowpilot.studio/</loc>
-    <xhtml:link rel="alternate" hreflang="ro" href="https://flowpilot.studio/" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://flowpilot.studio/en" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://flowpilot.studio/" />
+    <loc>https://flowpilot.ro/</loc>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://flowpilot.ro/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://flowpilot.ro/en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://flowpilot.ro/" />
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://flowpilot.studio/en</loc>
-    <xhtml:link rel="alternate" hreflang="ro" href="https://flowpilot.studio/" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://flowpilot.studio/en" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://flowpilot.studio/" />
+    <loc>https://flowpilot.ro/en</loc>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://flowpilot.ro/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://flowpilot.ro/en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://flowpilot.ro/" />
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://flowpilot.studio/privacy</loc>
-    <xhtml:link rel="alternate" hreflang="ro" href="https://flowpilot.studio/privacy" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://flowpilot.studio/en/privacy" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://flowpilot.studio/privacy" />
+    <loc>https://flowpilot.ro/privacy</loc>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://flowpilot.ro/privacy" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://flowpilot.ro/en/privacy" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://flowpilot.ro/privacy" />
     <changefreq>monthly</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
-    <loc>https://flowpilot.studio/en/privacy</loc>
-    <xhtml:link rel="alternate" hreflang="ro" href="https://flowpilot.studio/privacy" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://flowpilot.studio/en/privacy" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://flowpilot.studio/privacy" />
+    <loc>https://flowpilot.ro/en/privacy</loc>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://flowpilot.ro/privacy" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://flowpilot.ro/en/privacy" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://flowpilot.ro/privacy" />
     <changefreq>monthly</changefreq>
     <priority>0.3</priority>
   </url>
