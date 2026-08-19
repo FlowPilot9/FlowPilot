@@ -2,12 +2,12 @@ import type { TranslationDictionary } from "./types";
 
 export const en: TranslationDictionary = {
   meta: {
-    title: "FlowPilot — Premium websites & business automation",
+    title: "FlowPilot — Modern websites for businesses",
     description:
-      "FlowPilot designs premium websites today and builds the intelligent business tools of tomorrow. Fast, modern and scalable digital experiences.",
-    ogTitle: "FlowPilot — Premium websites & business automation",
+      "We build modern, fast and optimized websites for businesses. Premium design, development and ongoing support from idea to launch.",
+    ogTitle: "FlowPilot — Modern websites for businesses",
     ogDescription:
-      "We design premium websites today while building the intelligent business tools of tomorrow.",
+      "We build modern, fast and optimized websites for businesses.",
   },
   common: {
     brand: "FlowPilot",

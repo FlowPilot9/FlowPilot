@@ -2,12 +2,12 @@ import type { TranslationDictionary } from "./types";
 
 export const ro: TranslationDictionary = {
   meta: {
-    title: "FlowPilot — Site-uri premium și automatizare business",
+    title: "FlowPilot — Site-uri web moderne pentru afaceri",
     description:
-      "FlowPilot proiectează site-uri premium astăzi și construiește instrumentele inteligente de business de mâine. Experiențe digitale rapide, moderne și scalabile.",
-    ogTitle: "FlowPilot — Site-uri premium și automatizare business",
+      "Creăm site-uri web moderne, rapide și optimizate pentru afaceri. Design premium, dezvoltare și mentenanță, de la idee la lansare.",
+    ogTitle: "FlowPilot — Site-uri web moderne pentru afaceri",
     ogDescription:
-      "Proiectăm site-uri premium astăzi, în timp ce construim instrumentele inteligente de business de mâine.",
+      "Creăm site-uri web moderne, rapide și optimizate pentru afaceri.",
   },
   common: {
     brand: "FlowPilot",
