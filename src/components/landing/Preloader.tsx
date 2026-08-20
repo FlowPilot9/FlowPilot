@@ -1,4 +1,4 @@
-import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
+import { AnimatePresence, m, useReducedMotion } from "framer-motion";
 import { usePageReady } from "@/hooks/use-page-ready";
 
 // ---------------------------------------------------------------------------
@@ -18,14 +18,14 @@ export function Preloader() {
   return (
     <AnimatePresence>
       {!ready && (
-        <motion.div
+        <m.div
           key="preloader"
           initial={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.45, ease: "easeInOut" }}
           className="fixed inset-0 z-[100] flex items-center justify-center bg-background"
         >
-          <motion.div
+          <m.div
             initial={prefersReducedMotion ? { opacity: 1 } : { opacity: 0.35, scale: 0.92 }}
             animate={
               prefersReducedMotion
@@ -48,8 +48,8 @@ export function Preloader() {
               alt="FlowPilot"
               className="hidden h-20 w-20 object-contain dark:block"
             />
-          </motion.div>
-        </motion.div>
+          </m.div>
+        </m.div>
       )}
     </AnimatePresence>
   );

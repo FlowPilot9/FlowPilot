@@ -1,6 +1,6 @@
 import { memo, useCallback, useEffect, useRef, useState } from "react";
 import { Handshake, Wallet, Zap, Layers } from "lucide-react";
-import { motion, useInView, useReducedMotion, type Variants } from "framer-motion";
+import { m, useInView, useReducedMotion, type Variants } from "framer-motion";
 import { useTranslation } from "@/i18n/I18nProvider";
 
 const trustIcons = [Handshake, Wallet, Zap, Layers] as const;
@@ -206,7 +206,7 @@ const CircuitConnectors = memo(function CircuitConnectors({
       preserveAspectRatio="none"
       className="pointer-events-none absolute inset-0 z-0 hidden h-full w-full lg:block"
     >
-      <motion.path
+      <m.path
         d={RAIL_PATH}
         fill="none"
         stroke="var(--primary)"
@@ -217,7 +217,7 @@ const CircuitConnectors = memo(function CircuitConnectors({
         animate={anim}
         custom={{ opacity: 0.4, delay: RAIL_DELAY_S, reduce: prefersReducedMotion }}
       />
-      <motion.path
+      <m.path
         d={ARC_LEFT}
         fill="none"
         stroke="var(--primary)"
@@ -228,7 +228,7 @@ const CircuitConnectors = memo(function CircuitConnectors({
         animate={anim}
         custom={{ opacity: 0.45, delay: edgeToCenterDelay(150), reduce: prefersReducedMotion }}
       />
-      <motion.path
+      <m.path
         d={ARC_RIGHT}
         fill="none"
         stroke="var(--primary)"
@@ -239,7 +239,7 @@ const CircuitConnectors = memo(function CircuitConnectors({
         animate={anim}
         custom={{ opacity: 0.45, delay: edgeToCenterDelay(1050), reduce: prefersReducedMotion }}
       />
-      <motion.path
+      <m.path
         d={SPINE_PATH}
         fill="none"
         stroke="var(--primary)"
@@ -250,7 +250,7 @@ const CircuitConnectors = memo(function CircuitConnectors({
         animate={anim}
         custom={{ opacity: 0.6, delay: SPINE_DELAY_S, reduce: prefersReducedMotion }}
       />
-      <motion.path
+      <m.path
         d={BRIDGE_PATH}
         fill="none"
         stroke="var(--primary)"
@@ -262,7 +262,7 @@ const CircuitConnectors = memo(function CircuitConnectors({
         custom={{ opacity: 0.55, delay: CONNECTOR_CENTER_DELAY_S, reduce: prefersReducedMotion }}
       />
       {branches.map((b) => (
-        <motion.path
+        <m.path
           key={b.d}
           d={b.d}
           fill="none"
@@ -280,7 +280,7 @@ const CircuitConnectors = memo(function CircuitConnectors({
         />
       ))}
       {sideLinks.map((s) => (
-        <motion.path
+        <m.path
           key={s.d}
           d={s.d}
           fill="none"
@@ -298,7 +298,7 @@ const CircuitConnectors = memo(function CircuitConnectors({
         />
       ))}
       {stubs.map((s) => (
-        <motion.path
+        <m.path
           key={s.d}
           d={s.d}
           fill="none"
@@ -317,7 +317,7 @@ const CircuitConnectors = memo(function CircuitConnectors({
       ))}
 
       {junctions.map((j) => (
-        <motion.circle
+        <m.circle
           key={`${j.cx}-${j.cy}`}
           cx={j.cx}
           cy={j.cy}
@@ -331,7 +331,7 @@ const CircuitConnectors = memo(function CircuitConnectors({
       ))}
       {branches.map((b) => (
         <g key={`${b.node.cx}-${b.node.cy}`}>
-          <motion.circle
+          <m.circle
             cx={b.node.cx}
             cy={b.node.cy}
             r="7"
@@ -346,7 +346,7 @@ const CircuitConnectors = memo(function CircuitConnectors({
               reduce: prefersReducedMotion,
             }}
           />
-          <motion.circle
+          <m.circle
             cx={b.node.cx}
             cy={b.node.cy}
             r="3.5"
@@ -363,7 +363,7 @@ const CircuitConnectors = memo(function CircuitConnectors({
         </g>
       ))}
       {sideLinks.map((s) => (
-        <motion.circle
+        <m.circle
           key={`${s.node.cx}-${s.node.cy}`}
           cx={s.node.cx}
           cy={s.node.cy}
@@ -380,7 +380,7 @@ const CircuitConnectors = memo(function CircuitConnectors({
         />
       ))}
       {stubs.map((s) => (
-        <motion.circle
+        <m.circle
           key={`${s.node.cx}-${s.node.cy}`}
           cx={s.node.cx}
           cy={s.node.cy}
@@ -396,17 +396,21 @@ const CircuitConnectors = memo(function CircuitConnectors({
           }}
         />
       ))}
-      {flowMarkers.map((m) => (
-        <motion.circle
-          key={`${m.cx}-${m.cy}`}
-          cx={m.cx}
-          cy={m.cy}
+      {flowMarkers.map((marker) => (
+        <m.circle
+          key={`${marker.cx}-${marker.cy}`}
+          cx={marker.cx}
+          cy={marker.cy}
           r="2"
           fill="var(--primary)"
           variants={traceVariants}
           initial="hidden"
           animate={anim}
-          custom={{ opacity: 0.45, delay: edgeToCenterDelay(m.cx), reduce: prefersReducedMotion }}
+          custom={{
+            opacity: 0.45,
+            delay: edgeToCenterDelay(marker.cx),
+            reduce: prefersReducedMotion,
+          }}
         />
       ))}
 
@@ -459,7 +463,9 @@ const cardVariants: Variants = {
   visible: ({ reduce }: { reduce: boolean }) => ({
     opacity: 1,
     y: 0,
-    transition: reduce ? { duration: 0.01 } : { duration: CARD_ENTRANCE_DURATION_S, delay: CARD_ENTRANCE_DELAY_S, ease: "linear" },
+    transition: reduce
+      ? { duration: 0.01 }
+      : { duration: CARD_ENTRANCE_DURATION_S, delay: CARD_ENTRANCE_DELAY_S, ease: "linear" },
   }),
 };
 
@@ -511,7 +517,7 @@ function TrustCard({
   }, [shouldStart, prefersReducedMotion]);
 
   return (
-    <motion.div
+    <m.div
       variants={cardVariants}
       custom={{ reduce: prefersReducedMotion }}
       initial="hidden"
@@ -534,11 +540,15 @@ function TrustCard({
               <Icon className="h-4 w-4" />
             </div>
           </div>
-          <div className={`transition-opacity duration-[450ms] ${iconVisible ? "opacity-100" : "opacity-0"}`}>
+          <div
+            className={`transition-opacity duration-[450ms] ${iconVisible ? "opacity-100" : "opacity-0"}`}
+          >
             <StatusIndicator label={status} prefersReducedMotion={prefersReducedMotion} />
           </div>
         </div>
-        <div className={`transition-opacity duration-[450ms] ${textVisible ? "opacity-100" : "opacity-0"}`}>
+        <div
+          className={`transition-opacity duration-[450ms] ${textVisible ? "opacity-100" : "opacity-0"}`}
+        >
           <h3 className="mt-4 text-base font-semibold text-foreground transition-transform duration-300 group-hover:translate-x-0.5">
             {title}
           </h3>
@@ -546,7 +556,7 @@ function TrustCard({
           <p className="mt-3 text-xs text-muted-foreground/70">{detail}</p>
         </div>
       </div>
-    </motion.div>
+    </m.div>
   );
 }
 const MemoTrustCard = memo(TrustCard);
@@ -613,14 +623,14 @@ export function Trust() {
   return (
     <section className="border-y border-border/60 bg-surface">
       <div ref={sectionRef} className="mx-auto w-full max-w-[1680px] px-6 py-20 sm:px-10 lg:px-16">
-        <motion.h2
+        <m.h2
           initial={{ opacity: 0, y: 14 }}
           animate={sectionInView ? { opacity: 1, y: 0 } : {}}
           transition={prefersReducedMotion ? { duration: 0.01 } : { duration: 0.6, ease: EASE }}
           className="mx-auto max-w-2xl text-center text-2xl font-display font-semibold tracking-tight text-foreground md:text-3xl"
         >
           {t.trust.title}
-        </motion.h2>
+        </m.h2>
 
         {/* Mobile / tablet (< lg): unchanged plain grid. */}
         <div className="mt-12 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:hidden">
@@ -635,7 +645,10 @@ export function Trust() {
                   <div className="grid h-10 w-10 place-items-center rounded-xl bg-secondary text-muted-foreground transition-colors duration-300 group-hover:bg-primary/10 group-hover:text-primary">
                     <Icon className="h-4 w-4" />
                   </div>
-                  <StatusIndicator label={cardStatus[index]} prefersReducedMotion={prefersReducedMotion} />
+                  <StatusIndicator
+                    label={cardStatus[index]}
+                    prefersReducedMotion={prefersReducedMotion}
+                  />
                 </div>
                 <h3 className="mt-4 text-base font-semibold text-foreground transition-transform duration-300 group-hover:translate-x-0.5">
                   {trustItem.title}
@@ -659,7 +672,10 @@ export function Trust() {
             connectors fade in edge-to-center (see `edgeToCenterDelay`
             above) as a closing flourish. */}
         <div className="relative mt-16 hidden lg:grid lg:grid-cols-4 lg:items-start lg:gap-6 lg:pb-10">
-          <CircuitConnectors visible={connectionsVisible} prefersReducedMotion={prefersReducedMotion} />
+          <CircuitConnectors
+            visible={connectionsVisible}
+            prefersReducedMotion={prefersReducedMotion}
+          />
           {t.trust.items.map((trustItem, index) => (
             <MemoTrustCard
               key={trustItem.title}

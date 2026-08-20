@@ -6,6 +6,7 @@ import {
   Scripts,
   useRouterState,
 } from "@tanstack/react-router";
+import { LazyMotion } from "framer-motion";
 import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
@@ -14,6 +15,13 @@ import { Toaster } from "@/components/ui/sonner";
 import { ThemeProvider } from "@/theme/ThemeProvider";
 import { DEFAULT_LOCALE, getLocaleFromPathname, getMetaTags } from "@/i18n";
 import { PageReadyProvider } from "@/hooks/use-page-ready";
+
+// Dynamic import so framer-motion's feature engine (drag, layout
+// measurement, gestures) ships as its own chunk instead of the main
+// bundle — LazyMotion renders `m.*` elements immediately either way, it
+// just can't animate them until this resolves (typically well before
+// usePageReady flips true, so it's not noticeable in practice).
+const loadMotionFeatures = () => import("@/lib/motion-features").then((mod) => mod.default);
 
 // Locale-agnostic fallback only. In practice every real 404/error is caught
 // inside routes/{-$locale}.tsx, which knows the locale and renders a
@@ -130,10 +138,12 @@ function RootComponent() {
   return (
     <QueryClientProvider client={queryClient}>
       <ThemeProvider>
-        <PageReadyProvider>
-          <Outlet />
-          <Toaster position="bottom-right" />
-        </PageReadyProvider>
+        <LazyMotion features={loadMotionFeatures} strict>
+          <PageReadyProvider>
+            <Outlet />
+            <Toaster position="bottom-right" />
+          </PageReadyProvider>
+        </LazyMotion>
       </ThemeProvider>
     </QueryClientProvider>
   );

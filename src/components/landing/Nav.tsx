@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, m } from "framer-motion";
 import { ArrowRight, Menu, X } from "lucide-react";
 import { Logo } from "@/components/landing/Logo";
 import { LanguageSwitcher } from "@/components/landing/LanguageSwitcher";
@@ -55,7 +55,7 @@ export function Nav() {
   ];
 
   return (
-    <motion.header
+    <m.header
       initial={{ opacity: 0, y: -12 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6, ease: EASE }}
@@ -80,7 +80,7 @@ export function Nav() {
                 className="relative rounded-lg px-3.5 py-2 text-sm text-muted-foreground transition-colors hover:text-foreground"
               >
                 {activeHref === l.href && (
-                  <motion.span
+                  <m.span
                     layoutId="nav-active-pill"
                     className="absolute inset-0 rounded-lg bg-primary/10"
                     transition={{ type: "spring", stiffness: 380, damping: 32 }}
@@ -116,7 +116,7 @@ export function Nav() {
 
         <AnimatePresence>
           {open && (
-            <motion.div
+            <m.div
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: "auto" }}
               exit={{ opacity: 0, height: 0 }}
@@ -125,7 +125,7 @@ export function Nav() {
             >
               <div className="p-3">
                 {links.map((l, i) => (
-                  <motion.a
+                  <m.a
                     key={l.href}
                     href={l.href}
                     onClick={() => setOpen(false)}
@@ -135,9 +135,9 @@ export function Nav() {
                     className="block rounded-lg px-3 py-2 text-sm text-foreground hover:bg-surface-strong"
                   >
                     {l.label}
-                  </motion.a>
+                  </m.a>
                 ))}
-                <motion.a
+                <m.a
                   href={`${homePath}#contact`}
                   onClick={() => setOpen(false)}
                   initial={{ opacity: 0, x: -8 }}
@@ -146,12 +146,12 @@ export function Nav() {
                   className="btn-primary mt-2 block rounded-xl px-4 py-2 text-center text-sm font-medium"
                 >
                   {t.common.getInTouch}
-                </motion.a>
+                </m.a>
               </div>
-            </motion.div>
+            </m.div>
           )}
         </AnimatePresence>
       </div>
-    </motion.header>
+    </m.header>
   );
 }

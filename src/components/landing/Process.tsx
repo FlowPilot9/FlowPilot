@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
+import { AnimatePresence, m, useReducedMotion } from "framer-motion";
 import { Search, ClipboardList, Palette, Code2, Rocket, Wrench } from "lucide-react";
 import { SectionHeader } from "@/components/landing/SectionHeader";
 import { useTranslation } from "@/i18n/I18nProvider";
@@ -36,7 +36,7 @@ export function Process() {
             className="pointer-events-none absolute top-6 hidden h-px overflow-hidden rounded-full bg-border md:block"
             style={{ left: trackInset, right: trackInset }}
           >
-            <motion.div
+            <m.div
               className="h-full origin-left bg-primary"
               initial={false}
               animate={{ scaleX: progress }}
@@ -98,7 +98,7 @@ export function Process() {
             slide/carousel motion, per the brief. */}
         <div className="relative mt-10 min-h-[280px] sm:mt-14">
           <AnimatePresence mode="wait">
-            <motion.div
+            <m.div
               key={active}
               initial={prefersReducedMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
@@ -148,7 +148,7 @@ export function Process() {
                   </p>
                 </div>
               </div>
-            </motion.div>
+            </m.div>
           </AnimatePresence>
         </div>
       </div>

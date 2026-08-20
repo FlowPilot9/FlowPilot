@@ -1,4 +1,4 @@
-import { motion, useReducedMotion, type Variants } from "framer-motion";
+import { m, useReducedMotion, type Variants } from "framer-motion";
 import { Check, Wrench, ArrowRight } from "lucide-react";
 import { SectionHeader } from "@/components/landing/SectionHeader";
 import { useTranslation } from "@/i18n/I18nProvider";
@@ -90,7 +90,7 @@ export function Services() {
           />
         </div>
 
-        <motion.div
+        <m.div
           initial={prefersReducedMotion ? "visible" : "hidden"}
           whileInView="visible"
           viewport={{ once: true, amount: 0.15 }}
@@ -98,7 +98,7 @@ export function Services() {
           className="mt-16 grid grid-cols-1 gap-7 lg:grid-cols-3 lg:items-start"
         >
           {t.services.plans.map((plan, index) => (
-            <motion.div key={plan.name} variants={item} className="group relative h-full">
+            <m.div key={plan.name} variants={item} className="group relative h-full">
               {/* Large ambient glow concentrated below the card, matching the
                   reference treatment. Featured plan stays lit; the other cards
                   reveal the same glow on hover. */}
@@ -186,14 +186,14 @@ export function Services() {
                   <ArrowRight className="h-4 w-4" />
                 </a>
               </div>
-            </motion.div>
+            </m.div>
           ))}
-        </motion.div>
+        </m.div>
 
         {/* Maintenance — a calmer, secondary block below the pricing grid
             (§2.2: not a fourth card competing for the same attention, a
             distinct ongoing-support offer with its own quiet framing). */}
-        <motion.div
+        <m.div
           initial={prefersReducedMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.4 }}
@@ -248,7 +248,7 @@ export function Services() {
             {maintenance.cta}
             <ArrowRight className="h-4 w-4" />
           </a>
-        </motion.div>
+        </m.div>
 
         <p className="mx-auto mt-8 max-w-2xl text-center text-sm text-muted-foreground">
           {t.services.disclaimer}

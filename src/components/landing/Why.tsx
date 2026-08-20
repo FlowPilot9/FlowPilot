@@ -1,5 +1,5 @@
 import { useEffect, useRef, type ReactNode, type RefObject } from "react";
-import { motion, useInView, useReducedMotion, type Variants } from "framer-motion";
+import { m, useInView, useReducedMotion, type Variants } from "framer-motion";
 import { ArrowRight, Search, Sparkles } from "lucide-react";
 import { SectionHeader } from "@/components/landing/SectionHeader";
 import { useTranslation } from "@/i18n/I18nProvider";
@@ -468,7 +468,7 @@ function AiProof({ active, reduceMotion, proof }: ProofProps) {
             {proof.aiPrompt}
           </div>
 
-          <motion.span
+          <m.span
             initial={false}
             animate={
               reduceMotion ? { opacity: 0 } : active ? { opacity: [0, 1, 1, 0] } : { opacity: 0 }
@@ -482,7 +482,7 @@ function AiProof({ active, reduceMotion, proof }: ProofProps) {
           >
             <Sparkles className="h-2.5 w-2.5 text-primary" />
             {proof.generatingLabel}
-          </motion.span>
+          </m.span>
 
           <div
             className={`w-28 rounded-lg border border-primary/20 bg-primary/5 p-2 transition-all duration-500 ease-out motion-reduce:transition-none motion-reduce:delay-0 ${
@@ -574,7 +574,7 @@ function PrincipleRow({
   const reversed = index % 2 === 1;
 
   return (
-    <motion.div
+    <m.div
       ref={ref}
       initial={reduceMotion ? "visible" : "hidden"}
       animate={inView ? "visible" : "hidden"}
@@ -603,7 +603,7 @@ function PrincipleRow({
           <Proof active={inView} reduceMotion={reduceMotion} proof={proof} />
         </div>
       </div>
-    </motion.div>
+    </m.div>
   );
 }
 
