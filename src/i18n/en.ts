@@ -27,7 +27,6 @@ export const en: TranslationDictionary = {
     about: "About",
   },
   hero: {
-    badge: "Now accepting new projects · Q4 2026",
     title: "A website isn't",
     titleLine2: "just",
     titleUnderline: "a page.",
@@ -79,7 +78,7 @@ export const en: TranslationDictionary = {
   services: {
     eyebrow: "Pricing",
     title: "Simple plans, real results.",
-    description: "Prices below are indicative and may vary depending on project complexity.",
+    description: "Choose the right package for your business website. Prices are indicative and may vary depending on project complexity.",
     priceFromLabel: "from",
     plans: [
       {
@@ -223,8 +222,7 @@ export const en: TranslationDictionary = {
   showcase: {
     eyebrow: "Templates",
     title: "Premium products, ready to explore.",
-    description:
-      "Every template is built as a complete product — explore it live, then make it your own.",
+    description: "Explore website examples created for restaurants, clinics, construction companies and other businesses. Every template can be customized to match your brand and goals.",
     previewAlt: "{title} preview",
     liveLabel: "Live",
     liveDemoLabel: "Live Demo",
@@ -275,7 +273,7 @@ export const en: TranslationDictionary = {
   why: {
     eyebrow: "Why FlowPilot",
     title: "A partner obsessed with the details.",
-    intro: "Every benefit below is a demonstration, not just a promise.",
+    intro: "We build modern, fast and optimized websites for businesses that want a professional online presence.",
     items: [
       {
         label: "Performance",
@@ -373,7 +371,7 @@ export const en: TranslationDictionary = {
     founders: [
       { initials: "ȘD", name: "Ștefan Dima", role: "Frontend development & design" },
       { initials: "AP", name: "Alexandru Pirvu", role: "Backend development & systems" },
-      { initials: "MB", name: "Morar Bogdan", role: "Project management & client relations" },
+      { initials: "MB", name: "Morar Bogdan", role: "Project management & marketing" },
     ],
     today: "Today",
     todayText: "we build premium websites, one project at a time.",

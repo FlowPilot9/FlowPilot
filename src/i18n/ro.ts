@@ -27,13 +27,12 @@ export const ro: TranslationDictionary = {
     about: "Despre noi",
   },
   hero: {
-    badge: "Acceptăm proiecte noi · T4 2026",
     title: "Un site nu este",
     titleLine2: "doar",
     titleUnderline: "o pagină.",
     subtitlePrefix: "Este",
     titleHighlight: "prima impresie.",
-    description: "Creăm site-uri rapide, moderne și adaptate afacerii tale.",
+    description: "Construim site-uri rapide, moderne și adaptate afacerii tale.",
     ctaPrimary: "Începe un proiect",
     ctaSecondary: "Explorează modelele",
     trustTimeline: "Livrare în 1 - 2 săptămâni",
@@ -80,8 +79,7 @@ export const ro: TranslationDictionary = {
   services: {
     eyebrow: "Prețuri",
     title: "Planuri simple, rezultate reale.",
-    description:
-      "Prețurile de mai jos sunt orientative și pot varia în funcție de complexitatea proiectului.",
+    description: "Alege pachetul potrivit pentru site-ul afacerii tale. Prețurile sunt orientative și pot varia în funcție de complexitatea proiectului.",
     priceFromLabel: "de la",
     plans: [
       {
@@ -233,8 +231,7 @@ export const ro: TranslationDictionary = {
   showcase: {
     eyebrow: "Șabloane",
     title: "Produse premium, gata de explorat.",
-    description:
-      "Fiecare șablon e construit ca un produs complet — explorează-l live, apoi personalizează-l pentru afacerea ta.",
+    description: "Explorează exemple de site-uri web create pentru restaurante, clinici, companii de construcții și alte afaceri. Fiecare model poate fi personalizat pentru brandul și obiectivele tale.",
     previewAlt: "Previzualizare {title}",
     liveLabel: "Live",
     liveDemoLabel: "Demo live",
@@ -285,7 +282,7 @@ export const ro: TranslationDictionary = {
   why: {
     eyebrow: "De ce FlowPilot",
     title: "Un partener obsedat de detalii.",
-    intro: "Fiecare beneficiu de mai jos e o demonstrație, nu doar o promisiune.",
+    intro: "Construim site-uri web moderne, rapide și optimizate pentru afaceri care vor să aibă o prezență online profesionistă.",
     items: [
       {
         label: "Performanță",
@@ -385,7 +382,7 @@ export const ro: TranslationDictionary = {
     founders: [
       { initials: "ȘD", name: "Ștefan Dima", role: "Frontend development & design" },
       { initials: "AP", name: "Alexandru Pirvu", role: "Backend development & sisteme" },
-      { initials: "MB", name: "Morar Bogdan", role: "Project management & relații cu clienții" },
+      { initials: "MB", name: "Morar Bogdan", role: "Project management & marketing" },
     ],
     today: "Astăzi",
     todayText: "construim site-uri premium, unul câte unul.",
