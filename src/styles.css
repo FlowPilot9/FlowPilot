@@ -1,12 +1,10 @@
 @import "tailwindcss" source(none);
 @source "../src";
 @import "tw-animate-css";
-@import "@fontsource/inter/400.css";
-@import "@fontsource/inter/500.css";
-@import "@fontsource/inter/600.css";
-@import "@fontsource/inter/700.css";
-@import "@fontsource/geist-sans/600.css";
-@import "@fontsource/geist-sans/700.css";
+@import "@fontsource-variable/inter/wght.css"; /* upright, all weights (font-sans default) */
+@import "@fontsource-variable/inter/wght-italic.css"; /* italic quote in HeroWorkspace.tsx */
+@import "@fontsource-variable/geist/wght.css"; /* font-display, weights 600/700, no italic used */
+@import "@fontsource-variable/cormorant-garamond/wght-italic.css"; /* font-accent, always italic in Hero.tsx */
 
 @custom-variant dark (&:is(.dark *));
 
@@ -69,9 +67,9 @@
   --color-surface: var(--surface);
   --color-surface-strong: var(--surface-strong);
   --color-primary-glow: var(--primary-glow);
-  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
-  --font-display: "Geist Sans", ui-sans-serif, system-ui, sans-serif;
-  --font-accent: "Cormorant Garamond", ui-serif, Georgia, serif;
+  --font-sans: "Inter Variable", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Geist Variable", ui-sans-serif, system-ui, sans-serif;
+  --font-accent: "Cormorant Garamond Variable", ui-serif, Georgia, serif;
   --font-mono: ui-monospace, "SF Mono", "Cascadia Code", "Roboto Mono", monospace;
 }
 
