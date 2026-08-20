@@ -226,7 +226,7 @@ export function HeroWorkspace() {
   const tiltY = prefersReducedMotion ? 0 : tilt.x * MAX_TILT_DEG;
 
   return (
-    <div className="relative ml-auto w-full max-w-[600px] [container-type:inline-size] [perspective:1600px]">
+    <div className="relative mx-auto w-full max-w-[600px] [container-type:inline-size] [perspective:1600px] lg:ml-auto">
       {/* Ambient glow behind the product window — present in both themes,
           but doing more visible work in light mode, where there's no
           illustrated atmosphere of its own to lend the panel separation

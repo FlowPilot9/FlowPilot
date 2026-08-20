@@ -45,7 +45,7 @@ export function Hero() {
   return (
     <section
       id="top"
-      className="relative isolate overflow-hidden bg-background pb-20 pt-28 transition-colors duration-500 md:flex md:min-h-screen md:flex-col md:pb-16 md:pt-48"
+      className="relative isolate overflow-hidden bg-background pb-20 pt-28 transition-colors duration-500 lg:flex lg:min-h-screen lg:flex-col lg:pb-16 lg:pt-48"
     >
       {/* Atmosphere: night ocean glow in dark mode only (see
           AtmosphereScene.tsx). A faint technical grid sits on top of it in
@@ -63,9 +63,9 @@ export function Hero() {
         className="pointer-events-none absolute inset-x-0 bottom-0 z-10 h-28 bg-gradient-to-b from-transparent to-[var(--background)] transition-colors duration-500 md:h-40"
       />
 
-      <div className="relative z-0 mx-auto grid w-full max-w-[1600px] grid-cols-1 items-start gap-16 px-6 md:flex-1 md:grid-cols-[1fr_1.1fr] md:gap-28 md:px-10 lg:gap-44 lg:px-16">
-        <div className="[container-type:inline-size]">
-          <h1 className="w-full text-center text-[clamp(1.75rem,1.14rem+3.58cqw,2.75rem)] font-display font-bold leading-[1.15] tracking-tight text-foreground md:w-fit md:text-left md:text-[clamp(1.75rem,-0.3rem+11.73cqw,4.25rem)]">
+      <div className="relative z-0 mx-auto grid w-full max-w-[1600px] grid-cols-1 items-start gap-16 px-6 lg:flex-1 lg:grid-cols-[1fr_1.1fr] lg:gap-28 lg:px-10 xl:gap-44 xl:px-16">
+        <div className="[container-type:inline-size] md:flex md:flex-col md:items-center">
+          <h1 className="w-full text-center text-[clamp(1.75rem,1.14rem+3.58cqw,2.75rem)] font-display font-bold leading-[1.15] tracking-tight text-foreground md:w-fit md:min-w-0 md:max-w-full md:text-left md:text-[clamp(1.75rem,-0.3rem+11.73cqw,4.25rem)]">
             <span className="block overflow-hidden">
               <motion.span {...maskLine(0.32)} className="block text-[1.08em]">
                 {t.hero.title}
@@ -94,18 +94,18 @@ export function Hero() {
 
           <motion.p
             {...reveal(0.64)}
-            className="mx-auto mt-6 max-w-xl text-center text-[clamp(0.9rem,0.84rem+0.358cqw,1rem)] leading-relaxed text-muted-foreground md:mx-0 md:text-left md:text-[clamp(0.95rem,0.81rem+0.821cqw,1.125rem)]"
+            className="mx-auto mt-6 w-fit whitespace-nowrap text-center text-[clamp(0.72rem,0.55rem+1cqw,1rem)] leading-relaxed text-muted-foreground md:text-left md:text-[clamp(0.78rem,0.5rem+1.5cqw,1.125rem)]"
           >
             {t.hero.description}
           </motion.p>
 
-          <motion.div {...reveal(0.76)} className="mt-10 grid grid-cols-2 gap-3">
+          <motion.div {...reveal(0.76)} className="mx-auto mt-10 grid w-fit grid-cols-2 gap-3">
             <motion.a
               href="#contact"
               whileHover={prefersReducedMotion ? undefined : { scale: 1.03 }}
               whileTap={prefersReducedMotion ? undefined : { scale: 0.98 }}
               transition={{ duration: 0.2, ease: "easeOut" }}
-              className="btn-primary flex items-center justify-center gap-2 rounded-xl px-[clamp(0.85rem,0.5rem+2.6cqw,1.75rem)] py-[clamp(0.6rem,0.3rem+1.8cqw,1rem)] text-[clamp(0.75rem,0.5rem+1.8cqw,1rem)] font-medium"
+              className="btn-primary flex items-center justify-center gap-2 whitespace-nowrap rounded-xl px-[clamp(0.6rem,0.35rem+2.4cqw,1.75rem)] py-[clamp(0.6rem,0.3rem+1.8cqw,1rem)] text-[clamp(0.62rem,0.4rem+1.9cqw,1rem)] font-medium"
             >
               {t.hero.ctaPrimary}{" "}
               <ArrowRight className="h-[clamp(0.9rem,0.7rem+0.9cqw,1.25rem)] w-[clamp(0.9rem,0.7rem+0.9cqw,1.25rem)] shrink-0" />
@@ -115,7 +115,7 @@ export function Hero() {
               whileHover={prefersReducedMotion ? undefined : { scale: 1.03 }}
               whileTap={prefersReducedMotion ? undefined : { scale: 0.98 }}
               transition={{ duration: 0.2, ease: "easeOut" }}
-              className="btn-ghost flex items-center justify-center gap-2 rounded-xl px-[clamp(0.85rem,0.5rem+2.6cqw,1.75rem)] py-[clamp(0.6rem,0.3rem+1.8cqw,1rem)] text-[clamp(0.75rem,0.5rem+1.8cqw,1rem)] font-medium"
+              className="btn-ghost flex items-center justify-center gap-2 whitespace-nowrap rounded-xl px-[clamp(0.6rem,0.35rem+2.4cqw,1.75rem)] py-[clamp(0.6rem,0.3rem+1.8cqw,1rem)] text-[clamp(0.62rem,0.4rem+1.9cqw,1rem)] font-medium"
             >
               {t.hero.ctaSecondary}
             </motion.a>
