@@ -64,8 +64,8 @@ export function Hero() {
       />
 
       <div className="relative z-0 mx-auto grid w-full max-w-[1600px] grid-cols-1 items-start gap-16 px-6 lg:flex-1 lg:grid-cols-[1fr_1.1fr] lg:gap-28 lg:px-10 xl:gap-44 xl:px-16">
-        <div className="[container-type:inline-size] md:flex md:flex-col md:items-center">
-          <h1 className="w-full text-center text-[clamp(1.75rem,1.14rem+3.58cqw,2.75rem)] font-display font-bold leading-[1.15] tracking-tight text-foreground md:w-fit md:min-w-0 md:max-w-full md:text-left md:text-[clamp(1.75rem,-0.3rem+11.73cqw,4.25rem)]">
+        <div className="[container-type:inline-size] md:grid md:grid-cols-[max-content] md:justify-center">
+          <h1 className="w-full text-center text-[clamp(1.75rem,1.14rem+3.58cqw,2.75rem)] font-display font-bold leading-[1.15] tracking-tight text-foreground md:mx-auto md:w-fit md:min-w-0 md:max-w-full md:text-center md:text-[clamp(1.75rem,-0.3rem+11.73cqw,4.25rem)]">
             <span className="block overflow-hidden">
               <motion.span {...maskLine(0.32)} className="block text-[1.08em]">
                 {t.hero.title}
@@ -99,7 +99,10 @@ export function Hero() {
             {t.hero.description}
           </motion.p>
 
-          <motion.div {...reveal(0.76)} className="mx-auto mt-10 grid w-fit grid-cols-2 gap-3">
+          <motion.div
+            {...reveal(0.76)}
+            className="mx-auto mt-10 grid w-fit grid-cols-2 gap-3 md:w-full"
+          >
             <motion.a
               href="#contact"
               whileHover={prefersReducedMotion ? undefined : { scale: 1.03 }}

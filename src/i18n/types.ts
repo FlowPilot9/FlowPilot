@@ -32,7 +32,6 @@ export interface TranslationDictionary {
     about: string;
   };
   hero: {
-    badge: string;
     title: string;
     titleLine2: string;
     titleUnderline: string;

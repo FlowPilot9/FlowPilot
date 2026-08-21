@@ -293,9 +293,9 @@ function CraftProof({ active }: ProofProps) {
 }
 
 // --- 03 — Mobile First: the same page, desktop → tablet → mobile -----------
-// The screen content is a simplified likeness of our own Hero (badge,
-// two-tone headline, filled CTA) rather than a generic abstract page — the
-// proof should read as "this is our site, at three sizes", not "a website".
+// The screen content is a simplified likeness of our own Hero (two-tone
+// headline, filled CTA) rather than a generic abstract page — the proof
+// should read as "this is our site, at three sizes", not "a website".
 
 function MiniHeroScreen({ compact }: { compact?: boolean }) {
   return (
@@ -309,7 +309,6 @@ function MiniHeroScreen({ compact }: { compact?: boolean }) {
           </div>
         </div>
       )}
-      <span className="h-[3px] w-2/5 rounded-full bg-primary/20" />
       <span className="block h-[5px] w-full rounded-full bg-foreground/70" />
       {!compact && <span className="block h-[5px] w-4/5 rounded-full bg-foreground/70" />}
       <span className="block h-[5px] w-2/3 rounded-full bg-primary" />

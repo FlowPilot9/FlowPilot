@@ -4,10 +4,10 @@ export const ro: TranslationDictionary = {
   meta: {
     title: "FlowPilot — Site-uri web moderne pentru afaceri",
     description:
-      "Creăm site-uri web moderne, rapide și optimizate pentru afaceri. Design premium, dezvoltare și mentenanță, de la idee la lansare.",
+      "Construim site-uri web moderne, rapide și optimizate pentru afaceri. Design premium, dezvoltare și mentenanță, de la idee la lansare.",
     ogTitle: "FlowPilot — Site-uri web moderne pentru afaceri",
     ogDescription:
-      "Creăm site-uri web moderne, rapide și optimizate pentru afaceri.",
+      "Construim site-uri web moderne, rapide și optimizate pentru afaceri.",
   },
   common: {
     brand: "FlowPilot",
@@ -29,7 +29,7 @@ export const ro: TranslationDictionary = {
   hero: {
     title: "Un site nu este",
     titleLine2: "doar",
-    titleUnderline: "o pagină.",
+    titleUnderline: "o pagină",
     subtitlePrefix: "Este",
     titleHighlight: "prima impresie.",
     description: "Construim site-uri rapide, moderne și adaptate afacerii tale.",

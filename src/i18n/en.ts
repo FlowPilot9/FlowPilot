@@ -29,7 +29,7 @@ export const en: TranslationDictionary = {
   hero: {
     title: "A website isn't",
     titleLine2: "just",
-    titleUnderline: "a page.",
+    titleUnderline: "a page",
     subtitlePrefix: "It's",
     titleHighlight: "the first impression.",
     description: "We build fast, modern websites shaped around your business.",
