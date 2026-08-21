@@ -64,7 +64,7 @@ export function Contact() {
     "w-full rounded-xl border border-border bg-card px-3.5 py-2.5 text-sm outline-none transition-all duration-200 hover:border-foreground/20 focus:border-primary focus:ring-4 focus:ring-primary/10";
 
   return (
-    <section id="contact" className="bg-surface py-24 md:py-32">
+    <section id="contact" className="overflow-hidden bg-surface py-24 md:py-32">
       <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="text-center">
           <span className="text-sm font-semibold uppercase tracking-[0.2em] text-primary">
