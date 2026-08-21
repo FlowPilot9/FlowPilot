@@ -366,7 +366,7 @@ export const ro: TranslationDictionary = {
   about: {
     eyebrow: "DESPRE NOI",
     title:
-      "Nu suntem o agenție mare. Suntem trei oameni care construiesc fiecare proiect cu grijă.",
+      "Nu suntem o agenție mare. Suntem o echipă care construiește fiecare proiect cu grijă.",
     paragraph1:
       "FlowPilot a pornit dintr-o observație simplă: prea multe site-uri de afaceri mici arată ca niște șabloane reciclate, fără personalitate și fără cineva care să se implice cu adevărat în rezultat.",
     paragraph2:

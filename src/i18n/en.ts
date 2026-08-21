@@ -355,7 +355,7 @@ export const en: TranslationDictionary = {
   },
   about: {
     eyebrow: "ABOUT US",
-    title: "We are not a big agency. We are three people who build every project with care.",
+    title: "We are not a big agency. We are a team who builds every project with care.",
     paragraph1:
       "FlowPilot started from a simple observation: too many small business websites look like recycled templates, without personality and without someone truly invested in the outcome.",
     paragraph2:
