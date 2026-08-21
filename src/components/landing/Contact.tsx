@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "sonner";
 import { ArrowRight, Mail, MessageCircle, Eye, Fingerprint } from "lucide-react";
-import { motion, useReducedMotion, type Variants } from "framer-motion";
+import { m, useReducedMotion, type Variants } from "framer-motion";
 import { createContactFormSchema, type ContactFormValues } from "@/lib/lead-schemas";
 import { useTranslation } from "@/i18n/I18nProvider";
 import { localePath } from "@/i18n";
@@ -73,49 +73,46 @@ export function Contact() {
         </div>
 
         <div className="mt-8 grid grid-cols-1 gap-10 md:grid-cols-2 md:gap-14">
-          <motion.div
+          <m.div
             initial={prefersReducedMotion ? "visible" : "hidden"}
             whileInView="visible"
             viewport={{ once: true, amount: 0.3 }}
             variants={container}
           >
-            <motion.h2
+            <m.h2
               variants={item}
               className="text-4xl font-bold tracking-tight text-foreground sm:text-5xl md:text-[46px] md:leading-[1.1]"
             >
               {t.contact.title}
-            </motion.h2>
-            <motion.p
-              variants={item}
-              className="mt-5 max-w-lg text-lg text-muted-foreground md:text-xl"
-            >
+            </m.h2>
+            <m.p variants={item} className="mt-5 max-w-lg text-lg text-muted-foreground md:text-xl">
               {t.contact.description}
-            </motion.p>
+            </m.p>
 
-            <motion.a
+            <m.a
               variants={item}
               href="mailto:tflowpilot@gmail.com"
               className="mt-8 inline-flex items-center gap-2.5 text-lg font-medium text-foreground transition-colors duration-200 hover:text-primary"
             >
               <Mail className="h-5 w-5 text-primary" /> tflowpilot@gmail.com
-            </motion.a>
+            </m.a>
 
             <ul className="mt-8 space-y-4">
               {t.contact.trustIndicators.map((line, index) => {
                 const Icon = trustIcons[index];
                 return (
-                  <motion.li
+                  <m.li
                     key={line}
                     variants={item}
                     className="flex items-start gap-3 text-lg text-muted-foreground"
                   >
                     <Icon className="mt-0.5 h-5 w-5 shrink-0 text-primary" />
                     {line}
-                  </motion.li>
+                  </m.li>
                 );
               })}
             </ul>
-          </motion.div>
+          </m.div>
 
           {/* Form panel — a static, theme-correct ambient glow behind it
               (gold in light, blue in dark, via --primary-glow, same token
@@ -126,7 +123,7 @@ export function Contact() {
               typing. */}
           <div className="relative">
             <div className="workspace-glow absolute -inset-10 -z-10" />
-            <motion.form
+            <m.form
               initial={prefersReducedMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.3 }}
@@ -226,7 +223,7 @@ export function Contact() {
                 {isSubmitting ? t.contact.submitting : t.contact.submit}{" "}
                 <ArrowRight className="h-4 w-4" />
               </button>
-            </motion.form>
+            </m.form>
           </div>
         </div>
       </div>

@@ -1,4 +1,4 @@
-import { motion, useReducedMotion } from "framer-motion";
+import { m, useReducedMotion } from "framer-motion";
 import { ArrowRight, ChevronDown } from "lucide-react";
 import { useTranslation } from "@/i18n/I18nProvider";
 import { HeroWorkspace } from "@/components/landing/HeroWorkspace";
@@ -67,12 +67,12 @@ export function Hero() {
         <div className="[container-type:inline-size] md:grid md:grid-cols-[max-content] md:justify-center">
           <h1 className="w-full text-center text-[clamp(2.15rem,0.5rem+8cqw,2.9rem)] font-display font-bold leading-[1.15] tracking-tight text-foreground md:mx-auto md:w-fit md:min-w-0 md:max-w-full md:text-center md:text-[clamp(1.75rem,-0.3rem+11.73cqw,4.25rem)]">
             <span className="block overflow-hidden">
-              <motion.span {...maskLine(0.32)} className="block text-[1.08em]">
+              <m.span {...maskLine(0.32)} className="block text-[1.08em]">
                 {t.hero.title}
-              </motion.span>
+              </m.span>
             </span>
             <span className="block overflow-hidden pb-3 text-center">
-              <motion.span {...maskLine(0.4)} className="block text-[0.88em]">
+              <m.span {...maskLine(0.4)} className="block text-[0.88em]">
                 <span className="font-accent text-[1.2em] italic font-semibold text-primary">
                   {t.hero.titleLine2}
                 </span>{" "}
@@ -80,30 +80,27 @@ export function Hero() {
                   {t.hero.titleUnderline}
                   <span className="pointer-events-none absolute -bottom-3 left-0 h-[4px] w-full origin-left -rotate-[4deg] rounded-full bg-primary" />
                 </span>
-              </motion.span>
+              </m.span>
             </span>
             <span className="block overflow-hidden pb-1 pt-0">
-              <motion.span {...maskLine(0.52)} className="block text-[0.92em]">
+              <m.span {...maskLine(0.52)} className="block text-[0.92em]">
                 {t.hero.subtitlePrefix}{" "}
                 <span className="font-accent text-[1.15em] italic font-medium text-primary">
                   {t.hero.titleHighlight}
                 </span>
-              </motion.span>
+              </m.span>
             </span>
           </h1>
 
-          <motion.p
+          <m.p
             {...reveal(0.64)}
             className="mx-auto mt-6 w-fit whitespace-nowrap text-center text-[clamp(0.72rem,0.55rem+1cqw,1rem)] leading-relaxed text-muted-foreground md:text-left md:text-[clamp(0.78rem,0.5rem+1.5cqw,1.125rem)]"
           >
             {t.hero.description}
-          </motion.p>
+          </m.p>
 
-          <motion.div
-            {...reveal(0.76)}
-            className="mx-auto mt-10 grid w-fit grid-cols-2 gap-3 md:w-full"
-          >
-            <motion.a
+          <m.div {...reveal(0.76)} className="mt-10 grid grid-cols-2 gap-3">
+            <m.a
               href="#contact"
               whileHover={prefersReducedMotion ? undefined : { scale: 1.03 }}
               whileTap={prefersReducedMotion ? undefined : { scale: 0.98 }}
@@ -112,8 +109,8 @@ export function Hero() {
             >
               {t.hero.ctaPrimary}{" "}
               <ArrowRight className="h-[clamp(0.9rem,0.7rem+0.9cqw,1.25rem)] w-[clamp(0.9rem,0.7rem+0.9cqw,1.25rem)] shrink-0" />
-            </motion.a>
-            <motion.a
+            </m.a>
+            <m.a
               href="#work"
               whileHover={prefersReducedMotion ? undefined : { scale: 1.03 }}
               whileTap={prefersReducedMotion ? undefined : { scale: 0.98 }}
@@ -121,14 +118,14 @@ export function Hero() {
               className="btn-ghost flex items-center justify-center gap-2 whitespace-nowrap rounded-xl px-[clamp(0.6rem,0.35rem+2.4cqw,1.75rem)] py-[clamp(0.6rem,0.3rem+1.8cqw,1rem)] text-[clamp(0.62rem,0.4rem+1.9cqw,1rem)] font-medium"
             >
               {t.hero.ctaSecondary}
-            </motion.a>
-          </motion.div>
+            </m.a>
+          </m.div>
         </div>
 
         {/* The workspace "powers on": starts very slightly scaled down and
             softly blurred, then clears — a deliberate one-shot entrance
             (not a loop), timed to land just as the CTAs finish appearing. */}
-        <motion.div
+        <m.div
           initial={
             prefersReducedMotion
               ? { opacity: 1, scale: 1, filter: "blur(0px)" }
@@ -144,10 +141,10 @@ export function Hero() {
           }
         >
           <HeroWorkspace />
-        </motion.div>
+        </m.div>
       </div>
 
-      <motion.a
+      <m.a
         href="#about"
         aria-label={t.hero.scrollCue}
         initial={prefersReducedMotion ? { opacity: 1 } : { opacity: 0 }}
@@ -169,7 +166,7 @@ export function Hero() {
         className="absolute bottom-6 left-1/2 z-10 hidden -translate-x-1/2 text-muted-foreground md:block"
       >
         <ChevronDown className="h-5 w-5" />
-      </motion.a>
+      </m.a>
     </section>
   );
 }

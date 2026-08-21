@@ -1,12 +1,15 @@
 @import "tailwindcss" source(none);
 @source "../src";
 @import "tw-animate-css";
-@import "@fontsource/inter/400.css";
-@import "@fontsource/inter/500.css";
-@import "@fontsource/inter/600.css";
-@import "@fontsource/inter/700.css";
-@import "@fontsource/geist-sans/600.css";
-@import "@fontsource/geist-sans/700.css";
+/* Variable-font builds: one file per subset covers the whole weight range
+ * (100-900 for Inter/Geist, 300-700 for Cormorant) instead of one file per
+ * static weight, so this cuts ~10 font requests down to 4. Only the actual
+ * styles used in the app are imported — see the font-usage audit note below
+ * the @theme block for what's used where. */
+@import "@fontsource-variable/inter/wght.css"; /* upright, all weights (font-sans default) */
+@import "@fontsource-variable/inter/wght-italic.css"; /* italic quote in HeroWorkspace.tsx */
+@import "@fontsource-variable/geist/wght.css"; /* font-display, weights 600/700, no italic used */
+@import "@fontsource-variable/cormorant-garamond/wght-italic.css"; /* font-accent, always italic in Hero.tsx */
 
 @custom-variant dark (&:is(.dark *));
 
@@ -69,9 +72,9 @@
   --color-surface: var(--surface);
   --color-surface-strong: var(--surface-strong);
   --color-primary-glow: var(--primary-glow);
-  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
-  --font-display: "Geist Sans", ui-sans-serif, system-ui, sans-serif;
-  --font-accent: "Cormorant Garamond", ui-serif, Georgia, serif;
+  --font-sans: "Inter Variable", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Geist Variable", ui-sans-serif, system-ui, sans-serif;
+  --font-accent: "Cormorant Garamond Variable", ui-serif, Georgia, serif;
   --font-mono: ui-monospace, "SF Mono", "Cascadia Code", "Roboto Mono", monospace;
 }
 
@@ -429,7 +432,15 @@
    quality, not a "technical" motif specific to either sky or ocean), very
    low opacity throughout. */
 @utility hero-grain {
-  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+  /* Static pre-rendered noise tile (64x64 WebP, ~1.4KB), swapped in for
+     a live feTurbulence SVG filter. Same visual grain at the same 0.05
+     opacity/overlay blend, but the old version made the browser compute
+     a fractal-noise filter graph on paint -- cheap on desktop, but on a
+     slow/low-power device that showed up as ~2.4s of pure "render delay"
+     on this element in Lighthouse (it was also the LCP candidate, being
+     a full-viewport absolutely-positioned layer), since a decoded image
+     just gets painted straight away. */
+  background-image: url("data:image/webp;base64,UklGRnAFAABXRUJQVlA4IGQFAAAwEQCdASpAAEAAA8BgJaQAUYHSD5Gfg7QOp/vBwK/zfYFan/ndIPjU/03gDfdf+T0r/9p4o/rT2BPLP9jn7me0abT3/WqFVeZBzCP6yQejuwJvHpN6Z1mnZuEIll+NE0aBmVJcZJbOin6xlNFjCgaagB9wJgMdwM0H/3V6MzdcawSfdwmOdBcX74WuUr4nav233AD629GoNfbM8kJqXhaoPlyDLdPosQnD/eWygWBkyvgBYFmfLcVRVskbXvBNtP/1dsm071IwkuMs2cBbEmWt8/xPuGo7OLr1ZUkOvnPTokwGJuwEEou1VrCIZAMvu017G4w4wfRBqfj+djavYJb6qwXB0Vy3Z7awSEtIdczVVSIJC/kQn3cMzYuB6UwrtR7vl7+geSfrMomSOGSezP2Yxm3oJ0jQ/AFDRNrW6EoGubFIahCcunI85jxBLldqgVaWxr9pTDgJqKzV+N2PuJ3uhH3yBeDfkaDeTwqxfAQXKM7DFVwF075drc+dpcHKRhsjEsnl3OIx6ULNkbbMzf4JG7ZOhCF52Mahe1GRnImXvoqP5sV0AOh7MfxMyQTVlCU5LdvSWujFKUNYcA17zyxyUi2qUXPJc4tKg1TKQ1xJ8gVJSGoWGoPrlfWzip73PtiqAF+FQO7bue80pjzcXwYzWnOQ+ljCJJkzYprOeloxgGz34KsHcoO67tAK5TwdJUqx/S9L3/s+/ZtbiIkoJ5Bc4Aos9NedZVmVbPXJfZ9DTZ8wABsA6p8jmm4/WGV6bCylyva+koyTz87qsgozltzkzbNwW7Ue59OL9WpcXozRaK49MOv9G3dxHdekHMQuqZK6J8iNw+Iw8z4oBLloTStZhxy6F7U1Zur6IqAkB9dtR46NNCxT+0Z0cGitLu+/dS3SP7tFnxBteyD8zzZ/TFfO4vUXxlInS3hczdK4/RWdCKkYbMwxBraSf3E+1MKxOR1eAedUWyjHZ6x065cMSUB4QNYbjQC0QqCkJusnAQiLsRK/TnTtO2mHFenYCEvZfSOex/1JCj9x3kB1OIRd1xFsljO5GUxVFJMQHDnFIilSj48cya/U1GRh3DD2KTwLh+m/xdT1QYbK8MZ281HKJEz9/UvHDOXiwX2KrSYTLeHBBR85DndMGqc69CpeAxZgD653XsKzIlkD6mvLauaPLudGaRCKlEM55XxysCSDlwNGDmRX9sOVMPle8U3AxyU64+pSRd6Wnf3kbCgpVZVEWZSXseFGEc+U6ouybNgMiNbKmIcNgyFXe4QchjJSMz970cmP7j9PAf8oT3RIF5rrU+NAvRMrrI/rAi8j7AbFkMBw6OyfDq4kHaQAKeU/F82p6Ho9vFL6TYEWSYgkz1FehO0+YXlrL9Zl08nE1eFptJYPkMS8pT3PwOIePxjZR7qw05XAa8nWPt3bu022qidG5EkKxnY8cvZP01DTRaqybaxuAdsCSP2gtc+rNaAnA/QuceVG1wkWThQS6jWhV6eApZqIv/p8dYAW/PNWepBHrql314/oiAZj+JfBbdFJiHcf/0ypYFmvbxojzgANglS+AXHX3GtliHvAdMPmvCakVG9MXBeaQEDXjHqk7cR/H8xiJF/VDcQXNHrldZqrwD7skTBkzSkEC3IqLjhhp1B9zFU+cZlgv4fhZYp8hbkbnNPe0mUecXfXj7A6XwDOq9rS8onaDLJoSEHRCtQGmRkzjel3U3IEQG9v4adl7O3e/H+Nd9RUB/tkWVM2A2uxs3hF9pWHMSr3b1LSoW53b34d0pSOkduVC5sW+tW/wsOieu/du/QprtmswK7n38hcDmxRhTFNP/fha9wuWzAHtl+ild81eqhQAAA=");
   background-size: 180px 180px;
   opacity: 0.05;
   mix-blend-mode: overlay;
