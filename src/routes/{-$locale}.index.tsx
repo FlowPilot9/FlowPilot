@@ -1,12 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Landing } from "@/components/landing/Landing";
-import {
-  buildHrefLangLinks,
-  getMetaTags,
-  localePath,
-  resolveLocale,
-  SITE_URL,
-} from "@/i18n";
+import { buildHrefLangLinks, getMetaTags, localePath, resolveLocale, SITE_URL } from "@/i18n";
 
 export const Route = createFileRoute("/{-$locale}/")({
   head: ({ params }) => {
@@ -23,12 +17,13 @@ export const Route = createFileRoute("/{-$locale}/")({
         { property: "og:site_name", content: "FlowPilot" },
         { property: "og:type", content: "website" },
         { property: "og:url", content: `${SITE_URL}${localePath(locale, "/")}` },
-        { property: "og:image", content: "/og-image.jpg" },
+        { property: "og:image", content: "/og-image.webp" },
+        { property: "og:image:type", content: "image/webp" },
 
         { name: "twitter:card", content: "summary_large_image" },
         { name: "twitter:title", content: meta.ogTitle },
         { name: "twitter:description", content: meta.ogDescription },
-        { name: "twitter:image", content: "/og-image.jpg" },
+        { name: "twitter:image", content: "/og-image.webp" },
       ],
       scripts: [
         {
