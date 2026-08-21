@@ -79,12 +79,12 @@ export const ro: TranslationDictionary = {
   services: {
     eyebrow: "Prețuri",
     title: "Planuri simple, rezultate reale.",
-    description: "Alege pachetul potrivit pentru site-ul afacerii tale. Prețurile sunt orientative și pot varia în funcție de complexitatea proiectului.",
+    description: "Alege pachetul potrivit pentru site-ul afacerii tale.",
     priceFromLabel: "de la",
     plans: [
       {
         name: "Landing",
-        tagline: "O singură pagină, simplă și profesionistă.",
+        tagline: "O singură pagină, simplă și rapidă.",
         description:
           "Potrivit pentru persoane sau afaceri care au nevoie de o prezență online simplă și rapidă.",
         price: "100",
@@ -94,10 +94,27 @@ export const ro: TranslationDictionary = {
           "Design modern",
           "Responsive",
           "Secțiuni esențiale",
-          "Formular / buton de contact",
+          "Fără formular de contact",
           "Publicare online",
         ],
         cta: "Alege Landing",
+      },
+      {
+        name: "Landing+",
+        tagline: "O pagină completă, pregătită să fie găsită și contactată.",
+        description:
+          "Ideal pentru cei care vor o pagină de prezentare completă, cu SEO de bază și formular de contact.",
+        price: "150",
+        currency: "€",
+        features: [
+          "1 pagină",
+          "Design modern",
+          "Responsive",
+          "SEO de bază",
+          "Formular de contact",
+          "Publicare online",
+        ],
+        cta: "Alege Landing+",
       },
       {
         name: "Starter",
@@ -105,13 +122,10 @@ export const ro: TranslationDictionary = {
         description: "Ideal pentru o afacere mică ce vrea o prezență completă online.",
         price: "250",
         currency: "€",
-        featured: true,
-        badge: "Recomandat",
         features: [
-          "3-5 pagini",
+          "2-3 pagini",
           "Design personalizat",
           "Responsive",
-          "Animații & interacțiuni",
           "Formular de contact",
           "SEO de bază",
           "Optimizare pentru viteză",
@@ -122,18 +136,18 @@ export const ro: TranslationDictionary = {
       {
         name: "Business",
         tagline: "Un website mai complex, construit pentru o afacere în creștere.",
-        description: "Pentru afaceri în creștere care au nevoie de mai multă putere și integrări.",
+        description:
+          "Pentru afaceri în creștere care au nevoie de mai multe pagini și funcționalități.",
         price: "500",
         currency: "€",
         features: [
-          "5-10 pagini",
+          "4-5 pagini",
           "Design complet personalizat",
-          "Animații & interacțiuni avansate",
+          "Animații & interacțiuni",
           "SEO tehnic",
           "Analytics",
-          "Integrări cu servicii externe",
-          "Funcționalități custom",
-          "Optimizare avansată",
+          "Pagină suplimentară: +50€",
+          "Publicare online",
         ],
         cta: "Discută despre proiect",
       },
@@ -153,10 +167,7 @@ export const ro: TranslationDictionary = {
         "Suport tehnic",
       ],
       note: "Paginile noi și funcționalitățile suplimentare se taxează separat.",
-      cta: "Discută despre mentenanță",
     },
-    disclaimer:
-      "Prețurile afișate sunt prețuri de pornire și pot varia în funcție de complexitatea proiectului.",
   },
   process: {
     eyebrow: "Procesul nostru",

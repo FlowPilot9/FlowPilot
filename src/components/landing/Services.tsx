@@ -7,12 +7,11 @@ import { useTranslation } from "@/i18n/I18nProvider";
 // Services / Pricing.
 //
 // Signature moment (design system §1.2) for this section: pricing cards that
-// "wake up" on hover — border shifts to --primary, the card lifts, and a
-// soft ambient glow (reusing --primary-glow, the same token as the Hero
-// workspace glow, §6.1/§9) blooms behind it. The featured plan (Starter)
-// carries that same glow permanently at rest, so the eye lands there first;
-// the other two earn it back on hover, same recipe, same duration, so the
-// whole row reads as one consistent interaction rather than a special case.
+// "wake up" on hover — border shifts to --primary, the card lifts slightly,
+// and a soft ambient glow (reusing --primary-glow, the same token as the
+// Hero workspace glow, §6.1/§9) blooms behind it. All four plans get the
+// exact same treatment at rest, so the row reads as one consistent set —
+// the glow is purely a hover reward, not a permanent marker on any one card.
 // ---------------------------------------------------------------------------
 
 const container: Variants = {
@@ -95,52 +94,31 @@ export function Services() {
           whileInView="visible"
           viewport={{ once: true, amount: 0.15 }}
           variants={container}
-          className="mt-16 grid grid-cols-1 gap-7 lg:grid-cols-3 lg:items-start"
+          className="mt-16 grid grid-cols-1 gap-7 sm:grid-cols-2 lg:grid-cols-4 lg:items-start"
         >
           {t.services.plans.map((plan, index) => (
             <m.div key={plan.name} variants={item} className="group relative h-full">
-              {/* Large ambient glow concentrated below the card, matching the
-                  reference treatment. Featured plan stays lit; the other cards
-                  reveal the same glow on hover. */}
+              {/* Large ambient glow concentrated below the card — hidden at
+                  rest, blooms in on hover. Identical for every plan. */}
 
               <div
                 aria-hidden
-                className={`pricing-card-glow pointer-events-none absolute -inset-10 -z-10 rounded-[2.5rem] blur-3xl transition-opacity duration-500 ease-out ${
-                  plan.featured ? "opacity-100" : "opacity-0 group-hover:opacity-100"
-                }`}
+                className="pricing-card-glow pointer-events-none absolute -inset-10 -z-10 rounded-[2.5rem] opacity-0 blur-3xl transition-opacity duration-500 ease-out group-hover:opacity-100"
               />
 
-              <div
-                className={`relative flex h-full flex-col overflow-hidden rounded-2xl border p-7 shadow-soft transition-all duration-300 hover:-translate-y-1 hover:shadow-[var(--shadow-glow)] sm:p-8 ${
-                  plan.featured
-                    ? "border-primary/30 bg-card shadow-[var(--shadow-glow)] lg:-translate-y-3"
-                    : "border-border bg-card hover:border-primary/30"
-                }`}
-              >
-                {/* Large inner wash rises from the bottom of the card, so the
-                    featured plan feels illuminated from within rather than
+              <div className="relative flex h-full flex-col overflow-hidden rounded-2xl border border-border bg-card p-7 shadow-soft transition-all duration-300 hover:-translate-y-1 hover:border-primary/30 hover:shadow-[var(--shadow-glow)] sm:p-8">
+                {/* Large inner wash rises from the bottom of the card on
+                    hover, so it feels illuminated from within rather than
                     simply outlined. */}
 
                 <div
                   aria-hidden
-                  className={`pricing-card-inner-glow pointer-events-none absolute inset-x-0 bottom-0 -z-10 h-[72%] transition-opacity duration-500 ${
-                    plan.featured ? "opacity-100" : "opacity-0 group-hover:opacity-80"
-                  }`}
+                  className="pricing-card-inner-glow pointer-events-none absolute inset-x-0 bottom-0 -z-10 h-[72%] opacity-0 transition-opacity duration-500 group-hover:opacity-80"
                 />
 
-                {/* Top hairline — brightens on hover (always on for the
-                    featured card), same treatment as elsewhere on the site. */}
-                <div
-                  className={`absolute inset-x-0 -top-px h-px bg-gradient-to-r from-transparent via-primary/40 to-transparent transition-opacity duration-300 ${
-                    plan.featured ? "opacity-100" : "opacity-0 group-hover:opacity-100"
-                  }`}
-                />
-
-                {plan.badge && (
-                  <span className="absolute right-6 top-6 rounded-full bg-[image:var(--gradient-primary)] px-3 py-1 text-[11px] font-semibold uppercase tracking-wider text-primary-foreground shadow-soft">
-                    {plan.badge}
-                  </span>
-                )}
+                {/* Top hairline — brightens on hover, same treatment as
+                    elsewhere on the site. */}
+                <div className="absolute inset-x-0 -top-px h-px bg-gradient-to-r from-transparent via-primary/40 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
 
                 <div className="flex items-baseline gap-2.5">
                   <span className="font-mono text-sm text-muted-foreground/40">
@@ -178,9 +156,7 @@ export function Services() {
 
                 <a
                   href="#contact"
-                  className={`mt-8 inline-flex items-center justify-center gap-1.5 rounded-xl px-5 py-3 text-sm font-semibold transition-all duration-200 ${
-                    plan.featured ? "btn-primary" : "btn-ghost"
-                  }`}
+                  className="btn-ghost mt-8 inline-flex items-center justify-center gap-1.5 rounded-xl px-5 py-3 text-sm font-semibold transition-all duration-200"
                 >
                   {plan.cta}
                   <ArrowRight className="h-4 w-4" />
@@ -240,19 +216,7 @@ export function Services() {
           </ul>
 
           <p className="mt-5 text-xs text-muted-foreground">{maintenance.note}</p>
-
-          <a
-            href="#contact"
-            className="btn-primary mt-6 inline-flex w-full items-center justify-center gap-1.5 rounded-xl px-5 py-3 text-sm font-semibold sm:w-auto"
-          >
-            {maintenance.cta}
-            <ArrowRight className="h-4 w-4" />
-          </a>
         </m.div>
-
-        <p className="mx-auto mt-8 max-w-2xl text-center text-sm text-muted-foreground">
-          {t.services.disclaimer}
-        </p>
       </div>
     </section>
   );

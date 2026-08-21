@@ -72,8 +72,6 @@ export interface TranslationDictionary {
       description: string;
       price: string;
       currency: string;
-      featured?: boolean;
-      badge?: string;
       features: string[];
       cta: string;
     }>;
@@ -85,9 +83,7 @@ export interface TranslationDictionary {
       description: string;
       features: string[];
       note: string;
-      cta: string;
     };
-    disclaimer: string;
   };
   process: {
     eyebrow: string;
