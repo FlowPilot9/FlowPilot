@@ -17,7 +17,7 @@ export const Route = createFileRoute("/{-$locale}/privacy")({
     return {
       meta: [
         { title: t.privacy.metaTitle },
-        { name: "description", content: t.privacy.metaDescription },
+        { name: "robots", content: "noindex, follow" },
       ],
       links: [
         ...buildHrefLangLinks("/privacy"),

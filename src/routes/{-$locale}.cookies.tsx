@@ -17,7 +17,7 @@ export const Route = createFileRoute("/{-$locale}/cookies")({
     return {
       meta: [
         { title: t.cookies.metaTitle },
-        { name: "description", content: t.cookies.metaDescription },
+        { name: "robots", content: "noindex, follow" },
       ],
       links: [
         ...buildHrefLangLinks("/cookies"),
