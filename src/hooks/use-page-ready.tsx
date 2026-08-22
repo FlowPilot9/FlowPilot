@@ -39,7 +39,19 @@ export function PageReadyProvider({ children }: { children: ReactNode }) {
       const elapsed = Date.now() - start;
       window.setTimeout(
         () => {
-          if (!cancelled) setReady(true);
+          if (cancelled) return;
+          // Fonts are technically loaded at this point, but the browser may
+          // not have *painted* with them yet — flipping `ready` a frame too
+          // early lets the entrance animation start measured against
+          // fallback-font metrics, then visibly snap once the real font
+          // paints in (the "climbs, stutters, climbs again" glitch). Waiting
+          // two animation frames here gives that swap a full paint cycle to
+          // land before any animation reads layout.
+          requestAnimationFrame(() => {
+            requestAnimationFrame(() => {
+              if (!cancelled) setReady(true);
+            });
+          });
         },
         Math.max(MIN_DISPLAY_MS - elapsed, 0),
       );

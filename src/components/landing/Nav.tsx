@@ -102,7 +102,14 @@ export function Nav() {
           </div>
           <div className="flex items-center gap-2 min-[1200px]:hidden">
             <ThemeToggle />
-            <LanguageSwitcher />
+            {/* Below ~400px (compact Samsung-class phones), the theme
+                toggle + language switcher + hamburger cluster gets too wide
+                and collides with the logo. The switcher moves into the
+                dropdown menu at that width instead — everything above 400px
+                (and all of tablet/desktop) is unchanged. */}
+            <div className="hidden min-[401px]:block">
+              <LanguageSwitcher />
+            </div>
             <button
               className="rounded-lg border border-border p-2"
               onClick={() => setOpen((o) => !o)}
@@ -124,6 +131,9 @@ export function Nav() {
               className="glass-panel mt-2 overflow-hidden rounded-2xl min-[1200px]:hidden"
             >
               <div className="p-3">
+                <div className="mb-2 block min-[401px]:hidden">
+                  <LanguageSwitcher />
+                </div>
                 {links.map((l, i) => (
                   <m.a
                     key={l.href}
@@ -132,6 +142,7 @@ export function Nav() {
                     initial={{ opacity: 0, x: -8 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ duration: 0.3, delay: i * 0.04, ease: EASE }}
+                    style={{ willChange: "transform, opacity" }}
                     className="block rounded-lg px-3 py-2 text-sm text-foreground hover:bg-surface-strong"
                   >
                     {l.label}
@@ -143,6 +154,7 @@ export function Nav() {
                   initial={{ opacity: 0, x: -8 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.3, delay: links.length * 0.04, ease: EASE }}
+                  style={{ willChange: "transform, opacity" }}
                   className="btn-primary mt-2 block rounded-xl px-4 py-2 text-center text-sm font-medium"
                 >
                   {t.common.getInTouch}

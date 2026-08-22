@@ -94,7 +94,7 @@ export function Hero() {
 
           <m.p
             {...reveal(0.64)}
-            className="mx-auto mt-6 w-fit whitespace-nowrap text-center text-[clamp(0.72rem,0.55rem+1cqw,1rem)] leading-relaxed text-muted-foreground md:text-left md:text-[clamp(0.78rem,0.5rem+1.5cqw,1.125rem)]"
+            className="mx-auto mt-6 w-fit whitespace-normal text-center text-[clamp(0.72rem,0.55rem+1cqw,1rem)] leading-relaxed text-muted-foreground min-[401px]:whitespace-nowrap md:text-left md:text-[clamp(0.78rem,0.5rem+1.5cqw,1.125rem)]"
           >
             {t.hero.description}
           </m.p>
