@@ -9,9 +9,15 @@ import { useTranslation } from "@/i18n/I18nProvider";
 // Signature moment (design system §1.2) for this section: pricing cards that
 // "wake up" on hover — border shifts to --primary, the card lifts slightly,
 // and a soft ambient glow (reusing --primary-glow, the same token as the
-// Hero workspace glow, §6.1/§9) blooms behind it. All four plans get the
-// exact same treatment at rest, so the row reads as one consistent set —
-// the glow is purely a hover reward, not a permanent marker on any one card.
+// Hero workspace glow, §6.1/§9) blooms behind it. All plans share this hover
+// treatment. The recommended plan (flagged via `plan.badge`) is the one
+// deliberate exception to "no permanent marker" (§2.2 "accent follows
+// intention" — this is the one card the visitor should look at first): a
+// small primary-colored badge, a faint permanent tint/border, and a filled
+// CTA instead of the ghost one everyone else gets. Everything else — radius,
+// spacing, typography, icons, the hover glow itself — stays identical across
+// all cards so it still reads as one consistent row, just with one card the
+// eye lands on first.
 // ---------------------------------------------------------------------------
 
 const container: Variants = {
@@ -96,74 +102,117 @@ export function Services() {
           variants={container}
           className="mt-16 grid grid-cols-1 gap-7 sm:grid-cols-2 lg:grid-cols-4 lg:items-start"
         >
-          {t.services.plans.map((plan, index) => (
-            <m.div key={plan.name} variants={item} className="group relative h-full">
-              {/* Large ambient glow concentrated below the card — hidden at
-                  rest, blooms in on hover. Identical for every plan. */}
+          {t.services.plans.map((plan, index) => {
+            const isRecommended = Boolean(plan.badge);
 
-              <div
-                aria-hidden
-                className="pricing-card-glow pointer-events-none absolute -inset-10 -z-10 rounded-[2.5rem] opacity-0 blur-3xl transition-opacity duration-500 ease-out group-hover:opacity-100"
-              />
-
-              <div className="relative flex h-full flex-col overflow-hidden rounded-2xl border border-border bg-card p-7 shadow-soft transition-all duration-300 hover:-translate-y-1 hover:border-primary/30 hover:shadow-[var(--shadow-glow)] sm:p-8">
-                {/* Large inner wash rises from the bottom of the card on
-                    hover, so it feels illuminated from within rather than
-                    simply outlined. */}
+            return (
+              <m.div
+                key={plan.name}
+                variants={item}
+                className={`group relative h-full ${isRecommended ? "lg:-mt-3" : ""}`}
+              >
+                {/* Large ambient glow concentrated below the card — hidden at
+                    rest, blooms in on hover. Identical for every plan. The
+                    recommended plan additionally keeps a faint version of it
+                    on permanently (§ note above), so it reads as "lit" even
+                    before the visitor interacts. */}
 
                 <div
                   aria-hidden
-                  className="pricing-card-inner-glow pointer-events-none absolute inset-x-0 bottom-0 -z-10 h-[72%] opacity-0 transition-opacity duration-500 group-hover:opacity-80"
+                  className={`pricing-card-glow pointer-events-none absolute -inset-10 -z-10 rounded-[2.5rem] blur-3xl transition-opacity duration-500 ease-out group-hover:opacity-100 ${isRecommended ? "opacity-40" : "opacity-0"}`}
                 />
 
-                {/* Top hairline — brightens on hover, same treatment as
-                    elsewhere on the site. */}
-                <div className="absolute inset-x-0 -top-px h-px bg-gradient-to-r from-transparent via-primary/40 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
-
-                <div className="flex items-baseline gap-2.5">
-                  <span className="font-mono text-sm text-muted-foreground/40">
-                    {String(index + 1).padStart(2, "0")}
+                {isRecommended && (
+                  <span className="absolute -top-3.5 left-1/2 z-20 -translate-x-1/2 whitespace-nowrap rounded-full bg-primary px-4 py-1.5 text-xs font-semibold uppercase tracking-wide text-primary-foreground shadow-[var(--shadow-glow)]">
+                    {plan.badge}
                   </span>
-                  <h3 className="text-xl font-semibold text-foreground">{plan.name}</h3>
-                </div>
-                <p className="mt-1.5 text-sm font-medium text-foreground/80">{plan.tagline}</p>
+                )}
 
-                <div className="mt-6 border-t border-border/70 pt-6">
-                  <span className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
-                    {t.services.priceFromLabel}
-                  </span>
-                  <div className="flex items-baseline gap-1">
-                    <span className="text-5xl font-display font-bold tracking-tight text-foreground sm:text-[52px]">
-                      {plan.price}
-                    </span>
-                    <span className="text-2xl font-semibold text-muted-foreground">
-                      {plan.currency}
-                    </span>
-                  </div>
-                  <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-                    {plan.description}
-                  </p>
-                </div>
-
-                <ul className="mt-6 flex-1 space-y-3">
-                  {plan.features.map((feature) => (
-                    <li key={feature} className="flex items-start gap-2.5 text-sm text-foreground">
-                      <Check className="mt-0.5 h-4 w-4 shrink-0 text-primary" strokeWidth={2.5} />
-                      <span>{feature}</span>
-                    </li>
-                  ))}
-                </ul>
-
-                <a
-                  href="#contact"
-                  className="btn-ghost mt-8 inline-flex items-center justify-center gap-1.5 rounded-xl px-5 py-3 text-sm font-semibold transition-all duration-200"
+                <div
+                  className={`relative flex h-full flex-col overflow-hidden rounded-2xl border p-7 transition-all duration-300 hover:-translate-y-1 hover:shadow-[var(--shadow-glow)] sm:p-8 ${
+                    isRecommended
+                      ? "border-primary/30 bg-card shadow-[var(--shadow-elevated)] hover:border-primary/50"
+                      : "border-border bg-card shadow-soft hover:border-primary/30"
+                  }`}
                 >
-                  {plan.cta}
-                  <ArrowRight className="h-4 w-4" />
-                </a>
-              </div>
-            </m.div>
-          ))}
+                  {/* Faint permanent top-down primary tint, recommended plan
+                      only — same color-mix recipe as the ambient washes
+                      elsewhere in this section, just contained to the card. */}
+                  {isRecommended && (
+                    <div
+                      aria-hidden
+                      className="pointer-events-none absolute inset-0 -z-10"
+                      style={{
+                        background:
+                          "linear-gradient(180deg, color-mix(in oklab, var(--primary) 7%, transparent), transparent 55%)",
+                      }}
+                    />
+                  )}
+
+                  {/* Large inner wash rises from the bottom of the card on
+                      hover, so it feels illuminated from within rather than
+                      simply outlined. */}
+
+                  <div
+                    aria-hidden
+                    className="pricing-card-inner-glow pointer-events-none absolute inset-x-0 bottom-0 -z-10 h-[72%] opacity-0 transition-opacity duration-500 group-hover:opacity-80"
+                  />
+
+                  {/* Top hairline — brightens on hover, same treatment as
+                      elsewhere on the site. Stays subtly on for the
+                      recommended plan. */}
+                  <div
+                    className={`absolute inset-x-0 -top-px h-px bg-gradient-to-r from-transparent via-primary/40 to-transparent transition-opacity duration-300 group-hover:opacity-100 ${isRecommended ? "opacity-60" : "opacity-0"}`}
+                  />
+
+                  <div className="flex items-baseline gap-2.5">
+                    <span className="font-mono text-sm text-muted-foreground/40">
+                      {String(index + 1).padStart(2, "0")}
+                    </span>
+                    <h3 className="text-xl font-semibold text-foreground">{plan.name}</h3>
+                  </div>
+                  <p className="mt-1.5 text-sm font-medium text-foreground/80">{plan.tagline}</p>
+
+                  <div className="mt-6 border-t border-border/70 pt-6">
+                    <span className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
+                      {plan.priceLabel}
+                    </span>
+                    <div className="flex items-baseline gap-1">
+                      <span className="text-5xl font-display font-bold tracking-tight text-foreground sm:text-[52px]">
+                        {plan.price}
+                      </span>
+                      <span className="text-2xl font-semibold text-muted-foreground">
+                        {plan.currency}
+                      </span>
+                    </div>
+                    <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+                      {plan.description}
+                    </p>
+                  </div>
+
+                  <ul className="mt-6 flex-1 space-y-3">
+                    {plan.features.map((feature) => (
+                      <li
+                        key={feature}
+                        className="flex items-start gap-2.5 text-sm text-foreground"
+                      >
+                        <Check className="mt-0.5 h-4 w-4 shrink-0 text-primary" strokeWidth={2.5} />
+                        <span>{feature}</span>
+                      </li>
+                    ))}
+                  </ul>
+
+                  <a
+                    href="#contact"
+                    className={`mt-8 inline-flex items-center justify-center gap-1.5 rounded-xl px-5 py-3 text-sm font-semibold transition-all duration-200 ${isRecommended ? "btn-primary" : "btn-ghost"}`}
+                  >
+                    {plan.cta}
+                    <ArrowRight className="h-4 w-4" />
+                  </a>
+                </div>
+              </m.div>
+            );
+          })}
         </m.div>
 
         {/* Maintenance — a calmer, secondary block below the pricing grid

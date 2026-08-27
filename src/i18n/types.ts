@@ -65,15 +65,16 @@ export interface TranslationDictionary {
     eyebrow: string;
     title: string;
     description: string;
-    priceFromLabel: string;
     plans: Array<{
       name: string;
       tagline: string;
       description: string;
+      priceLabel: string;
       price: string;
       currency: string;
       features: string[];
       cta: string;
+      badge?: string;
     }>;
     maintenance: {
       title: string;
