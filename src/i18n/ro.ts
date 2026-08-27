@@ -105,7 +105,7 @@ export const ro: TranslationDictionary = {
         price: "250",
         currency: "€",
         features: [
-          "3-5 pagini",
+          "2-4 pagini",
           "Design personalizat",
           "Responsive",
           "Formular de contact",
@@ -125,7 +125,7 @@ export const ro: TranslationDictionary = {
         price: "500",
         currency: "€",
         features: [
-          "5-10 pagini",
+          "5-7 pagini",
           "Design complet personalizat",
           "Animații & interacțiuni avansate",
           "SEO tehnic",
@@ -425,7 +425,7 @@ export const ro: TranslationDictionary = {
     toastError: "Ceva nu a mers bine. Te rugăm să încerci din nou.",
   },
   footer: {
-    statement: "Un studio mic, condus de doi oameni care construiesc fiecare site cu mâna lor.",
+    statement: "Un studio mic, condus de trei oameni care construiesc fiecare site cu mâna lor.",
     cta: "Începe un proiect",
     navLabel: "Navigare",
     connectLabel: "Conectare",

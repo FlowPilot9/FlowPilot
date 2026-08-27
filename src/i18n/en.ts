@@ -104,7 +104,7 @@ export const en: TranslationDictionary = {
         price: "250",
         currency: "€",
         features: [
-          "3-5 pages",
+          "2-4 pages",
           "Custom design",
           "Responsive",
           "Contact form",
@@ -124,7 +124,7 @@ export const en: TranslationDictionary = {
         price: "500",
         currency: "€",
         features: [
-          "5-10 pages",
+          "5-7 pages",
           "Fully custom design",
           "Advanced animations & interactions",
           "Technical SEO",
@@ -413,7 +413,7 @@ export const en: TranslationDictionary = {
     toastError: "Something went wrong. Please try again.",
   },
   footer: {
-    statement: "A small studio, run by two people who build every site by hand.",
+    statement: "A small studio, run by three people who build every site by hand.",
     cta: "Start a project",
     navLabel: "Navigate",
     connectLabel: "Connect",
